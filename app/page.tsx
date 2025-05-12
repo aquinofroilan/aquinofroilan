@@ -1,7 +1,7 @@
 import React from "react";
-import { certificationsListsPreview } from "@/app/data/CertificationsListsPreview";
+import { CertificationsListsPreview } from "@/data/certification-list-preview";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle, Button, Badge } from "@/components/ui";
-import EmbedCard from "@/components/embed_card";
+import EmbedCard from "@/components/embed-card";
 import Link from "next/link";
 import Me from "@/public/images/me.webp";
 import { FaAndroid, FaNodeJs, FaReact } from "react-icons/fa";
@@ -58,7 +58,7 @@ export default function Home() {
                         </h1>
                     </div>
                     <div className="w-full grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 sm:gap-3 md:gap-10 lg:gap-20">
-                        {certificationsListsPreview.map((cert, index) => {
+                        {CertificationsListsPreview.map((cert, index) => {
                             return (
                                 <Card key={index}>
                                     <CardHeader>

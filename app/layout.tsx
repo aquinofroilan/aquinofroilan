@@ -1,7 +1,7 @@
 import "./globals.css";
 import { Inter } from "next/font/google";
-import NavBar from "@/components/NavigationBar/NavBar";
-import NavBarSmall from "@/components/NavigationBar/NavBarSmall";
+import NavBar from "@/components/navigation-bar/navbar";
+import NavBarSmall from "@/components/navigation-bar/navbar-small";
 import { Analytics } from "@vercel/analytics/react";
 import { ThemeProvider } from "@/provider/ThemeProvider";
 import { type ReactNode } from "react";
