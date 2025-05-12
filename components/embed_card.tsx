@@ -1,37 +1,32 @@
 "use client";
-import React, { useEffect } from "react";
+import { useEffect } from "react";
 
-interface EmbedCardProps {
-  badge_id: string;
-}
+const EmbedCard = ({ badge_id }: { badge_id: string }) => {
+    useEffect(() => {
+        const loadScript = () => {
+            const scriptId = "credly-embed-script";
+            if (document.getElementById(scriptId)) return;
 
-const EmbedCard = ({ badge_id }: EmbedCardProps) => {
-  useEffect(() => {
-    const loadScript = () => {
-      const scriptId = "credly-embed-script";
+            const script = document.createElement("script");
+            script.id = scriptId;
+            script.type = "text/javascript";
+            script.async = true;
+            script.src = "//cdn.credly.com/assets/utilities/embed.js";
 
-      if (document.getElementById(scriptId)) return;
+            document.body.appendChild(script);
+        };
 
-      const script = document.createElement("script");
-      script.id = scriptId;
-      script.type = "text/javascript";
-      script.async = true;
-      script.src = "//cdn.credly.com/assets/utilities/embed.js";
+        loadScript();
+    }, []);
 
-      document.body.appendChild(script);
-    };
-
-    loadScript();
-  }, []);
-
-  return (
-    <div
-      data-iframe-width="150"
-      data-iframe-height="270"
-      data-share-badge-id={badge_id}
-      data-share-badge-host="https://www.credly.com"
-    ></div>
-  );
+    return (
+        <div
+            data-iframe-width="150"
+            data-iframe-height="270"
+            data-share-badge-id={badge_id}
+            data-share-badge-host="https://www.credly.com"
+        ></div>
+    );
 };
 
 export default EmbedCard;
