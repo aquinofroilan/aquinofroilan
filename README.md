@@ -1,34 +1,27 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# **🍌 Hello World, I'm Froilan!**
+Developer based in Caloocan, Philippines
+<br>
+<br>
 
-## Getting Started
+<br>
 
-First, run the development server:
+![uaenaaaa's Streak](https://github-readme-streak-stats.herokuapp.com/?user=froilanimnida&theme=vue-dark&hide_border=true)
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-```
+<br>
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+[![roadmap.sh](https://roadmap.sh/card/wide/667cd2ae2028c2d81892c220?variant=light&roadmaps=frontend)](https://roadmap.sh)
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+<br>
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+![froilanimnida's Stats](https://github-readme-stats.vercel.app/api?username=froilanimnida&theme=vue-dark&show_icons=true&hide_border=true&count_private=true)
 
-## Learn More
+<br>
 
-To learn more about Next.js, take a look at the following resources:
+![uaenaaaa's Top Languages](https://github-readme-stats.vercel.app/api/top-langs/?username=froilanimnida&theme=vue-dark&show_icons=true&hide_border=true&layout=compact)
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+<br>
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+![Now Playing](https://spotify-recently-played-readme.vercel.app/api?user=31zu3iynpunc24u2ai2zglqnee4i)
+# 📫 How to reach me?
+# froilan.a@outlook.com
+**I Love Building Things**

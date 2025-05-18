@@ -1,3 +1,5 @@
+import React from "react";
+
 export default function Experience() {
     return (
         <div className="w-11/12 max-w-7xl flex flex-col gap-2 justify-start items-start">

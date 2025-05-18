@@ -1,9 +1,8 @@
 import Link from "next/link";
-import React from "react";
+import Image from "next/image";
+import AboutMeCode from "@/app/about/components/AboutMeCode";
 import TechStack from "@/app/about/tech-stack";
 import NowPlayingWidget from "@/components/widget/now-playing-widget";
-import Image from "next/image";
-import AboutMeCode from "@/app/about/components/about-me-code-snippets";
 
 export const metadata = {
     title: "About - Froilan | Web Developer",
