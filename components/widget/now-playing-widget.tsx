@@ -1,7 +1,7 @@
 "use client";
 import { useState, useEffect, useRef } from "react";
 import { Music } from "lucide-react";
-import { Card, CardContent, CardFooter, CardHeader, CardTitle, Progress, Button } from "@/components/ui";
+import { Card, CardContent, CardHeader, CardTitle, Progress } from "@/components/ui";
 import { getNowPlaying } from "@/actions";
 import Image from "next/image";
 import Link from "next/link";
@@ -208,14 +208,6 @@ const NowPlayingWidget = ({ className }: { className?: string }) => {
                         </div>
                     </div>
                 </div>
-
-                <CardFooter className="p-0 flex justify-start mt-3">
-                    <Button asChild className="flex flex-row gap-4" variant="outline">
-                        <Link target="_blank" className="flex items-center gap-2" href={songUrl ? songUrl : ""}>
-                            Play on Spotify
-                        </Link>
-                    </Button>
-                </CardFooter>
             </CardContent>
         </Card>
     );

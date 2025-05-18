@@ -1,7 +1,6 @@
 import React from "react";
 import { CertificationsListsPreview } from "@/data/certification-list-preview";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle, Button, Badge } from "@/components/ui";
-import EmbedCard from "@/components/embed-card";
 import Link from "next/link";
 import Me from "@/public/images/me.webp";
 import { FaAndroid, FaNodeJs, FaReact } from "react-icons/fa";
@@ -49,7 +48,7 @@ export default function Home() {
                                     Send me an email
                                 </Link>
                             </Button>
-                            <NowPlayingWidget className="w-fit" />
+                            <NowPlayingWidget className="w-full" />
                         </div>
                     </div>
                     <div className="w-full flex flex-col pb-3 items-center">
@@ -58,15 +57,15 @@ export default function Home() {
                         </h1>
                     </div>
                     <div className="w-full grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 sm:gap-3 md:gap-10 lg:gap-20">
-                        {CertificationsListsPreview.map((cert, index) => {
+                        {CertificationsListsPreview.map((cert) => {
                             return (
-                                <Card key={index}>
+                                <Card key={cert.title}>
                                     <CardHeader>
                                         <CardTitle>{cert.title}</CardTitle>
                                         <CardDescription>{cert.description}</CardDescription>
                                     </CardHeader>
                                     <CardContent className="flex flex-col justify-center items-center">
-                                        <EmbedCard badge_id={cert.badge_id} />
+                                        <Image src={cert.image} alt={cert.description} width={150} height={150} />
                                         <Button asChild className="w-full mt-3" variant="default">
                                             <Link href={cert.link}>View</Link>
                                         </Button>
