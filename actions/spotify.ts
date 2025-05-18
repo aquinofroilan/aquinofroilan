@@ -1,24 +1,7 @@
-import querystring from "querystring";
+"use server";
+import { getAccessToken } from "@/actions";
+
 const NOW_PLAYING_ENDPOINT = "https://api.spotify.com/v1/me/player/currently-playing";
-const TOKEN_ENDPOINT = "https://accounts.spotify.com/api/token";
-
-export const getAccessToken = async (client_id: string, client_secret: string, refresh_token: string) => {
-    const basic = Buffer.from(`${client_id}:${client_secret}`).toString("base64");
-
-    const response = await fetch(TOKEN_ENDPOINT, {
-        method: "POST",
-        headers: {
-            Authorization: `Basic ${basic}`,
-            "Content-Type": "application/x-www-form-urlencoded",
-        },
-        body: querystring.stringify({
-            grant_type: "refresh_token",
-            refresh_token,
-        }),
-    });
-
-    return response.json();
-};
 
 export const getNowPlaying = async () => {
     const client_id = process.env.NEXT_PUBLIC_CLIENT_ID;

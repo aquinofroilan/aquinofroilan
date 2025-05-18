@@ -1,9 +1,8 @@
 "use client";
-import React, { useState, useEffect, useRef } from "react";
+import { useState, useEffect, useRef } from "react";
 import { Music } from "lucide-react";
-import { Button } from "@/components/ui/button";
-import { Card, CardContent, CardFooter, CardHeader, CardTitle, Progress } from "@/components/ui";
-import { getNowPlaying } from "@/api/spotifyNowPlaying";
+import { Card, CardContent, CardFooter, CardHeader, CardTitle, Progress, Button } from "@/components/ui";
+import { getNowPlaying } from "@/actions";
 import Image from "next/image";
 import Link from "next/link";
 
@@ -106,7 +105,6 @@ const NowPlayingWidget = ({ className }: { className?: string }) => {
             artist = "fetch song";
         }
     } else if (nowPlaying && nowPlaying.isPlaying) {
-        // Use localTimePlayed instead of nowPlaying.timePlayed for progress calculation
         secondsPlayed = Math.floor(localTimePlayed / 1000);
         minutesPlayed = Math.floor(secondsPlayed / 60);
         secondsPlayed = (secondsPlayed % 60).toString().padStart(2, "0");
@@ -125,27 +123,21 @@ const NowPlayingWidget = ({ className }: { className?: string }) => {
     return (
         <Card className={`${!nowPlaying || !nowPlaying.isPlaying ? "hidden" : ""} ${className}`}>
             <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-                <CardTitle className="text-sm font-medium">
-                    <span className="font-semibold text-[#1ed760]">SPOTIFY</span> | Froilan&apos;s Now Playing
-                </CardTitle>
+                <CardTitle className="text-sm font-medium">Froilan&apos;s Now Playing</CardTitle>
                 <SpotifyIcon className="w-10 h-10" />
             </CardHeader>
             <CardContent className="flex flex-col w-full">
                 <div className="flex flex-row w-full justify-start items-center gap-2">
-                    {nowPlaying != null ? (
-                        albumImageUrl ? (
-                            <Link target="_blank" href={songUrl ? songUrl : ""}>
-                                <Image
-                                    src={albumImageUrl}
-                                    alt="Album Image"
-                                    width={80}
-                                    height={80}
-                                    className="rounded-sm cursor-pointer"
-                                />
-                            </Link>
-                        ) : (
-                            <Music />
-                        )
+                    {nowPlaying != null && albumImageUrl ? (
+                        <Link target="_blank" href={songUrl ? songUrl : ""}>
+                            <Image
+                                src={albumImageUrl}
+                                alt="Album Image"
+                                width={80}
+                                height={80}
+                                className="rounded-sm cursor-pointer"
+                            />
+                        </Link>
                     ) : (
                         <Music />
                     )}
