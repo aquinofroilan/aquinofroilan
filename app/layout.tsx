@@ -13,7 +13,7 @@ const font = Inter({
 });
 export const metadata = {
     title: "Froilan | Web Developer",
-    description: "Personal Website of Froilan, Web Developer and Web Developer based in the Caloocan Philippines.",
+    description: "Personal Website of Froilan, Web Developer based in Caloocan, Philippines.",
     "google-site-verification": "cea09eQxw2xZKhdxfMUKhILNuAzqAeQnrIWLUC027IA",
     applicationName: "Froilan",
     authors: [{ name: "Froilan Aquino", url: "https://froilan.vercel.app" }],

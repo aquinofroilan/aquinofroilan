@@ -1,6 +1,6 @@
 import Link from "next/link";
 import Image from "next/image";
-import AboutMeCode from "@/app/about/components/AboutMeCode";
+import AboutMeCode from "./components/about-me-code-snippets";
 import TechStack from "@/app/about/tech-stack";
 import NowPlayingWidget from "@/components/widget/now-playing-widget";
 
