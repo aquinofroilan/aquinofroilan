@@ -1,27 +1,11 @@
 "use client";
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { Music } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { Card, CardContent, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
+import { Card, CardContent, CardFooter, CardHeader, CardTitle, Progress } from "@/components/ui";
 import { getNowPlaying } from "@/api/spotifyNowPlaying";
-import { Progress } from "@/components/ui/progress";
 import Image from "next/image";
 import Link from "next/link";
-
-interface NowPlaying {
-    isPlaying: boolean;
-    timePlayed: number;
-    timeTotal: number;
-    albumImageUrl: string;
-    title: string;
-    artist: string;
-    songUrl: string;
-    artistUrl: string;
-}
-
-interface NowPlayingProps {
-    className?: string;
-}
 
 const SpotifyIcon = ({ className }: { className: string }) => (
     <svg className={className} xmlns="http://www.w3.org/2000/svg" viewBox="0 0 496 512">
@@ -30,21 +14,78 @@ const SpotifyIcon = ({ className }: { className: string }) => (
     </svg>
 );
 
-const NowPlayingWidget = ({ className }: NowPlayingProps) => {
-    const [nowPlaying, setNowPlaying] = useState<NowPlaying | null>(null);
+const NowPlayingWidget = ({ className }: { className?: string }) => {
+    const [nowPlaying, setNowPlaying] = useState<{
+        isPlaying: boolean;
+        timePlayed: number;
+        timeTotal: number;
+        albumImageUrl: string;
+        title: string;
+        artist: string;
+        songUrl: string;
+        artistUrl: string;
+    } | null>(null);
+    const [localTimePlayed, setLocalTimePlayed] = useState<number>(0);
+    const progressIntervalRef = useRef<NodeJS.Timeout | null>(null);
+    const lastUpdateTimeRef = useRef<number | null>(null);
+
+    // Function to fetch data and reset local state
+    const fetchNowPlaying = async () => {
+        const data = await getNowPlaying();
+        if (data !== null) {
+            setNowPlaying(data);
+            if (data && typeof data !== "string" && data.isPlaying) {
+                setLocalTimePlayed(data.timePlayed);
+                lastUpdateTimeRef.current = Date.now();
+            }
+        }
+    };
 
     useEffect(() => {
-        const fetchNowPlaying = async () => {
-            const data = await getNowPlaying();
-            if (data !== null) {
-                setNowPlaying(data);
+        fetchNowPlaying();
+
+        const apiInterval = setInterval(() => {
+            fetchNowPlaying();
+        }, 30000);
+
+        return () => {
+            clearInterval(apiInterval);
+            if (progressIntervalRef.current) {
+                clearInterval(progressIntervalRef.current);
             }
         };
-
-        setInterval(() => {
-            fetchNowPlaying();
-        }, 1000);
     }, []);
+
+    // Setup progress bar simulation
+    useEffect(() => {
+        if (progressIntervalRef.current) {
+            clearInterval(progressIntervalRef.current);
+        }
+
+        if (nowPlaying && typeof nowPlaying !== "string" && nowPlaying.isPlaying) {
+            progressIntervalRef.current = setInterval(() => {
+                setLocalTimePlayed((prev) => {
+                    if (!nowPlaying || typeof nowPlaying === "string" || !nowPlaying.isPlaying) return prev;
+
+                    const currentTime = Date.now();
+                    const elapsedSinceUpdate = lastUpdateTimeRef.current ? currentTime - lastUpdateTimeRef.current : 0;
+
+                    const newTimePlayed = nowPlaying.timePlayed + elapsedSinceUpdate;
+                    if (newTimePlayed >= nowPlaying.timeTotal) {
+                        return nowPlaying.timePlayed;
+                    }
+
+                    return newTimePlayed;
+                });
+            }, 1000);
+        }
+
+        return () => {
+            if (progressIntervalRef.current) {
+                clearInterval(progressIntervalRef.current);
+            }
+        };
+    }, [nowPlaying]);
 
     let secondsPlayed,
         songUrl,
@@ -65,7 +106,8 @@ const NowPlayingWidget = ({ className }: NowPlayingProps) => {
             artist = "fetch song";
         }
     } else if (nowPlaying && nowPlaying.isPlaying) {
-        secondsPlayed = Math.floor(nowPlaying.timePlayed / 1000);
+        // Use localTimePlayed instead of nowPlaying.timePlayed for progress calculation
+        secondsPlayed = Math.floor(localTimePlayed / 1000);
         minutesPlayed = Math.floor(secondsPlayed / 60);
         secondsPlayed = (secondsPlayed % 60).toString().padStart(2, "0");
 
@@ -73,12 +115,12 @@ const NowPlayingWidget = ({ className }: NowPlayingProps) => {
         minutesTotal = Math.floor(secondsTotal / 60);
         secondsTotal = (secondsTotal % 60).toString().padStart(2, "0");
 
-        albumImageUrl = nowPlaying.albumImageUrl || <Music />;
+        albumImageUrl = nowPlaying.albumImageUrl;
         title = nowPlaying.title;
         artist = nowPlaying.artist;
         songUrl = nowPlaying.songUrl;
         artistUrl = nowPlaying.artistUrl;
-        progress = (nowPlaying.timePlayed / nowPlaying.timeTotal) * 100;
+        progress = (localTimePlayed / nowPlaying.timeTotal) * 100;
     }
     return (
         <Card className={`${!nowPlaying || !nowPlaying.isPlaying ? "hidden" : ""} ${className}`}>
@@ -91,10 +133,10 @@ const NowPlayingWidget = ({ className }: NowPlayingProps) => {
             <CardContent className="flex flex-col w-full">
                 <div className="flex flex-row w-full justify-start items-center gap-2">
                     {nowPlaying != null ? (
-                        nowPlaying.albumImageUrl ? (
+                        albumImageUrl ? (
                             <Link target="_blank" href={songUrl ? songUrl : ""}>
                                 <Image
-                                    src={nowPlaying.albumImageUrl}
+                                    src={albumImageUrl}
                                     alt="Album Image"
                                     width={80}
                                     height={80}

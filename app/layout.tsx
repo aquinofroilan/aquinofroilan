@@ -3,7 +3,7 @@ import { Inter } from "next/font/google";
 import NavBar from "@/components/navigation-bar/navbar";
 import NavBarSmall from "@/components/navigation-bar/navbar-small";
 import { Analytics } from "@vercel/analytics/react";
-import { ThemeProvider } from "@/provider/ThemeProvider";
+import { ThemeProvider } from "@/provider/theme-provider";
 import { type ReactNode } from "react";
 
 const font = Inter({

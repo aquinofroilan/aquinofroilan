@@ -7,7 +7,7 @@ import Me from "@/public/images/me.webp";
 import { FaAndroid, FaNodeJs, FaReact } from "react-icons/fa";
 import Image from "next/image";
 import { Send } from "lucide-react";
-import NowPlayingWidget from "@/components/widget/NowPlayingWidget";
+import NowPlayingWidget from "@/components/widget/now-playing-widget";
 
 export default function Home() {
     return (
