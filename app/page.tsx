@@ -20,7 +20,7 @@ export default function Home() {
                             <FaNodeJs size={125} className="absolute bottom-0 z-20 right-[5%] fill-[#24B45D]" />
                             <FaReact
                                 size={125}
-                                className="absolute duration-20000 animate-spin z-30 top-[50%] left-0 fill-[#62ADFC]"
+                                className="absolute duration-40000 animate-spin z-30 top-[50%] left-0 fill-[#62ADFC]"
                             />
                             <Image
                                 priority={true}
@@ -49,7 +49,7 @@ export default function Home() {
                                     Send me an email
                                 </Link>
                             </Button>
-                            <NowPlayingWidget className="w-full max-w-xl" />
+                            <NowPlayingWidget className="w-fit" />
                         </div>
                     </div>
                     <div className="w-full flex flex-col pb-3 items-center">

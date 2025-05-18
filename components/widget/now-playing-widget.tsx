@@ -6,13 +6,6 @@ import { getNowPlaying } from "@/actions";
 import Image from "next/image";
 import Link from "next/link";
 
-const SpotifyIcon = ({ className }: { className: string }) => (
-    <svg className={className} xmlns="http://www.w3.org/2000/svg" viewBox="0 0 496 512">
-        <path fill="#1ed760" d="M248 8C111.1 8 0 119.1 0 256s111.1 248 248 248 248-111.1 248-248S384.9 8 248 8Z" />
-        <path d="M406.6 231.1c-5.2 0-8.4-1.3-12.9-3.9-71.2-42.5-198.5-52.7-280.9-29.7-3.6 1-8.1 2.6-12.9 2.6-13.2 0-23.3-10.3-23.3-23.6 0-13.6 8.4-21.3 17.4-23.9 35.2-10.3 74.6-15.2 117.5-15.2 73 0 149.5 15.2 205.4 47.8 7.8 4.5 12.9 10.7 12.9 22.6 0 13.6-11 23.3-23.2 23.3zm-31 76.2c-5.2 0-8.7-2.3-12.3-4.2-62.5-37-155.7-51.9-238.6-29.4-4.8 1.3-7.4 2.6-11.9 2.6-10.7 0-19.4-8.7-19.4-19.4s5.2-17.8 15.5-20.7c27.8-7.8 56.2-13.6 97.8-13.6 64.9 0 127.6 16.1 177 45.5 8.1 4.8 11.3 11 11.3 19.7-.1 10.8-8.5 19.5-19.4 19.5zm-26.9 65.6c-4.2 0-6.8-1.3-10.7-3.6-62.4-37.6-135-39.2-206.7-24.5-3.9 1-9 2.6-11.9 2.6-9.7 0-15.8-7.7-15.8-15.8 0-10.3 6.1-15.2 13.6-16.8 81.9-18.1 165.6-16.5 237 26.2 6.1 3.9 9.7 7.4 9.7 16.5s-7.1 15.4-15.2 15.4z" />
-    </svg>
-);
-
 const NowPlayingWidget = ({ className }: { className?: string }) => {
     const [nowPlaying, setNowPlaying] = useState<{
         isPlaying: boolean;
@@ -27,6 +20,7 @@ const NowPlayingWidget = ({ className }: { className?: string }) => {
     const [localTimePlayed, setLocalTimePlayed] = useState<number>(0);
     const progressIntervalRef = useRef<NodeJS.Timeout | null>(null);
     const lastUpdateTimeRef = useRef<number | null>(null);
+    const apiTimeoutRef = useRef<NodeJS.Timeout | null>(null);
 
     // Function to fetch data and reset local state
     const fetchNowPlaying = async () => {
@@ -40,28 +34,51 @@ const NowPlayingWidget = ({ className }: { className?: string }) => {
         }
     };
 
+    // Schedule the next API call
+    const scheduleNextApiCall = (timeUntilSongEnds: number | null) => {
+        // Clear any existing timeout
+        if (apiTimeoutRef.current) {
+            clearTimeout(apiTimeoutRef.current);
+        }
+
+        // If song is about to end, schedule refresh slightly after
+        if (timeUntilSongEnds !== null && timeUntilSongEnds < 30000 && timeUntilSongEnds > 0) {
+            // Add a small buffer (1 second) to ensure song has finished
+            const refreshTime = timeUntilSongEnds + 1000;
+            apiTimeoutRef.current = setTimeout(fetchNowPlaying, refreshTime);
+        } else {
+            // Standard 30 second refresh if no imminent song ending
+            apiTimeoutRef.current = setTimeout(fetchNowPlaying, 30000);
+        }
+    };
+
     useEffect(() => {
         fetchNowPlaying();
 
-        const apiInterval = setInterval(() => {
-            fetchNowPlaying();
-        }, 30000);
-
+        // Clean up on component unmount
         return () => {
-            clearInterval(apiInterval);
             if (progressIntervalRef.current) {
                 clearInterval(progressIntervalRef.current);
+            }
+            if (apiTimeoutRef.current) {
+                clearTimeout(apiTimeoutRef.current);
             }
         };
     }, []);
 
-    // Setup progress bar simulation
+    // Setup progress bar simulation and smart refresh timing
     useEffect(() => {
         if (progressIntervalRef.current) {
             clearInterval(progressIntervalRef.current);
         }
 
         if (nowPlaying && typeof nowPlaying !== "string" && nowPlaying.isPlaying) {
+            // Calculate time until song ends
+            const timeUntilSongEnds = nowPlaying.timeTotal - nowPlaying.timePlayed;
+
+            // Schedule the next API call based on song remaining time
+            scheduleNextApiCall(timeUntilSongEnds);
+
             progressIntervalRef.current = setInterval(() => {
                 setLocalTimePlayed((prev) => {
                     if (!nowPlaying || typeof nowPlaying === "string" || !nowPlaying.isPlaying) return prev;
@@ -70,13 +87,24 @@ const NowPlayingWidget = ({ className }: { className?: string }) => {
                     const elapsedSinceUpdate = lastUpdateTimeRef.current ? currentTime - lastUpdateTimeRef.current : 0;
 
                     const newTimePlayed = nowPlaying.timePlayed + elapsedSinceUpdate;
+
+                    // If we're approaching the end of the song, reschedule API call
+                    const remainingTime = nowPlaying.timeTotal - newTimePlayed;
+                    if (remainingTime <= 5000 && remainingTime > 0) {
+                        scheduleNextApiCall(remainingTime);
+                    }
+
+                    // Don't exceed the total time
                     if (newTimePlayed >= nowPlaying.timeTotal) {
-                        return nowPlaying.timePlayed;
+                        return nowPlaying.timeTotal;
                     }
 
                     return newTimePlayed;
                 });
             }, 1000);
+        } else {
+            // If not playing, still schedule a regular check
+            scheduleNextApiCall(null);
         }
 
         return () => {
@@ -84,6 +112,7 @@ const NowPlayingWidget = ({ className }: { className?: string }) => {
                 clearInterval(progressIntervalRef.current);
             }
         };
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [nowPlaying]);
 
     let secondsPlayed,
@@ -120,11 +149,13 @@ const NowPlayingWidget = ({ className }: { className?: string }) => {
         artistUrl = nowPlaying.artistUrl;
         progress = (localTimePlayed / nowPlaying.timeTotal) * 100;
     }
+
+    // Rest of component remains the same
     return (
         <Card className={`${!nowPlaying || !nowPlaying.isPlaying ? "hidden" : ""} ${className}`}>
+            {/* Existing JSX content */}
             <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-                <CardTitle className="text-sm font-medium">Froilan&apos;s Now Playing</CardTitle>
-                <SpotifyIcon className="w-10 h-10" />
+                <CardTitle>Froilan&apos;s Now Playing</CardTitle>
             </CardHeader>
             <CardContent className="flex flex-col w-full">
                 <div className="flex flex-row w-full justify-start items-center gap-2">
@@ -141,12 +172,12 @@ const NowPlayingWidget = ({ className }: { className?: string }) => {
                     ) : (
                         <Music />
                     )}
-                    <div className="flex flex-col gap-1 w-3/4 max-w-[75%]">
+                    <div className="flex flex-col gap-1 w-full">
                         <h1 className="text-base font-bold overflow-hidden whitespace-nowrap text-ellipsis">
                             {
                                 <Link
                                     target="_blank"
-                                    className="cursor-pointer hover:underline"
+                                    className="cursor-pointer hover:underline underline-offset-2"
                                     href={songUrl ? songUrl : ""}
                                 >
                                     {title}
@@ -156,7 +187,7 @@ const NowPlayingWidget = ({ className }: { className?: string }) => {
                         <h1 className="text-sm font-regular">
                             {
                                 <Link
-                                    className="cursor-pointer hover:underline"
+                                    className="cursor-pointer hover:underline underline-offset-2"
                                     target="_blank"
                                     href={artistUrl ? artistUrl : ""}
                                 >
@@ -165,12 +196,12 @@ const NowPlayingWidget = ({ className }: { className?: string }) => {
                             }
                         </h1>
                         <div className="flex flex-col w-full gap-2">
-                            <Progress aria-label="song progress" className="w-full" value={progress} />
+                            <Progress aria-label="song progress" value={progress} />
                             <div className="w-full flex flex-row justify-between">
-                                <p className="text-xs  text-muted-foreground">
+                                <p className="text-xs text-muted-foreground">
                                     {minutesPlayed}:{secondsPlayed}
                                 </p>
-                                <p className="text-xs  text-muted-foreground">
+                                <p className="text-xs text-muted-foreground">
                                     {minutesTotal}:{secondsTotal}
                                 </p>
                             </div>
@@ -181,7 +212,6 @@ const NowPlayingWidget = ({ className }: { className?: string }) => {
                 <CardFooter className="p-0 flex justify-start mt-3">
                     <Button asChild className="flex flex-row gap-4" variant="outline">
                         <Link target="_blank" className="flex items-center gap-2" href={songUrl ? songUrl : ""}>
-                            <SpotifyIcon className="w-6 h-6" />
                             Play on Spotify
                         </Link>
                     </Button>
