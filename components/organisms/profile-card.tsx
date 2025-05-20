@@ -3,10 +3,11 @@ import Image from "next/image";
 import { Mail, MapPin, Phone } from "lucide-react";
 import Link from "next/link";
 import { Button, Badge } from "@/components/ui";
+import { cn } from "@/lib/utils";
 
-function ProfileCard() {
+const ProfileCard = ({ className }: { className?: string }) => {
     return (
-        <div className="w-full flex flex-row gap-5">
+        <div className={cn("w-full flex flex-row gap-5", className)}>
             <Image
                 priority={true}
                 src={Me}
@@ -48,6 +49,6 @@ function ProfileCard() {
             </div>
         </div>
     );
-}
+};
 
 export default ProfileCard;

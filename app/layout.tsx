@@ -1,11 +1,8 @@
 import "./globals.css";
 import { Quicksand } from "next/font/google";
-import NavBar from "@/components/navigation-bar/navbar";
-import NavBarSmall from "@/components/navigation-bar/navbar-small";
 import { Analytics } from "@vercel/analytics/react";
 import { ThemeProvider } from "@/provider/theme-provider";
 import { type ReactNode } from "react";
-import { TooltipProvider } from "@/components/ui";
 import Footer from "@/components/organisms/footer";
 
 const font = Quicksand({
@@ -32,20 +29,6 @@ export const metadata = {
         "Portfolio",
         "Personal Website",
     ],
-    openGraph: {
-        title: "Froilan | Web Developer",
-        description: "Personal Website of Froilan, Web Developer and Web Developer based in the Caloocan Philippines.",
-        url: "https://froilan.dev",
-        siteName: "Froilan | Web Developer",
-        images: [
-            {
-                url: "/og.png",
-                width: 1200,
-                height: 630,
-                alt: "Froilan | Web Developer",
-            },
-        ],
-    },
     robots: "index, follow",
     "og:title": "Froilan | Web Developer",
     "og:description": "Personal Website of Froilan, Web Developer and Web Developer based in the Caloocan Philippines.",
@@ -54,19 +37,15 @@ export const metadata = {
 
 export default function RootLayout({ children }: { children: ReactNode }) {
     return (
-        <html lang="en">
+        <html lang="en" className="scroll-smooth">
             <body
-                className={`${font.className} gap-5 md:gap-8 lg:gap-14 pt-4 pb-10 min-h-screen md:pt-8 lg:pt-11 xl:pt-14 w-full justify-start flex flex-col items-center`}
+                className={`${font.className} w-full min-h-screen bg-background text-foreground antialiased transition-colors duration-200 dark:bg-background-dark dark:text-foreground-dark flex flex-col items-center justify-between`}
             >
-                <TooltipProvider>
-                    <ThemeProvider attribute="class" defaultTheme="system" enableSystem disableTransitionOnChange>
-                        <NavBar />
-                        <NavBarSmall />
-                        {children}
-                        <Footer />
-                    </ThemeProvider>
-                    <Analytics />
-                </TooltipProvider>
+                <ThemeProvider attribute="class" defaultTheme="system" enableSystem disableTransitionOnChange>
+                    {children}
+                    <Footer />
+                </ThemeProvider>
+                <Analytics />
             </body>
         </html>
     );

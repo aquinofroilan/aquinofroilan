@@ -3,9 +3,10 @@ import { BentoGridItem } from "@/components/ui";
 import { CertificationsListsPreview } from "@/data/certification-list-preview";
 import Link from "next/link";
 
-function CertificationCard() {
+const CertificationCard = ({ className }: { className?: string }) => {
     return (
         <BentoGridItem
+            className={className}
             icon={<BadgeCheckIcon size={20} />}
             title={
                 <div className="flex gap-2 items-center justify-between w-full">
@@ -40,6 +41,6 @@ function CertificationCard() {
             }
         />
     );
-}
+};
 
 export default CertificationCard;

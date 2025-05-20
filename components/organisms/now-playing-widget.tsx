@@ -5,6 +5,7 @@ import { BentoGridItem, Progress } from "@/components/ui";
 import { getNowPlaying } from "@/actions";
 import Image from "next/image";
 import Link from "next/link";
+import { cn } from "@/lib/utils";
 
 const NowPlayingWidget = ({ className }: { className?: string }) => {
     const [nowPlaying, setNowPlaying] = useState<{
@@ -149,11 +150,9 @@ const NowPlayingWidget = ({ className }: { className?: string }) => {
         artistUrl = nowPlaying.artistUrl;
         progress = (localTimePlayed / nowPlaying.timeTotal) * 100;
     }
-
-    // Rest of component remains the same
     return (
         <BentoGridItem
-            className={`${!nowPlaying || !nowPlaying.isPlaying ? "hidden" : ""} ${className}`}
+            className={cn(`${!nowPlaying || !nowPlaying.isPlaying ? "hidden" : ""} ${className}`)}
             icon={<Music />}
             title={<h1>Now Playing</h1>}
             description={

@@ -3,9 +3,10 @@ import { Github, Instagram, LinkedIn } from "@/components/atoms";
 import { ArrowRight, Send } from "lucide-react";
 import Link from "next/link";
 
-function ContactMe() {
+const ContactMe = ({ className }: { className?: string }) => {
     return (
         <BentoGridItem
+            className={className}
             title={<h1>Contact Me</h1>}
             icon={<Send size={20} />}
             description={
@@ -84,6 +85,6 @@ function ContactMe() {
             }
         />
     );
-}
+};
 
 export default ContactMe;
