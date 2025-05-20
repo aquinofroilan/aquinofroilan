@@ -8,7 +8,7 @@ import ContactMe from "@/components/organisms/contact-me-card";
 
 export default function Home() {
     return (
-        <main className="py-10 w-11/12 max-w-5xl gap-3 flex flex-col md:grid md:grid-cols-2">
+        <main className="py-10 w-11/12 max-w-5xl gap-2 flex flex-col md:grid md:grid-cols-2">
             <ProfileCard className="col-span-2" />
             <AboutCard className="col-span-1 row-span-2" />
             <CertificationCard className="w-full col-span-1 row-span-1" />

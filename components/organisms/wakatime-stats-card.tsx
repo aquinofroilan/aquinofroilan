@@ -63,8 +63,8 @@ const WakatimeStatsCard = async ({ className }: { className?: string }) => {
                 <>
                     <BentoGridItem
                         className="my-5"
-                        icon={<CircleArrowUp size={16} />}
-                        title="Programming Activity"
+                        icon={<CircleArrowUp size={15} />}
+                        title={<h1 className="text-lg">Programming Activity</h1>}
                         description={
                             <div className="space-y-3">
                                 {wakatimeCategories?.slice(0, 6).map((category, index) => (
@@ -86,8 +86,8 @@ const WakatimeStatsCard = async ({ className }: { className?: string }) => {
                     />
                     <BentoGridItem
                         className="my-5"
-                        icon={<Code size={16} />}
-                        title="Programming Languages"
+                        icon={<Code size={15} />}
+                        title={<h1 className="text-lg">Programming Languages</h1>}
                         description={
                             <div className="space-y-3">
                                 {wakatimeLanguages?.slice(0, 6).map((lang, index) => (
@@ -107,12 +107,10 @@ const WakatimeStatsCard = async ({ className }: { className?: string }) => {
                             </div>
                         }
                     />
-
-                    {/* Daily Average BentoGridItem */}
                     <BentoGridItem
                         className="my-5"
-                        icon={<Clock size={16} />}
-                        title="Daily Activity"
+                        icon={<Clock size={15} />}
+                        title={<h1 className="text-lg">Daily Activity</h1>}
                         description={
                             <div className="grid grid-cols-2 gap-3">
                                 <div className="border border-border rounded-md p-2">
@@ -126,12 +124,10 @@ const WakatimeStatsCard = async ({ className }: { className?: string }) => {
                             </div>
                         }
                     />
-
-                    {/* Editors BentoGridItem */}
                     <BentoGridItem
                         className="my-5"
-                        icon={<Monitor size={16} />}
-                        title="Editors"
+                        icon={<Monitor size={15} />}
+                        title={<h1 className="text-lg">Editors</h1>}
                         description={
                             <div className="space-y-2">
                                 {wakatimeEditors?.map((editor, index) => (
@@ -143,12 +139,10 @@ const WakatimeStatsCard = async ({ className }: { className?: string }) => {
                             </div>
                         }
                     />
-
-                    {/* Operating Systems BentoGridItem */}
                     <BentoGridItem
                         className="my-5"
-                        icon={<Laptop size={16} />}
-                        title="Operating Systems"
+                        icon={<Laptop size={15} />}
+                        title={<h1 className="text-lg">Operating Systems</h1>}
                         description={
                             <div className="space-y-2">
                                 {wakatimeOperatingSystems?.map((os, index) => (
@@ -161,11 +155,10 @@ const WakatimeStatsCard = async ({ className }: { className?: string }) => {
                         }
                     />
 
-                    {/* GitHub Stats BentoGridItem */}
                     <BentoGridItem
                         className="my-5 md:col-span-2"
-                        icon={<Github size={16} />}
-                        title="GitHub Activity"
+                        icon={<Github size={15} />}
+                        title={<h1 className="text-lg">GitHub Activity</h1>}
                         description={
                             <div className="grid grid-cols-2 sm:grid-cols-5 gap-2">
                                 <div className="border border-border rounded-md p-2">

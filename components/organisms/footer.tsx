@@ -1,11 +1,11 @@
 import React from "react";
+import { ThemeToggler } from "../theme-toggler";
 
 const Footer = () => {
     return (
-        <footer className="border-t-[2px] border-t-neutral-100 dark:border-neutral-800 pt-3">
-            <h1 className="text-sm md:text-base ml-3">
-                © {new Date().getFullYear()} Froilan Aquino. All rights reserved.
-            </h1>
+        <footer className="pt-3 flex items-center justify-between w-full max-w-5xl">
+            <p className="text-xs ml-3">© {new Date().getFullYear()} Froilan Aquino. All rights reserved.</p>
+            <ThemeToggler />
         </footer>
     );
 };
