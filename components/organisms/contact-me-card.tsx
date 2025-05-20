@@ -7,7 +7,7 @@ const ContactMe = ({ className }: { className?: string }) => {
     return (
         <BentoGridItem
             className={className}
-            title={<h1>Contact Me</h1>}
+            title={<h1 className="text-lg">Contact Me</h1>}
             icon={<Send size={15} />}
             description={
                 <div className="flex flex-col gap-5">

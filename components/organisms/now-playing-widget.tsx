@@ -25,13 +25,17 @@ const NowPlayingWidget = ({ className }: { className?: string }) => {
 
     // Function to fetch data and reset local state
     const fetchNowPlaying = async () => {
-        const data = await getNowPlaying();
-        if (data !== null) {
-            setNowPlaying(data);
-            if (data && typeof data !== "string" && data.isPlaying) {
-                setLocalTimePlayed(data.timePlayed);
-                lastUpdateTimeRef.current = Date.now();
+        try {
+            const data = await getNowPlaying();
+            if (data !== null) {
+                setNowPlaying(data);
+                if (data && typeof data !== "string" && data.isPlaying) {
+                    setLocalTimePlayed(data.timePlayed);
+                    lastUpdateTimeRef.current = Date.now();
+                }
             }
+        } catch {
+            console.error("Error fetching now playing data:");
         }
     };
 
@@ -154,7 +158,7 @@ const NowPlayingWidget = ({ className }: { className?: string }) => {
         <BentoGridItem
             className={cn(`${!nowPlaying || !nowPlaying.isPlaying ? "hidden" : ""} ${className}`)}
             icon={<Music size={15} />}
-            title={<h1>Now Playing</h1>}
+            title={<h1 className="text-lg">Now Playing</h1>}
             description={
                 <div className="flex flex-row w-full justify-start items-center gap-2">
                     {nowPlaying != null && albumImageUrl ? (

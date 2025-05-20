@@ -4,11 +4,11 @@ const AboutCard = ({ className }: { className?: string }) => {
     return (
         <BentoGridItem
             className={className}
-            title={<h1>About Me</h1>}
-            icon={<ContactRoundIcon size={25} />}
+            title={<h1 className="text-lg">About Me</h1>}
+            icon={<ContactRoundIcon size={15} />}
             description={
                 <div className="w-full flex flex-col gap-3">
-                    <h1 className="text-xs md:text-base">
+                    <h1 className="text-sm">
                         I develop applications using Javascript frameworks and libraries like React and also use the
                         React&apos;s Framework Next.js, like this website. I used Next.js to create this website. I also
                         used Supabase as my database and Firebase for my authentication. I&apos;m currently getting my
@@ -16,7 +16,7 @@ const AboutCard = ({ className }: { className?: string }) => {
                         modalities are not limited to school classes; I also attend online sessions at the Google
                         Developer Students Club to learn something new and seek opportunities for my career.
                     </h1>
-                    <h1 className="text-xs md:text-base">
+                    <h1 className="text-sm">
                         In my self-taught programming session, I used platforms like YouTube and freecodecamp to and at
                         the same time learning UI/UX design since I&apos;m also interested in designing. I also used
                         Udemy, EdX, Coursera, and a like to learn something new and to add to my knowledge of
@@ -25,7 +25,7 @@ const AboutCard = ({ className }: { className?: string }) => {
                         learn something new. Right now, I&apos;m currently planning on getting certified in the Google
                         UI/UX certification program through Coursera.
                     </h1>
-                    <h1 className="text-xs md:text-base">
+                    <h1 className="text-sm">
                         When I&apos;m not coding, I&apos; reading English books to hone my proficiency and expand my
                         vocabulary. I also watch emerging technology-related videos to keep myself up-to-date with the
                         latest technology trends.

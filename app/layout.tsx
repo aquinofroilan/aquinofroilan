@@ -4,6 +4,7 @@ import { Analytics } from "@vercel/analytics/react";
 import { ThemeProvider } from "@/provider/theme-provider";
 import { type ReactNode } from "react";
 import Footer from "@/components/organisms/footer";
+import { Separator } from "@/components/ui";
 
 const font = Quicksand({
     weight: ["400", "500", "600", "700"],
@@ -43,6 +44,7 @@ export default function RootLayout({ children }: { children: ReactNode }) {
             >
                 <ThemeProvider attribute="class" defaultTheme="system" enableSystem disableTransitionOnChange>
                     {children}
+                    <Separator className="w-11/12 max-w-5xl" />
                     <Footer />
                 </ThemeProvider>
                 <Analytics />
