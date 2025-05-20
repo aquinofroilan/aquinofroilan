@@ -6,6 +6,7 @@ import { Analytics } from "@vercel/analytics/react";
 import { ThemeProvider } from "@/provider/theme-provider";
 import { type ReactNode } from "react";
 import { TooltipProvider } from "@/components/ui";
+import Footer from "@/components/organisms/footer";
 
 const font = Quicksand({
     weight: ["400", "500", "600", "700"],
@@ -62,6 +63,7 @@ export default function RootLayout({ children }: { children: ReactNode }) {
                         <NavBar />
                         <NavBarSmall />
                         {children}
+                        <Footer />
                     </ThemeProvider>
                     <Analytics />
                 </TooltipProvider>

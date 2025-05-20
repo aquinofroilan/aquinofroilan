@@ -91,6 +91,16 @@ function ContactMe() {
                             <ArrowRight size={20} />
                         </Link>
                     </div>
+                    <div>
+                        <h1>My Resume/CV:</h1>
+                        <Link
+                            href={"https://drive.google.com/file/d/1tBgDb_ft-XHI801KDlWLez21sBI48-AY/view?usp=sharing"}
+                            className="bg-neutral-200 w-full justify-between flex items-center py-2 px-2 rounded-md"
+                        >
+                            View my CV
+                            <ArrowRight size={20} />
+                        </Link>
+                    </div>
                 </div>
             }
         />
