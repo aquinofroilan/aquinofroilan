@@ -1,0 +1,58 @@
+const FRONTEND = [
+    "HTML",
+    "CSS",
+    "JavaScript",
+    "TypeScript",
+    "React",
+    "Next.js",
+    "Tailwind CSS",
+    "Svelte",
+    "Prettier",
+    "ESLint",
+    "Styled Components",
+    "Webpack",
+];
+const BACKEND = [
+    "Node.js",
+    "Python",
+    "Flask",
+    "Django",
+    "REST API",
+    "MySQL",
+    "PostgreSQL",
+    "MongoDB",
+    "Redis",
+    "JWT",
+    "Render",
+    "Railway",
+    "Supabase",
+    "Prisma",
+];
+const DEVOPS = [
+    "Docker",
+    "Kubernetes",
+    "AWS",
+    "Google Cloud Platform",
+    "Firebase",
+    "Vercel",
+    "GitHub Actions",
+    "CI/CD",
+];
+const DEVELOPER_TOOLS = [
+    "Git",
+    "GitHub",
+    "Postman",
+    "Figma",
+    "Visual Studio Code",
+    "Trello",
+    "Jira",
+    "PyCharm",
+    "IntelliJ IDEA",
+    "Android Studio",
+    "Sublimetext",
+    "Notion",
+    "Discord",
+    "Teams",
+];
+
+export { FRONTEND, BACKEND, DEVOPS, DEVELOPER_TOOLS };
