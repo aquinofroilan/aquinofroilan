@@ -1,4 +1,4 @@
-import { BentoGridItem, Tooltip, TooltipContent, TooltipTrigger } from "@/components/ui";
+import { BentoGridItem } from "@/components/ui";
 import { Github, Instagram, LinkedIn } from "@/components/atoms";
 import { ArrowRight, Send } from "lucide-react";
 import Link from "next/link";
@@ -32,53 +32,32 @@ function ContactMe() {
                     <div>
                         <h1>Social Links:</h1>
                         <div className="flex flex-row gap-3">
-                            <Tooltip>
-                                <TooltipTrigger asChild>
-                                    <Link
-                                        className="bg-neutral-200 w-full justify-center flex items-center py-2 px-2 rounded-md"
-                                        aria-label="Github link of the website owner"
-                                        target="_blank"
-                                        href="https://github.com/froilanimnida"
-                                    >
-                                        <Github />
-                                    </Link>
-                                </TooltipTrigger>
-                                <TooltipContent>
-                                    <p>@froilanimnida</p>
-                                </TooltipContent>
-                            </Tooltip>
+                            <Link
+                                className="bg-neutral-200 w-full justify-center flex items-center py-2 px-2 rounded-md"
+                                aria-label="Github link of the website owner"
+                                target="_blank"
+                                href="https://github.com/froilanimnida"
+                            >
+                                <Github />
+                            </Link>
 
-                            <Tooltip>
-                                <TooltipTrigger asChild>
-                                    <Link
-                                        className="bg-neutral-200 w-full justify-center flex items-center py-2 px-2 rounded-md"
-                                        aria-label="Instagram Profile of the website owner"
-                                        target="_blank"
-                                        href="https://www.instagram.com/froilanimnida"
-                                    >
-                                        <Instagram />
-                                    </Link>
-                                </TooltipTrigger>
-                                <TooltipContent>
-                                    <p>@froilanimnida</p>
-                                </TooltipContent>
-                            </Tooltip>
+                            <Link
+                                className="bg-neutral-200 w-full justify-center flex items-center py-2 px-2 rounded-md"
+                                aria-label="Instagram Profile of the website owner"
+                                target="_blank"
+                                href="https://www.instagram.com/froilanimnida"
+                            >
+                                <Instagram />
+                            </Link>
 
-                            <Tooltip>
-                                <TooltipTrigger asChild>
-                                    <Link
-                                        className="bg-neutral-200 w-full justify-center flex items-center py-2 px-2 rounded-md"
-                                        aria-label="LinkedIn link of the website owner"
-                                        target="_blank"
-                                        href="https://linkedin.com/in/froilanimnida"
-                                    >
-                                        <LinkedIn />
-                                    </Link>
-                                </TooltipTrigger>
-                                <TooltipContent>
-                                    <p>@froilanimnida</p>
-                                </TooltipContent>
-                            </Tooltip>
+                            <Link
+                                className="bg-neutral-200 w-full justify-center flex items-center py-2 px-2 rounded-md"
+                                aria-label="LinkedIn link of the website owner"
+                                target="_blank"
+                                href="https://linkedin.com/in/froilanimnida"
+                            >
+                                <LinkedIn />
+                            </Link>
                         </div>
                     </div>
                     <div>
