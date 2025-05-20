@@ -3,11 +3,12 @@ import { Github, Instagram, LinkedIn } from "@/components/atoms";
 import { ArrowRight, Send } from "lucide-react";
 import Link from "next/link";
 
-function ContactMe() {
+const ContactMe = ({ className }: { className?: string }) => {
     return (
         <BentoGridItem
+            className={className}
             title={<h1>Contact Me</h1>}
-            icon={<Send size={20} />}
+            icon={<Send size={15} />}
             description={
                 <div className="flex flex-col gap-5">
                     <div>
@@ -67,7 +68,7 @@ function ContactMe() {
                             className="bg-neutral-200 w-full justify-between flex items-center py-2 px-2 rounded-md"
                         >
                             Schedule a call
-                            <ArrowRight size={20} />
+                            <ArrowRight size={15} />
                         </Link>
                     </div>
                     <div>
@@ -77,13 +78,13 @@ function ContactMe() {
                             className="bg-neutral-200 w-full justify-between flex items-center py-2 px-2 rounded-md"
                         >
                             View my CV
-                            <ArrowRight size={20} />
+                            <ArrowRight size={15} />
                         </Link>
                     </div>
                 </div>
             }
         />
     );
-}
+};
 
 export default ContactMe;

@@ -1,4 +1,5 @@
 import { BentoGridItem, Badge } from "@/components/ui";
+import { cn } from "@/lib/utils";
 import { ArrowRightCircle, FlaskConical } from "lucide-react";
 import Link from "next/link";
 
@@ -43,11 +44,11 @@ const DEVELOPER_TOOLS = [
     "Discord",
     "Teams",
 ];
-function TechStackCard() {
+const TechStackCard = ({ className }: { className?: string }) => {
     return (
         <BentoGridItem
-            className="flex flex-col gap-3"
-            icon={<FlaskConical size={20} />}
+            className={cn("flex flex-col gap-3", className)}
+            icon={<FlaskConical size={15} />}
             title={
                 <div className="flex justify-between items-center w-full">
                     <h1>Tech Stack</h1>
@@ -107,6 +108,6 @@ function TechStackCard() {
             }
         />
     );
-}
+};
 
 export default TechStackCard;

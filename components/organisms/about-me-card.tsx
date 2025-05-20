@@ -1,8 +1,9 @@
 import { BentoGridItem } from "@/components/ui";
 import { ContactRoundIcon } from "lucide-react";
-function AboutCard() {
+const AboutCard = ({ className }: { className?: string }) => {
     return (
         <BentoGridItem
+            className={className}
             title={<h1>About Me</h1>}
             icon={<ContactRoundIcon size={25} />}
             description={
@@ -33,6 +34,6 @@ function AboutCard() {
             }
         />
     );
-}
+};
 
 export default AboutCard;

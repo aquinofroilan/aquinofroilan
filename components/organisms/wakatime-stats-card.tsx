@@ -2,6 +2,7 @@ import React from "react";
 import { FetchWakaTimeStats } from "@/actions/wakatime";
 import { BentoGridItem } from "@/components/ui";
 import { Clock, Code, Github, Laptop, Monitor, ChartColumnIcon, CircleArrowUp } from "lucide-react";
+import { cn } from "@/lib/utils";
 type WakatimeStatsTypes = {
     data: {
         editors: Array<{
@@ -38,7 +39,7 @@ type GitHubStats = {
     total_issues: number;
     contributed_to_last_year: number;
 };
-async function WakatimeStatsCard() {
+const WakatimeStatsCard = async ({ className }: { className?: string }) => {
     const github_stats: GitHubStats = {
         total_stars_earned: 5,
         total_commits_2025: 512,
@@ -55,8 +56,8 @@ async function WakatimeStatsCard() {
     const wakatimeEditors = wakatimeStats?.data.editors;
     return (
         <BentoGridItem
-            className="flex flex-col gap-3"
-            icon={<ChartColumnIcon size={20} />}
+            className={cn("flex flex-col gap-3", className)}
+            icon={<ChartColumnIcon size={15} />}
             title={"Wakatime Stats"}
             description={
                 <>
@@ -194,6 +195,6 @@ async function WakatimeStatsCard() {
             }
         />
     );
-}
+};
 
 export default WakatimeStatsCard;
