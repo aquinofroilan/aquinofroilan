@@ -7,6 +7,7 @@ import { FaAndroid, FaNodeJs, FaReact } from "react-icons/fa";
 import Image from "next/image";
 import { Send } from "lucide-react";
 import NowPlayingWidget from "@/components/organisms/now-playing-widget";
+import TechStackCard from "@/components/organisms/tech-stack-card";
 
 export default function Home() {
     return (
@@ -56,6 +57,7 @@ export default function Home() {
                             Certifications & Badges
                         </h1>
                     </div>
+                    <TechStackCard />
                     <div className="w-full grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 sm:gap-3 md:gap-10 lg:gap-20">
                         {CertificationsListsPreview.map((cert) => {
                             return (

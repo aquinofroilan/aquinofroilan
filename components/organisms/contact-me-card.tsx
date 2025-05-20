@@ -1,4 +1,3 @@
-import React from "react";
 import { BentoGridItem, Tooltip, TooltipContent, TooltipTrigger } from "@/components/ui";
 import { Github, Instagram, LinkedIn } from "@/components/atoms";
 import { ArrowRight, Send } from "lucide-react";
