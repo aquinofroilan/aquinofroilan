@@ -7,7 +7,7 @@ const CertificationCard = ({ className }: { className?: string }) => {
     return (
         <BentoGridItem
             className={className}
-            icon={<BadgeCheckIcon size={20} />}
+            icon={<BadgeCheckIcon size={15} />}
             title={
                 <div className="flex gap-2 items-center justify-between w-full">
                     <h1>Certifications and Badges</h1>

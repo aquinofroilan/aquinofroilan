@@ -48,7 +48,7 @@ const TechStackCard = ({ className }: { className?: string }) => {
     return (
         <BentoGridItem
             className={cn("flex flex-col gap-3", className)}
-            icon={<FlaskConical size={20} />}
+            icon={<FlaskConical size={15} />}
             title={
                 <div className="flex justify-between items-center w-full">
                     <h1>Tech Stack</h1>

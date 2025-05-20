@@ -23,7 +23,7 @@ const ProfileCard = ({ className }: { className?: string }) => {
                 <h1 className="font-bold text-3xl">Froilan Aquino</h1>
                 <h1 className="text-xs md:text-base">Web Developer</h1>
                 <h1 className="text-xs md:text-base flex items-center gap-2">
-                    <MapPin size={16} />
+                    <MapPin size={15} />
                     Caloocan City, Metro Manila, Philippines
                 </h1>
 

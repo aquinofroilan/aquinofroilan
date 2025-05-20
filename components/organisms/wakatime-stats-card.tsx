@@ -57,7 +57,7 @@ const WakatimeStatsCard = async ({ className }: { className?: string }) => {
     return (
         <BentoGridItem
             className={cn("flex flex-col gap-3", className)}
-            icon={<ChartColumnIcon size={20} />}
+            icon={<ChartColumnIcon size={15} />}
             title={"Wakatime Stats"}
             description={
                 <>

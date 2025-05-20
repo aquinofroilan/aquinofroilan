@@ -153,7 +153,7 @@ const NowPlayingWidget = ({ className }: { className?: string }) => {
     return (
         <BentoGridItem
             className={cn(`${!nowPlaying || !nowPlaying.isPlaying ? "hidden" : ""} ${className}`)}
-            icon={<Music />}
+            icon={<Music size={15} />}
             title={<h1>Now Playing</h1>}
             description={
                 <div className="flex flex-row w-full justify-start items-center gap-2">

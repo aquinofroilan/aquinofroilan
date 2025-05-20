@@ -8,13 +8,13 @@ import ContactMe from "@/components/organisms/contact-me-card";
 
 export default function Home() {
     return (
-        <main className="py-10 w-11/12 max-w-5xl gap-5 flex flex-col">
-            <ProfileCard />
-            <AboutCard />
-            <NowPlayingWidget className="w-full" />
-            <CertificationCard />
-            <TechStackCard />
-            <WakatimeStatsCard />
+        <main className="py-10 w-11/12 max-w-5xl gap-3 flex flex-col md:grid md:grid-cols-2">
+            <ProfileCard className="col-span-2" />
+            <AboutCard className="col-span-1 row-span-2" />
+            <CertificationCard className="w-full col-span-1 row-span-1" />
+            <TechStackCard className="w-full col-span-1 row-span-1" />
+            <NowPlayingWidget className="w-full col-span-2 row-span-1" />
+            <WakatimeStatsCard className="row-span-2 col-span-1" />
             <ContactMe />
         </main>
     );
