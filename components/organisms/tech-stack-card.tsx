@@ -1,49 +1,9 @@
 import { BentoGridItem, Badge } from "@/components/ui";
+import { FRONTEND, BACKEND, DEVELOPER_TOOLS, DEVOPS } from "@/data/techstack-array";
 import { cn } from "@/lib/utils";
 import { ArrowRightCircle, FlaskConical } from "lucide-react";
 import Link from "next/link";
 
-const FRONTEND = [
-    "HTML",
-    "CSS",
-    "JavaScript",
-    "TypeScript",
-    "React",
-    "Next.js",
-    "Tailwind CSS",
-    "Svelte",
-    "Prettier",
-    "ESLint",
-    "Styled Components",
-    "Webpack",
-];
-const BACKEND = ["Node.js", "Python", "Flask", "Django", "REST API", "MySQL", "PostgreSQL", "MongoDB", "Redis", "JWT"];
-const DEVOPS = [
-    "Docker",
-    "Kubernetes",
-    "AWS",
-    "Google Cloud Platform",
-    "Firebase",
-    "Vercel",
-    "GitHub Actions",
-    "CI/CD",
-];
-const DEVELOPER_TOOLS = [
-    "Git",
-    "GitHub",
-    "Postman",
-    "Figma",
-    "Visual Studio Code",
-    "Trello",
-    "Jira",
-    "PyCharm",
-    "IntelliJ IDEA",
-    "Android Studio",
-    "Sublimetext",
-    "Notion",
-    "Discord",
-    "Teams",
-];
 const TechStackCard = ({ className }: { className?: string }) => {
     return (
         <BentoGridItem
@@ -54,8 +14,7 @@ const TechStackCard = ({ className }: { className?: string }) => {
                     <h1 className="text-lg">Tech Stack</h1>
                     <Link
                         className="text-xs md:text-base text-neutral-500 hover:text-neutral-700 dark:text-neutral-400 dark:hover:text-neutral-200 transition duration-200 flex items-center gap-2"
-                        href={"/tech-stack"}
-                        target="_blank"
+                        href={"/techstack"}
                     >
                         View All
                         <ArrowRightCircle size={15} />
