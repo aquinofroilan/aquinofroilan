@@ -1,13 +1,13 @@
 import "./globals.css";
-import { Inter } from "next/font/google";
+import { Quicksand } from "next/font/google";
 import NavBar from "@/components/navigation-bar/navbar";
 import NavBarSmall from "@/components/navigation-bar/navbar-small";
 import { Analytics } from "@vercel/analytics/react";
 import { ThemeProvider } from "@/provider/theme-provider";
 import { type ReactNode } from "react";
 
-const font = Inter({
-    weight: ["400", "500", "600", "700", "800", "900"],
+const font = Quicksand({
+    weight: ["400", "500", "600", "700"],
     style: "normal",
     subsets: ["latin"],
 });

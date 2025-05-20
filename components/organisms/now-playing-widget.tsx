@@ -1,7 +1,7 @@
 "use client";
 import { useState, useEffect, useRef } from "react";
 import { Music } from "lucide-react";
-import { Card, CardContent, CardHeader, CardTitle, Progress } from "@/components/ui";
+import { BentoGridItem, Progress } from "@/components/ui";
 import { getNowPlaying } from "@/actions";
 import Image from "next/image";
 import Link from "next/link";
@@ -152,12 +152,11 @@ const NowPlayingWidget = ({ className }: { className?: string }) => {
 
     // Rest of component remains the same
     return (
-        <Card className={`${!nowPlaying || !nowPlaying.isPlaying ? "hidden" : ""} ${className}`}>
-            {/* Existing JSX content */}
-            <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-                <CardTitle>Froilan&apos;s Now Playing</CardTitle>
-            </CardHeader>
-            <CardContent className="flex flex-col w-full">
+        <BentoGridItem
+            className={`${!nowPlaying || !nowPlaying.isPlaying ? "hidden" : ""} ${className}`}
+            icon={<Music />}
+            title={<h1>Now Playing</h1>}
+            description={
                 <div className="flex flex-row w-full justify-start items-center gap-2">
                     {nowPlaying != null && albumImageUrl ? (
                         <Link target="_blank" href={songUrl ? songUrl : ""}>
@@ -208,8 +207,8 @@ const NowPlayingWidget = ({ className }: { className?: string }) => {
                         </div>
                     </div>
                 </div>
-            </CardContent>
-        </Card>
+            }
+        />
     );
 };
 

@@ -2,7 +2,7 @@ import Link from "next/link";
 import Image from "next/image";
 import AboutMeCode from "./components/about-me-code-snippets";
 import TechStack from "@/app/about/tech-stack";
-import NowPlayingWidget from "@/components/widget/now-playing-widget";
+import NowPlayingWidget from "@/components/organisms/now-playing-widget";
 
 export const metadata = {
     title: "About - Froilan | Web Developer",
