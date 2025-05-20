@@ -1,18 +1,17 @@
 "use server";
 import { getAccessToken } from "@/actions";
 
-const NOW_PLAYING_ENDPOINT = "https://api.spotify.com/v1/me/player/currently-playing";
-
 export const getNowPlaying = async () => {
-    const client_id = process.env.SPOTIFY_CLIENT_ID ?? "";
-    const client_secret = process.env.SPOTIFY_CLIENT_SECRET ?? "";
-    const refresh_token = process.env.SPOTIFY_REFRESH_TOKEN ?? "";
+    const NOW_PLAYING_ENDPOINT = "https://api.spotify.com/v1/me/player/currently-playing";
+    const CLIENT_ID = process.env.SPOTIFY_CLIENT_ID ?? "";
+    const CLIENT_SECRET = process.env.SPOTIFY_CLIENT_SECRET ?? "";
+    const REFRESH_TOKEN = process.env.SPOTIFY_REFRESH_TOKEN ?? "";
 
-    if (!client_id || !client_secret || !refresh_token) {
+    if (!CLIENT_ID || !CLIENT_SECRET || !REFRESH_TOKEN) {
         console.error("Missing Spotify credentials in environment variables");
         return null;
     }
-    const { access_token } = await getAccessToken(client_id!, client_secret!, refresh_token!);
+    const { access_token } = await getAccessToken(CLIENT_ID!, CLIENT_SECRET!, REFRESH_TOKEN!);
 
     const response = await fetch(NOW_PLAYING_ENDPOINT, {
         headers: {

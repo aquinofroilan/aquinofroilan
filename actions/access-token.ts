@@ -1,8 +1,8 @@
 import querystring from "querystring";
-const TOKEN_ENDPOINT = "https://accounts.spotify.com/api/token";
 
 export const getAccessToken = async (client_id: string, client_secret: string, refresh_token: string) => {
     const basic = Buffer.from(`${client_id}:${client_secret}`).toString("base64");
+    const TOKEN_ENDPOINT = "https://accounts.spotify.com/api/token";
 
     const response = await fetch(TOKEN_ENDPOINT, {
         method: "POST",

@@ -1,10 +1,11 @@
 "use client";
 import { useState, useEffect, useRef } from "react";
 import { Music } from "lucide-react";
-import { Card, CardContent, CardHeader, CardTitle, Progress } from "@/components/ui";
+import { BentoGridItem, Progress } from "@/components/ui";
 import { getNowPlaying } from "@/actions";
 import Image from "next/image";
 import Link from "next/link";
+import { cn } from "@/lib/utils";
 
 const NowPlayingWidget = ({ className }: { className?: string }) => {
     const [nowPlaying, setNowPlaying] = useState<{
@@ -24,13 +25,17 @@ const NowPlayingWidget = ({ className }: { className?: string }) => {
 
     // Function to fetch data and reset local state
     const fetchNowPlaying = async () => {
-        const data = await getNowPlaying();
-        if (data !== null) {
-            setNowPlaying(data);
-            if (data && typeof data !== "string" && data.isPlaying) {
-                setLocalTimePlayed(data.timePlayed);
-                lastUpdateTimeRef.current = Date.now();
+        try {
+            const data = await getNowPlaying();
+            if (data !== null) {
+                setNowPlaying(data);
+                if (data && typeof data !== "string" && data.isPlaying) {
+                    setLocalTimePlayed(data.timePlayed);
+                    lastUpdateTimeRef.current = Date.now();
+                }
             }
+        } catch {
+            console.error("Error fetching now playing data:");
         }
     };
 
@@ -149,15 +154,12 @@ const NowPlayingWidget = ({ className }: { className?: string }) => {
         artistUrl = nowPlaying.artistUrl;
         progress = (localTimePlayed / nowPlaying.timeTotal) * 100;
     }
-
-    // Rest of component remains the same
     return (
-        <Card className={`${!nowPlaying || !nowPlaying.isPlaying ? "hidden" : ""} ${className}`}>
-            {/* Existing JSX content */}
-            <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-                <CardTitle>Froilan&apos;s Now Playing</CardTitle>
-            </CardHeader>
-            <CardContent className="flex flex-col w-full">
+        <BentoGridItem
+            className={cn(`${!nowPlaying || !nowPlaying.isPlaying ? "hidden" : ""} ${className}`)}
+            icon={<Music size={15} />}
+            title={<h1 className="text-lg">Now Playing</h1>}
+            description={
                 <div className="flex flex-row w-full justify-start items-center gap-2">
                     {nowPlaying != null && albumImageUrl ? (
                         <Link target="_blank" href={songUrl ? songUrl : ""}>
@@ -208,8 +210,8 @@ const NowPlayingWidget = ({ className }: { className?: string }) => {
                         </div>
                     </div>
                 </div>
-            </CardContent>
-        </Card>
+            }
+        />
     );
 };
 
