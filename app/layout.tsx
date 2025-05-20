@@ -5,6 +5,7 @@ import NavBarSmall from "@/components/navigation-bar/navbar-small";
 import { Analytics } from "@vercel/analytics/react";
 import { ThemeProvider } from "@/provider/theme-provider";
 import { type ReactNode } from "react";
+import { TooltipProvider } from "@/components/ui";
 
 const font = Quicksand({
     weight: ["400", "500", "600", "700"],
@@ -56,12 +57,14 @@ export default function RootLayout({ children }: { children: ReactNode }) {
             <body
                 className={`${font.className} gap-5 md:gap-8 lg:gap-14 pt-4 pb-10 min-h-screen md:pt-8 lg:pt-11 xl:pt-14 w-full justify-start flex flex-col items-center`}
             >
-                <ThemeProvider attribute="class" defaultTheme="system" enableSystem disableTransitionOnChange>
-                    <NavBar />
-                    <NavBarSmall />
-                    {children}
-                </ThemeProvider>
-                <Analytics />
+                <TooltipProvider>
+                    <ThemeProvider attribute="class" defaultTheme="system" enableSystem disableTransitionOnChange>
+                        <NavBar />
+                        <NavBarSmall />
+                        {children}
+                    </ThemeProvider>
+                    <Analytics />
+                </TooltipProvider>
             </body>
         </html>
     );
