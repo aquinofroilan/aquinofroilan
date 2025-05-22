@@ -1,6 +1,7 @@
 import {
     AboutCard,
     CertificationCard,
+    CompentenciesCard,
     ContactMe,
     NowPlayingWidget,
     ProfileCard,
@@ -17,8 +18,9 @@ export default function Home() {
             <CertificationCard className="w-full col-span-1 row-span-1" />
             <TechStackCard className="w-full col-span-1 row-span-1" />
             <NowPlayingWidget className="w-full col-span-2 row-span-3" />
-            <WakatimeStatsCard className="row-span-2 col-span-1" />
+            <WakatimeStatsCard className="row-span-3 col-span-1" />
             <TrascendingCodeCard />
+            <CompentenciesCard />
             <ContactMe />
         </main>
     );

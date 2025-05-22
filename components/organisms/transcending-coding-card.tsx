@@ -5,7 +5,7 @@ export const TrascendingCodeCard = ({ className }: { className?: string }) => {
         <BentoGridItem
             className={className}
             icon={<Rocket size={15} />}
-            title={<h1 className="text-lg">Beyond Coding/Programming</h1>}
+            title={<h1 className="text-lg">Beyond Coding</h1>}
             description={
                 <div className="flex flex-col gap-5">
                     <p className="text-sm text-justify">
