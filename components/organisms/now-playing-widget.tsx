@@ -35,7 +35,7 @@ export const NowPlayingWidget = ({ className }: { className?: string }) => {
                 }
             }
         } catch {
-            console.error("Error fetching now playing data:");
+            return;
         }
     };
 
