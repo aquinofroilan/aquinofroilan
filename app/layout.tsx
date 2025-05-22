@@ -45,9 +45,9 @@ export default function RootLayout({ children }: { children: ReactNode }) {
                 <FadeUpAnimation>
                     <ThemeProvider attribute="class" defaultTheme="system" enableSystem disableTransitionOnChange>
                         {children}
-                        <Footer />
                     </ThemeProvider>
                     <Analytics />
+                    <Footer />
                 </FadeUpAnimation>
             </body>
         </html>
