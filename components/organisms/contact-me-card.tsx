@@ -2,8 +2,7 @@ import { BentoGridItem } from "@/components/ui";
 import { Github, Instagram, LinkedIn } from "@/components/atoms";
 import { ArrowRight, Send } from "lucide-react";
 import Link from "next/link";
-
-const ContactMe = ({ className }: { className?: string }) => {
+export const ContactMe = ({ className }: { className?: string }) => {
     return (
         <BentoGridItem
             className={className}
@@ -86,5 +85,3 @@ const ContactMe = ({ className }: { className?: string }) => {
         />
     );
 };
-
-export default ContactMe;

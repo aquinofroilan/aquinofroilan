@@ -7,7 +7,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { cn } from "@/lib/utils";
 
-const NowPlayingWidget = ({ className }: { className?: string }) => {
+export const NowPlayingWidget = ({ className }: { className?: string }) => {
     const [nowPlaying, setNowPlaying] = useState<{
         isPlaying: boolean;
         timePlayed: number;
@@ -35,7 +35,7 @@ const NowPlayingWidget = ({ className }: { className?: string }) => {
                 }
             }
         } catch {
-            console.error("Error fetching now playing data:");
+            return;
         }
     };
 
@@ -214,5 +214,3 @@ const NowPlayingWidget = ({ className }: { className?: string }) => {
         />
     );
 };
-
-export default NowPlayingWidget;

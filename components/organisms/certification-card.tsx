@@ -3,7 +3,7 @@ import { BentoGridItem } from "@/components/ui";
 import { CertificationsListsPreview } from "@/data/certification-list-preview";
 import Link from "next/link";
 
-const CertificationCard = ({ className }: { className?: string }) => {
+export const CertificationCard = ({ className }: { className?: string }) => {
     return (
         <BentoGridItem
             className={className}
@@ -42,5 +42,3 @@ const CertificationCard = ({ className }: { className?: string }) => {
         />
     );
 };
-
-export default CertificationCard;
