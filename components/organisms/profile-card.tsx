@@ -4,8 +4,7 @@ import { Mail, MapPin, Phone } from "lucide-react";
 import Link from "next/link";
 import { Button } from "@/components/ui";
 import { cn } from "@/lib/utils";
-
-const ProfileCard = ({ className }: { className?: string }) => {
+export const ProfileCard = ({ className }: { className?: string }) => {
     return (
         <div className={cn("w-full flex flex-row gap-5", className)}>
             <div className="xs:w-1/3 md:block flex justify-center items-center">
@@ -52,5 +51,3 @@ const ProfileCard = ({ className }: { className?: string }) => {
         </div>
     );
 };
-
-export default ProfileCard;

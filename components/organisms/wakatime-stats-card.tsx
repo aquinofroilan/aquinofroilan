@@ -1,6 +1,6 @@
 import React from "react";
 import { FetchWakaTimeStats } from "@/actions/wakatime";
-import { BentoGridItem } from "@/components/ui";
+import { BentoGridItem, Progress } from "@/components/ui";
 import { Clock, Code, Github, Laptop, Monitor, ChartColumnIcon, CircleArrowUp } from "lucide-react";
 import { cn } from "@/lib/utils";
 type WakatimeStatsTypes = {
@@ -39,7 +39,7 @@ type GitHubStats = {
     total_issues: number;
     contributed_to_last_year: number;
 };
-const WakatimeStatsCard = async ({ className }: { className?: string }) => {
+export const WakatimeStatsCard = async ({ className }: { className?: string }) => {
     const github_stats: GitHubStats = {
         total_stars_earned: 5,
         total_commits_2025: 512,
@@ -73,12 +73,7 @@ const WakatimeStatsCard = async ({ className }: { className?: string }) => {
                                             <span>{category.name}</span>
                                             <span>{category.percent.toFixed(1)}%</span>
                                         </div>
-                                        <div className="w-full bg-secondary/50 rounded-full h-2">
-                                            <div
-                                                className="bg-primary h-2 rounded-full"
-                                                style={{ width: `${category.percent}%` }}
-                                            />
-                                        </div>
+                                        <Progress value={category.percent} />
                                     </div>
                                 ))}
                             </div>
@@ -96,12 +91,7 @@ const WakatimeStatsCard = async ({ className }: { className?: string }) => {
                                             <span>{lang.name}</span>
                                             <span>{lang.percent.toFixed(1)}%</span>
                                         </div>
-                                        <div className="w-full bg-secondary/50 rounded-full h-2">
-                                            <div
-                                                className="bg-primary h-2 rounded-full"
-                                                style={{ width: `${lang.percent}%` }}
-                                            />
-                                        </div>
+                                        <Progress value={lang.percent} />
                                     </div>
                                 ))}
                             </div>
@@ -160,7 +150,7 @@ const WakatimeStatsCard = async ({ className }: { className?: string }) => {
                         icon={<Github size={15} />}
                         title={<h1 className="text-lg">GitHub Activity</h1>}
                         description={
-                            <div className="grid grid-cols-2 sm:grid-cols-5 gap-2">
+                            <div className="flex flex-col lg:flex-row gap-2">
                                 <div className="border border-border rounded-md p-2">
                                     <p className="text-xs text-muted-foreground">Stars</p>
                                     <p className="font-medium">{github_stats.total_stars_earned}</p>
@@ -189,5 +179,3 @@ const WakatimeStatsCard = async ({ className }: { className?: string }) => {
         />
     );
 };
-
-export default WakatimeStatsCard;

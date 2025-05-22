@@ -3,7 +3,7 @@ import { BentoGridItem } from "@/components/ui";
 import { CertificationsListsPreview } from "@/data/certification-list-preview";
 import Link from "next/link";
 
-const CertificationCard = ({ className }: { className?: string }) => {
+export const CertificationCard = ({ className }: { className?: string }) => {
     return (
         <BentoGridItem
             className={className}
@@ -29,7 +29,7 @@ const CertificationCard = ({ className }: { className?: string }) => {
                                 target="_blank"
                                 rel="noreferrer"
                                 key={cert.link}
-                                className="flex gap-2 items-center bg-neutral-100 p-5 rounded-md hover:bg-neutral-200 dark:bg-neutral-800 dark:hover:bg-neutral-700 transition duration-200"
+                                className="flex gap-2 items-center p-5 rounded-md border-1 transition duration-200"
                             >
                                 <div>
                                     <h1 className="text-xs md:text-base">{cert.title}</h1>
@@ -42,5 +42,3 @@ const CertificationCard = ({ className }: { className?: string }) => {
         />
     );
 };
-
-export default CertificationCard;

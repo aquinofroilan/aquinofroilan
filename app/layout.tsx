@@ -3,7 +3,8 @@ import { Quicksand } from "next/font/google";
 import { Analytics } from "@vercel/analytics/react";
 import { ThemeProvider } from "@/provider/theme-provider";
 import { type ReactNode } from "react";
-import Footer from "@/components/organisms/footer";
+import { Footer } from "@/components/organisms";
+import FadeUpAnimation from "@/components/animated-component";
 
 const font = Quicksand({
     weight: ["400", "500", "600", "700"],
@@ -37,15 +38,17 @@ export const metadata = {
 
 export default function RootLayout({ children }: { children: ReactNode }) {
     return (
-        <html lang="en" className="scroll-smooth">
+        <html lang="en" className="scroll-smooth" suppressHydrationWarning>
             <body
-                className={`${font.className} w-full min-h-screen bg-background text-foreground antialiased transition-colors duration-200 dark:bg-background-dark dark:text-foreground-dark flex flex-col items-center justify-between`}
+                className={`${font.className} w-full min-h-screen bg-background text-foreground antialiased transition-colors duration-200`}
             >
-                <ThemeProvider attribute="class" defaultTheme="system" enableSystem disableTransitionOnChange>
-                    {children}
+                <FadeUpAnimation>
+                    <ThemeProvider attribute="class" defaultTheme="system" enableSystem disableTransitionOnChange>
+                        {children}
+                    </ThemeProvider>
+                    <Analytics />
                     <Footer />
-                </ThemeProvider>
-                <Analytics />
+                </FadeUpAnimation>
             </body>
         </html>
     );
