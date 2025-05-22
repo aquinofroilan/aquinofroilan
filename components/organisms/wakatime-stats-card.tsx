@@ -1,6 +1,6 @@
 import React from "react";
 import { FetchWakaTimeStats } from "@/actions/wakatime";
-import { BentoGridItem } from "@/components/ui";
+import { BentoGridItem, Progress } from "@/components/ui";
 import { Clock, Code, Github, Laptop, Monitor, ChartColumnIcon, CircleArrowUp } from "lucide-react";
 import { cn } from "@/lib/utils";
 type WakatimeStatsTypes = {
@@ -73,12 +73,7 @@ const WakatimeStatsCard = async ({ className }: { className?: string }) => {
                                             <span>{category.name}</span>
                                             <span>{category.percent.toFixed(1)}%</span>
                                         </div>
-                                        <div className="w-full bg-secondary/50 rounded-full h-2">
-                                            <div
-                                                className="bg-primary h-2 rounded-full"
-                                                style={{ width: `${category.percent}%` }}
-                                            />
-                                        </div>
+                                        <Progress value={category.percent} />
                                     </div>
                                 ))}
                             </div>
@@ -96,12 +91,7 @@ const WakatimeStatsCard = async ({ className }: { className?: string }) => {
                                             <span>{lang.name}</span>
                                             <span>{lang.percent.toFixed(1)}%</span>
                                         </div>
-                                        <div className="w-full bg-secondary/50 rounded-full h-2">
-                                            <div
-                                                className="bg-primary h-2 rounded-full"
-                                                style={{ width: `${lang.percent}%` }}
-                                            />
-                                        </div>
+                                        <Progress value={lang.percent} />
                                     </div>
                                 ))}
                             </div>
