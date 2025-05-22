@@ -1,7 +1,7 @@
 import React from "react";
 import { BentoGridItem } from "@/components/ui";
 
-const CompentenciesCard = ({ className }: { className?: string }) => {
+export const CompentenciesCard = ({ className }: { className?: string }) => {
     return (
         <BentoGridItem
             className={className}
@@ -11,5 +11,3 @@ const CompentenciesCard = ({ className }: { className?: string }) => {
         />
     );
 };
-
-export default CompentenciesCard;

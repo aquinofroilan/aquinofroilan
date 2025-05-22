@@ -4,7 +4,7 @@ import { cn } from "@/lib/utils";
 import { ArrowRightCircle, FlaskConical } from "lucide-react";
 import Link from "next/link";
 
-const TechStackCard = ({ className }: { className?: string }) => {
+export const TechStackCard = ({ className }: { className?: string }) => {
     return (
         <BentoGridItem
             className={cn("flex flex-col gap-3", className)}
@@ -68,5 +68,3 @@ const TechStackCard = ({ className }: { className?: string }) => {
         />
     );
 };
-
-export default TechStackCard;

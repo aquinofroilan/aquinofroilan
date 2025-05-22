@@ -1,10 +1,13 @@
-import NowPlayingWidget from "@/components/organisms/now-playing-widget";
-import ProfileCard from "@/components/organisms/profile-card";
-import CertificationCard from "@/components/organisms/certification-card";
-import AboutCard from "@/components/organisms/about-me-card";
-import TechStackCard from "@/components/organisms/tech-stack-card";
-import WakatimeStatsCard from "@/components/organisms/wakatime-stats-card";
-import ContactMe from "@/components/organisms/contact-me-card";
+import {
+    AboutCard,
+    CertificationCard,
+    ContactMe,
+    NowPlayingWidget,
+    ProfileCard,
+    TechStackCard,
+    TrascendingCodeCard,
+    WakatimeStatsCard,
+} from "@/components/organisms/";
 
 export default function Home() {
     return (
@@ -13,8 +16,9 @@ export default function Home() {
             <AboutCard className="col-span-1 row-span-2" />
             <CertificationCard className="w-full col-span-1 row-span-1" />
             <TechStackCard className="w-full col-span-1 row-span-1" />
-            <NowPlayingWidget className="w-full col-span-2 row-span-1" />
+            <NowPlayingWidget className="w-full col-span-2 row-span-3" />
             <WakatimeStatsCard className="row-span-2 col-span-1" />
+            <TrascendingCodeCard />
             <ContactMe />
         </main>
     );

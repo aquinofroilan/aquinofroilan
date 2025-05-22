@@ -39,7 +39,7 @@ type GitHubStats = {
     total_issues: number;
     contributed_to_last_year: number;
 };
-const WakatimeStatsCard = async ({ className }: { className?: string }) => {
+export const WakatimeStatsCard = async ({ className }: { className?: string }) => {
     const github_stats: GitHubStats = {
         total_stars_earned: 5,
         total_commits_2025: 512,
@@ -179,5 +179,3 @@ const WakatimeStatsCard = async ({ className }: { className?: string }) => {
         />
     );
 };
-
-export default WakatimeStatsCard;

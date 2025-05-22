@@ -3,7 +3,7 @@ import { Quicksand } from "next/font/google";
 import { Analytics } from "@vercel/analytics/react";
 import { ThemeProvider } from "@/provider/theme-provider";
 import { type ReactNode } from "react";
-import Footer from "@/components/organisms/footer";
+import { Footer } from "@/components/organisms";
 import FadeUpAnimation from "@/components/animated-component";
 
 const font = Quicksand({

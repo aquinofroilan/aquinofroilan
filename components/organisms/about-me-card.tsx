@@ -1,6 +1,6 @@
 import { BentoGridItem } from "@/components/ui";
 import { ContactRoundIcon } from "lucide-react";
-const AboutCard = ({ className }: { className?: string }) => {
+export const AboutCard = ({ className }: { className?: string }) => {
     return (
         <BentoGridItem
             className={className}
@@ -35,5 +35,3 @@ const AboutCard = ({ className }: { className?: string }) => {
         />
     );
 };
-
-export default AboutCard;

@@ -1,8 +1,6 @@
-import React from "react";
 import { ThemeToggler } from "../theme-toggler";
 import { Separator } from "@/components/ui";
-
-const Footer = () => {
+export const Footer = () => {
     return (
         <>
             <footer className="pt-3 flex flex-col items-center justify-between w-full max-w-5xl">
@@ -17,5 +15,3 @@ const Footer = () => {
         </>
     );
 };
-
-export default Footer;
