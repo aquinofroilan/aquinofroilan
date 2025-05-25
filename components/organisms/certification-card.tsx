@@ -5,6 +5,7 @@ import Link from "next/link";
 import * as motion from "motion/react-client";
 
 export const CertificationCard = ({ className }: { className?: string }) => {
+export const CertificationCard = ({ className }: { className?: string }) => {
     return (
         <motion.div
             initial={{ opacity: 0, y: 20 }}

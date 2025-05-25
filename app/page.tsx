@@ -9,6 +9,17 @@ import {
     TrascendingCodeCard,
     WakatimeStatsCard,
 } from "@/components/organisms/";
+import {
+    AboutCard,
+    CertificationCard,
+    CompentenciesCard,
+    ContactMe,
+    NowPlayingWidget,
+    ProfileCard,
+    TechStackCard,
+    TrascendingCodeCard,
+    WakatimeStatsCard,
+} from "@/components/organisms/";
 
 export default function Home() {
     return (
