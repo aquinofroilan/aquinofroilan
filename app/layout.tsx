@@ -4,7 +4,6 @@ import { Analytics } from "@vercel/analytics/react";
 import { ThemeProvider } from "@/provider/theme-provider";
 import { type ReactNode } from "react";
 import { Footer } from "@/components/organisms";
-import FadeUpAnimation from "@/components/animated-component";
 
 const font = Quicksand({
     weight: ["400", "500", "600", "700"],
@@ -40,15 +39,13 @@ export default function RootLayout({ children }: { children: ReactNode }) {
     return (
         <html lang="en" className="scroll-smooth" suppressHydrationWarning>
             <body
-                className={`${font.className} w-full min-h-screen bg-background text-foreground antialiased transition-colors duration-200`}
+                className={`${font.className} w-full flex items-center flex-col min-h-screen bg-background text-foreground antialiased transition-colors duration-200`}
             >
                 <ThemeProvider attribute="class" defaultTheme="system" enableSystem disableTransitionOnChange>
-                    <FadeUpAnimation>
-                        {children}
-                        <Analytics />
-                        <Footer />
-                    </FadeUpAnimation>
+                    {children}
                 </ThemeProvider>
+                <Analytics />
+                <Footer />
             </body>
         </html>
     );

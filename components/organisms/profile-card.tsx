@@ -4,9 +4,21 @@ import { Mail, MapPin, Phone } from "lucide-react";
 import Link from "next/link";
 import { Button } from "@/components/ui";
 import { cn } from "@/lib/utils";
+import * as motion from "motion/react-client";
+
 export const ProfileCard = ({ className }: { className?: string }) => {
     return (
-        <div className={cn("w-full flex flex-row gap-5", className)}>
+        <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -20 }}
+            transition={{
+                duration: 0.3,
+                ease: "easeOut",
+                delay: 0.1,
+            }}
+            className={cn("w-full flex flex-row gap-5", className)}
+        >
             <div className="xs:w-1/3 md:block flex justify-center items-center">
                 <Image
                     priority={true}
@@ -48,6 +60,6 @@ export const ProfileCard = ({ className }: { className?: string }) => {
                     </Button>
                 </div>
             </div>
-        </div>
+        </motion.div>
     );
 };
