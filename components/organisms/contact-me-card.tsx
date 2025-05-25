@@ -28,15 +28,9 @@ export const ContactMe = ({ className }: { className?: string }) => {
                             <div className="flex flex-col">
                                 <Link
                                     className="underline underline-offset-1 font-bold"
-                                    href="mailto:froilan.j.aquino@gmail.com"
+                                    href="mailto:aquino.froilan@outlook.com?subject=Contact%20from%20Website"
                                     target="_blank"
-                                >
-                                    froilan.j.aquino@gmail.com
-                                </Link>
-                                <Link
-                                    className="underline underline-offset-1 font-bold"
-                                    href="mailto:aquino.froilan@outlook.com"
-                                    target="_blank"
+                                    rel="noopener noreferrer"
                                 >
                                     aquino.froilan@outlook.com
                                 </Link>
@@ -49,25 +43,23 @@ export const ContactMe = ({ className }: { className?: string }) => {
                                     className="border-1 w-full justify-center flex items-center py-2 px-2 rounded-md"
                                     aria-label="Github link of the website owner"
                                     target="_blank"
-                                    href="https://github.com/froilanimnida"
+                                    href="https://github.com/aquinofroilan"
                                 >
                                     <Github />
                                 </Link>
-
                                 <Link
                                     className="border-1 w-full justify-center flex items-center py-2 px-2 rounded-md"
                                     aria-label="Instagram Profile of the website owner"
                                     target="_blank"
-                                    href="https://www.instagram.com/froilanimnida"
+                                    href="https://www.instagram.com/aquinofroilan_"
                                 >
                                     <Instagram />
                                 </Link>
-
                                 <Link
                                     className="border-1 w-full justify-center flex items-center py-2 px-2 rounded-md"
                                     aria-label="LinkedIn link of the website owner"
                                     target="_blank"
-                                    href="https://linkedin.com/in/froilanimnida"
+                                    href="https://linkedin.com/in/aquinofroilan"
                                 >
                                     <LinkedIn />
                                 </Link>
@@ -76,7 +68,7 @@ export const ContactMe = ({ className }: { className?: string }) => {
                         <div>
                             <h1>Let&apos;s talk:</h1>
                             <Link
-                                href={"https://calendly.com/froilaniminida/15min"}
+                                href="https://calendly.com/froilan/15min"
                                 className="border-1 w-full justify-between flex items-center py-2 px-2 rounded-md mt-2"
                             >
                                 Schedule a call

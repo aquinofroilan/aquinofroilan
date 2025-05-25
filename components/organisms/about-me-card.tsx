@@ -41,11 +41,10 @@ export const AboutCard = ({ className }: { className?: string }) => {
                             Figma and organized education from sites such as Udemy, EdX, and Coursera.
                         </p>
                         <p className="text-sm text-justify">
-                            I plan to explore system-level languages like C and Go soon in order to expand my low-level
-                            comprehension and algorithmic problem-solving skills. Additionally, I&apos;m exploring Java
-                            and Kotlin and will take a native approach to mobile development. At the same time, I&apos;m
-                            strengthening my mathematical underpinnings for a future shift to machine learning and
-                            artificial intelligence, areas that appeal to me on a rational and imaginative level.
+                            I am currently broadening my technical foundation by studying system-level programming
+                            languages such as C and Go, with the aim of deepening my understanding of low-level
+                            operations and enhancing my algorithmic thinking. In parallel, I am exploring Java and
+                            Kotlin to adopt a native-first approach to mobile development.
                         </p>
                     </div>
                 }
