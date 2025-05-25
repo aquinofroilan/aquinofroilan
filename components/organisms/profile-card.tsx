@@ -4,9 +4,21 @@ import { Mail, MapPin, Phone } from "lucide-react";
 import Link from "next/link";
 import { Button } from "@/components/ui";
 import { cn } from "@/lib/utils";
+import * as motion from "motion/react-client";
+
 export const ProfileCard = ({ className }: { className?: string }) => {
     return (
-        <div className={cn("w-full flex flex-row gap-5", className)}>
+        <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -20 }}
+            transition={{
+                duration: 0.3,
+                ease: "easeOut",
+                delay: 0.1,
+            }}
+            className={cn("w-full flex flex-row gap-5", className)}
+        >
             <div className="xs:w-1/3 md:block flex justify-center items-center">
                 <Image
                     priority={true}
@@ -35,19 +47,23 @@ export const ProfileCard = ({ className }: { className?: string }) => {
                         variant={"default"}
                         size={"sm"}
                     >
-                        <Link href={"https://calendly.com/froilaniminida/15min"} target="_blank">
+                        <Link href="https://calendly.com/froilan/15min" target="_blank">
                             <Phone size={16} />
                             Schedule a call
                         </Link>
                     </Button>
                     <Button className="rounded-md flex flex-row gap-2" asChild variant={"outline"} size={"sm"}>
-                        <Link href={"mailto:froilan.j.aquino@gmail.com"} target="_blank">
+                        <Link
+                            href="mailto:aquino.froilan@outlook.com?subject=Contact%20from%20Website"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                        >
                             <Mail size={16} />
                             Send email
                         </Link>
                     </Button>
                 </div>
             </div>
-        </div>
+        </motion.div>
     );
 };

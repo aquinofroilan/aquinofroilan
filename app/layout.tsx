@@ -1,13 +1,12 @@
 import "./globals.css";
-import { Quicksand } from "next/font/google";
+import { Nunito_Sans } from "next/font/google";
 import { Analytics } from "@vercel/analytics/react";
 import { ThemeProvider } from "@/provider/theme-provider";
 import { type ReactNode } from "react";
 import { Footer } from "@/components/organisms";
-import FadeUpAnimation from "@/components/animated-component";
 
-const font = Quicksand({
-    weight: ["400", "500", "600", "700"],
+const font = Nunito_Sans({
+    weight: ["400", "500", "600", "700", "800"],
     style: "normal",
     subsets: ["latin"],
 });
@@ -40,15 +39,13 @@ export default function RootLayout({ children }: { children: ReactNode }) {
     return (
         <html lang="en" className="scroll-smooth" suppressHydrationWarning>
             <body
-                className={`${font.className} w-full min-h-screen bg-background text-foreground antialiased transition-colors duration-200`}
+                className={`${font.className} w-full flex items-center flex-col min-h-screen bg-background text-foreground antialiased transition-colors duration-200`}
             >
-                <FadeUpAnimation>
-                    <ThemeProvider attribute="class" defaultTheme="system" enableSystem disableTransitionOnChange>
-                        {children}
-                    </ThemeProvider>
-                    <Analytics />
-                    <Footer />
-                </FadeUpAnimation>
+                <ThemeProvider attribute="class" defaultTheme="system" enableSystem disableTransitionOnChange>
+                    {children}
+                </ThemeProvider>
+                <Analytics />
+                <Footer />
             </body>
         </html>
     );
