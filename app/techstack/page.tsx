@@ -12,9 +12,9 @@ function TechStack() {
                 <ArrowLeft size={15} />
                 <h1 className="text-sm">Back</h1>
             </Link>
-            <div className="col-Badge-2 flex flex-col gap-5">
+            <div className="flex flex-col gap-5">
                 <h1 className="text-2xl text-center font-bold">TechStack</h1>
-                <div className="col-Badge-2 grid grid-cols-1 md:grid-cols-2 gap-2">
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-2">
                     <BentoGridItem
                         title={<h1 className="text-lg">Frontend</h1>}
                         description={

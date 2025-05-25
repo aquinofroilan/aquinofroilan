@@ -13,7 +13,7 @@ function Certifications() {
                 <ArrowLeft size={15} />
                 <h1 className="text-sm">Back</h1>
             </Link>
-            <div className="col-span-2 flex flex-col gap-5">
+            <div className="col-span-2 w-full flex flex-col gap-5">
                 <h1 className="text-2xl text-center font-bold">All Certifications</h1>
                 <div className="col-span-2 grid grid-cols-1 md:grid-cols-2 gap-2">
                     {CertificationsListsPreview.map((c) => {
