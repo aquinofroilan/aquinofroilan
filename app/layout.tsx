@@ -42,13 +42,13 @@ export default function RootLayout({ children }: { children: ReactNode }) {
             <body
                 className={`${font.className} w-full min-h-screen bg-background text-foreground antialiased transition-colors duration-200`}
             >
-                <FadeUpAnimation>
-                    <ThemeProvider attribute="class" defaultTheme="system" enableSystem disableTransitionOnChange>
+                <ThemeProvider attribute="class" defaultTheme="system" enableSystem disableTransitionOnChange>
+                    <FadeUpAnimation>
                         {children}
-                    </ThemeProvider>
-                    <Analytics />
-                    <Footer />
-                </FadeUpAnimation>
+                        <Analytics />
+                        <Footer />
+                    </FadeUpAnimation>
+                </ThemeProvider>
             </body>
         </html>
     );
