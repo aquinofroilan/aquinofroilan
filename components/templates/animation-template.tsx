@@ -1,21 +1,12 @@
 "use client";
-
-import { ReactNode } from "react";
-import { usePathname } from "next/navigation";
-import { AnimatePresence } from "motion/react";
+import type { ReactNode } from "react";
 import * as motion from "motion/react-client";
+import { AnimatePresence } from "motion/react";
 
-interface PageTransitionWrapperProps {
-    children: ReactNode;
-}
-
-export const PageTransitionWrapper = ({ children }: PageTransitionWrapperProps) => {
-    const pathname = usePathname();
-
+const AnimationTemplate = ({ children }: { children: ReactNode }) => {
     return (
         <AnimatePresence mode="wait">
             <motion.div
-                key={pathname}
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 exit={{ opacity: 0, y: -20 }}
@@ -30,3 +21,5 @@ export const PageTransitionWrapper = ({ children }: PageTransitionWrapperProps) 
         </AnimatePresence>
     );
 };
+
+export default AnimationTemplate;

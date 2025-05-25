@@ -1,4 +1,4 @@
-import { ThemeToggler } from "../theme-toggler";
+import { ThemeToggler } from "@/components/atoms";
 import { Separator } from "@/components/ui";
 export const Footer = () => {
     return (
