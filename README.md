@@ -1,4 +1,5 @@
 # **🍌 Hello World, I'm Froilan!**
+
 Developer based in Caloocan, Philippines
 <br>
 <br>
@@ -22,6 +23,9 @@ Developer based in Caloocan, Philippines
 <br>
 
 ![Now Playing](https://spotify-recently-played-readme.vercel.app/api?user=31zu3iynpunc24u2ai2zglqnee4i)
+
 # 📫 How to reach me?
+
 # froilan.a@outlook.com
+
 **I Love Building Things**

@@ -2,6 +2,7 @@ import { ArrowLeft } from "lucide-react";
 import Link from "next/link";
 import { BentoGridItem } from "@/components/ui";
 import { CertificationsListsPreview } from "@/data/certification-list-preview";
+import * as motion from "motion/react-client";
 
 function Certifications() {
     return (
@@ -16,14 +17,27 @@ function Certifications() {
             <div className="col-span-2 w-full flex flex-col gap-5">
                 <h1 className="text-2xl text-center font-bold">All Certifications</h1>
                 <div className="col-span-2 grid grid-cols-1 md:grid-cols-2 gap-2">
-                    {CertificationsListsPreview.map((c) => {
+                    {CertificationsListsPreview.map((c, index) => {
                         return (
-                            <Link href={c.link} target="_blank" key={c.link}>
-                                <BentoGridItem
-                                    title={<h1 className="text-lg">{c.title}</h1>}
-                                    description={<h1 className="text-xs md:text-base">{c.description}</h1>}
-                                />
-                            </Link>
+                            <motion.div
+                                key={c.link}
+                                initial={{ opacity: 0, y: 20 }}
+                                animate={{ opacity: 1, y: 0 }}
+                                exit={{ opacity: 0, y: -20 }}
+                                transition={{
+                                    duration: 0.3,
+                                    ease: "easeOut",
+                                    delay: index * 0.1,
+                                }}
+                                className="w-full h-full"
+                            >
+                                <Link href={c.link} target="_blank">
+                                    <BentoGridItem
+                                        title={<h1 className="text-lg">{c.title}</h1>}
+                                        description={<h1 className="text-xs md:text-base">{c.description}</h1>}
+                                    />
+                                </Link>
+                            </motion.div>
                         );
                     })}
                 </div>

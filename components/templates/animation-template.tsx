@@ -14,7 +14,7 @@ const AnimationTemplate = ({ children }: { children: ReactNode }) => {
                     duration: 0.3,
                     ease: "easeOut",
                 }}
-                className="w-full"
+                className="w-full flex flex-col items-center justify-start"
             >
                 {children}
             </motion.div>

@@ -5,6 +5,7 @@ import { BentoGridItem, Progress } from "@/components/ui";
 import { getNowPlaying } from "@/actions";
 import Image from "next/image";
 import Link from "next/link";
+import * as motion from "motion/react-client";
 import { cn } from "@/lib/utils";
 
 export const NowPlayingWidget = ({ className }: { className?: string }) => {
@@ -155,62 +156,74 @@ export const NowPlayingWidget = ({ className }: { className?: string }) => {
         progress = (localTimePlayed / nowPlaying.timeTotal) * 100;
     }
     return (
-        <BentoGridItem
+        <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -20 }}
+            transition={{
+                duration: 0.3,
+                ease: "easeOut",
+                delay: 0.5,
+            }}
             className={cn(`${!nowPlaying || !nowPlaying.isPlaying ? "hidden" : ""} ${className}`)}
-            icon={<Music size={15} />}
-            title={<h1 className="text-lg">Now Playing</h1>}
-            description={
-                <div className="flex flex-row w-full justify-start items-center gap-2">
-                    {nowPlaying != null && albumImageUrl ? (
-                        <Link target="_blank" href={songUrl ? songUrl : ""}>
-                            <Image
-                                src={albumImageUrl}
-                                alt="Album Image"
-                                width={80}
-                                height={80}
-                                className="rounded-sm cursor-pointer"
-                            />
-                        </Link>
-                    ) : (
-                        <Music />
-                    )}
-                    <div className="flex flex-col gap-1 w-full">
-                        <h1 className="text-base font-bold overflow-hidden whitespace-nowrap text-ellipsis">
-                            {
-                                <Link
-                                    target="_blank"
-                                    className="cursor-pointer hover:underline underline-offset-2"
-                                    href={songUrl ? songUrl : ""}
-                                >
-                                    {title}
-                                </Link>
-                            }
-                        </h1>
-                        <h1 className="text-sm font-regular">
-                            {
-                                <Link
-                                    className="cursor-pointer hover:underline underline-offset-2"
-                                    target="_blank"
-                                    href={artistUrl ? artistUrl : ""}
-                                >
-                                    {artist}
-                                </Link>
-                            }
-                        </h1>
-                        <div className="flex flex-col w-full gap-2">
-                            <Progress aria-label="song progress" value={progress} />
-                            <div className="w-full flex flex-row justify-between">
-                                <p className="text-xs text-muted-foreground">
-                                    {minutesPlayed}:{secondsPlayed}
-                                </p>
-                                <p className="text-xs text-muted-foreground">
-                                    {minutesTotal}:{secondsTotal}
-                                </p>
+        >
+            <BentoGridItem
+                className="w-full h-full"
+                icon={<Music size={15} />}
+                title={<h1 className="text-lg">Now Playing</h1>}
+                description={
+                    <div className="flex flex-row w-full justify-start items-center gap-2">
+                        {nowPlaying != null && albumImageUrl ? (
+                            <Link target="_blank" href={songUrl ? songUrl : ""}>
+                                <Image
+                                    src={albumImageUrl}
+                                    alt="Album Image"
+                                    width={80}
+                                    height={80}
+                                    className="rounded-sm cursor-pointer"
+                                />
+                            </Link>
+                        ) : (
+                            <Music />
+                        )}
+                        <div className="flex flex-col gap-1 w-full">
+                            <h1 className="text-base font-bold overflow-hidden whitespace-nowrap text-ellipsis">
+                                {
+                                    <Link
+                                        target="_blank"
+                                        className="cursor-pointer hover:underline underline-offset-2"
+                                        href={songUrl ? songUrl : ""}
+                                    >
+                                        {title}
+                                    </Link>
+                                }
+                            </h1>
+                            <h1 className="text-sm font-regular">
+                                {
+                                    <Link
+                                        className="cursor-pointer hover:underline underline-offset-2"
+                                        target="_blank"
+                                        href={artistUrl ? artistUrl : ""}
+                                    >
+                                        {artist}
+                                    </Link>
+                                }
+                            </h1>
+                            <div className="flex flex-col w-full gap-2">
+                                <Progress aria-label="song progress" value={progress} />
+                                <div className="w-full flex flex-row justify-between">
+                                    <p className="text-xs text-muted-foreground">
+                                        {minutesPlayed}:{secondsPlayed}
+                                    </p>
+                                    <p className="text-xs text-muted-foreground">
+                                        {minutesTotal}:{secondsTotal}
+                                    </p>
+                                </div>
                             </div>
                         </div>
                     </div>
-                </div>
-            }
-        />
+                }
+            />
+        </motion.div>
     );
 };
