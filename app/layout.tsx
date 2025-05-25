@@ -1,12 +1,12 @@
 import "./globals.css";
-import { Quicksand } from "next/font/google";
+import { Nunito_Sans } from "next/font/google";
 import { Analytics } from "@vercel/analytics/react";
 import { ThemeProvider } from "@/provider/theme-provider";
 import { type ReactNode } from "react";
 import { Footer } from "@/components/organisms";
 
-const font = Quicksand({
-    weight: ["400", "500", "600", "700"],
+const font = Nunito_Sans({
+    weight: ["400", "500", "600", "700", "800"],
     style: "normal",
     subsets: ["latin"],
 });

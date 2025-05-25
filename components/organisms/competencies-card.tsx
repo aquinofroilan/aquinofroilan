@@ -55,17 +55,11 @@ export const CompentenciesCard = ({ className }: { className?: string }) => {
                 title={<h1 className="text-lg">My Journey</h1>}
                 description={
                     <div className="relative pl-8 mt-4">
-                        {/* Timeline line */}
-                        <div className="absolute left-0 top-1 bottom-8 w-[2px] bg-gradient-to-b from-primary/80 to-primary/20 rounded-full" />
-
-                        {/* Timeline items */}
+                        <div className="absolute left-0 top-1 bottom-8 w-[2px] bg-gradient-to-t from-primary/80 to-primary/20 rounded-full" />
                         <div className="space-y-8">
                             {milestones.map((milestone, index) => (
                                 <div key={index} className="relative">
-                                    {/* Timeline dot */}
                                     <div className="absolute left-[-8px] top-1 w-3 h-3 rounded-full bg-primary" />
-
-                                    {/* Content */}
                                     <div className="pb-2">
                                         <Badge variant="outline" className="text-xs py-0">
                                             {milestone.year}
