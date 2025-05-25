@@ -55,7 +55,7 @@ export const TechStackCard = ({ className }: { className?: string }) => {
                             </div>
                         </div>
                         <div>
-                            <h1>Devlops & Cloud</h1>
+                            <h1>DevOps & Cloud</h1>
                             <div className="flex flex-wrap gap-2">
                                 {DEVOPS.slice(0, 6).map((item) => (
                                     <Badge key={item} variant={"outline"} className="w-fit font-semibold text-xs">
