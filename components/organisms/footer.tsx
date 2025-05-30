@@ -1,4 +1,4 @@
-import { ThemeToggler } from "@/components/atoms";
+//import { ThemeToggler } from "@/components/atoms";
 import { Separator } from "@/components/ui";
 import * as motion from "motion/react-client";
 
@@ -22,7 +22,7 @@ export const Footer = () => {
                         <p className="text-xs md:text-sm ml-3">
                             © {new Date().getFullYear()} Froilan Aquino. All rights reserved.
                         </p>
-                        <ThemeToggler />
+                        {/*<ThemeToggler />*/}
                     </div>
                 </motion.div>
             </footer>

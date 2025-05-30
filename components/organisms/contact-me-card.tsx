@@ -28,11 +28,11 @@ export const ContactMe = ({ className }: { className?: string }) => {
                             <div className="flex flex-col">
                                 <Link
                                     className="underline underline-offset-1 font-bold"
-                                    href="mailto:aquino.froilan@outlook.com?subject=Contact%20from%20Website"
+                                    href="mailto:aquino.froilan.dev@outlook.com?subject=Contact%20from%20Website"
                                     target="_blank"
                                     rel="noopener noreferrer"
                                 >
-                                    aquino.froilan@outlook.com
+                                    aquino.froilan.dev@outlook.com
                                 </Link>
                             </div>
                         </div>
@@ -68,7 +68,7 @@ export const ContactMe = ({ className }: { className?: string }) => {
                         <div>
                             <h1>Let&apos;s talk:</h1>
                             <Link
-                                href="https://calendly.com/froilan/15min"
+                                href="https://calendly.com/froilan/consultation"
                                 className="border-1 w-full justify-between flex items-center py-2 px-2 rounded-md mt-2"
                             >
                                 Schedule a call

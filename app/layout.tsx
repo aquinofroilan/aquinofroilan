@@ -3,6 +3,7 @@ import { Nunito_Sans } from "next/font/google";
 import { Analytics } from "@vercel/analytics/react";
 import { ThemeProvider } from "@/provider/theme-provider";
 import { type ReactNode } from "react";
+import { SpeedInsights } from "@vercel/speed-insights/next";
 import { Footer } from "@/components/organisms";
 
 const font = Nunito_Sans({
@@ -45,6 +46,7 @@ export default function RootLayout({ children }: { children: ReactNode }) {
                     {children}
                 </ThemeProvider>
                 <Analytics />
+                <SpeedInsights />
                 <Footer />
             </body>
         </html>
