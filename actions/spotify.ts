@@ -19,16 +19,10 @@ export const getNowPlaying = async () => {
         },
     });
 
-    if (response.status > 400) {
-        throw new Error("Unable to Fetch Song");
-    } else if (response.status === 204) {
-        throw new Error("Currently Not Playing");
-    }
+    if (response.status > 400 || response.status === 204) return null;
 
     const song = await response.json();
-    if (!song.item) {
-        throw new Error("Currently Not Playing");
-    }
+    if (!song.item) return null;
     const albumImageUrl = song.item.album.images[0].url;
     const artist = song.item.artists.map((artist: { name: string }) => artist.name).join(", ");
     const isPlaying = song.is_playing;
