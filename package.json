@@ -42,7 +42,7 @@
         "@next/eslint-plugin-next": "^15.3.2",
         "@tailwindcss/postcss": "^4.1.7",
         "@types/eslint__eslintrc": "^2.1.2",
-        "eslint": "^9.27.0",
+        "eslint": "^9.28.0",
         "postcss": "^8.5.3",
         "prettier": "3.5.3",
         "querystring": "^0.2.1",
