@@ -34,6 +34,13 @@ export const metadata = {
     "og:title": "Froilan | Web Developer",
     "og:description": "Personal Website of Froilan, Web Developer and Web Developer based in the Caloocan Philippines.",
     "og:type": "website",
+    "og:url": "https://froilan.vercel.app",
+    "og:site_name": "Froilan Portfolio",
+    "twitter:card": "summary_large_image",
+    "twitter:title": "Froilan | Web Developer",
+    "twitter:description": "Personal Website of Froilan, Web Developer based in Caloocan, Philippines.",
+    canonical: "https://froilan.vercel.app",
+    metadataBase: new URL("https://froilan.vercel.app"),
 };
 
 export default function RootLayout({ children }: { children: ReactNode }) {
