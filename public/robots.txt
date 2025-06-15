@@ -1,10 +1,6 @@
 User-agent: *
 Allow: /
 
-# Disallow specific paths if needed
-# Disallow: /admin/
-# Disallow: /private/
-
 # Sitemap location
 Sitemap: https://froilan.vercel.app/sitemap.xml
 
