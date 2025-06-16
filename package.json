@@ -33,7 +33,7 @@
         "clsx": "^2.1.1",
         "eslint-config-next": "15.3.2",
         "lucide-react": "^0.511.0",
-        "motion": "^12.12.2",
+        "motion": "^12.18.1",
         "next": "^15.3.3",
         "next-themes": "^0.3.0",
         "react": "18.3.1",
