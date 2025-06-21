@@ -105,9 +105,9 @@ I am currently broadening my technical foundation by studying system-level progr
 
 ## **📈 Stats:**
 
-![Froilan's Streak](https://github-readme-streak-stats.herokuapp.com/?user=aquinofroilan&theme=vue-dark&hide_border=true)
+[![GitHub Streak](https://streak-stats.demolab.com?user=aquinofroilan&theme=dracula&hide_border=true&short_numbers=true&date_format=n%2Fj%5B%2FY%5D)](https://git.io/streak-stats)
 
-[![roadmap.sh](https://roadmap.sh/card/wide/667cd2ae2028c2d81892c220?variant=light&roadmaps=frontend)](https://roadmap.sh)
+[![roadmap.sh](https://roadmap.sh/card/wide/68468c0e846bd2eeed76e41a?variant=dark)](https://roadmap.sh)
 
 ![Froilan's Stats](https://github-readme-stats.vercel.app/api?username=aquinofroilan&theme=vue-dark&show_icons=true&hide_border=true&count_private=true)
 
