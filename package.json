@@ -53,6 +53,6 @@
         "postcss": "^8.5.3",
         "prettier": "3.6.0",
         "querystring": "^0.2.1",
-        "tailwindcss": "^4.1.8"
+        "tailwindcss": "^4.1.10"
     }
 }
