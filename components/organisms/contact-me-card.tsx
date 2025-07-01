@@ -1,5 +1,5 @@
 import { BentoGridItem } from "@/components/ui";
-import { Github, Instagram, LinkedIn } from "@/components/atoms";
+import { CredlyIcon, Github, Instagram, LinkedIn } from "@/components/atoms";
 import { ArrowRight, Send } from "lucide-react";
 import Link from "next/link";
 import * as motion from "motion/react-client";
@@ -62,6 +62,14 @@ export const ContactMe = ({ className }: { className?: string }) => {
                                     href="https://linkedin.com/in/aquinofroilan"
                                 >
                                     <LinkedIn />
+                                </Link>
+                                <Link
+                                    className="border-1 w-full justify-center flex items-center py-2 px-2 rounded-md"
+                                    aria-label="LinkedIn link of the website owner"
+                                    target="_blank"
+                                    href="https://www.credly.com/users/froilan"
+                                >
+                                    <CredlyIcon />
                                 </Link>
                             </div>
                         </div>
