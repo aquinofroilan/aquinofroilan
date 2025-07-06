@@ -1,5 +1,10 @@
 export const CertificationsListsPreview = [
     {
+        title: "Project Management Fundamentals",
+        description: "International Business Machines SkillsBuild",
+        link: "https://www.credly.com/badges/35586e45-9790-457f-822c-ccc026d6922c/public_url",
+    },
+    {
         title: "Python Essentials 1",
         description: "Cisco Networking Academy",
         link: "https://www.credly.com/badges/b8e988b8-ec7d-4209-bf2e-2849a92ef464/public_url",
@@ -26,7 +31,7 @@ export const CertificationsListsPreview = [
     },
     {
         title: "Cybersecurity Fundamentals",
-        description: "IBM SkillsBuild",
+        description: "International Business Machines SkillsBuild",
         link: "https://www.credly.com/badges/df3fb8e7-abea-4715-a3d4-1c1c3857d32b/public_url",
     },
     {

@@ -44,7 +44,8 @@ export const CertificationCard = ({ className }: { className?: string }) => {
                                     className="flex gap-2 items-center p-5 rounded-md border transition duration-200"
                                 >
                                     <div>
-                                        <h1 className="text-xs md:text-base">{cert.title}</h1>
+                                        <h1 className="text-sm md:text-base">{cert.title}</h1>
+                                        <p>{cert.description}</p>
                                     </div>
                                 </Link>
                             );
