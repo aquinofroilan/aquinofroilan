@@ -34,7 +34,7 @@ export const ProfileCard = ({ className }: { className?: string }) => {
 
             <div>
                 <h1 className="font-bold text-lg">Froilan Aquino</h1>
-                <h1 className="text-xs md:text-base">Software Developer</h1>
+                <h1 className="text-xs md:text-base">Software Engineer</h1>
                 <h1 className="text-xs md:text-base flex items-center gap-2">
                     <MapPin size={15} />
                     Caloocan City, MNL, PH
