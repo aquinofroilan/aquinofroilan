@@ -1,5 +1,5 @@
 import { BentoGridItem } from "@/components/ui";
-import { CredlyIcon, Github, Instagram, LinkedIn } from "@/components/atoms";
+import { CredlyIcon, Github, HackerRank, Instagram, LinkedIn } from "@/components/atoms";
 import { ArrowRight, Send } from "lucide-react";
 import Link from "next/link";
 import * as motion from "motion/react-client";
@@ -38,7 +38,7 @@ export const ContactMe = ({ className }: { className?: string }) => {
                         </div>
                         <div>
                             <h1>Social Links:</h1>
-                            <div className="flex flex-row gap-3 mt-2">
+                            <div className="grid grid-cols-3 gap-2">
                                 <Link
                                     className="border-1 w-full justify-center flex items-center py-2 px-2 rounded-md"
                                     aria-label="Github link of the website owner"
@@ -65,11 +65,19 @@ export const ContactMe = ({ className }: { className?: string }) => {
                                 </Link>
                                 <Link
                                     className="border-1 w-full justify-center flex items-center py-2 px-2 rounded-md"
-                                    aria-label="LinkedIn link of the website owner"
+                                    aria-label="Credly link of the website owner"
                                     target="_blank"
                                     href="https://www.credly.com/users/froilan"
                                 >
                                     <CredlyIcon />
+                                </Link>
+                                <Link
+                                    className="border-1 w-full justify-center flex items-center py-2 px-2 rounded-md"
+                                    aria-label="HackerRank link of the website owner"
+                                    target="_blank"
+                                    href="https://www.hackerrank.com/profile/froilanaquino"
+                                >
+                                    <HackerRank />
                                 </Link>
                             </div>
                         </div>
