@@ -1,4 +1,4 @@
-import { BentoGridItem } from "@/components/ui";
+import { BentoGridItem, Tooltip, TooltipContent, TooltipTrigger } from "@/components/ui";
 import { CredlyIcon, Github, HackerRank, Instagram, LeetCode, LinkedIn } from "@/components/atoms";
 import { ArrowRight, Send } from "lucide-react";
 import Link from "next/link";
@@ -39,54 +39,96 @@ export const ContactMe = ({ className }: { className?: string }) => {
                         <div>
                             <h1>Social Links:</h1>
                             <div className="grid grid-cols-3 gap-2">
-                                <Link
-                                    className="border-1 w-full justify-center flex items-center py-2 px-2 rounded-md"
-                                    aria-label="Github link of the website owner"
-                                    target="_blank"
-                                    href="https://github.com/aquinofroilan"
-                                >
-                                    <Github />
-                                </Link>
-                                <Link
-                                    className="border-1 w-full justify-center flex items-center py-2 px-2 rounded-md"
-                                    aria-label="Instagram Profile of the website owner"
-                                    target="_blank"
-                                    href="https://www.instagram.com/aquinofroilan_"
-                                >
-                                    <Instagram />
-                                </Link>
-                                <Link
-                                    className="border-1 w-full justify-center flex items-center py-2 px-2 rounded-md"
-                                    aria-label="LinkedIn link of the website owner"
-                                    target="_blank"
-                                    href="https://linkedin.com/in/aquinofroilan"
-                                >
-                                    <LinkedIn />
-                                </Link>
-                                <Link
-                                    className="border-1 w-full justify-center flex items-center py-2 px-2 rounded-md"
-                                    aria-label="Credly link of the website owner"
-                                    target="_blank"
-                                    href="https://www.credly.com/users/froilan"
-                                >
-                                    <CredlyIcon />
-                                </Link>
-                                <Link
-                                    className="border-1 w-full justify-center flex items-center py-2 px-2 rounded-md"
-                                    aria-label="HackerRank link of the website owner"
-                                    target="_blank"
-                                    href="https://www.hackerrank.com/profile/froilanaquino"
-                                >
-                                    <HackerRank />
-                                </Link>
-                                <Link
-                                    className="border-1 w-full justify-center flex items-center py-2 px-2 rounded-md"
-                                    aria-label="LeetCode link of the website owner"
-                                    target="_blank"
-                                    href="https://leetcode.com/u/froilan_/"
-                                >
-                                    <LeetCode />
-                                </Link>
+                                <Tooltip>
+                                    <TooltipTrigger>
+                                        <Link
+                                            className="border-1 w-full justify-center flex items-center py-2 px-2 rounded-md"
+                                            aria-label="Github link of the website owner"
+                                            target="_blank"
+                                            href="https://github.com/aquinofroilan"
+                                        >
+                                            <Github />
+                                        </Link>
+                                    </TooltipTrigger>
+                                    <TooltipContent>
+                                        <p>GitHub</p>
+                                    </TooltipContent>
+                                </Tooltip>
+                                <Tooltip>
+                                    <TooltipTrigger>
+                                        <Link
+                                            className="border-1 w-full justify-center flex items-center py-2 px-2 rounded-md"
+                                            aria-label="Instagram Profile of the website owner"
+                                            target="_blank"
+                                            href="https://www.instagram.com/aquinofroilan_"
+                                        >
+                                            <Instagram />
+                                        </Link>
+                                    </TooltipTrigger>
+                                    <TooltipContent>
+                                        <p>Instagram</p>
+                                    </TooltipContent>
+                                </Tooltip>
+                                <Tooltip>
+                                    <TooltipTrigger>
+                                        <Link
+                                            className="border-1 w-full justify-center flex items-center py-2 px-2 rounded-md"
+                                            aria-label="LinkedIn link of the website owner"
+                                            target="_blank"
+                                            href="https://linkedin.com/in/aquinofroilan"
+                                        >
+                                            <LinkedIn />
+                                        </Link>
+                                    </TooltipTrigger>
+                                    <TooltipContent>
+                                        <p>LinkedIn</p>
+                                    </TooltipContent>
+                                </Tooltip>
+                                <Tooltip>
+                                    <TooltipTrigger>
+                                        <Link
+                                            className="border-1 w-full justify-center flex items-center py-2 px-2 rounded-md"
+                                            aria-label="Credly link of the website owner"
+                                            target="_blank"
+                                            href="https://www.credly.com/users/froilan"
+                                        >
+                                            <CredlyIcon />
+                                        </Link>
+                                    </TooltipTrigger>
+                                    <TooltipContent>
+                                        <p>Credly</p>
+                                    </TooltipContent>
+                                </Tooltip>
+                                <Tooltip>
+                                    <TooltipTrigger>
+                                        <Link
+                                            className="border-1 w-full justify-center flex items-center py-2 px-2 rounded-md"
+                                            aria-label="HackerRank link of the website owner"
+                                            target="_blank"
+                                            href="https://www.hackerrank.com/profile/froilanaquino"
+                                        >
+                                            <HackerRank />
+                                        </Link>
+                                    </TooltipTrigger>
+                                    <TooltipContent>
+                                        <p>HackerRank</p>
+                                    </TooltipContent>
+                                </Tooltip>
+                                <Tooltip>
+                                    <TooltipTrigger>
+                                        <Link
+                                            className="border-1 w-full justify-center flex items-center py-2 px-2 rounded-md"
+                                            aria-label="LeetCode link of the website owner"
+                                            target="_blank"
+                                            href="https://leetcode.com/u/froilan_/"
+                                        >
+                                            <LeetCode />
+                                        </Link>
+                                    </TooltipTrigger>
+                                    <TooltipContent>
+                                        <p>LeetCode</p>
+                                    </TooltipContent>
+                                </Tooltip>
                             </div>
                         </div>
                         <div>
