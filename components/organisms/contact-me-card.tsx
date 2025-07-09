@@ -1,5 +1,5 @@
 import { BentoGridItem } from "@/components/ui";
-import { CredlyIcon, Github, HackerRank, Instagram, LinkedIn } from "@/components/atoms";
+import { CredlyIcon, Github, HackerRank, Instagram, LeetCode, LinkedIn } from "@/components/atoms";
 import { ArrowRight, Send } from "lucide-react";
 import Link from "next/link";
 import * as motion from "motion/react-client";
@@ -78,6 +78,14 @@ export const ContactMe = ({ className }: { className?: string }) => {
                                     href="https://www.hackerrank.com/profile/froilanaquino"
                                 >
                                     <HackerRank />
+                                </Link>
+                                <Link
+                                    className="border-1 w-full justify-center flex items-center py-2 px-2 rounded-md"
+                                    aria-label="LeetCode link of the website owner"
+                                    target="_blank"
+                                    href="https://leetcode.com/u/froilan_/"
+                                >
+                                    <LeetCode />
                                 </Link>
                             </div>
                         </div>
