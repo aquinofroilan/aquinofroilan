@@ -5,6 +5,7 @@ import { ThemeProvider } from "@/provider/theme-provider";
 import { type ReactNode } from "react";
 import { SpeedInsights } from "@vercel/speed-insights/next";
 import { Footer } from "@/components/organisms";
+import { TooltipProvider } from "@/components/ui";
 
 const font = Nunito_Sans({
     weight: ["400", "500", "600", "700", "800"],
@@ -49,12 +50,14 @@ export default function RootLayout({ children }: { children: ReactNode }) {
             <body
                 className={`${font.className} w-full flex items-center flex-col min-h-screen bg-background text-foreground antialiased transition-colors duration-200`}
             >
-                <ThemeProvider attribute="class" defaultTheme="system" enableSystem disableTransitionOnChange>
-                    {children}
-                </ThemeProvider>
-                <Analytics />
-                <SpeedInsights />
-                <Footer />
+                <TooltipProvider>
+                    <ThemeProvider attribute="class" defaultTheme="system" enableSystem disableTransitionOnChange>
+                        {children}
+                    </ThemeProvider>
+                    <Analytics />
+                    <SpeedInsights />
+                    <Footer />
+                </TooltipProvider>
             </body>
         </html>
     );

@@ -21,3 +21,4 @@ export { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle }
 export { Button, type ButtonProps, buttonVariants } from "./button";
 export { Badge, type BadgeProps, badgeVariants } from "./badge";
 export { BentoGrid, BentoGridItem } from "./bento-grid";
+export { Tooltip, TooltipContent, TooltipTrigger, TooltipProvider } from "./tooltip";
