@@ -3,6 +3,7 @@ import { FetchWakaTimeStats } from "@/actions/wakatime";
 import { BentoGridItem, Progress } from "@/components/ui";
 import { Clock, Code, Github, Laptop, Monitor, ChartColumnIcon, CircleArrowUp } from "lucide-react";
 import * as motion from "motion/react-client";
+import { getGithubStats } from "@/actions";
 
 type WakatimeStatsTypes = {
     data: {
@@ -33,21 +34,9 @@ type WakatimeStatsTypes = {
     };
 };
 
-type GitHubStats = {
-    total_stars_earned: number;
-    total_commits_2025: number;
-    total_prs: number;
-    total_issues: number;
-    contributed_to_last_year: number;
-};
+type GitHubStats = { pullRequests: number; issues: number; commitsPastYear: number; stars: number };
 export const WakatimeStatsCard = async ({ className }: { className?: string }) => {
-    const github_stats: GitHubStats = {
-        total_stars_earned: 5,
-        total_commits_2025: 512,
-        total_prs: 119,
-        total_issues: 47,
-        contributed_to_last_year: 3,
-    };
+    const github_stats: GitHubStats = await getGithubStats();
     const wakatimeStats: WakatimeStatsTypes = await FetchWakaTimeStats();
     const wakatimeLanguages = wakatimeStats?.data.languages;
     const wakatimeCategories = wakatimeStats?.data.categories;
@@ -165,23 +154,19 @@ export const WakatimeStatsCard = async ({ className }: { className?: string }) =
                                 <div className="flex flex-col lg:flex-row gap-2">
                                     <div className="border border-border rounded-md p-2">
                                         <p className="text-xs text-muted-foreground">Stars</p>
-                                        <p className="font-medium">{github_stats.total_stars_earned}</p>
+                                        <p className="font-medium">{github_stats.stars}</p>
                                     </div>
                                     <div className="border border-border rounded-md p-2">
-                                        <p className="text-xs text-muted-foreground">Commits (2025)</p>
-                                        <p className="font-medium">{github_stats.total_commits_2025}</p>
+                                        <p className="text-xs text-muted-foreground">Commits Past Year</p>
+                                        <p className="font-medium">{github_stats.commitsPastYear}</p>
                                     </div>
                                     <div className="border border-border rounded-md p-2">
                                         <p className="text-xs text-muted-foreground">Pull Requests</p>
-                                        <p className="font-medium">{github_stats.total_prs}</p>
+                                        <p className="font-medium">{github_stats.pullRequests}</p>
                                     </div>
                                     <div className="border border-border rounded-md p-2">
                                         <p className="text-xs text-muted-foreground">Issues</p>
-                                        <p className="font-medium">{github_stats.total_issues}</p>
-                                    </div>
-                                    <div className="border border-border rounded-md p-2">
-                                        <p className="text-xs text-muted-foreground">Contributed To</p>
-                                        <p className="font-medium">{github_stats.contributed_to_last_year}</p>
+                                        <p className="font-medium">{github_stats.issues}</p>
                                     </div>
                                 </div>
                             }
