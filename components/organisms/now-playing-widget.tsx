@@ -2,7 +2,7 @@
 import { useState, useEffect, useRef } from "react";
 import { Music } from "lucide-react";
 import { BentoGridItem, Progress } from "@/components/ui";
-import { getNowPlaying } from "@/actions";
+import { getGithubStats, getNowPlaying } from "@/actions";
 import Image from "next/image";
 import Link from "next/link";
 import * as motion from "motion/react-client";
@@ -39,6 +39,9 @@ export const NowPlayingWidget = ({ className }: { className?: string }) => {
             return;
         }
     };
+    const fetchGithubStats = async () => {
+        const response = await getGithubStats();
+    };
 
     // Schedule the next API call
     const scheduleNextApiCall = (timeUntilSongEnds: number | null) => {
@@ -60,7 +63,7 @@ export const NowPlayingWidget = ({ className }: { className?: string }) => {
 
     useEffect(() => {
         fetchNowPlaying();
-
+        fetchGithubStats();
         // Clean up on component unmount
         return () => {
             if (progressIntervalRef.current) {
