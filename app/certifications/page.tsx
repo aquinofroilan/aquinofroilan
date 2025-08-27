@@ -3,6 +3,13 @@ import Link from "next/link";
 import { BentoGridItem } from "@/components/ui";
 import { CertificationsListsPreview } from "@/data/certification-list-preview";
 import * as motion from "motion/react-client";
+import type { Metadata } from "next";
+
+export const metadata: Metadata = {
+    title: "Froilan | Software Engineer | Certifications",
+    description: "A showcase of my certifications and achievements.",
+    keywords: ["Certifications", "Achievements", "Showcase"],
+};
 
 function Certifications() {
     return (

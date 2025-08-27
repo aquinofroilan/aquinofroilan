@@ -1,5 +1,12 @@
 import { ArrowLeft } from "lucide-react";
+import type { Metadata } from "next";
 import Link from "next/link";
+
+export const metadata: Metadata = {
+    title: "Froilan | Software Engineer | Projects",
+    description: "A showcase of my projects and contributions.",
+    keywords: ["Projects", "Showcase", "Contributions"],
+};
 
 function Projects() {
     return (
