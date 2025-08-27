@@ -52,7 +52,5 @@ export const getGithubStats = async () => {
         commitsPastYear: data.user.contributionsCollection.totalCommitContributions,
         stars: totalStars,
     };
-    console.log(stats);
-
     return stats;
 };

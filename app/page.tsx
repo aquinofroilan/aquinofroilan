@@ -22,7 +22,7 @@ export default function Home() {
         <>
             <main className="py-10 w-11/12 max-w-7xl gap-2 flex flex-col md:grid md:grid-cols-2">
                 <ProfileCard className="h-full overflow-scroll col-span-2" />
-                <AboutCard className="h-full overflow-scroll col-span-1 row-span-2" />
+                <AboutCard className="h-full overflow-scroll col-span-1 row-span-1" />
                 <CertificationCard className="h-full overflow-scroll col-span-1 row-span-1" />
                 <TechStackCard className="h-full overflow-scroll col-span-1 row-span-1" />
                 <ProjectsCard className="h-full overflow-scroll col-span-1 row-span-1" />

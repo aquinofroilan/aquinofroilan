@@ -1,6 +1,8 @@
 export const Flask = () => {
     return (
         <svg
+            width={16}
+            height={16}
             fill="currentColor"
             version="1.1"
             xmlns="http://www.w3.org/2000/svg"
