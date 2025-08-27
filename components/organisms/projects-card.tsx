@@ -91,7 +91,7 @@ function ProjectsCard({ className }: { className?: string }) {
                                         className="w-fit font-semibold text-xs flex flex-row gap-1 items-center"
                                     >
                                         <Flask />
-                                        Spring Boot
+                                        Flask
                                     </Badge>
                                     <Badge
                                         variant="outline"
