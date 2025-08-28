@@ -6,6 +6,9 @@ import { FolderCode } from "lucide-react";
 import { SpringBoot } from "@/components/atoms/icons/springboot";
 import { Java } from "@/components/atoms/icons/java";
 import { PostgreSQL } from "@/components/atoms/icons/postgresql";
+import { Python } from "@/components/atoms/icons/python";
+import { Flask } from "@/components/atoms/icons/flask";
+import { NextJS } from "@/components/atoms/icons/nextjs";
 
 function ProjectsCard({ className }: { className?: string }) {
     return (
@@ -55,6 +58,72 @@ function ProjectsCard({ className }: { className?: string }) {
                                     >
                                         <SpringBoot />
                                         Spring Boot
+                                    </Badge>
+                                    <Badge
+                                        variant="outline"
+                                        className="w-fit font-semibold text-xs flex flex-row gap-1 items-center"
+                                    >
+                                        <PostgreSQL />
+                                        PostgreSQL
+                                    </Badge>
+                                </div>
+                            </div>
+                        </Link>
+
+                        <Link
+                            href="https://github.com/aquinofroilan/ez-parking-system"
+                            target="_blank"
+                            rel="noreferrer"
+                            className="flex gap-2 items-center p-5 rounded-md border transition duration-200"
+                        >
+                            <div className="flex flex-col gap-1">
+                                <h1 className="text-sm md:text-base">EZ Parking System</h1>
+                                <p>Backend for a parking management system built with Python Flask</p>
+                                <div className="flex flex-wrap gap-2">
+                                    <Badge
+                                        variant="outline"
+                                        className="w-fit font-semibold text-xs flex flex-row gap-1 items-center"
+                                    >
+                                        <Python />
+                                        Python
+                                    </Badge>
+                                    <Badge
+                                        variant="outline"
+                                        className="w-fit font-semibold text-xs flex flex-row gap-1 items-center"
+                                    >
+                                        <Flask />
+                                        Flask
+                                    </Badge>
+                                    <Badge
+                                        variant="outline"
+                                        className="w-fit font-semibold text-xs flex flex-row gap-1 items-center"
+                                    >
+                                        <PostgreSQL />
+                                        PostgreSQL
+                                    </Badge>
+                                </div>
+                            </div>
+                        </Link>
+
+                        <Link
+                            href="https://github.com/aquinofroilan/pawsitive-health"
+                            target="_blank"
+                            rel="noreferrer"
+                            className="flex gap-2 items-center p-5 rounded-md border transition duration-200"
+                        >
+                            <div className="flex flex-col gap-1">
+                                <h1 className="text-sm md:text-base">Pawsitive Health (Capstone)</h1>
+                                <p>
+                                    Full stack application for a pet health management system built with NextJS and
+                                    PostgreSQL
+                                </p>
+                                <div className="flex flex-wrap gap-2">
+                                    <Badge
+                                        variant="outline"
+                                        className="w-fit font-semibold text-xs flex flex-row gap-1 items-center"
+                                    >
+                                        <NextJS />
+                                        Next.js
                                     </Badge>
                                     <Badge
                                         variant="outline"

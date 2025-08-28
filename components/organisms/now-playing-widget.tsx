@@ -2,7 +2,7 @@
 import { useState, useEffect, useRef } from "react";
 import { Music } from "lucide-react";
 import { BentoGridItem, Progress } from "@/components/ui";
-import { getGithubStats, getNowPlaying } from "@/actions";
+import { getNowPlaying } from "@/actions";
 import Image from "next/image";
 import Link from "next/link";
 import * as motion from "motion/react-client";
@@ -39,13 +39,9 @@ export const NowPlayingWidget = ({ className }: { className?: string }) => {
             return;
         }
     };
-    const fetchGithubStats = async () => {
-        const response = await getGithubStats();
-    };
 
     // Schedule the next API call
     const scheduleNextApiCall = (timeUntilSongEnds: number | null) => {
-        // Clear any existing timeout
         if (apiTimeoutRef.current) {
             clearTimeout(apiTimeoutRef.current);
         }
@@ -56,15 +52,12 @@ export const NowPlayingWidget = ({ className }: { className?: string }) => {
             const refreshTime = timeUntilSongEnds + 1000;
             apiTimeoutRef.current = setTimeout(fetchNowPlaying, refreshTime);
         } else {
-            // Standard 30 second refresh if no imminent song ending
             apiTimeoutRef.current = setTimeout(fetchNowPlaying, 30000);
         }
     };
 
     useEffect(() => {
         fetchNowPlaying();
-        fetchGithubStats();
-        // Clean up on component unmount
         return () => {
             if (progressIntervalRef.current) {
                 clearInterval(progressIntervalRef.current);
@@ -82,7 +75,6 @@ export const NowPlayingWidget = ({ className }: { className?: string }) => {
         }
 
         if (nowPlaying && typeof nowPlaying !== "string" && nowPlaying.isPlaying) {
-            // Calculate time until song ends
             const timeUntilSongEnds = nowPlaying.timeTotal - nowPlaying.timePlayed;
 
             // Schedule the next API call based on song remaining time
@@ -112,7 +104,6 @@ export const NowPlayingWidget = ({ className }: { className?: string }) => {
                 });
             }, 1000);
         } else {
-            // If not playing, still schedule a regular check
             scheduleNextApiCall(null);
         }
 
