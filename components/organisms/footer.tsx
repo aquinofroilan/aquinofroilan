@@ -5,7 +5,7 @@ import * as motion from "motion/react-client";
 export const Footer = () => {
     return (
         <>
-            <footer className="pt-3 flex flex-col items-center justify-between w-full max-w-5xl">
+            <footer className="pt-3 flex flex-col items-center justify-between w-full max-w-7xl">
                 <motion.div
                     initial={{ opacity: 0, y: 20 }}
                     animate={{ opacity: 1, y: 0 }}
@@ -17,7 +17,7 @@ export const Footer = () => {
                     }}
                     className="w-full"
                 >
-                    <Separator className="w-full max-w-5xl" />
+                    <Separator className="w-full" />
                     <div className="flex flex-row items-center justify-between w-full py-5">
                         <p className="text-xs md:text-sm ml-3">
                             © {new Date().getFullYear()} Froilan Aquino. All rights reserved.

@@ -3,6 +3,13 @@ import { BentoGridItem, Badge } from "@/components/ui";
 import { ArrowLeft } from "lucide-react";
 import Link from "next/link";
 import * as motion from "motion/react-client";
+import type { Metadata } from "next";
+
+export const metadata: Metadata = {
+    title: "Froilan | Software Engineer | TechStack",
+    description: "A showcase of my technical skills and tools.",
+    keywords: ["TechStack", "Skills", "Tools"],
+};
 
 function TechStack() {
     return (
