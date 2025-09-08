@@ -34,7 +34,7 @@
     "class-variance-authority": "^0.7.1",
     "clsx": "^2.1.1",
     "eslint-config-next": "15.5.0",
-    "lucide-react": "^0.541.0",
+    "lucide-react": "^0.542.0",
     "motion": "^12.18.1",
     "next": "^15.3.5",
     "next-themes": "^0.3.0",
