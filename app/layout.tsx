@@ -1,5 +1,5 @@
 import "./globals.css";
-import { Nunito_Sans } from "next/font/google";
+import { Poppins } from "next/font/google";
 import { Analytics } from "@vercel/analytics/react";
 import { ThemeProvider } from "@/provider/theme-provider";
 import { type ReactNode } from "react";
@@ -7,7 +7,7 @@ import { SpeedInsights } from "@vercel/speed-insights/next";
 import { Footer } from "@/components/organisms";
 import { TooltipProvider } from "@/components/ui";
 
-const font = Nunito_Sans({
+const font = Poppins({
     weight: ["400", "500", "600", "700", "800"],
     style: "normal",
     subsets: ["latin"],

@@ -34,7 +34,9 @@ export const ProfileCard = ({ className }: { className?: string }) => {
 
             <div>
                 <h1 className="font-bold text-lg">Froilan Aquino</h1>
-                <h1 className="text-xs md:text-base">Software Engineer</h1>
+                <h1 className="text-xs md:text-base">
+                    {process.env.PAGE_TITLE ? String(process.env.PAGE_TITLE).slice(10) : "Software Engineer"}
+                </h1>
                 <h1 className="text-xs md:text-base flex items-center gap-2">
                     <MapPin size={15} />
                     Caloocan City, MNL, PH
@@ -54,7 +56,7 @@ export const ProfileCard = ({ className }: { className?: string }) => {
                     </Button>
                     <Button className="rounded-md flex flex-row gap-2" asChild variant={"outline"} size={"sm"}>
                         <Link
-                            href="mailto:aquino.froilan@outlook.com?subject=Contact%20from%20Website"
+                            href="mailto:aquino.froilan.dev@outlook.com?subject=Contact%20from%20Website"
                             target="_blank"
                             rel="noopener noreferrer"
                         >

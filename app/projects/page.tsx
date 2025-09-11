@@ -3,9 +3,9 @@ import type { Metadata } from "next";
 import Link from "next/link";
 
 export const metadata: Metadata = {
-    title: "Froilan | Software Engineer | Projects",
-    description: "A showcase of my projects and contributions.",
-    keywords: ["Projects", "Showcase", "Contributions"],
+    title: process.env.PAGE_TITLE ? process.env.PAGE_TITLE + " | Projects" : "Froilan | Software Engineer | Projects",
+    description: "A showcase of Froilan's projects and contributions.",
+    keywords: ["Froilan's Projects", "Froilan's Showcase", "Froilan's Contributions"],
 };
 
 function Projects() {

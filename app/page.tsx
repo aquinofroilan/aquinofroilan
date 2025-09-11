@@ -13,7 +13,7 @@ import ProjectsCard from "@/components/organisms/projects-card";
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-    title: "Froilan | Software Engineer",
+    title: process.env.PAGE_TITLE ? process.env.PAGE_TITLE : "Froilan | Software Engineer",
     description: "Welcome to my portfolio website.",
     keywords: ["Froilan", "Software Engineer", "Portfolio"],
 };
