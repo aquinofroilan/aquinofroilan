@@ -23,7 +23,7 @@ export const ProjectsList: ProjectItem[] = [
     {
         title: "Pawsitive Health | Capstone",
         description:
-            "Full stack application for a pet health management system built with NextJS and PostgreSQL",
+            "Full stack app for a pet health management system built with NextJS and PostgreSQL",
         link: "https://github.com/aquinofroilan/pawsitive-health",
         footerContent: [
             {

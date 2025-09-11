@@ -2,7 +2,7 @@ import React from "react";
 import * as motion from "motion/react-client";
 import {Badge, BentoGridItem} from "@/components/ui";
 import Link from "next/link";
-import {FolderCode} from "lucide-react";
+import {ArrowRightCircle, FolderCode} from "lucide-react";
 import {ProjectsList} from "@/data/projects-list";
 
 function ProjectsCard({className}: { className?: string }) {
@@ -24,6 +24,13 @@ function ProjectsCard({className}: { className?: string }) {
                 title={
                     <div className="flex justify-between items-center w-full">
                         <h1 className="text-lg">Projects</h1>
+                        <Link
+                            href={"/projects"}
+                            className="text-xs md:text-base text-neutral-500 hover:text-neutral-700 dark:text-neutral-400 dark:hover:text-neutral-200 transition duration-200 flex items-center gap-2"
+                        >
+                            View All
+                            <ArrowRightCircle size={15} />
+                        </Link>
                     </div>
                 }
                 description={
