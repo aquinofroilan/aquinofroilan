@@ -5,39 +5,42 @@ const FRONTEND = [
     "TypeScript",
     "React",
     "Next.js",
+    "Angular",
     "Tailwind CSS",
     "Svelte",
-    "Prettier",
-    "ESLint",
     "Styled Components",
-    "Webpack",
+    "Webpack"
 ];
+
 const BACKEND = [
     "Node.js",
     "Python",
     "Flask",
     "Django",
-    "REST API",
     "MySQL",
     "PostgreSQL",
     "MongoDB",
     "Redis",
     "JWT",
-    "Render",
-    "Railway",
-    "Supabase",
-    "Prisma",
+    "Spring Boot",
+    "Firebase",
+    "SQLite"
 ];
+
 const DEVOPS = [
     "Docker",
     "Kubernetes",
     "AWS",
     "Google Cloud Platform",
-    "Firebase",
     "Vercel",
     "GitHub Actions",
     "CI/CD",
+    "Sentry",
+    "Render",
+    "Railway",
+    "Supabase"
 ];
+
 const DEVELOPER_TOOLS = [
     "Git",
     "GitHub",
@@ -53,6 +56,8 @@ const DEVELOPER_TOOLS = [
     "Notion",
     "Discord",
     "Teams",
+    "Prettier",
+    "ESLint"
 ];
 
 export { FRONTEND, BACKEND, DEVOPS, DEVELOPER_TOOLS };

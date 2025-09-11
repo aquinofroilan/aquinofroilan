@@ -7,6 +7,7 @@ import Image from "next/image";
 import Link from "next/link";
 import * as motion from "motion/react-client";
 import { cn } from "@/lib/utils";
+import {Spotify} from "@/components/atoms";
 
 export const NowPlayingWidget = ({ className }: { className?: string }) => {
     const [nowPlaying, setNowPlaying] = useState<{
@@ -30,7 +31,7 @@ export const NowPlayingWidget = ({ className }: { className?: string }) => {
             const data = await getNowPlaying();
             if (data !== null) {
                 setNowPlaying(data);
-                if (data && typeof data !== "string" && data.isPlaying) {
+                if (data && data.isPlaying) {
                     setLocalTimePlayed(data.timePlayed);
                     lastUpdateTimeRef.current = Date.now();
                 }
@@ -57,7 +58,7 @@ export const NowPlayingWidget = ({ className }: { className?: string }) => {
     };
 
     useEffect(() => {
-        fetchNowPlaying();
+        fetchNowPlaying().then();
         return () => {
             if (progressIntervalRef.current) {
                 clearInterval(progressIntervalRef.current);
@@ -74,7 +75,7 @@ export const NowPlayingWidget = ({ className }: { className?: string }) => {
             clearInterval(progressIntervalRef.current);
         }
 
-        if (nowPlaying && typeof nowPlaying !== "string" && nowPlaying.isPlaying) {
+        if (nowPlaying && nowPlaying.isPlaying) {
             const timeUntilSongEnds = nowPlaying.timeTotal - nowPlaying.timePlayed;
 
             // Schedule the next API call based on song remaining time
@@ -82,7 +83,7 @@ export const NowPlayingWidget = ({ className }: { className?: string }) => {
 
             progressIntervalRef.current = setInterval(() => {
                 setLocalTimePlayed((prev) => {
-                    if (!nowPlaying || typeof nowPlaying === "string" || !nowPlaying.isPlaying) return prev;
+                    if (!nowPlaying || !nowPlaying.isPlaying) return prev;
 
                     const currentTime = Date.now();
                     const elapsedSinceUpdate = lastUpdateTimeRef.current ? currentTime - lastUpdateTimeRef.current : 0;
@@ -125,15 +126,7 @@ export const NowPlayingWidget = ({ className }: { className?: string }) => {
         artist,
         artistUrl,
         progress;
-    if (typeof nowPlaying === "string") {
-        if (nowPlaying === "Currently Not Playing") {
-            title = "User is";
-            artist = "currently Offline";
-        } else {
-            title = "Failed to";
-            artist = "fetch song";
-        }
-    } else if (nowPlaying && nowPlaying.isPlaying) {
+    if (nowPlaying && nowPlaying.isPlaying) {
         secondsPlayed = Math.floor(localTimePlayed / 1000);
         minutesPlayed = Math.floor(secondsPlayed / 60);
         secondsPlayed = (secondsPlayed % 60).toString().padStart(2, "0");
@@ -163,7 +156,7 @@ export const NowPlayingWidget = ({ className }: { className?: string }) => {
         >
             <BentoGridItem
                 className="w-full h-full"
-                icon={<Music size={15} />}
+                icon={<Spotify />}
                 title={<h1 className="text-lg">Now Playing</h1>}
                 description={
                     <div className="flex flex-row w-full justify-start items-center gap-2">
@@ -181,7 +174,7 @@ export const NowPlayingWidget = ({ className }: { className?: string }) => {
                             <Music />
                         )}
                         <div className="flex flex-col gap-1 w-full">
-                            <h1 className="text-base font-bold overflow-hidden whitespace-nowrap text-ellipsis">
+                            <h1 className="text-base font-semibold overflow-hidden whitespace-nowrap text-ellipsis">
                                 {
                                     <Link
                                         target="_blank"

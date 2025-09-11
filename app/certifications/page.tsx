@@ -6,14 +6,16 @@ import * as motion from "motion/react-client";
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-    title: "Froilan | Software Engineer | Certifications",
-    description: "A showcase of my certifications and achievements.",
-    keywords: ["Certifications", "Achievements", "Showcase"],
+    title: process.env.PAGE_TITLE
+        ? process.env.PAGE_TITLE + " | Certifications"
+        : "Froilan | Software Engineer | Certifications",
+    description: "A showcase of Froilan's certifications and achievements.",
+    keywords: ["Froilan's Certifications", "Froilan's Achievements", "Froilan's Showcase"],
 };
 
 function Certifications() {
     return (
-        <main className="py-10 w-11/12 max-w-5xl gap-2 flex flex-col md:grid md:grid-cols-2">
+        <main className="py-10 w-11/12 max-w-7xl gap-2 flex flex-col md:grid md:grid-cols-2">
             <Link
                 href={"/"}
                 className="flex items-center gap-2 text-neutral-500 hover:text-neutral-700 dark:text-neutral-400 dark:hover:text-neutral-200 transition duration-200"

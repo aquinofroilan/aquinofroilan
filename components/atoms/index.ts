@@ -5,3 +5,4 @@ export { CredlyIcon } from "./icons/credly";
 export { ThemeToggler } from "./theme-toggler";
 export { HackerRank } from "./icons/hackerrank";
 export { LeetCode } from "./icons/leetcode";
+export { Spotify } from "./icons/spotify";
