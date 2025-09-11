@@ -51,7 +51,7 @@ export const ProjectsList: ProjectItem[] = [
             },
             {
                 text: "PostgreSQL",
-                icon: <SpringBoot />
+                icon: <PostgreSQL />
             }
         ]
     },
