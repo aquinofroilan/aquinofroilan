@@ -1,6 +1,10 @@
 import { ArrowLeft } from "lucide-react";
 import type { Metadata } from "next";
 import Link from "next/link";
+import * as motion from "motion/react-client";
+import {Badge} from "@/components/ui";
+import {ProjectsList} from "@/data/projects-list";
+import React from "react";
 
 export const metadata: Metadata = {
     title: process.env.PAGE_TITLE ? process.env.PAGE_TITLE + " | Projects" : "Froilan | Software Engineer | Projects",
@@ -10,7 +14,7 @@ export const metadata: Metadata = {
 
 function Projects() {
     return (
-        <main className="py-10 w-11/12 max-w-5xl gap-2 flex flex-col md:grid md:grid-cols-2">
+        <main className="py-10 w-11/12 max-w-7xl gap-2 flex flex-col md:grid md:grid-cols-2">
             <Link
                 href={"/"}
                 className="flex items-center gap-2 text-neutral-500 hover:text-neutral-700 dark:text-neutral-400 dark:hover:text-neutral-200 transition duration-200"
@@ -18,13 +22,53 @@ function Projects() {
                 <ArrowLeft size={15} />
                 <h1 className="text-sm">Back</h1>
             </Link>
-            <div className="grid place-content-center col-span-2 w-full h-full">
+            <div className="col-span-2 w-full flex flex-col gap-5">
                 <h1 className="text-2xl text-center font-bold">Projects</h1>
-                <p className="text-center text-neutral-500 dark:text-neutral-400">
-                    This page is currently under construction. I am working on creating a projects section where I can
-                    showcase my work, contributions, and any other projects I have been involved in. Stay tuned for
-                    updates. In the meantime, feel free to check out my other pages.
-                </p>
+                <div className="col-span-2 grid grid-cols-1 lg:grid-cols-2 gap-2">
+                    {ProjectsList.map((project, index) => {
+                        return (
+                            <motion.div
+                                key={project.link}
+                                initial={{ opacity: 0, y: 20 }}
+                                animate={{ opacity: 1, y: 0 }}
+                                exit={{ opacity: 0, y: -20 }}
+                                transition={{
+                                    duration: 0.3,
+                                    ease: "easeOut",
+                                    delay: index * 0.1,
+                                }}
+                                className="w-full h-full"
+                            >
+                                <Link
+                                    href={project.link}
+                                    key={project.link}
+                                    target="_blank"
+                                    rel="noreferrer"
+                                    className="flex gap-2 items-center p-5 rounded-md border transition duration-200"
+                                >
+                                    <div className="flex flex-col gap-1">
+                                        <h1 className="text-sm md:text-base">
+                                            {project.title}
+                                        </h1>
+                                        <p className="text-sm">{project.description}</p>
+                                        <div className="flex flex-wrap gap-2">
+                                            {project.footerContent.map((footer) => (
+                                                <Badge
+                                                    key={footer.text}
+                                                    variant="outline"
+                                                    className="w-fit font-semibold text-xs flex flex-row gap-1 items-center"
+                                                >
+                                                    {footer.icon}
+                                                    {footer.text}
+                                                </Badge>
+                                            ))}
+                                        </div>
+                                    </div>
+                                </Link>
+                            </motion.div>
+                        );
+                    })}
+                </div>
             </div>
         </main>
     );

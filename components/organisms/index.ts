@@ -7,4 +7,4 @@ export { ProfileCard } from "./profile-card";
 export { Footer } from "./footer";
 export { NowPlayingWidget } from "./now-playing-widget";
 export { ContactMe } from "./contact-me-card";
-export { CompentenciesCard } from "./competencies-card";
+export { CompetenciesCard } from "./competencies-card";

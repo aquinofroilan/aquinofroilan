@@ -1,4 +1,4 @@
-import { FRONTEND, BACKEND, DEVELOPER_TOOLS, DEVOPS } from "@/data/techstack-array";
+import { FRONTEND, BACKEND, DEVELOPER_TOOLS, DEVOPS } from "@/data/techstack-list";
 import { BentoGridItem, Badge } from "@/components/ui";
 import { ArrowLeft } from "lucide-react";
 import Link from "next/link";
@@ -13,7 +13,7 @@ export const metadata: Metadata = {
 
 function TechStack() {
     return (
-        <main className="py-10 w-11/12 max-w-5xl gap-2 flex flex-col">
+        <main className="py-10 w-11/12 max-w-7xl gap-2 flex flex-col">
             <Link
                 href={"/"}
                 className="flex items-center gap-2 text-neutral-500 hover:text-neutral-700 dark:text-neutral-400 dark:hover:text-neutral-200 transition duration-200"

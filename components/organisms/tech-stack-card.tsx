@@ -1,5 +1,5 @@
 import { BentoGridItem, Badge } from "@/components/ui";
-import { FRONTEND, BACKEND, DEVELOPER_TOOLS, DEVOPS } from "@/data/techstack-array";
+import { FRONTEND, BACKEND, DEVELOPER_TOOLS, DEVOPS } from "@/data/techstack-list";
 import { ArrowRightCircle, FlaskConical } from "lucide-react";
 import Link from "next/link";
 import * as motion from "motion/react-client";
@@ -33,7 +33,7 @@ export const TechStackCard = ({ className }: { className?: string }) => {
                     </div>
                 }
                 description={
-                    <div className="flex flex-col gap-2">
+                    <div className="flex flex-col gap-5">
                         <div>
                             <h1>Frontend</h1>
                             <div className="flex flex-wrap gap-2">

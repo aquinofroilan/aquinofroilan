@@ -57,13 +57,13 @@ export const WakatimeStatsCard = async ({ className }: { className?: string }) =
             className={className}
         >
             <BentoGridItem
-                className="flex flex-col gap-3 w-full h-full"
+                className="flex flex-col gap-3 w-full h-full hover:shadow-md"
                 icon={<ChartColumnIcon size={15} />}
                 title={"Wakatime Stats"}
                 description={
                     <>
                         <BentoGridItem
-                            className="my-5"
+                            className="my-5 hover:shadow-none"
                             icon={<CircleArrowUp size={15} />}
                             title={<h1 className="text-lg">Programming Activity</h1>}
                             description={
@@ -81,7 +81,7 @@ export const WakatimeStatsCard = async ({ className }: { className?: string }) =
                             }
                         />
                         <BentoGridItem
-                            className="my-5"
+                            className="my-5 hover:shadow-none"
                             icon={<Code size={15} />}
                             title={<h1 className="text-lg">Programming Languages</h1>}
                             description={
@@ -99,7 +99,7 @@ export const WakatimeStatsCard = async ({ className }: { className?: string }) =
                             }
                         />
                         <BentoGridItem
-                            className="my-5"
+                            className="my-5 hover:shadow-none"
                             icon={<Clock size={15} />}
                             title={<h1 className="text-lg">Daily Activity</h1>}
                             description={
@@ -116,7 +116,7 @@ export const WakatimeStatsCard = async ({ className }: { className?: string }) =
                             }
                         />
                         <BentoGridItem
-                            className="my-5"
+                            className="my-5 hover:shadow-none"
                             icon={<Monitor size={15} />}
                             title={<h1 className="text-lg">Editors</h1>}
                             description={
@@ -131,7 +131,7 @@ export const WakatimeStatsCard = async ({ className }: { className?: string }) =
                             }
                         />
                         <BentoGridItem
-                            className="my-5"
+                            className="my-5 hover:shadow-none"
                             icon={<Laptop size={15} />}
                             title={<h1 className="text-lg">Operating Systems</h1>}
                             description={
@@ -147,7 +147,7 @@ export const WakatimeStatsCard = async ({ className }: { className?: string }) =
                         />
 
                         <BentoGridItem
-                            className="my-5 md:col-span-2"
+                            className="my-5 md:col-span-2 hover:shadow-none"
                             icon={<Github size={15} />}
                             title={<h1 className="text-lg">GitHub Activity</h1>}
                             description={

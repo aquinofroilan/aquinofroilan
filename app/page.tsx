@@ -1,7 +1,7 @@
 import {
     AboutCard,
     CertificationCard,
-    CompentenciesCard,
+    CompetenciesCard,
     ContactMe,
     NowPlayingWidget,
     ProfileCard,
@@ -28,7 +28,7 @@ export default function Home() {
                 <ProjectsCard className="h-full overflow-scroll col-span-1 row-span-1" />
                 <TrascendingCodeCard className="h-full overflow-scroll col-span-1 row-span-1" />
                 <WakatimeStatsCard className="h-full overflow-scroll row-span-3 col-span-1" />
-                <CompentenciesCard />
+                <CompetenciesCard />
                 <ContactMe />
                 <NowPlayingWidget className="h-full overflow-scroll w-full col-span-2 row-span-1" />
             </main>
