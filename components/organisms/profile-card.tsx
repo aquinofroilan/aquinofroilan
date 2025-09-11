@@ -52,19 +52,15 @@ export const ProfileCard = ({ className }: { className?: string }) => {
                         variant={"default"}
                         size={"sm"}
                     >
-                        <Link href="https://calendly.com/froilan/15min" target="_blank">
+                        <Link href={process.env.SCHEDULE_A_CALL_URL as string} target="_blank">
                             <Phone className="hidden md:block" size={16} />
                             <span>Schedule a call</span>
                         </Link>
                     </Button>
                     <Button className="rounded-md flex flex-row gap-2" asChild variant={"outline"} size={"sm"}>
-                        <Link
-                            href="mailto:aquino.froilan.dev@outlook.com?subject=Contact%20from%20Website"
-                            target="_blank"
-                            rel="noopener noreferrer"
-                        >
+                        <Link href={process.env.SEND_EMAIL_URL as string} target="_blank" rel="noopener noreferrer">
                             <Mail className="hidden md:block" size={16} />
-                            Send email
+                            <span>Send email</span>
                         </Link>
                     </Button>
                 </div>
