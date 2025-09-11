@@ -144,9 +144,7 @@ export const ContactMe = ({ className }: { className?: string }) => {
                         <div>
                             <h1>My Resume/CV:</h1>
                             <Link
-                                href={
-                                    "https://drive.google.com/file/d/1tBgDb_ft-XHI801KDlWLez21sBI48-AY/view?usp=sharing"
-                                }
+                                href={process.env.RESUME_CV_LINK as string}
                                 className="border-1 w-full justify-between flex items-center py-2 px-2 rounded-md mt-2"
                             >
                                 View my CV
