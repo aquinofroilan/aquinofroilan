@@ -6,9 +6,9 @@ import * as motion from "motion/react-client";
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-    title: "Froilan | Software Engineer | TechStack",
-    description: "A showcase of my technical skills and tools.",
-    keywords: ["TechStack", "Skills", "Tools"],
+    title: process.env.PAGE_TITLE ? process.env.PAGE_TITLE + " | TechStack" : "Froilan | Software Engineer | TechStack",
+    description: "A showcase of Froilan's technical skills and tools.",
+    keywords: ["Froilan's TechStack", "Froilan's Skills", "Froilan's Tools"],
 };
 
 function TechStack() {
