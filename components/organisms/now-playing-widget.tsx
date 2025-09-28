@@ -132,7 +132,7 @@ export const NowPlayingWidget = ({ className }: { className?: string }) => {
         artist = nowPlaying.artist;
         songUrl = nowPlaying.songUrl;
         artistUrl = nowPlaying.artistUrl;
-        progress = (localTimePlayed / nowPlaying.timeTotal) * 100;
+        progress = Math.min(100, Math.max(0, (localTimePlayed / nowPlaying.timeTotal) * 100));
     }
     return (
         <motion.div
@@ -144,7 +144,7 @@ export const NowPlayingWidget = ({ className }: { className?: string }) => {
                 ease: "easeOut",
                 delay: 0.5,
             }}
-            className={cn(`${!nowPlaying || !nowPlaying.isPlaying ? "hidden" : ""} ${className}`)}
+            className={cn(`${!nowPlaying || !nowPlaying.isPlaying ? "hidden" : ""} `, className)}
         >
             <BentoGridItem
                 className="w-full h-full"
@@ -156,7 +156,7 @@ export const NowPlayingWidget = ({ className }: { className?: string }) => {
                             <Link target="_blank" href={songUrl ? songUrl : ""} rel="noopener noreferrer">
                                 <Image
                                     src={albumImageUrl}
-                                    alt="Album Image"
+                                    alt={title && artist ? `Album art for ${title} by ${artist}` : "Album art"}
                                     width={80}
                                     height={80}
                                     className="rounded-sm cursor-pointer"
@@ -191,7 +191,7 @@ export const NowPlayingWidget = ({ className }: { className?: string }) => {
                                 }
                             </h1>
                             <div className="flex flex-col w-full gap-2">
-                                <Progress aria-label="song progress" value={progress} />
+                                <Progress aria-label="song progress" value={progress ?? 0} />
                                 <div className="w-full flex flex-row justify-between">
                                     <p className="text-xs text-muted-foreground">
                                         {minutesPlayed}:{secondsPlayed}
