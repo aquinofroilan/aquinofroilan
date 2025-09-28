@@ -14,6 +14,13 @@ const nextConfig = {
                 hostname: "roadmap.sh",
                 port: "",
             },
+            {
+                protocol: "https",
+                hostname:
+                    "b700c33a8dd77e29da09cb700c5c6959.r2.cloudflarestorage.com",
+                port: "",
+                pathname: "/**",
+            },
         ],
     },
 };
