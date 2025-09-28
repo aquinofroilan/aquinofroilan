@@ -1,8 +1,8 @@
 export const Angular = ({ className }: { className?: string }) => {
     return (
         <svg viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg" className={className}>
-            <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
-            <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g>
+            <g id="SVGRepo_bgCarrier" strokeWidth="0"></g>
+            <g id="SVGRepo_tracerCarrier" strokeLinecap="round" strokeLinejoin="round"></g>
             <g id="SVGRepo_iconCarrier">
                 <path d="M16 2L3 7L5 24L16 30L27 24L29 7L16 2Z" fill="currentColor"></path>
                 <path d="M16 2V30L27 24L29 7L16 2Z" fill="currentColor"></path>

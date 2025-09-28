@@ -16,3 +16,7 @@ export { Prisma } from "./icons/prisma";
 export { NextJS } from "./icons/nextjs";
 export { React } from "./icons/react";
 export { Vercel } from "./icons/vercel";
+export { Expo } from "./icons/expo";
+export { Python } from "./icons/python";
+export { Flask } from "./icons/flask";
+export { MapBox } from "./icons/mapbox";
