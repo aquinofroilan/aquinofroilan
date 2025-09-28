@@ -1,28 +1,77 @@
 import { ArrowLeft } from "lucide-react";
 import Link from "next/link";
+import { notFound } from "next/navigation";
+import { getBlogPost, getAllBlogPosts } from "@/data/blog-posts";
+import { BlogPostComponent } from "@/components/organisms";
+import type { Metadata } from "next";
 
-const Blog = async ({ params }: { params: Promise<{ slug: string }> }) => {
+interface BlogPostPageProps {
+    params: Promise<{ slug: string }>;
+}
+
+// Generate metadata for SEO
+export async function generateMetadata({ params }: BlogPostPageProps): Promise<Metadata> {
     const slug = (await params).slug;
+    const post = getBlogPost(slug);
+
+    if (!post) {
+        return {
+            title: "Blog Post Not Found",
+        };
+    }
+
+    return {
+        title: `${post.title} | Froilan`,
+        description: post.description,
+        keywords: post.tags,
+        authors: [{ name: post.author }],
+        openGraph: {
+            title: post.title,
+            description: post.description,
+            type: "article",
+            publishedTime: post.publishedAt,
+            authors: [post.author],
+            tags: post.tags,
+        },
+        twitter: {
+            card: "summary_large_image",
+            title: post.title,
+            description: post.description,
+        },
+    };
+}
+
+// Generate static params for all blog posts
+export function generateStaticParams() {
+    const posts = getAllBlogPosts();
+    return posts.map((post) => ({
+        slug: post.id,
+    }));
+}
+
+const BlogPost = async ({ params }: BlogPostPageProps) => {
+    const slug = (await params).slug;
+    const post = getBlogPost(slug);
+
+    if (!post) {
+        notFound();
+    }
+
     return (
-        <main className="py-10 w-11/12 max-w-5xl gap-2 flex flex-col md:grid md:grid-cols-2">
+        <main className="py-10 w-11/12 max-w-5xl gap-8 flex flex-col">
+            {/* Navigation */}
             <Link
-                href={"/"}
+                href={"/blog"}
                 className="flex items-center gap-2 text-neutral-500 hover:text-neutral-700 dark:text-neutral-400 dark:hover:text-neutral-200 transition duration-200"
             >
                 <ArrowLeft size={15} />
-                <h1 className="text-sm">Back</h1>
+                <h1 className="text-sm">Back to Blog</h1>
             </Link>
-            <div className="grid place-content-center col-span-2 w-full h-full">
-                <h1 className="text-2xl text-center font-bold">Blogs</h1>
-                <p className="text-center text-neutral-500 dark:text-neutral-400">
-                    This page is currently under construction. I am working on creating a blog section where I can share
-                    my thoughts, experiences, and insights on various topics. Stay tuned for updates. In the meantime,
-                    feel free to check out my other pages.
-                </p>
-                <p className="text-center text-neutral-500 dark:text-neutral-400">Slug: {slug}</p>
-            </div>
+
+            {/* Blog Post Content */}
+            <BlogPostComponent post={post} />
         </main>
     );
 };
 
-export default Blog;
+export default BlogPost;

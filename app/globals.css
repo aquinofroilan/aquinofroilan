@@ -2,6 +2,7 @@
 /* stylelint-disable */
 /* This file uses Tailwind CSS 4.0 experimental syntax */
 @import "tailwindcss";
+@import "highlight.js/styles/github-dark.css";
 
 @plugin 'tailwindcss-animate';
 
@@ -77,5 +78,26 @@
     }
     body {
         @apply bg-background text-foreground;
+    }
+}
+
+/* Enhanced styles for blog content */
+@layer components {
+    .line-clamp-2 {
+        display: -webkit-box;
+        -webkit-line-clamp: 2;
+        -webkit-box-orient: vertical;
+        overflow: hidden;
+    }
+    
+    /* Code block enhancements */
+    .hljs {
+        background: hsl(var(--muted)) !important;
+        color: hsl(var(--muted-foreground)) !important;
+    }
+    
+    /* Dark mode code highlighting adjustments */
+    .dark .hljs {
+        background: hsl(var(--muted)) !important;
     }
 }
