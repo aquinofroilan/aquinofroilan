@@ -5,7 +5,7 @@ import { Python } from "@/components/atoms/icons/python";
 import { Flask } from "@/components/atoms/icons/flask";
 import { NextJS } from "@/components/atoms/icons/nextjs";
 
-import {ReactNode} from "react";
+import { ReactNode } from "react";
 
 type FooterItem = {
     text: string;
@@ -15,26 +15,25 @@ type FooterItem = {
 type ProjectItem = {
     title: string;
     description: string;
-    link:  string;
+    link: string;
     footerContent: FooterItem[];
 };
 
 export const ProjectsList: ProjectItem[] = [
     {
         title: "Pawsitive Health | Capstone",
-        description:
-            "Full stack app for a pet health management system built with NextJS and PostgreSQL",
+        description: "Full stack app for a pet health management system built with NextJS and PostgreSQL",
         link: "https://github.com/aquinofroilan/pawsitive-health",
         footerContent: [
             {
                 text: "NextJS",
-                icon: <NextJS/>
+                icon: <NextJS className="w-5 h-5 md:w-6 md:h-6" />,
             },
             {
                 text: "PostgreSQL",
-                icon: <PostgreSQL/>
-            }
-        ]
+                icon: <PostgreSQL className="w-5 h-5 md:w-6 md:h-6" />,
+            },
+        ],
     },
     {
         title: "Synectix",
@@ -43,17 +42,17 @@ export const ProjectsList: ProjectItem[] = [
         footerContent: [
             {
                 text: "Java",
-                icon: <Java />
+                icon: <Java className="w-5 h-5 md:w-6 md:h-6" />,
             },
             {
                 text: "Spring Boot",
-                icon: <SpringBoot />
+                icon: <SpringBoot className="w-5 h-5 md:w-6 md:h-6" />,
             },
             {
                 text: "PostgreSQL",
-                icon: <PostgreSQL />
-            }
-        ]
+                icon: <PostgreSQL className="w-5 h-5 md:w-6 md:h-6" />,
+            },
+        ],
     },
     {
         title: "EZ Parking System",
@@ -62,16 +61,16 @@ export const ProjectsList: ProjectItem[] = [
         footerContent: [
             {
                 text: "Python",
-                icon: <Python />
+                icon: <Python className="w-5 h-5 md:w-6 md:h-6" />,
             },
             {
                 text: "Flask",
-                icon: <Flask />
+                icon: <Flask className="w-5 h-5 md:w-6 md:h-6" />,
             },
             {
-                icon: <PostgreSQL />,
-                text: "PostgreSQL"
-            }
-        ]
-    }
+                icon: <PostgreSQL className="w-5 h-5 md:w-6 md:h-6" />,
+                text: "PostgreSQL",
+            },
+        ],
+    },
 ];

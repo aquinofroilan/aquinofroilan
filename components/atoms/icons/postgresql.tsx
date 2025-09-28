@@ -1,8 +1,7 @@
-export const PostgreSQL = () => {
+export const PostgreSQL = ({ className }: { className?: string }) => {
     return (
         <svg
-            width={16}
-            height={16}
+            className={className}
             fill="currentColor"
             viewBox="0 0 32 32"
             version="1.1"

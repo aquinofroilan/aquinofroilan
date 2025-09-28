@@ -1,11 +1,6 @@
-export const LeetCode = () => {
+export const LeetCode = ({ className }: { className?: string }) => {
     return (
-        <svg
-            fill="currentColor"
-            viewBox="0 0 32 32"
-            xmlns="http://www.w3.org/2000/svg"
-            className="w-5 h-5 md:w-6 md:h-6"
-        >
+        <svg className={className} fill="currentColor" viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg">
             <g id="SVGRepo_bgCarrier" strokeWidth="0"></g>
             <g id="SVGRepo_tracerCarrier" strokeLinecap="round" strokeLinejoin="round"></g>
             <g id="SVGRepo_iconCarrier">

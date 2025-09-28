@@ -2,8 +2,9 @@ import { fetchImagesWithPrefix } from "@/actions";
 import { ArrowLeft } from "lucide-react";
 import Link from "next/link";
 import { Separator, Tooltip, TooltipContent, TooltipTrigger } from "@/components/ui";
-import { Github } from "@/components/atoms";
 import ImageGallery from "@/components/organisms/image-gallery";
+import { Java, PostgreSQL, Angular, Github, TailwindCSS, TypeScript, SpringBoot } from "@/components/atoms";
+
 const SynectixDetails = async () => {
     const snapshotLinks = await fetchImagesWithPrefix("synectix-");
 
@@ -21,7 +22,7 @@ const SynectixDetails = async () => {
                     <h1 className="text-2xl text-center font-bold">Synectix</h1>
                     <Tooltip>
                         <TooltipTrigger asChild>
-                            <Link href={"https://github.com/aquinofroilan/synectix"}>
+                            <Link href={"https://github.com/aquinofroilan/synectix"} target="_blank">
                                 <Github />
                             </Link>
                         </TooltipTrigger>
@@ -40,15 +41,16 @@ const SynectixDetails = async () => {
                     </p>
                 </section>
                 <Separator className="my-4" />
-                <section>
+                <section className="flex justify-between items-center">
                     <h6 className="text-lg font-semibold">Technologies Used</h6>
-                    <ul className="list-disc ml-5 mt-2 text-neutral-700 dark:text-neutral-300">
-                        <li>Java</li>
-                        <li>Spring Boot</li>
-                        <li>PostgreSQL</li>
-                        <li>Angular</li>
-                        <li>TypeScript</li>
-                    </ul>
+                    <div className="flex flex-col gap-4">
+                        <TailwindCSS className="w-6 h-6" />
+                        <Java className="w-6 h-6" />
+                        <PostgreSQL className="w-6 h-6" />
+                        <Angular className="w-6 h-6" />
+                        <TypeScript className="w-6 h-6" />
+                        <SpringBoot className="w-6 h-6" />
+                    </div>
                 </section>
                 <Separator className="my-4" />
                 <section>
