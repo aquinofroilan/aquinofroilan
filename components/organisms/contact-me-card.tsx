@@ -47,7 +47,7 @@ export const ContactMe = ({ className }: { className?: string }) => {
                                             target="_blank"
                                             href="https://github.com/aquinofroilan"
                                         >
-                                            <Github />
+                                            <Github className="w-5 h-5" />
                                         </Link>
                                     </TooltipTrigger>
                                     <TooltipContent>
@@ -62,7 +62,7 @@ export const ContactMe = ({ className }: { className?: string }) => {
                                             target="_blank"
                                             href="https://www.instagram.com/aquinofroilan_"
                                         >
-                                            <Instagram />
+                                            <Instagram className="w-5 h-5" />
                                         </Link>
                                     </TooltipTrigger>
                                     <TooltipContent>
@@ -77,7 +77,7 @@ export const ContactMe = ({ className }: { className?: string }) => {
                                             target="_blank"
                                             href="https://linkedin.com/in/aquinofroilan"
                                         >
-                                            <LinkedIn />
+                                            <LinkedIn className="w-5 h-5" />
                                         </Link>
                                     </TooltipTrigger>
                                     <TooltipContent>
@@ -92,7 +92,7 @@ export const ContactMe = ({ className }: { className?: string }) => {
                                             target="_blank"
                                             href="https://www.credly.com/users/froilan"
                                         >
-                                            <CredlyIcon />
+                                            <CredlyIcon className="w-5 h-5" />
                                         </Link>
                                     </TooltipTrigger>
                                     <TooltipContent>
@@ -107,7 +107,7 @@ export const ContactMe = ({ className }: { className?: string }) => {
                                             target="_blank"
                                             href="https://www.hackerrank.com/profile/froilanaquino"
                                         >
-                                            <HackerRank />
+                                            <HackerRank className="w-5 h-5" />
                                         </Link>
                                     </TooltipTrigger>
                                     <TooltipContent>
@@ -122,7 +122,7 @@ export const ContactMe = ({ className }: { className?: string }) => {
                                             target="_blank"
                                             href="https://leetcode.com/u/froilan_/"
                                         >
-                                            <LeetCode />
+                                            <LeetCode className="w-5 h-5" />
                                         </Link>
                                     </TooltipTrigger>
                                     <TooltipContent>

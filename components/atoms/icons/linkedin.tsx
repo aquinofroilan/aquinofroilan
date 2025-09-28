@@ -1,9 +1,9 @@
-export const LinkedIn = () => {
+export const LinkedIn = ({ className }: { className?: string }) => {
     return (
         <svg
             role="img"
             viewBox="0 0 24 24"
-            className="w-5 h-5 md:w-6 md:h-6"
+            className={className}
             fill="currentColor"
             xmlns="http://www.w3.org/2000/svg"
         >

@@ -7,7 +7,7 @@ import Image from "next/image";
 import Link from "next/link";
 import * as motion from "motion/react-client";
 import { cn } from "@/lib/utils";
-import {Spotify} from "@/components/atoms";
+import { Spotify } from "@/components/atoms";
 
 export const NowPlayingWidget = ({ className }: { className?: string }) => {
     const [nowPlaying, setNowPlaying] = useState<{
@@ -21,11 +21,10 @@ export const NowPlayingWidget = ({ className }: { className?: string }) => {
         artistUrl: string;
     } | null>(null);
     const [localTimePlayed, setLocalTimePlayed] = useState<number>(0);
-    const progressIntervalRef = useRef<NodeJS.Timeout | null>(null);
+    const progressIntervalRef = useRef<ReturnType<typeof setInterval> | null>(null);
     const lastUpdateTimeRef = useRef<number | null>(null);
-    const apiTimeoutRef = useRef<NodeJS.Timeout | null>(null);
+    const apiTimeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null);
 
-    // Function to fetch data and reset local state
     const fetchNowPlaying = async () => {
         try {
             const data = await getNowPlaying();
@@ -41,15 +40,12 @@ export const NowPlayingWidget = ({ className }: { className?: string }) => {
         }
     };
 
-    // Schedule the next API call
     const scheduleNextApiCall = (timeUntilSongEnds: number | null) => {
         if (apiTimeoutRef.current) {
             clearTimeout(apiTimeoutRef.current);
         }
 
-        // If song is about to end, schedule refresh slightly after
         if (timeUntilSongEnds !== null && timeUntilSongEnds < 30000 && timeUntilSongEnds > 0) {
-            // Add a small buffer (1 second) to ensure song has finished
             const refreshTime = timeUntilSongEnds + 1000;
             apiTimeoutRef.current = setTimeout(fetchNowPlaying, refreshTime);
         } else {
@@ -69,7 +65,6 @@ export const NowPlayingWidget = ({ className }: { className?: string }) => {
         };
     }, []);
 
-    // Setup progress bar simulation and smart refresh timing
     useEffect(() => {
         if (progressIntervalRef.current) {
             clearInterval(progressIntervalRef.current);
@@ -78,7 +73,6 @@ export const NowPlayingWidget = ({ className }: { className?: string }) => {
         if (nowPlaying && nowPlaying.isPlaying) {
             const timeUntilSongEnds = nowPlaying.timeTotal - nowPlaying.timePlayed;
 
-            // Schedule the next API call based on song remaining time
             scheduleNextApiCall(timeUntilSongEnds);
 
             progressIntervalRef.current = setInterval(() => {
@@ -90,13 +84,11 @@ export const NowPlayingWidget = ({ className }: { className?: string }) => {
 
                     const newTimePlayed = nowPlaying.timePlayed + elapsedSinceUpdate;
 
-                    // If we're approaching the end of the song, reschedule API call
                     const remainingTime = nowPlaying.timeTotal - newTimePlayed;
                     if (remainingTime <= 5000 && remainingTime > 0) {
                         scheduleNextApiCall(remainingTime);
                     }
 
-                    // Don't exceed the total time
                     if (newTimePlayed >= nowPlaying.timeTotal) {
                         return nowPlaying.timeTotal;
                     }
@@ -140,7 +132,7 @@ export const NowPlayingWidget = ({ className }: { className?: string }) => {
         artist = nowPlaying.artist;
         songUrl = nowPlaying.songUrl;
         artistUrl = nowPlaying.artistUrl;
-        progress = (localTimePlayed / nowPlaying.timeTotal) * 100;
+        progress = Math.min(100, Math.max(0, (localTimePlayed / nowPlaying.timeTotal) * 100));
     }
     return (
         <motion.div
@@ -152,7 +144,7 @@ export const NowPlayingWidget = ({ className }: { className?: string }) => {
                 ease: "easeOut",
                 delay: 0.5,
             }}
-            className={cn(`${!nowPlaying || !nowPlaying.isPlaying ? "hidden" : ""} ${className}`)}
+            className={cn(`${!nowPlaying || !nowPlaying.isPlaying ? "hidden" : ""} `, className)}
         >
             <BentoGridItem
                 className="w-full h-full"
@@ -161,10 +153,10 @@ export const NowPlayingWidget = ({ className }: { className?: string }) => {
                 description={
                     <div className="flex flex-row w-full justify-start items-center gap-2">
                         {nowPlaying != null && albumImageUrl ? (
-                            <Link target="_blank" href={songUrl ? songUrl : ""}>
+                            <Link target="_blank" href={songUrl ? songUrl : ""} rel="noopener noreferrer">
                                 <Image
                                     src={albumImageUrl}
-                                    alt="Album Image"
+                                    alt={title && artist ? `Album art for ${title} by ${artist}` : "Album art"}
                                     width={80}
                                     height={80}
                                     className="rounded-sm cursor-pointer"
@@ -179,6 +171,7 @@ export const NowPlayingWidget = ({ className }: { className?: string }) => {
                                     <Link
                                         target="_blank"
                                         className="cursor-pointer hover:underline underline-offset-2"
+                                        rel="noopener noreferrer"
                                         href={songUrl ? songUrl : ""}
                                     >
                                         {title}
@@ -190,6 +183,7 @@ export const NowPlayingWidget = ({ className }: { className?: string }) => {
                                     <Link
                                         className="cursor-pointer hover:underline underline-offset-2"
                                         target="_blank"
+                                        rel="noopener noreferrer"
                                         href={artistUrl ? artistUrl : ""}
                                     >
                                         {artist}
@@ -197,7 +191,7 @@ export const NowPlayingWidget = ({ className }: { className?: string }) => {
                                 }
                             </h1>
                             <div className="flex flex-col w-full gap-2">
-                                <Progress aria-label="song progress" value={progress} />
+                                <Progress aria-label="song progress" value={progress ?? 0} />
                                 <div className="w-full flex flex-row justify-between">
                                     <p className="text-xs text-muted-foreground">
                                         {minutesPlayed}:{secondsPlayed}

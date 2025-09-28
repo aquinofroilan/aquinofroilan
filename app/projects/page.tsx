@@ -2,8 +2,8 @@ import { ArrowLeft } from "lucide-react";
 import type { Metadata } from "next";
 import Link from "next/link";
 import * as motion from "motion/react-client";
-import {Badge} from "@/components/ui";
-import {ProjectsList} from "@/data/projects-list";
+import { Badge } from "@/components/ui";
+import { ProjectsList } from "@/data/projects-list";
 import React from "react";
 
 export const metadata: Metadata = {
@@ -12,6 +12,13 @@ export const metadata: Metadata = {
     keywords: ["Froilan's Projects", "Froilan's Showcase", "Froilan's Contributions"],
 };
 
+/**
+ * Render the Projects page containing a back link, a centered "Projects" heading, and an animated grid of project entries.
+ *
+ * Each project entry is animated on mount, links to `project.pageLink`, displays the project title which opens `project.projectLink` in a new tab, shows the project description, and renders footer badges from `project.footerContent`.
+ *
+ * @returns The rendered Projects page as a JSX element.
+ */
 function Projects() {
     return (
         <main className="py-10 w-11/12 max-w-7xl gap-2 flex flex-col md:grid md:grid-cols-2">
@@ -28,7 +35,7 @@ function Projects() {
                     {ProjectsList.map((project, index) => {
                         return (
                             <motion.div
-                                key={project.link}
+                                key={project.pageLink}
                                 initial={{ opacity: 0, y: 20 }}
                                 animate={{ opacity: 1, y: 0 }}
                                 exit={{ opacity: 0, y: -20 }}
@@ -39,17 +46,27 @@ function Projects() {
                                 }}
                                 className="w-full h-full"
                             >
-                                <Link
-                                    href={project.link}
-                                    key={project.link}
-                                    target="_blank"
-                                    rel="noreferrer"
+                                <div
+                                    key={project.projectLink}
                                     className="flex gap-2 items-center p-5 rounded-md border transition duration-200"
                                 >
                                     <div className="flex flex-col gap-1">
-                                        <h1 className="text-sm md:text-base">
-                                            {project.title}
-                                        </h1>
+                                        <section className="flex justify-between w-full items-center">
+                                            <Link
+                                                href={project.projectLink}
+                                                target="_blank"
+                                                rel="noreferrer"
+                                                className="text-base font-semibold hover:underline underline-offset-2"
+                                            >
+                                                {project.title}
+                                            </Link>
+                                            <Link
+                                                className="text-base font-semibold hover:underline underline-offset-2"
+                                                href={project.pageLink}
+                                            >
+                                                View
+                                            </Link>
+                                        </section>
                                         <p className="text-sm">{project.description}</p>
                                         <div className="flex flex-wrap gap-2">
                                             {project.footerContent.map((footer) => (
@@ -64,7 +81,7 @@ function Projects() {
                                             ))}
                                         </div>
                                     </div>
-                                </Link>
+                                </div>
                             </motion.div>
                         );
                     })}
