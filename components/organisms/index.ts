@@ -8,3 +8,5 @@ export { Footer } from "./footer";
 export { NowPlayingWidget } from "./now-playing-widget";
 export { ContactMe } from "./contact-me-card";
 export { CompetenciesCard } from "./competencies-card";
+export { BlogCard } from "./blog-card";
+export { BlogPostComponent } from "./blog-post";
