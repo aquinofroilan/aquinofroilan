@@ -72,8 +72,8 @@ export const ProjectsList: ProjectItem[] = [
                 icon: <Flask className="w-5 h-5" />,
             },
             {
-                icon: <PostgreSQL className="w-5 h-5" />,
                 text: "PostgreSQL",
+                icon: <PostgreSQL className="w-5 h-5" />,
             },
         ],
     },
