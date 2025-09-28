@@ -12,6 +12,13 @@ export const metadata: Metadata = {
     keywords: ["Froilan's Projects", "Froilan's Showcase", "Froilan's Contributions"],
 };
 
+/**
+ * Render the Projects page containing a back link, a centered "Projects" heading, and an animated grid of project entries.
+ *
+ * Each project entry is animated on mount, links to `project.pageLink`, displays the project title which opens `project.projectLink` in a new tab, shows the project description, and renders footer badges from `project.footerContent`.
+ *
+ * @returns The rendered Projects page as a JSX element.
+ */
 function Projects() {
     return (
         <main className="py-10 w-11/12 max-w-7xl gap-2 flex flex-col md:grid md:grid-cols-2">

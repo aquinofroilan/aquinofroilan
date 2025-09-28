@@ -5,6 +5,14 @@ import Link from "next/link";
 import { ArrowRightCircle, FolderCode } from "lucide-react";
 import { ProjectsList } from "@/data/projects-list";
 
+/**
+ * Render a motion-enabled "Projects" card that displays a header with a "View All" link and up to two project entries.
+ *
+ * Each project entry shows a title (opens in a new tab), a "Details" link, a short description, and a row of footer badges.
+ *
+ * @param className - Optional CSS classes applied to the root motion container
+ * @returns A React element representing the Projects card with animated entrance/exit, header controls, and project entries
+ */
 function ProjectsCard({ className }: { className?: string }) {
     return (
         <motion.div
