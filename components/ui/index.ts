@@ -22,3 +22,12 @@ export { Button, type ButtonProps, buttonVariants } from "./button";
 export { Badge, type BadgeProps, badgeVariants } from "./badge";
 export { BentoGrid, BentoGridItem } from "./bento-grid";
 export { Tooltip, TooltipContent, TooltipTrigger, TooltipProvider } from "./tooltip";
+export {
+    Dialog,
+    DialogContent,
+    DialogDescription,
+    DialogFooter,
+    DialogHeader,
+    DialogTitle,
+    DialogTrigger,
+} from "./dialog";

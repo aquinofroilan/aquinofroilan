@@ -1,9 +1,10 @@
-export const Flask = () => {
+export const Flask = ({ className }: { className?: string }) => {
     return (
         <svg
             width={16}
             height={16}
             fill="currentColor"
+            className={className}
             version="1.1"
             xmlns="http://www.w3.org/2000/svg"
             xmlnsXlink="http://www.w3.org/1999/xlink"
