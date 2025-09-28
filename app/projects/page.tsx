@@ -48,7 +48,7 @@ function Projects() {
                             >
                                 <div
                                     key={project.projectLink}
-                                    className="flex gap-2 items-center p-5 rounded-md border transition duration-200"
+                                    className="grid grid-cols-1 gap-2 items-center p-5 rounded-md border transition duration-200 w-full"
                                 >
                                     <div className="flex flex-col gap-1">
                                         <section className="flex justify-between w-full items-center">

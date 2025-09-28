@@ -1,5 +1,10 @@
 export const CertificationsListsPreview = [
     {
+        title: "Fundamentals of Digital Marketing",
+        description: "Google Digital Academy Skillshop",
+        link: "https://skillshop.exceedlms.com/student/award/G4oGYxCuYiCyodDQ4AUETFp7",
+    },
+    {
         title: "Project Management Fundamentals",
         description: "International Business Machines SkillsBuild",
         link: "https://www.credly.com/badges/35586e45-9790-457f-822c-ccc026d6922c/public_url",
