@@ -28,7 +28,7 @@ function Projects() {
                     {ProjectsList.map((project, index) => {
                         return (
                             <motion.div
-                                key={project.link}
+                                key={project.pageLink}
                                 initial={{ opacity: 0, y: 20 }}
                                 animate={{ opacity: 1, y: 0 }}
                                 exit={{ opacity: 0, y: -20 }}
@@ -40,7 +40,7 @@ function Projects() {
                                 className="w-full h-full"
                             >
                                 <Link
-                                    href={project.link}
+                                    href={project.pageLink}
                                     key={project.projectLink}
                                     rel="noreferrer"
                                     className="flex gap-2 items-center p-5 rounded-md border transition duration-200"

@@ -22,7 +22,7 @@ const EZP = async () => {
                     <h1 className="text-2xl text-center font-bold">EZ Parking System</h1>
                     <Tooltip>
                         <TooltipTrigger asChild>
-                            <Link href={"https://github.com/aquinofroilan/synectix"} target="_blank">
+                            <Link href={"https://github.com/aquinofroilan/ez-parking-system"} target="_blank">
                                 <Github className="w-5 h-5 md:w-6 md:h-6" />
                             </Link>
                         </TooltipTrigger>
