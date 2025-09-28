@@ -45,7 +45,6 @@ const SynectixDetails = async () => {
                     <h6 className="text-lg font-semibold">Snapshots</h6>
                     <ImageGallery images={snapshotLinks} />
                 </section>
-                <Separator className="my-4" />
                 <section className="flex justify-end items-center my-4">
                     <div className="flex flex-row gap-4">
                         <TailwindCSS className="w-6 h-6" />

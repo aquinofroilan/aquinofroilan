@@ -2,8 +2,8 @@ import { ArrowLeft } from "lucide-react";
 import type { Metadata } from "next";
 import Link from "next/link";
 import * as motion from "motion/react-client";
-import {Badge} from "@/components/ui";
-import {ProjectsList} from "@/data/projects-list";
+import { Badge } from "@/components/ui";
+import { ProjectsList } from "@/data/projects-list";
 import React from "react";
 
 export const metadata: Metadata = {
@@ -41,15 +41,21 @@ function Projects() {
                             >
                                 <Link
                                     href={project.link}
-                                    key={project.link}
-                                    target="_blank"
+                                    key={project.projectLink}
                                     rel="noreferrer"
                                     className="flex gap-2 items-center p-5 rounded-md border transition duration-200"
                                 >
                                     <div className="flex flex-col gap-1">
-                                        <h1 className="text-sm md:text-base">
-                                            {project.title}
-                                        </h1>
+                                        <section>
+                                            <Link
+                                                href={project.projectLink}
+                                                target="_blank"
+                                                rel="noreferrer"
+                                                className="text-base font-semibold hover:underline underline-offset-2"
+                                            >
+                                                {project.title}
+                                            </Link>
+                                        </section>
                                         <p className="text-sm">{project.description}</p>
                                         <div className="flex flex-wrap gap-2">
                                             {project.footerContent.map((footer) => (

@@ -16,6 +16,7 @@ type ProjectItem = {
     title: string;
     description: string;
     link: string;
+    projectLink: string;
     footerContent: FooterItem[];
 };
 
@@ -23,52 +24,55 @@ export const ProjectsList: ProjectItem[] = [
     {
         title: "Pawsitive Health | Capstone",
         description: "Full stack app for a pet health management system built with NextJS and PostgreSQL",
-        link: "https://github.com/aquinofroilan/pawsitive-health",
+        link: "/projects/pawsitive",
+        projectLink: "https://github.com/aquinofroilan/pawsitive-health",
         footerContent: [
             {
                 text: "NextJS",
-                icon: <NextJS className="w-5 h-5 md:w-6 md:h-6" />,
+                icon: <NextJS className="w-5 h-5" />,
             },
             {
                 text: "PostgreSQL",
-                icon: <PostgreSQL className="w-5 h-5 md:w-6 md:h-6" />,
+                icon: <PostgreSQL className="w-5 h-5" />,
             },
         ],
     },
     {
         title: "Synectix",
         description: "Backend for an ERP system built with Spring Boot",
-        link: "https://github.com/aquinofroilan/synectix",
+        link: "/projects/synectix",
+        projectLink: "https://github.com/aquinofroilan/synectix",
         footerContent: [
             {
                 text: "Java",
-                icon: <Java className="w-5 h-5 md:w-6 md:h-6" />,
+                icon: <Java className="w-5 h-5" />,
             },
             {
                 text: "Spring Boot",
-                icon: <SpringBoot className="w-5 h-5 md:w-6 md:h-6" />,
+                icon: <SpringBoot className="w-5 h-5" />,
             },
             {
                 text: "PostgreSQL",
-                icon: <PostgreSQL className="w-5 h-5 md:w-6 md:h-6" />,
+                icon: <PostgreSQL className="w-5 h-5" />,
             },
         ],
     },
     {
         title: "EZ Parking System",
         description: "Backend for a parking management system built with Python Flask",
-        link: "https://github.com/aquinofroilan/ez-parking-system",
+        link: "/projects/ezp",
+        projectLink: "https://github.com/aquinofroilan/ez-parking-system",
         footerContent: [
             {
                 text: "Python",
-                icon: <Python className="w-5 h-5 md:w-6 md:h-6" />,
+                icon: <Python className="w-5 h-5" />,
             },
             {
                 text: "Flask",
-                icon: <Flask className="w-5 h-5 md:w-6 md:h-6" />,
+                icon: <Flask className="w-5 h-5" />,
             },
             {
-                icon: <PostgreSQL className="w-5 h-5 md:w-6 md:h-6" />,
+                icon: <PostgreSQL className="w-5 h-5" />,
                 text: "PostgreSQL",
             },
         ],
