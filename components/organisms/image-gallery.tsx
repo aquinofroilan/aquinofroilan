@@ -21,7 +21,7 @@ const ImageGallery = ({ images }: { images: Array<{ key: string | undefined; url
     return (
         <div className="flex flex-col items-center lg:grid grid-cols-2 gap-4">
             {images.map((image, index) => (
-                <Dialog key={image.key}>
+                <Dialog key={image.key ?? image.url}>
                     <DialogTrigger asChild>
                         <div className="relative w-full h-[300px] cursor-pointer hover:opacity-80 transition duration-200">
                             <Image
