@@ -1,9 +1,11 @@
+import { cn } from "@/lib/utils";
+
 export const MapBox = ({ className }: { className?: string }) => {
     return (
         <svg
             viewBox="0 0 1024 1024"
             xmlns="http://www.w3.org/2000/svg"
-            className={`${className} fill-black dark:fill-white`}
+            className={cn("fill-black dark:fill-white", className)}
         >
             <g id="SVGRepo_bgCarrier" strokeWidth="0"></g>
             <g id="SVGRepo_tracerCarrier" strokeLinecap="round" strokeLinejoin="round"></g>

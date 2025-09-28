@@ -5,6 +5,10 @@ import { Dialog, DialogContent, DialogTrigger, DialogTitle, DialogDescription } 
 
 const ImageGallery = ({ images }: { images: Array<{ key: string | undefined; url: string }> }) => {
     const [loadedImages, setLoadedImages] = useState<Set<string>>(new Set());
+    const formatImageTitle = (key?: string) => {
+        const base = key?.split(".", 1)[0] ?? "image";
+        return base.replaceAll("-", " ").toUpperCase();
+    };
 
     const handleImageLoad = (url: string) => {
         setLoadedImages((prev) => {
@@ -32,12 +36,7 @@ const ImageGallery = ({ images }: { images: Array<{ key: string | undefined; url
                         </div>
                     </DialogTrigger>
                     <DialogContent className="w-11/12 max-w-7xl">
-                        <DialogTitle className="text-center mb-2">
-                            {(image.key ?? "image")
-                                .replaceAll("-", " ")
-                                .toUpperCase()
-                                .slice(0, (image.key ?? "image").indexOf("."))}
-                        </DialogTitle>
+                        <DialogTitle className="text-center mb-2">{formatImageTitle(image.key)}</DialogTitle>
                         <DialogDescription className="flex justify-center text-sm text-muted-foreground">
                             Snapshot {index + 1} of {images.length}
                         </DialogDescription>
