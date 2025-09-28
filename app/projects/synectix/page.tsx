@@ -1,13 +1,12 @@
 import { fetchImagesWithPrefix } from "@/actions";
 import { ArrowLeft } from "lucide-react";
 import Link from "next/link";
-import Image from "next/image";
 import { Separator, Tooltip, TooltipContent, TooltipTrigger } from "@/components/ui";
 import { Github } from "@/components/atoms";
-
+import ImageGallery from "@/components/organisms/image-gallery";
 const SynectixDetails = async () => {
     const snapshotLinks = await fetchImagesWithPrefix("synectix-");
-    console.log(snapshotLinks);
+
     return (
         <main className="py-10 w-11/12 max-w-7xl gap-2 flex flex-col md:grid md:grid-cols-2">
             <Link
@@ -54,19 +53,7 @@ const SynectixDetails = async () => {
                 <Separator className="my-4" />
                 <section>
                     <h6 className="text-lg font-semibold">Snapshots</h6>
-                    <div className="flex flex-col items-center lg:grid grid-cols-2 gap-4">
-                        {snapshotLinks.map((image) => (
-                            <div key={image.key} className="my-2">
-                                <Image
-                                    src={image.url}
-                                    alt={image.key as string}
-                                    width={500}
-                                    height={300}
-                                    className="w-full h-auto"
-                                />
-                            </div>
-                        ))}
-                    </div>
+                    <ImageGallery images={snapshotLinks} />
                 </section>
             </div>
         </main>
