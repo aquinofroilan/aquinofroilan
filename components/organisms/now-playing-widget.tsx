@@ -7,7 +7,7 @@ import Image from "next/image";
 import Link from "next/link";
 import * as motion from "motion/react-client";
 import { cn } from "@/lib/utils";
-import {Spotify} from "@/components/atoms";
+import { Spotify } from "@/components/atoms";
 
 export const NowPlayingWidget = ({ className }: { className?: string }) => {
     const [nowPlaying, setNowPlaying] = useState<{
@@ -25,7 +25,6 @@ export const NowPlayingWidget = ({ className }: { className?: string }) => {
     const lastUpdateTimeRef = useRef<number | null>(null);
     const apiTimeoutRef = useRef<NodeJS.Timeout | null>(null);
 
-    // Function to fetch data and reset local state
     const fetchNowPlaying = async () => {
         try {
             const data = await getNowPlaying();
@@ -47,9 +46,7 @@ export const NowPlayingWidget = ({ className }: { className?: string }) => {
             clearTimeout(apiTimeoutRef.current);
         }
 
-        // If song is about to end, schedule refresh slightly after
         if (timeUntilSongEnds !== null && timeUntilSongEnds < 30000 && timeUntilSongEnds > 0) {
-            // Add a small buffer (1 second) to ensure song has finished
             const refreshTime = timeUntilSongEnds + 1000;
             apiTimeoutRef.current = setTimeout(fetchNowPlaying, refreshTime);
         } else {
@@ -69,7 +66,6 @@ export const NowPlayingWidget = ({ className }: { className?: string }) => {
         };
     }, []);
 
-    // Setup progress bar simulation and smart refresh timing
     useEffect(() => {
         if (progressIntervalRef.current) {
             clearInterval(progressIntervalRef.current);
@@ -78,7 +74,6 @@ export const NowPlayingWidget = ({ className }: { className?: string }) => {
         if (nowPlaying && nowPlaying.isPlaying) {
             const timeUntilSongEnds = nowPlaying.timeTotal - nowPlaying.timePlayed;
 
-            // Schedule the next API call based on song remaining time
             scheduleNextApiCall(timeUntilSongEnds);
 
             progressIntervalRef.current = setInterval(() => {
@@ -90,13 +85,11 @@ export const NowPlayingWidget = ({ className }: { className?: string }) => {
 
                     const newTimePlayed = nowPlaying.timePlayed + elapsedSinceUpdate;
 
-                    // If we're approaching the end of the song, reschedule API call
                     const remainingTime = nowPlaying.timeTotal - newTimePlayed;
                     if (remainingTime <= 5000 && remainingTime > 0) {
                         scheduleNextApiCall(remainingTime);
                     }
 
-                    // Don't exceed the total time
                     if (newTimePlayed >= nowPlaying.timeTotal) {
                         return nowPlaying.timeTotal;
                     }

@@ -1,6 +1,7 @@
-export const Python = () => {
+export const Python = ({ className }: { className?: string }) => {
     return (
         <svg
+            className={className}
             viewBox="0 0 20 20"
             version="1.1"
             xmlns="http://www.w3.org/2000/svg"
