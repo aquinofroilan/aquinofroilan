@@ -21,9 +21,9 @@ export const NowPlayingWidget = ({ className }: { className?: string }) => {
         artistUrl: string;
     } | null>(null);
     const [localTimePlayed, setLocalTimePlayed] = useState<number>(0);
-    const progressIntervalRef = useRef<NodeJS.Timeout | null>(null);
+    const progressIntervalRef = useRef<ReturnType<typeof setInterval> | null>(null);
     const lastUpdateTimeRef = useRef<number | null>(null);
-    const apiTimeoutRef = useRef<NodeJS.Timeout | null>(null);
+    const apiTimeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null);
 
     const fetchNowPlaying = async () => {
         try {
@@ -40,7 +40,6 @@ export const NowPlayingWidget = ({ className }: { className?: string }) => {
         }
     };
 
-    // Schedule the next API call
     const scheduleNextApiCall = (timeUntilSongEnds: number | null) => {
         if (apiTimeoutRef.current) {
             clearTimeout(apiTimeoutRef.current);
@@ -154,7 +153,7 @@ export const NowPlayingWidget = ({ className }: { className?: string }) => {
                 description={
                     <div className="flex flex-row w-full justify-start items-center gap-2">
                         {nowPlaying != null && albumImageUrl ? (
-                            <Link target="_blank" href={songUrl ? songUrl : ""}>
+                            <Link target="_blank" href={songUrl ? songUrl : ""} rel="noopener noreferrer">
                                 <Image
                                     src={albumImageUrl}
                                     alt="Album Image"
@@ -172,6 +171,7 @@ export const NowPlayingWidget = ({ className }: { className?: string }) => {
                                     <Link
                                         target="_blank"
                                         className="cursor-pointer hover:underline underline-offset-2"
+                                        rel="noopener noreferrer"
                                         href={songUrl ? songUrl : ""}
                                     >
                                         {title}
@@ -183,6 +183,7 @@ export const NowPlayingWidget = ({ className }: { className?: string }) => {
                                     <Link
                                         className="cursor-pointer hover:underline underline-offset-2"
                                         target="_blank"
+                                        rel="noopener noreferrer"
                                         href={artistUrl ? artistUrl : ""}
                                     >
                                         {artist}
