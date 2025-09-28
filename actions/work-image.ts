@@ -23,7 +23,6 @@ const fetchImagesWithPrefix = async (prefix: string) => {
             };
         }),
     );
-    console.log("Signed URLs:", signedUrls);
     return signedUrls;
 };
 

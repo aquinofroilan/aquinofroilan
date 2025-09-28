@@ -10,9 +10,4 @@ const r2 = new S3Client({
     forcePathStyle: true,
 });
 
-console.log("R2 Client Configured:", {
-    endpoint: process.env.R2_ENDPOINT_URL,
-    bucket: process.env.R2_BUCKET_NAME,
-});
-
 export { r2 };
