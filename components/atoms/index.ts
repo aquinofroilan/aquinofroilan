@@ -12,3 +12,7 @@ export { Java } from "./icons/java";
 export { Angular } from "./icons/angular";
 export { PostgreSQL } from "./icons/postgresql";
 export { SpringBoot } from "./icons/springboot";
+export { Prisma } from "./icons/prisma";
+export { NextJS } from "./icons/nextjs";
+export { React } from "./icons/react";
+export { Vercel } from "./icons/vercel";

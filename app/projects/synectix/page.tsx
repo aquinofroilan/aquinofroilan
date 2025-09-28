@@ -15,7 +15,7 @@ const SynectixDetails = async () => {
                 className="flex items-center gap-2 text-neutral-500 hover:text-neutral-700 dark:text-neutral-400 dark:hover:text-neutral-200 transition duration-200"
             >
                 <ArrowLeft size={15} />
-                <h1 className="text-sm">Back</h1>
+                <h1 className="text-sm">Back to Projects</h1>
             </Link>
             <div className="grid place-content-center col-span-2 w-full h-full">
                 <section className="flex flex-row justify-between items-center gap-4 mb-5">
@@ -23,7 +23,7 @@ const SynectixDetails = async () => {
                     <Tooltip>
                         <TooltipTrigger asChild>
                             <Link href={"https://github.com/aquinofroilan/synectix"} target="_blank">
-                                <Github />
+                                <Github className="w-5 h-5 md:w-6 md:h-6" />
                             </Link>
                         </TooltipTrigger>
                         <TooltipContent>
@@ -41,9 +41,13 @@ const SynectixDetails = async () => {
                     </p>
                 </section>
                 <Separator className="my-4" />
-                <section className="flex justify-between items-center">
-                    <h6 className="text-lg font-semibold">Technologies Used</h6>
-                    <div className="flex flex-col gap-4">
+                <section>
+                    <h6 className="text-lg font-semibold">Snapshots</h6>
+                    <ImageGallery images={snapshotLinks} />
+                </section>
+                <Separator className="my-4" />
+                <section className="flex justify-end items-center my-4">
+                    <div className="flex flex-row gap-4">
                         <TailwindCSS className="w-6 h-6" />
                         <Java className="w-6 h-6" />
                         <PostgreSQL className="w-6 h-6" />
@@ -51,11 +55,6 @@ const SynectixDetails = async () => {
                         <TypeScript className="w-6 h-6" />
                         <SpringBoot className="w-6 h-6" />
                     </div>
-                </section>
-                <Separator className="my-4" />
-                <section>
-                    <h6 className="text-lg font-semibold">Snapshots</h6>
-                    <ImageGallery images={snapshotLinks} />
                 </section>
             </div>
         </main>

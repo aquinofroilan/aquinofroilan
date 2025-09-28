@@ -1,7 +1,7 @@
 import { ArrowLeft } from "lucide-react";
 import Link from "next/link";
 import { Separator, Tooltip, TooltipContent, TooltipTrigger } from "@/components/ui";
-import { Github } from "@/components/atoms";
+import { Github, NextJS, PostgreSQL, Prisma, React, TailwindCSS, TypeScript, Vercel } from "@/components/atoms";
 import ImageGallery from "@/components/organisms/image-gallery";
 import { fetchImagesWithPrefix } from "@/actions";
 import type { Metadata } from "next";
@@ -24,15 +24,15 @@ const PawsitiveDetails = async () => {
                 className="flex items-center gap-2 text-neutral-500 hover:text-neutral-700 dark:text-neutral-400 dark:hover:text-neutral-200 transition duration-200"
             >
                 <ArrowLeft size={15} />
-                <h1 className="text-sm">Back</h1>
+                <h1 className="text-sm">Back to Projects</h1>
             </Link>
             <div className="grid place-content-center col-span-2 w-full h-full">
                 <section className="flex flex-row justify-between items-center gap-4 mb-5">
-                    <h1 className="text-2xl text-center font-bold">Synectix</h1>
+                    <h1 className="text-2xl text-center font-bold">Pawsitive</h1>
                     <Tooltip>
                         <TooltipTrigger asChild>
                             <Link href={"https://github.com/aquinofroilan/pawsitive"} target="_blank">
-                                <Github />
+                                <Github className="w-5 h-5 md:w-6 md:h-6" />
                             </Link>
                         </TooltipTrigger>
                         <TooltipContent>
@@ -49,20 +49,19 @@ const PawsitiveDetails = async () => {
                 </section>
                 <Separator className="my-4" />
                 <section>
-                    <h6 className="text-lg font-semibold">Technologies Used</h6>
-                    <ul className="list-disc ml-5 mt-2 text-neutral-700 dark:text-neutral-300">
-                        <li>React Next.Js</li>
-                        <li>Vercel</li>
-                        <li>Tailwind CSS</li>
-                        <li>PostgreSQL</li>
-                        <li>Prisma</li>
-                        <li>TypeScript</li>
-                    </ul>
-                </section>
-                <Separator className="my-4" />
-                <section>
                     <h6 className="text-lg font-semibold">Snapshots</h6>
                     <ImageGallery images={snapshotLinks} />
+                </section>
+                <section className="flex justify-end items-center my-4">
+                    <div className="flex flex-row gap-4">
+                        <TailwindCSS className="w-6 h-6" />
+                        <PostgreSQL className="w-6 h-6" />
+                        <TypeScript className="w-6 h-6" />
+                        <Prisma className="w-6 h-6" />
+                        <NextJS className="w-6 h-6" />
+                        <React className="w-6 h-6" />
+                        <Vercel className="w-6 h-6" />
+                    </div>
                 </section>
             </div>
         </main>
