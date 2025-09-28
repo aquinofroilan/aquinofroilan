@@ -7,7 +7,7 @@ import Image from "next/image";
 import Link from "next/link";
 import * as motion from "motion/react-client";
 import { cn } from "@/lib/utils";
-import {Spotify} from "@/components/atoms";
+import { Spotify } from "@/components/atoms";
 
 export const NowPlayingWidget = ({ className }: { className?: string }) => {
     const [nowPlaying, setNowPlaying] = useState<{
