@@ -44,7 +44,7 @@ const ImageGallery = ({ images }: { images: Array<{ key: string | undefined; url
                         <div className="relative w-full max-h-[70vh] aspect-video">
                             <Image
                                 src={image.url}
-                                alt={image.key as string}
+                                alt={image.key ?? "Image"}
                                 fill
                                 quality={95}
                                 className="object-contain"
