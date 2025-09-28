@@ -22,7 +22,7 @@ const ImageGallery = ({ images }: { images: Array<{ key: string | undefined; url
                         <div className="relative w-full h-[300px] cursor-pointer hover:opacity-80 transition duration-200">
                             <Image
                                 src={image.url}
-                                alt={image.key as string}
+                                alt={image.key ?? "Image"}
                                 fill
                                 className="object-cover rounded-md"
                                 priority={index < 2}
@@ -33,10 +33,10 @@ const ImageGallery = ({ images }: { images: Array<{ key: string | undefined; url
                     </DialogTrigger>
                     <DialogContent className="w-11/12 max-w-7xl">
                         <DialogTitle className="text-center mb-2">
-                            {(image.key as string)
+                            {(image.key ?? "image")
                                 .replaceAll("-", " ")
                                 .toUpperCase()
-                                .slice(0, (image.key as string).indexOf("."))}
+                                .slice(0, (image.key ?? "image").indexOf("."))}
                         </DialogTitle>
                         <DialogDescription className="flex justify-center text-sm text-muted-foreground">
                             Snapshot {index + 1} of {images.length}
@@ -44,7 +44,7 @@ const ImageGallery = ({ images }: { images: Array<{ key: string | undefined; url
                         <div className="relative w-full max-h-[70vh] aspect-video">
                             <Image
                                 src={image.url}
-                                alt={image.key as string}
+                                alt={image.key ?? "Image"}
                                 fill
                                 quality={95}
                                 className="object-contain"
