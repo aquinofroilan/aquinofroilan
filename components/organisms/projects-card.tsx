@@ -63,7 +63,7 @@ function ProjectsCard({ className }: { className?: string }) {
                                         <Badge
                                             key={footer.text}
                                             variant="outline"
-                                            className="w-fit text-xs flex flex-row gap-1 items-center"
+                                            className="w-fit text-xs flex flex-row gap-1 items-center font-semibold"
                                         >
                                             {footer.icon}
                                             {footer.text}

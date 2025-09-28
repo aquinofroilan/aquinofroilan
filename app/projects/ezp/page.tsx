@@ -18,7 +18,6 @@ const EZP = async () => {
                 <h1 className="text-sm">Back to Projects</h1>
             </Link>
             <div className="grid place-content-center col-span-2 w-full h-full">
-                S
                 <section className="flex flex-row justify-between items-center gap-4 mb-5">
                     <h1 className="text-2xl text-center font-bold">EZ Parking System</h1>
                     <Tooltip>
