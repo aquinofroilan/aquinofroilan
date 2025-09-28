@@ -38,7 +38,7 @@ function ProjectsCard({ className }: { className?: string }) {
                         {ProjectsList.slice(0, 2).map((project) => (
                             <div
                                 className="flex-col flex gap-2 items-start p-5 rounded-md border transition duration-200"
-                                key={project.link}
+                                key={project.pageLink}
                             >
                                 <section className="flex justify-between w-full items-center">
                                     <Link
@@ -50,7 +50,7 @@ function ProjectsCard({ className }: { className?: string }) {
                                         {project.title}
                                     </Link>
                                     <Link
-                                        href={project.link}
+                                        href={project.pageLink}
                                         rel="noreferrer"
                                         className="text-sm hover:underline underline-offset-2"
                                     >

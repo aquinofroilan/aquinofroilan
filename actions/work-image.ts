@@ -4,6 +4,9 @@ import { r2 } from "@/lib/r2";
 
 const fetchImagesWithPrefix = async (prefix: string) => {
     const bucket = process.env.R2_BUCKET_NAME;
+    if (!bucket) {
+        throw new Error("R2_BUCKET_NAME environment variable is not defined.");
+    }
 
     const command = new ListObjectsV2Command({
         Bucket: bucket,

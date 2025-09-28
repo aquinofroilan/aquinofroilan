@@ -15,7 +15,7 @@ type FooterItem = {
 type ProjectItem = {
     title: string;
     description: string;
-    link: string;
+    pageLink: string;
     projectLink: string;
     footerContent: FooterItem[];
 };
@@ -24,7 +24,7 @@ export const ProjectsList: ProjectItem[] = [
     {
         title: "Pawsitive Health | Capstone",
         description: "Full stack app for a pet health management system built with NextJS and PostgreSQL",
-        link: "/projects/pawsitive",
+        pageLink: "/projects/pawsitive",
         projectLink: "https://github.com/aquinofroilan/pawsitive-health",
         footerContent: [
             {
@@ -40,7 +40,7 @@ export const ProjectsList: ProjectItem[] = [
     {
         title: "Synectix",
         description: "Backend for an ERP system built with Spring Boot",
-        link: "/projects/synectix",
+        pageLink: "/projects/synectix",
         projectLink: "https://github.com/aquinofroilan/synectix",
         footerContent: [
             {
@@ -60,7 +60,7 @@ export const ProjectsList: ProjectItem[] = [
     {
         title: "EZ Parking System",
         description: "Backend for a parking management system built with Python Flask",
-        link: "/projects/ezp",
+        pageLink: "/projects/ezp",
         projectLink: "https://github.com/aquinofroilan/ez-parking-system",
         footerContent: [
             {
