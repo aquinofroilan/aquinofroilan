@@ -7,7 +7,8 @@ import Image from "next/image";
 import Link from "next/link";
 import * as motion from "motion/react-client";
 import { cn } from "@/lib/utils";
-import {Spotify} from "@/components/atoms";
+import { Spotify } from "@/components/atoms";
+import { fetchImagesWithPrefix } from "@/actions/work-image";
 
 export const NowPlayingWidget = ({ className }: { className?: string }) => {
     const [nowPlaying, setNowPlaying] = useState<{
@@ -59,6 +60,7 @@ export const NowPlayingWidget = ({ className }: { className?: string }) => {
 
     useEffect(() => {
         fetchNowPlaying().then();
+        fetchImagesWithPrefix("synectix-");
         return () => {
             if (progressIntervalRef.current) {
                 clearInterval(progressIntervalRef.current);
