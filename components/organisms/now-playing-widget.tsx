@@ -148,7 +148,7 @@ export const NowPlayingWidget = ({ className }: { className?: string }) => {
         >
             <BentoGridItem
                 className="w-full h-full"
-                icon={<Spotify />}
+                icon={<Spotify className="w-4 h-4" />}
                 title={<h1 className="text-lg">Now Playing</h1>}
                 description={
                     <div className="flex flex-row w-full justify-start items-center gap-2">
