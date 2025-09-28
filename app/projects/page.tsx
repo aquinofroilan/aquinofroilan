@@ -39,14 +39,12 @@ function Projects() {
                                 }}
                                 className="w-full h-full"
                             >
-                                <Link
-                                    href={project.pageLink}
+                                <div
                                     key={project.projectLink}
-                                    rel="noreferrer"
                                     className="flex gap-2 items-center p-5 rounded-md border transition duration-200"
                                 >
                                     <div className="flex flex-col gap-1">
-                                        <section>
+                                        <section className="flex justify-between w-full items-center">
                                             <Link
                                                 href={project.projectLink}
                                                 target="_blank"
@@ -54,6 +52,12 @@ function Projects() {
                                                 className="text-base font-semibold hover:underline underline-offset-2"
                                             >
                                                 {project.title}
+                                            </Link>
+                                            <Link
+                                                className="text-base font-semibold hover:underline underline-offset-2"
+                                                href={project.pageLink}
+                                            >
+                                                View
                                             </Link>
                                         </section>
                                         <p className="text-sm">{project.description}</p>
@@ -70,7 +74,7 @@ function Projects() {
                                             ))}
                                         </div>
                                     </div>
-                                </Link>
+                                </div>
                             </motion.div>
                         );
                     })}

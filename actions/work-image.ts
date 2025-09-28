@@ -3,6 +3,9 @@ import { GetObjectCommand, ListObjectsV2Command } from "@aws-sdk/client-s3";
 import { r2 } from "@/lib/r2";
 
 const fetchImagesWithPrefix = async (prefix: string) => {
+    if (!prefix?.trim()) {
+        throw new Error("fetchImagesWithPrefix: 'prefix' is required.");
+    }
     const bucket = process.env.R2_BUCKET_NAME;
     if (!bucket) {
         throw new Error("R2_BUCKET_NAME environment variable is not defined.");
@@ -15,7 +18,7 @@ const fetchImagesWithPrefix = async (prefix: string) => {
 
     const response = await r2.send(command);
 
-    const files = response.Contents?.map((obj) => obj.Key) ?? [];
+    const files = (response.Contents ?? []).map((obj) => obj.Key).filter((key): key is string => Boolean(key));
 
     const { getSignedUrl } = await import("@aws-sdk/s3-request-presigner");
     const signedUrls = await Promise.all(
