@@ -64,6 +64,11 @@ export const SpotifyCard = ({ className }: { className?: string }) => {
                     lastUpdateTimeRef.current = Date.now();
                 }
             }
+            if (data === null) {
+                setNowPlaying(null);
+                setLocalTimePlayed(0);
+                lastUpdateTimeRef.current = null;
+            }
         } catch {
             return;
         }
