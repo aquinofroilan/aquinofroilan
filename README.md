@@ -2,6 +2,34 @@
 
 Hello World! I am **Froilan Aquino**, web-developer based on Caloocan City Philippines. I am passionate about things like new emerging technologies like AI Advancements.
 
+## **🚀 Getting Started**
+
+### Prerequisites
+- Node.js >= 20 or Bun >= 1.1
+- Cloudflare R2 bucket (for image storage)
+
+### Environment Setup
+1. Copy `.env.local.example` to `.env.local`
+2. Fill in your environment variables:
+   - R2 credentials (R2_KEY_ID, R2_SECRET_KEY, R2_ENDPOINT_URL, R2_BUCKET_NAME)
+   - **Important**: Add `R2_PUBLIC_URL` for image serving (see [R2_SETUP.md](./R2_SETUP.md))
+
+### Installation
+```bash
+# Install dependencies
+npm install
+# or
+bun install
+
+# Run development server
+npm run dev
+# or
+bun dev
+```
+
+### R2 Image Configuration
+If you're experiencing issues with images not loading from R2 bucket, please refer to [R2_SETUP.md](./R2_SETUP.md) for detailed configuration instructions.
+
 As a web developer, I am passionate in using modern JavaScript technologies, particularly React and its potent Next.js framework, which powers this website, to create scalable, maintainable, and smart apps. I use solutions like Supabase for database orchestration integration and Firebase for seamless authentication when it comes to service and backend architecture.
 
 In 2025, I earned my bachelor's degree in information technology, but I'm constantly learning new things outside of the classroom. I actively use websites like YouTube and FreeCode as well as AI-based applications like ChatGPT since I take a very self-directed approach to learning. and Claude to reinforce concepts and broaden my comprehension. Because I'm naturally curious, I usually use Dev.to, Medium, and technical discussions on GitHub and Stack Overflow to research topics. records.
