@@ -18,7 +18,7 @@ export const Footer = () => {
                     className="w-full"
                 >
                     <Separator className="w-full" />
-                    <div className="flex flex-row items-center justify-between w-full py-5">
+                    <div className="flex flex-row w-full py-5">
                         <p className="text-xs md:text-sm ml-3">
                             © {new Date().getFullYear()} Froilan Aquino. All rights reserved.
                         </p>

@@ -3,8 +3,7 @@ import {
     CertificationCard,
     CompetenciesCard,
     ContactMe,
-    NowPlayingWidget,
-    RecentlyPlayedWidget,
+    SpotifyStatsCard,
     ProfileCard,
     TechStackCard,
     TrascendingCodeCard,
@@ -31,8 +30,7 @@ export default function Home() {
                 <WakatimeStatsCard className="h-full overflow-scroll row-span-3 col-span-1" />
                 <CompetenciesCard />
                 <ContactMe />
-                <RecentlyPlayedWidget className="h-full overflow-scroll w-full col-span-2 row-span-1" />
-                <NowPlayingWidget className="h-full overflow-scroll w-full col-span-2 row-span-1" />
+                <SpotifyStatsCard className="h-full overflow-scroll w-full col-span-2 row-span-1" />
             </main>
         </>
     );
