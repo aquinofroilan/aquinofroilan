@@ -6,5 +6,6 @@ export { CertificationCard } from "./certification-card";
 export { ProfileCard } from "./profile-card";
 export { Footer } from "./footer";
 export { NowPlayingWidget } from "./now-playing-widget";
+export { RecentlyPlayedWidget } from "./recently-played-widget";
 export { ContactMe } from "./contact-me-card";
 export { CompetenciesCard } from "./competencies-card";
