@@ -1,7 +1,8 @@
 import React from "react";
 import { FetchWakaTimeStats } from "@/actions/wakatime";
 import { BentoGridItem, Progress } from "@/components/ui";
-import { Clock, Code, Github, Laptop, Monitor, ChartColumnIcon, CircleArrowUp } from "lucide-react";
+import { Clock, Code, Laptop, Monitor, ChartColumnIcon } from "lucide-react";
+import { Github } from "@/components/atoms";
 import * as motion from "motion/react-client";
 import { getGithubStats } from "@/actions";
 
@@ -15,12 +16,6 @@ type WakatimeStatsTypes = {
         languages: Array<{
             name: string;
             text: string;
-            percent: number;
-        }>;
-        categories: Array<{
-            name: string;
-            text: string;
-            hours: number;
             percent: number;
         }>;
         human_readable_daily_average: string;
@@ -39,7 +34,6 @@ export const WakatimeStatsCard = async ({ className }: { className?: string }) =
     const github_stats: GitHubStats = await getGithubStats();
     const wakatimeStats: WakatimeStatsTypes = await FetchWakaTimeStats();
     const wakatimeLanguages = wakatimeStats?.data.languages;
-    const wakatimeCategories = wakatimeStats?.data.categories;
     const wakatimeDailyAverage = wakatimeStats?.data.human_readable_daily_average;
     const wakatimeTotal = wakatimeStats?.data.human_readable_total;
     const wakatimeOperatingSystems = wakatimeStats?.data.operating_systems;
@@ -62,24 +56,6 @@ export const WakatimeStatsCard = async ({ className }: { className?: string }) =
                 title={"Wakatime Stats"}
                 description={
                     <>
-                        <BentoGridItem
-                            className="my-5 hover:shadow-none"
-                            icon={<CircleArrowUp size={15} />}
-                            title={<h1 className="text-lg">Programming Activity</h1>}
-                            description={
-                                <div className="space-y-3">
-                                    {wakatimeCategories?.slice(0, 6).map((category, index) => (
-                                        <div key={index} className="flex flex-col">
-                                            <div className="flex justify-between text-xs mb-1">
-                                                <span>{category.name}</span>
-                                                <span>{category.percent.toFixed(1)}%</span>
-                                            </div>
-                                            <Progress value={category.percent} />
-                                        </div>
-                                    ))}
-                                </div>
-                            }
-                        />
                         <BentoGridItem
                             className="my-5 hover:shadow-none"
                             icon={<Code size={15} />}
@@ -148,7 +124,7 @@ export const WakatimeStatsCard = async ({ className }: { className?: string }) =
 
                         <BentoGridItem
                             className="my-5 md:col-span-2 hover:shadow-none"
-                            icon={<Github size={15} />}
+                            icon={<Github className="w-4 h-4" />}
                             title={<h1 className="text-lg">GitHub Activity</h1>}
                             description={
                                 <div className="flex flex-col lg:flex-row gap-2">

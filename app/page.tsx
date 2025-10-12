@@ -3,11 +3,11 @@ import {
     CertificationCard,
     CompetenciesCard,
     ContactMe,
-    NowPlayingWidget,
     ProfileCard,
     TechStackCard,
     TrascendingCodeCard,
     WakatimeStatsCard,
+    SpotifyCard,
 } from "@/components/organisms/";
 import ProjectsCard from "@/components/organisms/projects-card";
 import type { Metadata } from "next";
@@ -30,7 +30,7 @@ export default function Home() {
                 <WakatimeStatsCard className="h-full overflow-scroll row-span-3 col-span-1" />
                 <CompetenciesCard />
                 <ContactMe />
-                <NowPlayingWidget className="h-full overflow-scroll w-full col-span-2 row-span-1" />
+                <SpotifyCard className="h-full overflow-scroll w-full col-span-2 row-span-1" />
             </main>
         </>
     );
