@@ -34,7 +34,7 @@ type TopTrack = {
 
 type TabType = "recent" | "top";
 
-export const SpotifyStatsCard = ({ className }: { className?: string }) => {
+export const SpotifyCard = ({ className }: { className?: string }) => {
     const [recentlyPlayed, setRecentlyPlayed] = useState<RecentlyPlayedTrack[] | null>(null);
     const [topTracks, setTopTracks] = useState<TopTrack[] | null>(null);
     const [loading, setLoading] = useState(true);
@@ -277,7 +277,12 @@ export const SpotifyStatsCard = ({ className }: { className?: string }) => {
                 }
                 description={
                     <div className="flex flex-col w-full gap-4">
-                        <div className="flex flex-row w-full justify-start items-center gap-2">
+                        <div
+                            className={cn(
+                                "flex items-center w-full gap-4",
+                                !nowPlaying || !nowPlaying.isPlaying ? "hidden" : "",
+                            )}
+                        >
                             {nowPlaying != null && albumImageUrl ? (
                                 <Link target="_blank" href={songUrl ? songUrl : ""} rel="noopener noreferrer">
                                     <Image
@@ -329,7 +334,7 @@ export const SpotifyStatsCard = ({ className }: { className?: string }) => {
                                 </div>
                             </div>
                         </div>
-                        <Separator />
+                        <Separator className={cn(nowPlaying ? "block" : "hidden")} />
                         <div className="grid md:grid-cols-2 gap-3 w-full">
                             {currentTracks && currentTracks.length > 0 ? (
                                 currentTracks.map((track, index) => (
