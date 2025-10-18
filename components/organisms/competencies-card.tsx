@@ -4,6 +4,12 @@ import * as motion from "motion/react-client";
 
 const milestones = [
     {
+        year: "09/29/2025 - Present",
+        title: "AI/Software Engineer",
+        description: "Hired as AI/Software Engineer at Journey Better Business Group Inc.",
+        badge: "Full time",
+    },
+    {
         year: "05/2025",
         title: "Academic Excellence",
         description: "Best in Capstone and Practicum",
