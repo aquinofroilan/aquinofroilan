@@ -20,13 +20,15 @@ export async function generateBlogContent() {
 
     const randomTopic = topics[Math.floor(Math.random() * topics.length)];
 
-    const prompt = `Write a detailed technical blog post about ${randomTopic} for software developers. 
-    The post should be 500-800 words, include code examples where appropriate, and be formatted in markdown. 
-    Include a catchy title at the beginning. Make it informative, practical, and engaging.
-    Format the response as:
-    Title: [Your Title Here]
-    
-    [Your markdown content here with ## headings, code blocks, and proper formatting]`;
+    const prompt = [
+        `Write a detailed technical blog post about ${randomTopic} for software developers.`,
+        "The post should be 500-800 words, include code examples where appropriate, and be formatted in markdown.",
+        "Include a catchy title at the beginning. Make it informative, practical, and engaging.",
+        "Format the response as:",
+        "Title: [Your Title Here]",
+        "",
+        "[Your markdown content here with ## headings, code blocks, and proper formatting]",
+    ].join(" ");
 
     try {
         const result = await model.generateContent(prompt);

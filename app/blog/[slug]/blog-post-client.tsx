@@ -6,7 +6,6 @@ import { useState } from "react";
 import ReactMarkdown from "react-markdown";
 import rehypeHighlight from "rehype-highlight";
 import remarkGfm from "remark-gfm";
-import "highlight.js/styles/github-dark.css";
 
 interface BlogPost {
     id: string;
@@ -46,11 +45,30 @@ export default function BlogPostClient({ post }: { post: BlogPost }) {
     const handleShare = async () => {
         const url = window.location.href;
         try {
-            await navigator.clipboard.writeText(url);
-            setCopied(true);
-            setTimeout(() => setCopied(false), 2000);
+            // Try modern clipboard API first
+            if (navigator.clipboard && navigator.clipboard.writeText) {
+                await navigator.clipboard.writeText(url);
+                setCopied(true);
+                setTimeout(() => setCopied(false), 2000);
+            } else {
+                // Fallback for older browsers
+                const textArea = document.createElement("textarea");
+                textArea.value = url;
+                textArea.style.position = "fixed";
+                textArea.style.left = "-999999px";
+                document.body.appendChild(textArea);
+                textArea.select();
+                try {
+                    document.execCommand("copy");
+                    setCopied(true);
+                    setTimeout(() => setCopied(false), 2000);
+                } finally {
+                    document.body.removeChild(textArea);
+                }
+            }
         } catch (error) {
             console.error("Error copying to clipboard:", error);
+            alert(`Please copy this URL manually: ${url}`);
         }
     };
 

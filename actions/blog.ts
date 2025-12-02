@@ -72,13 +72,9 @@ export async function createBlogPost(title: string, content: string): Promise<Bl
 
 export async function incrementBlogLikes(id: string): Promise<number> {
     try {
-        await turso.execute({
-            sql: "UPDATE blog_posts SET likes = likes + 1 WHERE id = ?",
-            args: [id],
-        });
-
+        // Use single query with RETURNING clause for better performance
         const result = await turso.execute({
-            sql: "SELECT likes FROM blog_posts WHERE id = ?",
+            sql: "UPDATE blog_posts SET likes = likes + 1 WHERE id = ? RETURNING likes",
             args: [id],
         });
 

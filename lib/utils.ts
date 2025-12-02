@@ -8,6 +8,11 @@ export function cn(...inputs: ClassValue[]) {
 export function formatDistance(date: Date, baseDate: Date): string {
     const seconds = Math.floor((baseDate.getTime() - date.getTime()) / 1000);
 
+    // Handle negative time differences
+    if (seconds < 0) {
+        return "in the future";
+    }
+
     let interval = Math.floor(seconds / 31536000);
     if (interval >= 1) {
         return interval === 1 ? "1 year ago" : `${interval} years ago`;
