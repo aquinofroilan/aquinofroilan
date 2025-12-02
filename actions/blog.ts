@@ -4,6 +4,11 @@ import { turso, BlogPost } from "@/lib/turso";
 import { v4 as uuidv4 } from "uuid";
 
 export async function getAllBlogPosts(): Promise<BlogPost[]> {
+    if (!turso) {
+        console.warn("Turso client not initialized");
+        return [];
+    }
+
     try {
         const result = await turso.execute(
             "SELECT id, title, content, created_at, likes FROM blog_posts ORDER BY created_at DESC"
@@ -23,6 +28,11 @@ export async function getAllBlogPosts(): Promise<BlogPost[]> {
 }
 
 export async function getBlogPostById(id: string): Promise<BlogPost | null> {
+    if (!turso) {
+        console.warn("Turso client not initialized");
+        return null;
+    }
+
     try {
         const result = await turso.execute({
             sql: "SELECT id, title, content, created_at, likes FROM blog_posts WHERE id = ?",
@@ -48,6 +58,10 @@ export async function getBlogPostById(id: string): Promise<BlogPost | null> {
 }
 
 export async function createBlogPost(title: string, content: string): Promise<BlogPost> {
+    if (!turso) {
+        throw new Error("Turso client not initialized");
+    }
+
     const id = uuidv4();
     const created_at = new Date().toISOString();
 
@@ -71,6 +85,10 @@ export async function createBlogPost(title: string, content: string): Promise<Bl
 }
 
 export async function incrementBlogLikes(id: string): Promise<number> {
+    if (!turso) {
+        throw new Error("Turso client not initialized");
+    }
+
     try {
         // Use single query with RETURNING clause for better performance
         const result = await turso.execute({
@@ -90,6 +108,11 @@ export async function incrementBlogLikes(id: string): Promise<number> {
 }
 
 export async function getRecentBlogPosts(limit: number = 4): Promise<BlogPost[]> {
+    if (!turso) {
+        console.warn("Turso client not initialized");
+        return [];
+    }
+
     try {
         const result = await turso.execute({
             sql: "SELECT id, title, content, created_at, likes FROM blog_posts ORDER BY created_at DESC LIMIT ?",
