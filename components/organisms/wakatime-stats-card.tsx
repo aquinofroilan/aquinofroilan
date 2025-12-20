@@ -32,8 +32,8 @@ type WakatimeStatsTypes = {
 
 export const WakatimeStatsLanguages = async ({ className }: { className?: string }) => {
     const wakatimeStats: WakatimeStatsTypes | null = await FetchWakaTimeStats();
-    const wakatimeLanguages = wakatimeStats?.data.languages;
     if (!wakatimeStats) return null;
+    const wakatimeLanguages = wakatimeStats?.data.languages;
 
     return (
         <Card className={className}>
@@ -62,6 +62,7 @@ export const WakatimeStatsLanguages = async ({ className }: { className?: string
 
 export const WakatimeStatsActivity = async ({ className }: { className?: string }) => {
     const wakatimeStats: WakatimeStatsTypes | null = await FetchWakaTimeStats();
+    if (!wakatimeStats) return null;
     const wakatimeDailyAverage = wakatimeStats?.data.human_readable_daily_average;
     const wakatimeTotal = wakatimeStats?.data.human_readable_total;
 
@@ -91,6 +92,7 @@ export const WakatimeStatsActivity = async ({ className }: { className?: string 
 
 export const WakatimeStatsEditors = async ({ className }: { className?: string }) => {
     const wakatimeStats: WakatimeStatsTypes | null = await FetchWakaTimeStats();
+    if (!wakatimeStats) return null;
     const wakatimeEditors = wakatimeStats?.data.editors;
 
     return (
@@ -117,6 +119,7 @@ export const WakatimeStatsEditors = async ({ className }: { className?: string }
 
 export const WakatimeStatsOS = async ({ className }: { className?: string }) => {
     const wakatimeStats: WakatimeStatsTypes | null = await FetchWakaTimeStats();
+    if (!wakatimeStats) return null;
     const wakatimeOperatingSystems = wakatimeStats?.data.operating_systems;
 
     return (
