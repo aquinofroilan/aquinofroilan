@@ -344,7 +344,7 @@ export const SpotifyCard = ({ className }: { className?: string }) => {
                             </div>
                         </div>
                         <Separator className={cn(nowPlaying ? "block" : "hidden")} />
-                        <div className="grid md:grid-cols-2 gap-3 w-full">
+                        <div className="flex flex-col gap-3 w-full">
                             {currentTracks && currentTracks.length > 0 ? (
                                 currentTracks.map((track, index) => (
                                     <div

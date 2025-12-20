@@ -2,7 +2,7 @@ import Me from "@/public/images/me.webp";
 import Image from "next/image";
 import { BadgeCheckIcon, Mail, MapPin, Phone } from "lucide-react";
 import Link from "next/link";
-import { Button, Card, CardContent } from "@/components/ui";
+import { Button, Card, CardContent, CardFooter } from "@/components/ui";
 import { cn } from "@/lib/utils";
 import * as motion from "motion/react-client";
 
@@ -46,28 +46,29 @@ export const ProfileCard = ({ className }: { className?: string }) => {
                         <p className="text-[11px] lg:text-base">
                             {process.env.PAGE_TITLE ? String(process.env.PAGE_TITLE).slice(10) : "Software Engineer"}
                         </p>
-
-                        <div className="flex flex-row gap-2 mt-3 justify-start items-start">
-                            <Button
-                                className="text-white rounded-md flex flex-row gap-2"
-                                asChild
-                                variant={"default"}
-                                size={"sm"}
-                            >
-                                <Link href={process.env.SCHEDULE_A_CALL_URL as string} target="_blank">
-                                    <Phone className="hidden md:block" size={16} />
-                                    <span>Schedule a call</span>
-                                </Link>
-                            </Button>
-                            <Button className="rounded-md flex flex-row gap-2" asChild variant={"outline"} size={"sm"}>
-                                <Link href={process.env.SEND_EMAIL_URL as string} target="_blank" rel="noopener noreferrer">
-                                    <Mail className="hidden md:block" size={16} />
-                                    <span>Send email</span>
-                                </Link>
-                            </Button>
-                        </div>
                     </div>
                 </CardContent>
+                <CardFooter className="p-6 pt-0">
+                    <div className="flex flex-row gap-2 w-full">
+                        <Button
+                            className="text-white rounded-md flex flex-row gap-2 flex-1"
+                            asChild
+                            variant={"default"}
+                            size={"sm"}
+                        >
+                            <Link href={process.env.SCHEDULE_A_CALL_URL as string} target="_blank">
+                                <Phone className="hidden md:block" size={16} />
+                                <span>Schedule a call</span>
+                            </Link>
+                        </Button>
+                        <Button className="rounded-md flex flex-row gap-2 flex-1" asChild variant={"outline"} size={"sm"}>
+                            <Link href={process.env.SEND_EMAIL_URL as string} target="_blank" rel="noopener noreferrer">
+                                <Mail className="hidden md:block" size={16} />
+                                <span>Send email</span>
+                            </Link>
+                        </Button>
+                    </div>
+                </CardFooter>
             </Card>
         </motion.div>
     );
