@@ -73,14 +73,14 @@ export const WakatimeStatsActivity = async ({ className }: { className?: string 
                 </CardTitle>
             </CardHeader>
             <CardContent>
-                <div className="grid grid-cols-2 gap-3">
-                    <div className="border border-border rounded-md p-2">
-                        <p className="text-xs text-muted-foreground">Daily Average</p>
-                        <p className="font-medium">{wakatimeDailyAverage}</p>
+                <div className="space-y-2">
+                    <div className="flex justify-between items-center text-xs">
+                        <span>Daily Average</span>
+                        <span>{wakatimeDailyAverage}</span>
                     </div>
-                    <div className="border border-border rounded-md p-2">
-                        <p className="text-xs text-muted-foreground">Total</p>
-                        <p className="font-medium">{wakatimeTotal}</p>
+                    <div className="flex justify-between items-center text-xs">
+                        <span>Total</span>
+                        <span>{wakatimeTotal}</span>
                     </div>
                 </div>
             </CardContent>
@@ -152,22 +152,22 @@ export const GithubStatsCard = async ({ className }: { className?: string }) => 
                 </CardTitle>
             </CardHeader>
             <CardContent>
-                <div className="flex flex-col lg:flex-row gap-2">
-                    <div className="border border-border rounded-md p-2 flex-1">
-                        <p className="text-xs text-muted-foreground">Stars</p>
-                        <p className="font-medium">{github_stats.stars}</p>
+                <div className="space-y-2">
+                    <div className="flex justify-between items-center text-xs">
+                        <span>Stars</span>
+                        <span>{github_stats.stars}</span>
                     </div>
-                    <div className="border border-border rounded-md p-2 flex-1">
-                        <p className="text-xs text-muted-foreground">Commits (Year)</p>
-                        <p className="font-medium">{github_stats.commitsPastYear}</p>
+                    <div className="flex justify-between items-center text-xs">
+                        <span>Commits (Year)</span>
+                        <span>{github_stats.commitsPastYear}</span>
                     </div>
-                    <div className="border border-border rounded-md p-2 flex-1">
-                        <p className="text-xs text-muted-foreground">PRs</p>
-                        <p className="font-medium">{github_stats.pullRequests}</p>
+                    <div className="flex justify-between items-center text-xs">
+                        <span>PRs</span>
+                        <span>{github_stats.pullRequests}</span>
                     </div>
-                    <div className="border border-border rounded-md p-2 flex-1">
-                        <p className="text-xs text-muted-foreground">Issues</p>
-                        <p className="font-medium">{github_stats.issues}</p>
+                    <div className="flex justify-between items-center text-xs">
+                        <span>Issues</span>
+                        <span>{github_stats.issues}</span>
                     </div>
                 </div>
             </CardContent>

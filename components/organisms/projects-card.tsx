@@ -1,5 +1,4 @@
 import React from "react";
-import * as motion from "motion/react-client";
 import { Badge, Card, CardHeader, CardTitle, CardContent } from "@/components/ui";
 import Link from "next/link";
 import { ArrowRightCircle, FolderCode } from "lucide-react";
@@ -15,17 +14,7 @@ import { ProjectsList } from "@/data/projects-list";
  */
 function ProjectsCard({ className }: { className?: string }) {
     return (
-        <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -20 }}
-            transition={{
-                duration: 0.3,
-                ease: "easeOut",
-                delay: 0.4,
-            }}
-            className={className}
-        >
+        <div className={className}>
             <Card className="flex flex-col gap-3 h-full w-full">
                 <CardHeader>
                     <CardTitle className="flex justify-between items-center w-full">
@@ -84,7 +73,7 @@ function ProjectsCard({ className }: { className?: string }) {
                     </div>
                 </CardContent>
             </Card>
-        </motion.div>
+        </div>
     );
 }
 

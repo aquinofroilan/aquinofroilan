@@ -1,20 +1,9 @@
 import { Rocket } from "lucide-react";
 import { Card, CardHeader, CardTitle, CardContent } from "@/components/ui";
-import * as motion from "motion/react-client";
 
 export const TrascendingCodeCard = ({ className }: { className?: string }) => {
     return (
-        <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -20 }}
-            transition={{
-                duration: 0.3,
-                ease: "easeOut",
-                delay: 0.8,
-            }}
-            className={className}
-        >
+        <div className={className}>
             <Card className="w-full h-full">
                 <CardHeader>
                     <CardTitle className="flex items-center gap-2">
@@ -41,6 +30,6 @@ export const TrascendingCodeCard = ({ className }: { className?: string }) => {
                     </div>
                 </CardContent>
             </Card>
-        </motion.div>
+        </div>
     );
 };

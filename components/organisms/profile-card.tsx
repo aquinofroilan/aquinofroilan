@@ -4,21 +4,10 @@ import { BadgeCheckIcon, Mail, MapPin, Phone } from "lucide-react";
 import Link from "next/link";
 import { Button, Card, CardContent, CardFooter } from "@/components/ui";
 import { cn } from "@/lib/utils";
-import * as motion from "motion/react-client";
 
 export const ProfileCard = ({ className }: { className?: string }) => {
     return (
-        <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -20 }}
-            transition={{
-                duration: 0.3,
-                ease: "easeOut",
-                delay: 0.1,
-            }}
-            className={className}
-        >
+        <div className={className}>
             <Card className="w-full h-full">
                 <CardContent className="flex flex-row gap-5 p-6">
                     <div className="flex-shrink-0 md:block flex justify-center items-center">
@@ -70,6 +59,6 @@ export const ProfileCard = ({ className }: { className?: string }) => {
                     </div>
                 </CardFooter>
             </Card>
-        </motion.div>
+        </div>
     );
 };

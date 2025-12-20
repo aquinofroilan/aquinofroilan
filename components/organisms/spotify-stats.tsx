@@ -5,7 +5,6 @@ import { Card, CardHeader, CardTitle, CardContent, Progress, Separator } from "@
 import { getNowPlaying, getRecentlyPlayed, getTopTracks } from "@/actions";
 import Image from "next/image";
 import Link from "next/link";
-import * as motion from "motion/react-client";
 import { cn } from "@/lib/utils";
 import { Spotify } from "@/components/atoms";
 import Loading from "@/app/loading";
@@ -203,17 +202,7 @@ export const SpotifyCard = ({ className }: { className?: string }) => {
 
     if (loading) {
         return (
-            <motion.div
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                exit={{ opacity: 0, y: -20 }}
-                transition={{
-                    duration: 0.3,
-                    ease: "easeOut",
-                    delay: 0.3,
-                }}
-                className={cn("", className)}
-            >
+            <div className={cn("", className)}>
                 <Card className="w-full h-full">
                     <CardHeader>
                         <CardTitle className="flex items-center gap-2">
@@ -227,7 +216,7 @@ export const SpotifyCard = ({ className }: { className?: string }) => {
                         </div>
                     </CardContent>
                 </Card>
-            </motion.div>
+            </div>
         );
     }
 
@@ -238,17 +227,7 @@ export const SpotifyCard = ({ className }: { className?: string }) => {
     const currentTracks = activeTab === "recent" ? recentlyPlayed : topTracks;
 
     return (
-        <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -20 }}
-            transition={{
-                duration: 0.3,
-                ease: "easeOut",
-                delay: 0.3,
-            }}
-            className={cn("", className)}
-        >
+        <div className={cn("", className)}>
             <Card className="w-full h-full">
                 <CardHeader>
                     <CardTitle className="flex items-center justify-between w-full">
@@ -414,6 +393,6 @@ export const SpotifyCard = ({ className }: { className?: string }) => {
                     </div>
                 </CardContent>
             </Card>
-        </motion.div>
+        </div>
     );
 };

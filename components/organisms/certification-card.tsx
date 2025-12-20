@@ -2,21 +2,10 @@ import { BadgeCheckIcon, ArrowRightCircle } from "lucide-react";
 import { Card, CardHeader, CardTitle, CardContent } from "@/components/ui";
 import { CertificationsListsPreview } from "@/data/certification-list-preview";
 import Link from "next/link";
-import * as motion from "motion/react-client";
 
 export const CertificationCard = ({ className }: { className?: string }) => {
     return (
-        <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -20 }}
-            transition={{
-                duration: 0.3,
-                ease: "easeOut",
-                delay: 0.3,
-            }}
-            className={className}
-        >
+        <div className={className}>
             <Card className="w-full h-full">
                 <CardHeader>
                     <CardTitle className="flex gap-2 items-center justify-between w-full">
@@ -54,6 +43,6 @@ export const CertificationCard = ({ className }: { className?: string }) => {
                     </div>
                 </CardContent>
             </Card>
-        </motion.div>
+        </div>
     );
 };

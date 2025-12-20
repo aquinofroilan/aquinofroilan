@@ -2,21 +2,10 @@ import { Card, CardHeader, CardTitle, CardContent, Tooltip, TooltipContent, Tool
 import { CredlyIcon, Github, HackerRank, Instagram, LeetCode, LinkedIn } from "@/components/atoms";
 import { ArrowRight, Send } from "lucide-react";
 import Link from "next/link";
-import * as motion from "motion/react-client";
 
 export const ContactMe = ({ className }: { className?: string }) => {
     return (
-        <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -20 }}
-            transition={{
-                duration: 0.3,
-                ease: "easeOut",
-                delay: 1,
-            }}
-            className={className}
-        >
+        <div className={className}>
             <Card className="w-full h-full">
                 <CardHeader>
                     <CardTitle className="flex items-center gap-2">
@@ -157,6 +146,6 @@ export const ContactMe = ({ className }: { className?: string }) => {
                     </div>
                 </CardContent>
             </Card>
-        </motion.div>
+        </div>
     );
 };

@@ -2,21 +2,10 @@ import { Card, CardHeader, CardTitle, CardContent, Badge } from "@/components/ui
 import { FRONTEND, BACKEND, DEVELOPER_TOOLS, DEVOPS } from "@/data/techstack-list";
 import { ArrowRightCircle, FlaskConical } from "lucide-react";
 import Link from "next/link";
-import * as motion from "motion/react-client";
 
 export const TechStackCard = ({ className }: { className?: string }) => {
     return (
-        <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -20 }}
-            transition={{
-                duration: 0.3,
-                ease: "easeOut",
-                delay: 0.4,
-            }}
-            className={className}
-        >
+        <div className={className}>
             <Card className="flex flex-col gap-3 h-full w-full">
                 <CardHeader>
                     <CardTitle className="flex justify-between items-center w-full">
@@ -78,6 +67,6 @@ export const TechStackCard = ({ className }: { className?: string }) => {
                     </div>
                 </CardContent>
             </Card>
-        </motion.div>
+        </div>
     );
 };
