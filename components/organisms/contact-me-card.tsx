@@ -1,4 +1,4 @@
-import { Card, CardHeader, CardTitle, CardContent, Tooltip, TooltipContent, TooltipTrigger } from "@/components/ui";
+import { Card, CardHeader, CardTitle, CardContent, Tooltip, TooltipContent, TooltipTrigger, Separator } from "@/components/ui";
 import { CredlyIcon, Github, HackerRank, Instagram, LeetCode, LinkedIn } from "@/components/atoms";
 import { ArrowRight, Send } from "lucide-react";
 import Link from "next/link";
@@ -34,7 +34,7 @@ export const ContactMe = ({ className }: { className?: string }) => {
                                 <Tooltip>
                                     <TooltipTrigger>
                                         <Link
-                                            className="border-1 w-full justify-center flex items-center py-2 px-2 rounded-md"
+                                            className="w-full justify-center flex items-center py-2 px-2 rounded-md hover:bg-muted transition-colors"
                                             aria-label="Github link of the website owner"
                                             target="_blank"
                                             href="https://github.com/aquinofroilan"
@@ -49,7 +49,7 @@ export const ContactMe = ({ className }: { className?: string }) => {
                                 <Tooltip>
                                     <TooltipTrigger>
                                         <Link
-                                            className="border-1 w-full justify-center flex items-center py-2 px-2 rounded-md"
+                                            className="w-full justify-center flex items-center py-2 px-2 rounded-md hover:bg-muted transition-colors"
                                             aria-label="Instagram Profile of the website owner"
                                             target="_blank"
                                             href="https://www.instagram.com/aquinofroilan_"
@@ -64,7 +64,7 @@ export const ContactMe = ({ className }: { className?: string }) => {
                                 <Tooltip>
                                     <TooltipTrigger>
                                         <Link
-                                            className="border-1 w-full justify-center flex items-center py-2 px-2 rounded-md"
+                                            className="w-full justify-center flex items-center py-2 px-2 rounded-md hover:bg-muted transition-colors"
                                             aria-label="LinkedIn link of the website owner"
                                             target="_blank"
                                             href="https://linkedin.com/in/aquinofroilan"
@@ -79,7 +79,7 @@ export const ContactMe = ({ className }: { className?: string }) => {
                                 <Tooltip>
                                     <TooltipTrigger>
                                         <Link
-                                            className="border-1 w-full justify-center flex items-center py-2 px-2 rounded-md"
+                                            className="w-full justify-center flex items-center py-2 px-2 rounded-md hover:bg-muted transition-colors"
                                             aria-label="Credly link of the website owner"
                                             target="_blank"
                                             href="https://www.credly.com/users/froilan"
@@ -94,7 +94,7 @@ export const ContactMe = ({ className }: { className?: string }) => {
                                 <Tooltip>
                                     <TooltipTrigger>
                                         <Link
-                                            className="border-1 w-full justify-center flex items-center py-2 px-2 rounded-md"
+                                            className="w-full justify-center flex items-center py-2 px-2 rounded-md hover:bg-muted transition-colors"
                                             aria-label="HackerRank link of the website owner"
                                             target="_blank"
                                             href="https://www.hackerrank.com/profile/froilanaquino"
@@ -109,7 +109,7 @@ export const ContactMe = ({ className }: { className?: string }) => {
                                 <Tooltip>
                                     <TooltipTrigger>
                                         <Link
-                                            className="border-1 w-full justify-center flex items-center py-2 px-2 rounded-md"
+                                            className="w-full justify-center flex items-center py-2 px-2 rounded-md hover:bg-muted transition-colors"
                                             aria-label="LeetCode link of the website owner"
                                             target="_blank"
                                             href="https://leetcode.com/u/froilan_/"
@@ -127,20 +127,20 @@ export const ContactMe = ({ className }: { className?: string }) => {
                             <h1>Let&apos;s talk:</h1>
                             <Link
                                 href="https://calendly.com/froilan/consultation"
-                                className="border-1 w-full justify-between flex items-center py-2 px-2 rounded-md mt-2"
+                                className="group w-full justify-between flex items-center py-2 px-2 rounded-md mt-2 hover:bg-muted transition-colors"
                             >
                                 Schedule a call
-                                <ArrowRight size={15} />
+                                <ArrowRight size={15} className="transition-transform group-hover:translate-x-1" />
                             </Link>
                         </div>
                         <div>
                             <h1>My Resume/CV:</h1>
                             <Link
                                 href={process.env.RESUME_CV_LINK as string}
-                                className="border-1 w-full justify-between flex items-center py-2 px-2 rounded-md mt-2"
+                                className="group w-full justify-between flex items-center py-2 px-2 rounded-md mt-2 hover:bg-muted transition-colors"
                             >
                                 View my CV
-                                <ArrowRight size={15} />
+                                <ArrowRight size={15} className="transition-transform group-hover:translate-x-1" />
                             </Link>
                         </div>
                     </div>

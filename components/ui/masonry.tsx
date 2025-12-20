@@ -1,5 +1,5 @@
 "use client";
-import { Children, forwardRef, isValidElement, useMemo, type HTMLAttributes, type ReactNode } from "react";
+import { Children, forwardRef, isValidElement, useMemo, useState, useEffect, type HTMLAttributes, type ReactNode } from "react";
 import { Slot } from "@radix-ui/react-slot";
 import { cn } from "@/lib/utils";
 
@@ -39,17 +39,36 @@ const Masonry = forwardRef<HTMLDivElement, MasonryProps>(
         },
         ref,
     ) => {
+        const [currentColumnCount, setCurrentColumnCount] = useState(columnCount);
+
+        useEffect(() => {
+            const updateColumns = () => {
+                const width = window.innerWidth;
+                if (width < 768) {
+                    setCurrentColumnCount(1);
+                } else if (width < 768) {
+                    setCurrentColumnCount(2);
+                } else {
+                    setCurrentColumnCount(columnCount);
+                }
+            };
+
+            updateColumns();
+            window.addEventListener("resize", updateColumns);
+            return () => window.removeEventListener("resize", updateColumns);
+        }, [columnCount]);
+
         // Distribute children into columns
         const columns = useMemo(() => {
-            const cols: ReactNode[][] = Array.from({ length: columnCount }, () => []);
+            const cols: ReactNode[][] = Array.from({ length: currentColumnCount }, () => []);
 
             Children.forEach(children, (child, index) => {
                 if (isValidElement(child)) {
-                    cols[index % columnCount].push(child);
+                    cols[index % currentColumnCount].push(child);
                 }
             });
             return cols;
-        }, [children, columnCount]);
+        }, [children, currentColumnCount]);
 
         return (
             <div ref={ref} className={cn("flex w-full", className)} style={{ gap: `${gap}px` }} {...props}>

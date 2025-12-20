@@ -10,7 +10,7 @@
         "url": "https://github.com/aquinofroilan/aquinofroilan"
     },
     "scripts": {
-        "dev": "bun next dev",
+        "dev": "bun next dev -H 0.0.0.0 -p 3000",
         "build": "bun next build",
         "start": "bun next start",
         "lint": "bun eslint .",

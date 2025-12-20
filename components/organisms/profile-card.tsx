@@ -9,14 +9,14 @@ export const ProfileCard = ({ className }: { className?: string }) => {
     return (
         <div className={className}>
             <Card className="w-full h-full">
-                <CardContent className="flex flex-row gap-5 p-6">
+                <CardContent className="flex flex-row items-center gap-5 p-6">
                     <div className="flex-shrink-0 md:block flex justify-center items-center">
                         <Image
                             priority={true}
                             src={Me}
                             quality={75}
-                            width={125}
-                            height={125}
+                            width={75}
+                            height={75}
                             placeholder="blur"
                             alt="Picture of the Developer"
                             className="rounded-lg"
@@ -28,11 +28,11 @@ export const ProfileCard = ({ className }: { className?: string }) => {
                             <h1 className="font-bold text-md lg:text-lg">Froilan Aquino</h1>
                             <BadgeCheckIcon size={15} color="#0087ED" />
                         </div>
-                        <p className="text-[11px] md:text-base  flex items-center gap-2">
+                        <p className="text-[11px] md:text-sm flex items-center gap-2">
                             <MapPin size={15} />
                             <span className="truncate">Caloocan City, MNL, PH</span>
                         </p>
-                        <p className="text-[11px] lg:text-base">
+                        <p className="text-[11px] md:text-sm">
                             {process.env.PAGE_TITLE ? String(process.env.PAGE_TITLE).slice(10) : "Software Engineer"}
                         </p>
                     </div>
