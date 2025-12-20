@@ -137,7 +137,7 @@ export const ContactMe = ({ className }: { className?: string }) => {
                             <h1>My Resume/CV:</h1>
                             <Link
                                 href={process.env.RESUME_CV_LINK ?? "#"}
-                            className="group w-full justify-between flex items-center py-2 px-2 rounded-md mt-2 hover:bg-muted transition-colors"
+                                className="group w-full justify-between flex items-center py-2 px-2 rounded-md mt-2 hover:bg-muted transition-colors"
                             >
                                 View my CV
                                 <ArrowRight size={15} className="transition-transform group-hover:translate-x-1" />
