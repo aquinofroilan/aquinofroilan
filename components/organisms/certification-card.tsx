@@ -1,28 +1,18 @@
 import { BadgeCheckIcon, ArrowRightCircle } from "lucide-react";
-import { BentoGridItem } from "@/components/ui";
+import { Card, CardHeader, CardTitle, CardContent } from "@/components/ui";
 import { CertificationsListsPreview } from "@/data/certification-list-preview";
 import Link from "next/link";
-import * as motion from "motion/react-client";
 
 export const CertificationCard = ({ className }: { className?: string }) => {
     return (
-        <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -20 }}
-            transition={{
-                duration: 0.3,
-                ease: "easeOut",
-                delay: 0.3,
-            }}
-            className={className}
-        >
-            <BentoGridItem
-                className="w-full h-full"
-                icon={<BadgeCheckIcon size={15} />}
-                title={
-                    <div className="flex gap-2 items-center justify-between w-full">
-                        <h1 className="text-lg">Certifications</h1>
+        <div className={className}>
+            <Card className="w-full h-full">
+                <CardHeader>
+                    <CardTitle className="flex gap-2 items-center justify-between w-full">
+                        <div className="flex items-center gap-2">
+                            <BadgeCheckIcon size={15} />
+                            <span className="text-lg">Certifications</span>
+                        </div>
                         <Link
                             href={"/certifications"}
                             className="text-xs md:text-base text-neutral-500 hover:text-neutral-700 dark:text-neutral-400 dark:hover:text-neutral-200 transition duration-200 flex items-center gap-2"
@@ -30,10 +20,10 @@ export const CertificationCard = ({ className }: { className?: string }) => {
                             View All
                             <ArrowRightCircle size={15} />
                         </Link>
-                    </div>
-                }
-                description={
-                    <div className="w-full flex flex-col gap-3">
+                    </CardTitle>
+                </CardHeader>
+                <CardContent>
+                    <div className="w-full flex flex-col gap-4">
                         {CertificationsListsPreview.slice(0, 4).map((cert) => {
                             return (
                                 <Link
@@ -41,18 +31,18 @@ export const CertificationCard = ({ className }: { className?: string }) => {
                                     target="_blank"
                                     rel="noreferrer"
                                     key={cert.link}
-                                    className="flex gap-2 items-center p-5 rounded-md border transition duration-200"
+                                    className="flex flex-col gap-1 group"
                                 >
-                                    <div>
-                                        <h1 className="text-sm md:text-base">{cert.title}</h1>
-                                        <p>{cert.description}</p>
-                                    </div>
+                                    <h1 className="text-sm font-medium group-hover:underline underline-offset-2">
+                                        {cert.title}
+                                    </h1>
+                                    <p className="text-xs text-muted-foreground">{cert.description}</p>
                                 </Link>
                             );
                         })}
                     </div>
-                }
-            />
-        </motion.div>
+                </CardContent>
+            </Card>
+        </div>
     );
 };

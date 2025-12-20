@@ -1,6 +1,5 @@
 import { PartyPopper } from "lucide-react";
-import { BentoGridItem, Badge } from "@/components/ui";
-import * as motion from "motion/react-client";
+import { Card, CardHeader, CardTitle, CardContent, Badge } from "@/components/ui";
 
 const milestones = [
     {
@@ -44,22 +43,15 @@ const milestones = [
 
 export const CompetenciesCard = ({ className }: { className?: string }) => {
     return (
-        <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -20 }}
-            transition={{
-                duration: 0.3,
-                ease: "easeOut",
-                delay: 0.9,
-            }}
-            className={className}
-        >
-            <BentoGridItem
-                className="w-full h-full"
-                icon={<PartyPopper size={15} />}
-                title={<h1 className="text-lg">My Journey</h1>}
-                description={
+        <div className={className}>
+            <Card className="w-full h-full">
+                <CardHeader>
+                    <CardTitle className="flex items-center gap-2">
+                        <PartyPopper size={15} />
+                        <span className="text-lg">My Journey</span>
+                    </CardTitle>
+                </CardHeader>
+                <CardContent>
                     <div className="relative pl-8 mt-4">
                         <div className="absolute left-0 top-1 bottom-8 w-[2px] bg-gradient-to-t to-primary/80 from-primary/20 rounded-full" />
                         <div className="space-y-8">
@@ -77,8 +69,8 @@ export const CompetenciesCard = ({ className }: { className?: string }) => {
                             ))}
                         </div>
                     </div>
-                }
-            />
-        </motion.div>
+                </CardContent>
+            </Card>
+        </div>
     );
 };

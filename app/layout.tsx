@@ -1,18 +1,31 @@
 import "./globals.css";
-import { Poppins } from "next/font/google";
+import { Inter } from "next/font/google";
 import { Analytics } from "@vercel/analytics/react";
 import { ThemeProvider } from "@/provider/theme-provider";
 import { type ReactNode } from "react";
 import { SpeedInsights } from "@vercel/speed-insights/next";
 import { Footer } from "@/components/organisms";
 import { TooltipProvider } from "@/components/ui";
+import { Metadata } from "next";
 
-const font = Poppins({
+const inter = Inter({
     weight: ["400", "500", "600", "700", "800"],
     style: "normal",
     subsets: ["latin"],
 });
-export const metadata = {
+
+export const metadata: Metadata & {
+    "google-site-verification": string;
+    "og:title": string;
+    "og:description": string;
+    "og:type": string;
+    "og:url": string;
+    "og:site_name": string;
+    "twitter:card": string;
+    "twitter:title": string;
+    "twitter:description": string;
+    canonical: string;
+} = {
     title: "Froilan | Software Engineer",
     description: "Personal Website of Froilan, Software Engineer based in Caloocan, Philippines.",
     "google-site-verification": "cea09eQxw2xZKhdxfMUKhILNuAzqAeQnrIWLUC027IA",
@@ -48,7 +61,7 @@ export default function RootLayout({ children }: { children: ReactNode }) {
     return (
         <html lang="en" data-scroll-behavior="smooth" suppressHydrationWarning>
             <body
-                className={`${font.className} w-full flex items-center flex-col min-h-screen bg-background text-foreground antialiased transition-colors duration-200`}
+                className={`${inter.className} w-full flex items-center flex-col min-h-screen bg-background text-foreground antialiased transition-colors duration-200`}
             >
                 <TooltipProvider>
                     <ThemeProvider attribute="class" defaultTheme="system" enableSystem disableTransitionOnChange>

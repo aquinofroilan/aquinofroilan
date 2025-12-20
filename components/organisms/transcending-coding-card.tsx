@@ -1,25 +1,17 @@
 import { Rocket } from "lucide-react";
-import { BentoGridItem } from "@/components/ui";
-import * as motion from "motion/react-client";
+import { Card, CardHeader, CardTitle, CardContent } from "@/components/ui";
 
 export const TrascendingCodeCard = ({ className }: { className?: string }) => {
     return (
-        <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -20 }}
-            transition={{
-                duration: 0.3,
-                ease: "easeOut",
-                delay: 0.8,
-            }}
-            className={className}
-        >
-            <BentoGridItem
-                className="w-full h-full"
-                icon={<Rocket size={15} />}
-                title={<h1 className="text-lg">Beyond Coding</h1>}
-                description={
+        <div className={className}>
+            <Card className="w-full h-full">
+                <CardHeader>
+                    <CardTitle className="flex items-center gap-2">
+                        <Rocket size={15} />
+                        <span className="text-lg">Beyond Coding</span>
+                    </CardTitle>
+                </CardHeader>
+                <CardContent>
                     <div className="flex flex-col gap-5">
                         <p className="text-sm text-justify">
                             I am not just a coder, I am a reader, a thinker, a tech enthusiast, and a problem solver.
@@ -36,8 +28,8 @@ export const TrascendingCodeCard = ({ className }: { className?: string }) => {
                             Giving a F*ck.
                         </p>
                     </div>
-                }
-            />
-        </motion.div>
+                </CardContent>
+            </Card>
+        </div>
     );
 };

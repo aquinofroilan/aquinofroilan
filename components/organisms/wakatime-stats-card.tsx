@@ -1,9 +1,8 @@
 import React from "react";
 import { FetchWakaTimeStats } from "@/actions/wakatime";
-import { BentoGridItem, Progress } from "@/components/ui";
-import { Clock, Code, Laptop, Monitor, ChartColumnIcon } from "lucide-react";
+import { Card, CardHeader, CardContent, CardTitle, Progress } from "@/components/ui";
+import { Clock, Code, Laptop, Monitor } from "lucide-react";
 import { Github } from "@/components/atoms";
-import * as motion from "motion/react-client";
 import { getGithubStats } from "@/actions";
 
 type WakatimeStatsTypes = {
@@ -24,132 +23,165 @@ type WakatimeStatsTypes = {
             name: string;
             text: string;
             hours: number;
+            minutes: number;
             percent: number;
+            total_seconds: number;
         }>;
     };
 };
 
-type GitHubStats = { pullRequests: number; issues: number; commitsPastYear: number; stars: number };
-export const WakatimeStatsCard = async ({ className }: { className?: string }) => {
-    const github_stats: GitHubStats = await getGithubStats();
-    const wakatimeStats: WakatimeStatsTypes = await FetchWakaTimeStats();
+export const WakatimeStatsLanguages = async ({ className }: { className?: string }) => {
+    const wakatimeStats: WakatimeStatsTypes | null = await FetchWakaTimeStats();
+    if (!wakatimeStats) return null;
     const wakatimeLanguages = wakatimeStats?.data.languages;
+
+    return (
+        <Card className={className}>
+            <CardHeader>
+                <CardTitle className="flex items-center gap-2">
+                    <Code size={15} />
+                    <span className="text-lg">Languages</span>
+                </CardTitle>
+            </CardHeader>
+            <CardContent>
+                <div className="space-y-3">
+                    {wakatimeLanguages?.slice(0, 6).map((lang, index) => (
+                        <div key={index} className="flex flex-col">
+                            <div className="flex justify-between text-xs mb-1">
+                                <span>{lang.name}</span>
+                                <span>{lang.percent.toFixed(1)}%</span>
+                            </div>
+                            <Progress value={lang.percent} />
+                        </div>
+                    ))}
+                </div>
+            </CardContent>
+        </Card>
+    );
+};
+
+export const WakatimeStatsActivity = async ({ className }: { className?: string }) => {
+    const wakatimeStats: WakatimeStatsTypes | null = await FetchWakaTimeStats();
+    if (!wakatimeStats) return null;
     const wakatimeDailyAverage = wakatimeStats?.data.human_readable_daily_average;
     const wakatimeTotal = wakatimeStats?.data.human_readable_total;
-    const wakatimeOperatingSystems = wakatimeStats?.data.operating_systems;
-    const wakatimeEditors = wakatimeStats?.data.editors;
-    return (
-        <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -20 }}
-            transition={{
-                duration: 0.3,
-                ease: "easeOut",
-                delay: 0.6,
-            }}
-            className={className}
-        >
-            <BentoGridItem
-                className="flex flex-col gap-3 w-full h-full hover:shadow-md"
-                icon={<ChartColumnIcon size={15} />}
-                title={"Wakatime Stats"}
-                description={
-                    <>
-                        <BentoGridItem
-                            className="my-5 hover:shadow-none"
-                            icon={<Code size={15} />}
-                            title={<h1 className="text-lg">Programming Languages</h1>}
-                            description={
-                                <div className="space-y-3">
-                                    {wakatimeLanguages?.slice(0, 6).map((lang, index) => (
-                                        <div key={index} className="flex flex-col">
-                                            <div className="flex justify-between text-xs mb-1">
-                                                <span>{lang.name}</span>
-                                                <span>{lang.percent.toFixed(1)}%</span>
-                                            </div>
-                                            <Progress value={lang.percent} />
-                                        </div>
-                                    ))}
-                                </div>
-                            }
-                        />
-                        <BentoGridItem
-                            className="my-5 hover:shadow-none"
-                            icon={<Clock size={15} />}
-                            title={<h1 className="text-lg">Daily Activity</h1>}
-                            description={
-                                <div className="grid grid-cols-2 gap-3">
-                                    <div className="border border-border rounded-md p-2">
-                                        <p className="text-xs text-muted-foreground">Daily Average</p>
-                                        <p className="font-medium">{wakatimeDailyAverage}</p>
-                                    </div>
-                                    <div className="border border-border rounded-md p-2">
-                                        <p className="text-xs text-muted-foreground">Total</p>
-                                        <p className="font-medium">{wakatimeTotal}</p>
-                                    </div>
-                                </div>
-                            }
-                        />
-                        <BentoGridItem
-                            className="my-5 hover:shadow-none"
-                            icon={<Monitor size={15} />}
-                            title={<h1 className="text-lg">Editors</h1>}
-                            description={
-                                <div className="space-y-2">
-                                    {wakatimeEditors?.map((editor, index) => (
-                                        <div key={index} className="flex justify-between items-center text-xs">
-                                            <span>{editor.name}</span>
-                                            <span>{editor.percent.toFixed(1)}%</span>
-                                        </div>
-                                    ))}
-                                </div>
-                            }
-                        />
-                        <BentoGridItem
-                            className="my-5 hover:shadow-none"
-                            icon={<Laptop size={15} />}
-                            title={<h1 className="text-lg">Operating Systems</h1>}
-                            description={
-                                <div className="space-y-2">
-                                    {wakatimeOperatingSystems?.map((os, index) => (
-                                        <div key={index} className="flex justify-between items-center text-xs">
-                                            <span>{os.name}</span>
-                                            <span>{os.percent.toFixed(1)}%</span>
-                                        </div>
-                                    ))}
-                                </div>
-                            }
-                        />
 
-                        <BentoGridItem
-                            className="my-5 md:col-span-2 hover:shadow-none"
-                            icon={<Github className="w-4 h-4" />}
-                            title={<h1 className="text-lg">GitHub Activity</h1>}
-                            description={
-                                <div className="flex flex-col lg:flex-row gap-2">
-                                    <div className="border border-border rounded-md p-2">
-                                        <p className="text-xs text-muted-foreground">Stars</p>
-                                        <p className="font-medium">{github_stats.stars}</p>
-                                    </div>
-                                    <div className="border border-border rounded-md p-2">
-                                        <p className="text-xs text-muted-foreground">Commits Past Year</p>
-                                        <p className="font-medium">{github_stats.commitsPastYear}</p>
-                                    </div>
-                                    <div className="border border-border rounded-md p-2">
-                                        <p className="text-xs text-muted-foreground">Pull Requests</p>
-                                        <p className="font-medium">{github_stats.pullRequests}</p>
-                                    </div>
-                                    <div className="border border-border rounded-md p-2">
-                                        <p className="text-xs text-muted-foreground">Issues</p>
-                                        <p className="font-medium">{github_stats.issues}</p>
-                                    </div>
-                                </div>
-                            }
-                        />
-                    </>
-                }
-            />
-        </motion.div>
+    return (
+        <Card className={className}>
+            <CardHeader>
+                <CardTitle className="flex items-center gap-2">
+                    <Clock size={15} />
+                    <span className="text-lg">Daily Activity</span>
+                </CardTitle>
+            </CardHeader>
+            <CardContent>
+                <div className="space-y-2">
+                    <div className="flex justify-between items-center text-xs">
+                        <span>Daily Average</span>
+                        <span>{wakatimeDailyAverage}</span>
+                    </div>
+                    <div className="flex justify-between items-center text-xs">
+                        <span>Total</span>
+                        <span>{wakatimeTotal}</span>
+                    </div>
+                </div>
+            </CardContent>
+        </Card>
+    );
+};
+
+export const WakatimeStatsEditors = async ({ className }: { className?: string }) => {
+    const wakatimeStats: WakatimeStatsTypes | null = await FetchWakaTimeStats();
+    if (!wakatimeStats) return null;
+    const wakatimeEditors = wakatimeStats?.data.editors;
+
+    return (
+        <Card className={className}>
+            <CardHeader>
+                <CardTitle className="flex items-center gap-2">
+                    <Monitor size={15} />
+                    <span className="text-lg">Editors</span>
+                </CardTitle>
+            </CardHeader>
+            <CardContent>
+                <div className="space-y-2">
+                    {wakatimeEditors?.map((editor, index) => (
+                        <div key={index} className="flex justify-between items-center text-xs">
+                            <span>{editor.name}</span>
+                            <span>{editor.percent.toFixed(1)}%</span>
+                        </div>
+                    ))}
+                </div>
+            </CardContent>
+        </Card>
+    );
+};
+
+export const WakatimeStatsOS = async ({ className }: { className?: string }) => {
+    const wakatimeStats: WakatimeStatsTypes | null = await FetchWakaTimeStats();
+    if (!wakatimeStats) return null;
+    const wakatimeOperatingSystems = wakatimeStats?.data.operating_systems;
+
+    return (
+        <Card className={className}>
+            <CardHeader>
+                <CardTitle className="flex items-center gap-2">
+                    <Laptop size={15} />
+                    <span className="text-lg">Operating Systems</span>
+                </CardTitle>
+            </CardHeader>
+            <CardContent>
+                <div className="space-y-2">
+                    {wakatimeOperatingSystems?.map((os, index) => (
+                        <div key={index} className="flex justify-between items-center text-xs">
+                            <span>{os.name}</span>
+                            <span>{os.percent.toFixed(1)}%</span>
+                        </div>
+                    ))}
+                </div>
+            </CardContent>
+        </Card>
+    );
+};
+
+export const GithubStatsCard = async ({ className }: { className?: string }) => {
+    let github_stats;
+    try {
+        github_stats = await getGithubStats();
+    } catch (error) {
+        console.error("Failed to fetch GitHub stats:", error);
+        return null;
+    }
+    if (!github_stats) return null;
+
+    return (
+        <Card className={className}>
+            <CardHeader>
+                <CardTitle className="flex items-center gap-2">
+                    <Github className="w-4 h-4" />
+                    <span className="text-lg">GitHub Activity</span>
+                </CardTitle>
+            </CardHeader>
+            <CardContent>
+                <div className="space-y-2">
+                    <div className="flex justify-between items-center text-xs">
+                        <span>Stars</span>
+                        <span>{github_stats.stars}</span>
+                    </div>
+                    <div className="flex justify-between items-center text-xs">
+                        <span>Commits (Year)</span>
+                        <span>{github_stats.commitsPastYear}</span>
+                    </div>
+                    <div className="flex justify-between items-center text-xs">
+                        <span>PRs</span>
+                        <span>{github_stats.pullRequests}</span>
+                    </div>
+                    <div className="flex justify-between items-center text-xs">
+                        <span>Issues</span>
+                        <span>{github_stats.issues}</span>
+                    </div>
+                </div>
+            </CardContent>
+        </Card>
     );
 };

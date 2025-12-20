@@ -1,6 +1,7 @@
 "use server";
+import { cache } from "react";
 
-export const FetchWakaTimeStats = async () => {
+export const FetchWakaTimeStats = cache(async () => {
     try {
         const response = await fetch("https://wakatime.com/api/v1/users/froilan/stats?including_today=true");
         const data = await response.json();
@@ -10,4 +11,4 @@ export const FetchWakaTimeStats = async () => {
         console.error(error);
         return null;
     }
-};
+});

@@ -1,11 +1,10 @@
 "use client";
 import { useState, useEffect, useRef } from "react";
 import { Music, Clock, TrendingUp } from "lucide-react";
-import { BentoGridItem, Progress, Separator } from "@/components/ui";
+import { Card, CardHeader, CardTitle, CardContent, Progress, Separator } from "@/components/ui";
 import { getNowPlaying, getRecentlyPlayed, getTopTracks } from "@/actions";
 import Image from "next/image";
 import Link from "next/link";
-import * as motion from "motion/react-client";
 import { cn } from "@/lib/utils";
 import { Spotify } from "@/components/atoms";
 import Loading from "@/app/loading";
@@ -172,7 +171,7 @@ export const SpotifyCard = ({ className }: { className?: string }) => {
     const fetchData = async () => {
         try {
             setLoading(true);
-            const [recentData, topData] = await Promise.all([getRecentlyPlayed(6), getTopTracks(6, "long_term")]);
+            const [recentData, topData] = await Promise.all([getRecentlyPlayed(5), getTopTracks(5, "long_term")]);
             setRecentlyPlayed(recentData);
             setTopTracks(topData);
         } catch (error) {
@@ -185,7 +184,7 @@ export const SpotifyCard = ({ className }: { className?: string }) => {
     };
 
     useEffect(() => {
-        fetchData();
+        fetchData().then();
         const interval = setInterval(fetchData, 5 * 60 * 1000);
         return () => clearInterval(interval);
     }, []);
@@ -203,28 +202,21 @@ export const SpotifyCard = ({ className }: { className?: string }) => {
 
     if (loading) {
         return (
-            <motion.div
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                exit={{ opacity: 0, y: -20 }}
-                transition={{
-                    duration: 0.3,
-                    ease: "easeOut",
-                    delay: 0.3,
-                }}
-                className={cn("", className)}
-            >
-                <BentoGridItem
-                    className="w-full h-full"
-                    icon={<Spotify className="w-4 h-4" />}
-                    title={<h1 className="text-lg">Spotify Stats</h1>}
-                    description={
+            <div className={cn("", className)}>
+                <Card className="w-full h-full">
+                    <CardHeader>
+                        <CardTitle className="flex items-center gap-2">
+                            <Spotify className="w-4 h-4" />
+                            <span className="text-lg">Spotify Stats</span>
+                        </CardTitle>
+                    </CardHeader>
+                    <CardContent>
                         <div className="flex items-center justify-center h-32">
                             <Loading />
                         </div>
-                    }
-                />
-            </motion.div>
+                    </CardContent>
+                </Card>
+            </div>
         );
     }
 
@@ -235,23 +227,14 @@ export const SpotifyCard = ({ className }: { className?: string }) => {
     const currentTracks = activeTab === "recent" ? recentlyPlayed : topTracks;
 
     return (
-        <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -20 }}
-            transition={{
-                duration: 0.3,
-                ease: "easeOut",
-                delay: 0.3,
-            }}
-            className={cn("", className)}
-        >
-            <BentoGridItem
-                className="w-full h-full"
-                icon={<Spotify className="w-4 h-4" />}
-                title={
-                    <div className="flex items-center justify-between w-full">
-                        <h1 className="text-lg">Spotify Stats</h1>
+        <div className={cn("", className)}>
+            <Card className="w-full h-full">
+                <CardHeader>
+                    <CardTitle className="flex items-center justify-between w-full">
+                        <div className="flex items-center gap-2">
+                            <Spotify className="w-4 h-4" />
+                            <span className="text-lg">Spotify Stats</span>
+                        </div>
                         <div className="flex gap-2">
                             <button
                                 onClick={() => setActiveTab("recent")}
@@ -278,9 +261,9 @@ export const SpotifyCard = ({ className }: { className?: string }) => {
                                 Top
                             </button>
                         </div>
-                    </div>
-                }
-                description={
+                    </CardTitle>
+                </CardHeader>
+                <CardContent>
                     <div className="flex flex-col w-full gap-4">
                         <div
                             className={cn(
@@ -340,7 +323,7 @@ export const SpotifyCard = ({ className }: { className?: string }) => {
                             </div>
                         </div>
                         <Separator className={cn(nowPlaying ? "block" : "hidden")} />
-                        <div className="grid md:grid-cols-2 gap-3 w-full">
+                        <div className="flex flex-col gap-3 w-full">
                             {currentTracks && currentTracks.length > 0 ? (
                                 currentTracks.map((track, index) => (
                                     <div
@@ -408,8 +391,8 @@ export const SpotifyCard = ({ className }: { className?: string }) => {
                             )}
                         </div>
                     </div>
-                }
-            />
-        </motion.div>
+                </CardContent>
+            </Card>
+        </div>
     );
 };

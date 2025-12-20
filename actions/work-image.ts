@@ -23,22 +23,23 @@ const fetchImagesWithPrefix = async (prefix: string) => {
     // Use R2 public URL if available
     // This should be the R2 public bucket URL (e.g., https://pub-xxxxx.r2.dev or custom domain)
     const publicUrl = process.env.R2_PUBLIC_URL;
-    
+
     if (publicUrl) {
         // Use public URLs for images that work with Next.js Image Optimization
         // Format: https://pub-xxxxx.r2.dev/path/to/image.png
-        const publicUrls = files.map((key) => ({
+
+        return files.map((key) => ({
             key,
             url: `${publicUrl}/${key}`,
         }));
-        return publicUrls;
     }
 
     // Fallback to signed URLs
     // Note: Signed URLs from private R2 endpoints won't work with Vercel Image Optimization
     // because Vercel's optimizer cannot access private storage endpoints
     const { getSignedUrl } = await import("@aws-sdk/s3-request-presigner");
-    const signedUrls = await Promise.all(
+
+    return await Promise.all(
         files.map(async (key) => {
             return {
                 key,
@@ -46,7 +47,6 @@ const fetchImagesWithPrefix = async (prefix: string) => {
             };
         }),
     );
-    return signedUrls;
 };
 
 export { fetchImagesWithPrefix };
