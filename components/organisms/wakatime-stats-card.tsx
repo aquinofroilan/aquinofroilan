@@ -141,7 +141,14 @@ export const WakatimeStatsOS = async ({ className }: { className?: string }) => 
 };
 
 export const GithubStatsCard = async ({ className }: { className?: string }) => {
-    const github_stats = await getGithubStats();
+    let github_stats;
+    try {
+        github_stats = await getGithubStats();
+    } catch (error) {
+        console.error("Failed to fetch GitHub stats:", error);
+        return null;
+    }
+    if (!github_stats) return null;
 
     return (
         <Card className={className}>
