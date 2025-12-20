@@ -1,4 +1,4 @@
-import { BentoGridItem } from "@/components/ui";
+import { Card, CardHeader, CardTitle, CardContent } from "@/components/ui";
 import { ContactRoundIcon } from "lucide-react";
 import * as motion from "motion/react-client";
 
@@ -15,11 +15,14 @@ export const AboutCard = ({ className }: { className?: string }) => {
             }}
             className={className}
         >
-            <BentoGridItem
-                className="w-full h-full"
-                title={<h1 className="text-lg">About Me</h1>}
-                icon={<ContactRoundIcon size={15} />}
-                description={
+            <Card className="w-full h-full">
+                <CardHeader>
+                    <CardTitle className="flex items-center gap-2">
+                        <ContactRoundIcon size={15} />
+                        <span className="text-lg">About Me</span>
+                    </CardTitle>
+                </CardHeader>
+                <CardContent>
                     <div className="w-full flex flex-col gap-3">
                         <p className="text-sm text-justify">
                             I work as a web developer and have a passion for creating scalable, maintainable, and
@@ -45,8 +48,8 @@ export const AboutCard = ({ className }: { className?: string }) => {
                             systems.
                         </p>
                     </div>
-                }
-            />
+                </CardContent>
+            </Card>
         </motion.div>
     );
 };

@@ -6,11 +6,15 @@ import {
     ProfileCard,
     TechStackCard,
     TrascendingCodeCard,
-    WakatimeStatsCard,
+    WakatimeStatsLanguages,
+    WakatimeStatsActivity,
+    WakatimeStatsEditors,
+    WakatimeStatsOS,
+    GithubStatsCard,
     SpotifyCard,
 } from "@/components/organisms/";
 import ProjectsCard from "@/components/organisms/projects-card";
-import { Masonry, MasonryItem } from "@/components/ui";
+import { Masonry } from "@/components/ui";
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
@@ -23,43 +27,24 @@ export default function Home() {
         <>
             <main className="py-10 w-11/12 max-w-7xl">
                 <Masonry
-                    columnWidth={350}
-                    gap={16}
                     columnCount={3}
-                    maxColumnCount={3}
-                    itemHeight={200}
+                    gap={16}
                     className="w-full"
                 >
-                    <MasonryItem asChild>
-                        <ProfileCard className="h-full overflow-scroll col-span-2" />
-                    </MasonryItem>
-                    <MasonryItem>
-                        <AboutCard className="h-auto overflow-visible" />
-                    </MasonryItem>
-                    <MasonryItem>
-                        <CertificationCard className="h-auto overflow-visible" />
-                    </MasonryItem>
-                    <MasonryItem>
-                        <TechStackCard className="h-auto overflow-visible" />
-                    </MasonryItem>
-                    <MasonryItem>
-                        <ProjectsCard className="h-auto overflow-visible" />
-                    </MasonryItem>
-                    <MasonryItem>
-                        <TrascendingCodeCard className="h-auto overflow-visible" />
-                    </MasonryItem>
-                    <MasonryItem>
-                        <WakatimeStatsCard className="h-auto overflow-visible" />
-                    </MasonryItem>
-                    <MasonryItem>
-                        <CompetenciesCard className="h-auto overflow-visible" />
-                    </MasonryItem>
-                    <MasonryItem>
-                        <ContactMe className="h-auto overflow-visible" />
-                    </MasonryItem>
-                    <MasonryItem>
-                        <SpotifyCard className="h-auto overflow-visible w-full" />
-                    </MasonryItem>
+                    <ProfileCard className="h-auto overflow-visible" />
+                    <AboutCard className="h-auto overflow-visible" />
+                    <CertificationCard className="h-auto overflow-visible" />
+                    <TechStackCard className="h-auto overflow-visible" />
+                    <ProjectsCard className="h-auto overflow-visible" />
+                    <TrascendingCodeCard className="h-auto overflow-visible" />
+                    <WakatimeStatsLanguages className="h-auto overflow-visible" />
+                    <WakatimeStatsActivity className="h-auto overflow-visible" />
+                    <WakatimeStatsEditors className="h-auto overflow-visible" />
+                    <WakatimeStatsOS className="h-auto overflow-visible" />
+                    <GithubStatsCard className="h-auto overflow-visible" />
+                    <CompetenciesCard className="h-auto overflow-visible" />
+                    <ContactMe className="h-auto overflow-visible" />
+                    <SpotifyCard className="h-auto overflow-visible w-full" />
                 </Masonry>
             </main>
         </>

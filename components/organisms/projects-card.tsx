@@ -1,6 +1,6 @@
 import React from "react";
 import * as motion from "motion/react-client";
-import { Badge, BentoGridItem } from "@/components/ui";
+import { Badge, Card, CardHeader, CardTitle, CardContent } from "@/components/ui";
 import Link from "next/link";
 import { ArrowRightCircle, FolderCode } from "lucide-react";
 import { ProjectsList } from "@/data/projects-list";
@@ -26,12 +26,13 @@ function ProjectsCard({ className }: { className?: string }) {
             }}
             className={className}
         >
-            <BentoGridItem
-                className="flex flex-col gap-3 h-full w-full"
-                icon={<FolderCode size={15} />}
-                title={
-                    <div className="flex justify-between items-center w-full">
-                        <h1 className="text-lg">Projects</h1>
+            <Card className="flex flex-col gap-3 h-full w-full">
+                <CardHeader>
+                    <CardTitle className="flex justify-between items-center w-full">
+                        <div className="flex items-center gap-2">
+                            <FolderCode size={15} />
+                            <span className="text-lg">Projects</span>
+                        </div>
                         <Link
                             href={"/projects"}
                             className="text-xs md:text-base text-neutral-500 hover:text-neutral-700 dark:text-neutral-400 dark:hover:text-neutral-200 transition duration-200 flex items-center gap-2"
@@ -39,9 +40,9 @@ function ProjectsCard({ className }: { className?: string }) {
                             View All
                             <ArrowRightCircle size={15} />
                         </Link>
-                    </div>
-                }
-                description={
+                    </CardTitle>
+                </CardHeader>
+                <CardContent>
                     <div className="flex flex-col gap-2">
                         {ProjectsList.slice(0, 2).map((project) => (
                             <div
@@ -81,8 +82,8 @@ function ProjectsCard({ className }: { className?: string }) {
                             </div>
                         ))}
                     </div>
-                }
-            />
+                </CardContent>
+            </Card>
         </motion.div>
     );
 }

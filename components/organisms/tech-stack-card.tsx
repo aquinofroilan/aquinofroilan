@@ -1,4 +1,4 @@
-import { BentoGridItem, Badge } from "@/components/ui";
+import { Card, CardHeader, CardTitle, CardContent, Badge } from "@/components/ui";
 import { FRONTEND, BACKEND, DEVELOPER_TOOLS, DEVOPS } from "@/data/techstack-list";
 import { ArrowRightCircle, FlaskConical } from "lucide-react";
 import Link from "next/link";
@@ -17,12 +17,13 @@ export const TechStackCard = ({ className }: { className?: string }) => {
             }}
             className={className}
         >
-            <BentoGridItem
-                className="flex flex-col gap-3 h-full w-full"
-                icon={<FlaskConical size={15} />}
-                title={
-                    <div className="flex justify-between items-center w-full">
-                        <h1 className="text-lg">Tech Stack</h1>
+            <Card className="flex flex-col gap-3 h-full w-full">
+                <CardHeader>
+                    <CardTitle className="flex justify-between items-center w-full">
+                        <div className="flex items-center gap-2">
+                            <FlaskConical size={15} />
+                            <span className="text-lg">Tech Stack</span>
+                        </div>
                         <Link
                             className="text-xs md:text-base text-neutral-500 hover:text-neutral-700 dark:text-neutral-400 dark:hover:text-neutral-200 transition duration-200 flex items-center gap-2"
                             href={"/techstack"}
@@ -30,9 +31,9 @@ export const TechStackCard = ({ className }: { className?: string }) => {
                             View All
                             <ArrowRightCircle size={15} />
                         </Link>
-                    </div>
-                }
-                description={
+                    </CardTitle>
+                </CardHeader>
+                <CardContent>
                     <div className="flex flex-col gap-5">
                         <div>
                             <h1>Frontend</h1>
@@ -75,8 +76,8 @@ export const TechStackCard = ({ className }: { className?: string }) => {
                             </div>
                         </div>
                     </div>
-                }
-            />
+                </CardContent>
+            </Card>
         </motion.div>
     );
 };

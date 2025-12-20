@@ -1,7 +1,7 @@
 "use client";
 import { useState, useEffect, useRef } from "react";
 import { Music, Clock, TrendingUp } from "lucide-react";
-import { BentoGridItem, Progress, Separator } from "@/components/ui";
+import { Card, CardHeader, CardTitle, CardContent, Progress, Separator } from "@/components/ui";
 import { getNowPlaying, getRecentlyPlayed, getTopTracks } from "@/actions";
 import Image from "next/image";
 import Link from "next/link";
@@ -214,16 +214,19 @@ export const SpotifyCard = ({ className }: { className?: string }) => {
                 }}
                 className={cn("", className)}
             >
-                <BentoGridItem
-                    className="w-full h-full"
-                    icon={<Spotify className="w-4 h-4" />}
-                    title={<h1 className="text-lg">Spotify Stats</h1>}
-                    description={
+                <Card className="w-full h-full">
+                    <CardHeader>
+                        <CardTitle className="flex items-center gap-2">
+                            <Spotify className="w-4 h-4" />
+                            <span className="text-lg">Spotify Stats</span>
+                        </CardTitle>
+                    </CardHeader>
+                    <CardContent>
                         <div className="flex items-center justify-center h-32">
                             <Loading />
                         </div>
-                    }
-                />
+                    </CardContent>
+                </Card>
             </motion.div>
         );
     }
@@ -246,12 +249,13 @@ export const SpotifyCard = ({ className }: { className?: string }) => {
             }}
             className={cn("", className)}
         >
-            <BentoGridItem
-                className="w-full h-full"
-                icon={<Spotify className="w-4 h-4" />}
-                title={
-                    <div className="flex items-center justify-between w-full">
-                        <h1 className="text-lg">Spotify Stats</h1>
+            <Card className="w-full h-full">
+                <CardHeader>
+                    <CardTitle className="flex items-center justify-between w-full">
+                        <div className="flex items-center gap-2">
+                            <Spotify className="w-4 h-4" />
+                            <span className="text-lg">Spotify Stats</span>
+                        </div>
                         <div className="flex gap-2">
                             <button
                                 onClick={() => setActiveTab("recent")}
@@ -278,9 +282,9 @@ export const SpotifyCard = ({ className }: { className?: string }) => {
                                 Top
                             </button>
                         </div>
-                    </div>
-                }
-                description={
+                    </CardTitle>
+                </CardHeader>
+                <CardContent>
                     <div className="flex flex-col w-full gap-4">
                         <div
                             className={cn(
@@ -408,8 +412,8 @@ export const SpotifyCard = ({ className }: { className?: string }) => {
                             )}
                         </div>
                     </div>
-                }
-            />
+                </CardContent>
+            </Card>
         </motion.div>
     );
 };

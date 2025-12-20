@@ -1,4 +1,4 @@
-import { BentoGridItem, Tooltip, TooltipContent, TooltipTrigger } from "@/components/ui";
+import { Card, CardHeader, CardTitle, CardContent, Tooltip, TooltipContent, TooltipTrigger } from "@/components/ui";
 import { CredlyIcon, Github, HackerRank, Instagram, LeetCode, LinkedIn } from "@/components/atoms";
 import { ArrowRight, Send } from "lucide-react";
 import Link from "next/link";
@@ -17,11 +17,14 @@ export const ContactMe = ({ className }: { className?: string }) => {
             }}
             className={className}
         >
-            <BentoGridItem
-                className="w-full h-full"
-                title={<h1 className="text-lg">Contact Me</h1>}
-                icon={<Send size={15} />}
-                description={
+            <Card className="w-full h-full">
+                <CardHeader>
+                    <CardTitle className="flex items-center gap-2">
+                        <Send size={15} />
+                        <span className="text-lg">Contact Me</span>
+                    </CardTitle>
+                </CardHeader>
+                <CardContent>
                     <div className="flex flex-col gap-5">
                         <div>
                             <h1>Email:</h1>
@@ -152,8 +155,8 @@ export const ContactMe = ({ className }: { className?: string }) => {
                             </Link>
                         </div>
                     </div>
-                }
-            />
+                </CardContent>
+            </Card>
         </motion.div>
     );
 };

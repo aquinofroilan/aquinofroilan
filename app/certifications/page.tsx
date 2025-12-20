@@ -1,6 +1,6 @@
 import { ArrowLeft } from "lucide-react";
 import Link from "next/link";
-import { BentoGridItem } from "@/components/ui";
+import { Card, CardHeader, CardTitle, CardContent } from "@/components/ui";
 import { CertificationsListsPreview } from "@/data/certification-list-preview";
 import * as motion from "motion/react-client";
 import type { Metadata } from "next";
@@ -41,10 +41,14 @@ function Certifications() {
                                 className="w-full h-full"
                             >
                                 <Link href={c.link} target="_blank">
-                                    <BentoGridItem
-                                        title={<h1 className="text-lg">{c.title}</h1>}
-                                        description={<h1 className="text-xs md:text-base">{c.description}</h1>}
-                                    />
+                                    <Card className="h-full hover:bg-muted/50 transition-colors">
+                                        <CardHeader>
+                                            <CardTitle className="text-lg">{c.title}</CardTitle>
+                                        </CardHeader>
+                                        <CardContent>
+                                            <h1 className="text-xs md:text-base">{c.description}</h1>
+                                        </CardContent>
+                                    </Card>
                                 </Link>
                             </motion.div>
                         );

@@ -1,5 +1,5 @@
 import { FRONTEND, BACKEND, DEVELOPER_TOOLS, DEVOPS } from "@/data/techstack-list";
-import { BentoGridItem, Badge } from "@/components/ui";
+import { Card, CardHeader, CardTitle, CardContent, Badge } from "@/components/ui";
 import { ArrowLeft } from "lucide-react";
 import Link from "next/link";
 import * as motion from "motion/react-client";
@@ -35,10 +35,11 @@ function TechStack() {
                         }}
                         className="w-full h-full"
                     >
-                        <BentoGridItem
-                            className="h-full"
-                            title={<h1 className="text-lg">Frontend</h1>}
-                            description={
+                        <Card className="h-full">
+                            <CardHeader>
+                                <CardTitle className="text-lg">Frontend</CardTitle>
+                            </CardHeader>
+                            <CardContent>
                                 <div className="flex flex-wrap gap-2">
                                     {FRONTEND.map((item) => (
                                         <Badge key={item} variant={"outline"}>
@@ -46,8 +47,8 @@ function TechStack() {
                                         </Badge>
                                     ))}
                                 </div>
-                            }
-                        />
+                            </CardContent>
+                        </Card>
                     </motion.div>
                     <motion.div
                         initial={{ opacity: 0, y: 20 }}
@@ -60,10 +61,11 @@ function TechStack() {
                         }}
                         className="w-full h-full"
                     >
-                        <BentoGridItem
-                            className="h-full"
-                            title={<h1 className="text-lg">Backend</h1>}
-                            description={
+                        <Card className="h-full">
+                            <CardHeader>
+                                <CardTitle className="text-lg">Backend</CardTitle>
+                            </CardHeader>
+                            <CardContent>
                                 <div className="flex flex-wrap gap-2">
                                     {BACKEND.map((item) => (
                                         <Badge key={item} variant={"outline"}>
@@ -71,8 +73,8 @@ function TechStack() {
                                         </Badge>
                                     ))}
                                 </div>
-                            }
-                        />
+                            </CardContent>
+                        </Card>
                     </motion.div>
                     <motion.div
                         initial={{ opacity: 0, y: 20 }}
@@ -85,10 +87,11 @@ function TechStack() {
                         }}
                         className="w-full h-full"
                     >
-                        <BentoGridItem
-                            className="h-full"
-                            title={<h1 className="text-lg">DevOps & Cloud</h1>}
-                            description={
+                        <Card className="h-full">
+                            <CardHeader>
+                                <CardTitle className="text-lg">DevOps & Cloud</CardTitle>
+                            </CardHeader>
+                            <CardContent>
                                 <div className="flex flex-wrap gap-2">
                                     {DEVOPS.map((item) => (
                                         <Badge key={item} variant={"outline"}>
@@ -96,8 +99,8 @@ function TechStack() {
                                         </Badge>
                                     ))}
                                 </div>
-                            }
-                        />
+                            </CardContent>
+                        </Card>
                     </motion.div>
                     <motion.div
                         initial={{ opacity: 0, y: 20 }}
@@ -110,10 +113,11 @@ function TechStack() {
                         }}
                         className="w-full h-full"
                     >
-                        <BentoGridItem
-                            className="h-full"
-                            title={<h1 className="text-lg">Developer Tools</h1>}
-                            description={
+                        <Card className="h-full">
+                            <CardHeader>
+                                <CardTitle className="text-lg">Developer Tools</CardTitle>
+                            </CardHeader>
+                            <CardContent>
                                 <div className="flex flex-wrap gap-2 h-full">
                                     {DEVELOPER_TOOLS.map((item) => (
                                         <Badge key={item} variant={"outline"}>
@@ -121,8 +125,8 @@ function TechStack() {
                                         </Badge>
                                     ))}
                                 </div>
-                            }
-                        />
+                            </CardContent>
+                        </Card>
                     </motion.div>
                 </div>
             </div>
