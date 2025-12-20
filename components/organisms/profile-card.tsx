@@ -50,7 +50,12 @@ export const ProfileCard = ({ className }: { className?: string }) => {
                                 <span>Schedule a call</span>
                             </Link>
                         </Button>
-                        <Button className="rounded-md flex flex-row gap-2 flex-1" asChild variant={"outline"} size={"sm"}>
+                        <Button
+                            className="rounded-md flex flex-row gap-2 flex-1"
+                            asChild
+                            variant={"outline"}
+                            size={"sm"}
+                        >
                             <Link href={process.env.SEND_EMAIL_URL as string} target="_blank" rel="noopener noreferrer">
                                 <Mail className="hidden md:block" size={16} />
                                 <span>Send email</span>

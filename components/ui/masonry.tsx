@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-unused-vars */
 "use client";
 import { Children, forwardRef, isValidElement, useMemo, type HTMLAttributes, type ReactNode } from "react";
 import { Slot } from "@radix-ui/react-slot";
@@ -53,12 +52,7 @@ const Masonry = forwardRef<HTMLDivElement, MasonryProps>(
         }, [children, columnCount]);
 
         return (
-            <div
-                ref={ref}
-                className={cn("flex w-full", className)}
-                style={{ gap: `${gap}px` }}
-                {...props}
-            >
+            <div ref={ref} className={cn("flex w-full", className)} style={{ gap: `${gap}px` }} {...props}>
                 {columns.map((col, i) => (
                     <div key={i} className="flex flex-col flex-1" style={{ gap: `${gap}px` }}>
                         {col}
@@ -74,16 +68,14 @@ interface MasonryItemProps extends HTMLAttributes<HTMLDivElement> {
     asChild?: boolean;
 }
 
-const MasonryItem = forwardRef<HTMLDivElement, MasonryItemProps>(
-    ({ className, children, asChild, ...props }, ref) => {
-        const Comp = asChild ? Slot : "div";
-        return (
-            <Comp ref={ref} className={cn("mb-0", className)} {...props}>
-                {children}
-            </Comp>
-        );
-    },
-);
+const MasonryItem = forwardRef<HTMLDivElement, MasonryItemProps>(({ className, children, asChild, ...props }, ref) => {
+    const Comp = asChild ? Slot : "div";
+    return (
+        <Comp ref={ref} className={cn("mb-0", className)} {...props}>
+            {children}
+        </Comp>
+    );
+});
 MasonryItem.displayName = "MasonryItem";
 
 export { Masonry, MasonryItem, type MasonryProps };

@@ -26,11 +26,7 @@ export default function Home() {
     return (
         <>
             <main className="py-10 w-11/12 max-w-7xl">
-                <Masonry
-                    columnCount={3}
-                    gap={16}
-                    className="w-full"
-                >
+                <Masonry columnCount={3} gap={16} className="w-full">
                     <FadeIn delay={0.1} className="h-auto overflow-visible">
                         <ProfileCard className="h-full" />
                     </FadeIn>

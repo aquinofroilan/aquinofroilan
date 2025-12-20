@@ -9,7 +9,7 @@ const FRONTEND = [
     "Tailwind CSS",
     "Svelte",
     "Styled Components",
-    "Webpack"
+    "Webpack",
 ];
 
 const BACKEND = [
@@ -24,7 +24,7 @@ const BACKEND = [
     "JWT",
     "Spring Boot",
     "Firebase",
-    "SQLite"
+    "SQLite",
 ];
 
 const DEVOPS = [
@@ -38,7 +38,7 @@ const DEVOPS = [
     "Sentry",
     "Render",
     "Railway",
-    "Supabase"
+    "Supabase",
 ];
 
 const DEVELOPER_TOOLS = [
@@ -57,7 +57,7 @@ const DEVELOPER_TOOLS = [
     "Discord",
     "Teams",
     "Prettier",
-    "ESLint"
+    "ESLint",
 ];
 
 export { FRONTEND, BACKEND, DEVOPS, DEVELOPER_TOOLS };

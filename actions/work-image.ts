@@ -23,7 +23,7 @@ const fetchImagesWithPrefix = async (prefix: string) => {
     // Use R2 public URL if available
     // This should be the R2 public bucket URL (e.g., https://pub-xxxxx.r2.dev or custom domain)
     const publicUrl = process.env.R2_PUBLIC_URL;
-    
+
     if (publicUrl) {
         // Use public URLs for images that work with Next.js Image Optimization
         // Format: https://pub-xxxxx.r2.dev/path/to/image.png
