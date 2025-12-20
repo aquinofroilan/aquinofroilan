@@ -171,7 +171,7 @@ export const SpotifyCard = ({ className }: { className?: string }) => {
     const fetchData = async () => {
         try {
             setLoading(true);
-            const [recentData, topData] = await Promise.all([getRecentlyPlayed(6), getTopTracks(6, "long_term")]);
+            const [recentData, topData] = await Promise.all([getRecentlyPlayed(5), getTopTracks(5, "long_term")]);
             setRecentlyPlayed(recentData);
             setTopTracks(topData);
         } catch (error) {
@@ -184,7 +184,7 @@ export const SpotifyCard = ({ className }: { className?: string }) => {
     };
 
     useEffect(() => {
-        fetchData();
+        fetchData().then();
         const interval = setInterval(fetchData, 5 * 60 * 1000);
         return () => clearInterval(interval);
     }, []);

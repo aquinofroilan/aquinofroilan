@@ -1,4 +1,3 @@
-import React from "react";
 import { Badge, Card, CardHeader, CardTitle, CardContent } from "@/components/ui";
 import Link from "next/link";
 import { ArrowRightCircle, FolderCode } from "lucide-react";

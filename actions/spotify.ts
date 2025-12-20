@@ -75,7 +75,7 @@ export const getRecentlyPlayed = async (limit: number = 6) => {
             return null;
         }
 
-        const tracks = data.items.map(
+        return data.items.map(
             (item: {
                 track: {
                     album: { images: { url: string }[]; name: string };
@@ -96,7 +96,6 @@ export const getRecentlyPlayed = async (limit: number = 6) => {
                 duration: item.track.duration_ms,
             }),
         );
-        return tracks;
     } catch (error) {
         console.error("Error fetching recently played tracks:", error);
         return null;
@@ -130,7 +129,7 @@ export const getTopTracks = async (
             return null;
         }
 
-        const tracks = data.items.map(
+        return data.items.map(
             (track: {
                 album: { images: { url: string }[]; name: string };
                 artists: { name: string; external_urls: { spotify: string } }[];
@@ -149,8 +148,6 @@ export const getTopTracks = async (
                 popularity: track.popularity,
             }),
         );
-
-        return tracks;
     } catch (error) {
         console.error("Error fetching top tracks:", error);
         return null;

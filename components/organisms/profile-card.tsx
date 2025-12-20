@@ -3,7 +3,6 @@ import Image from "next/image";
 import { BadgeCheckIcon, Mail, MapPin, Phone } from "lucide-react";
 import Link from "next/link";
 import { Button, Card, CardContent, CardFooter } from "@/components/ui";
-import { cn } from "@/lib/utils";
 
 export const ProfileCard = ({ className }: { className?: string }) => {
     return (

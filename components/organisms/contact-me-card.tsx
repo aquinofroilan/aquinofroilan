@@ -1,4 +1,4 @@
-import { Card, CardHeader, CardTitle, CardContent, Tooltip, TooltipContent, TooltipTrigger, Separator } from "@/components/ui";
+import { Card, CardHeader, CardTitle, CardContent, Tooltip, TooltipContent, TooltipTrigger } from "@/components/ui";
 import { CredlyIcon, Github, HackerRank, Instagram, LeetCode, LinkedIn } from "@/components/atoms";
 import { ArrowRight, Send } from "lucide-react";
 import Link from "next/link";

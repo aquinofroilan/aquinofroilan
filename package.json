@@ -13,7 +13,7 @@
         "dev": "bun next dev -H 0.0.0.0 -p 3000",
         "build": "bun next build",
         "start": "bun next start",
-        "lint": "bun eslint .",
+        "lint": "bunx eslint .",
         "format": "prettier --write .",
         "format:check": "prettier --check .",
         "test": "jest"
@@ -57,7 +57,7 @@
         "@types/node": "^25.0.3",
         "@types/react": "^19.2.7",
         "@types/react-dom": "^19.2.3",
-        "eslint": "^9.30.1",
+        "eslint": "^9.39.2",
         "eslint-config-next": "^16.1.0",
         "jest": "^30.1.3",
         "jest-environment-jsdom": "^30.1.2",

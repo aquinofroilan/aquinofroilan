@@ -46,11 +46,10 @@ export const getGithubStats = async () => {
         0,
     );
 
-    const stats = {
+    return {
         pullRequests: data.user.pullRequests.totalCount,
         issues: data.user.issues.totalCount,
         commitsPastYear: data.user.contributionsCollection.totalCommitContributions,
         stars: totalStars,
     };
-    return stats;
 };

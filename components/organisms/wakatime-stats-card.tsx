@@ -1,7 +1,7 @@
 import React from "react";
 import { FetchWakaTimeStats } from "@/actions/wakatime";
 import { Card, CardHeader, CardContent, CardTitle, Progress } from "@/components/ui";
-import { Clock, Code, Laptop, Monitor, ChartColumnIcon } from "lucide-react";
+import { Clock, Code, Laptop, Monitor } from "lucide-react";
 import { Github } from "@/components/atoms";
 import { getGithubStats } from "@/actions";
 

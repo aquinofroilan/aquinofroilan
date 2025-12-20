@@ -1,6 +1,5 @@
 import { PartyPopper } from "lucide-react";
 import { Card, CardHeader, CardTitle, CardContent, Badge } from "@/components/ui";
-import * as motion from "motion/react-client";
 
 const milestones = [
     {
