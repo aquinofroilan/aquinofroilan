@@ -1,4 +1,3 @@
-import React from "react";
 import * as motion from "motion/react-client";
 import { Badge, BentoGridItem } from "@/components/ui";
 import Link from "next/link";

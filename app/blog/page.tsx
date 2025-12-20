@@ -7,7 +7,7 @@ async function Blog() {
     const posts = await getAllBlogPosts();
 
     return (
-        <main className="py-10 w-11/12 max-w-5xl gap-4 flex flex-col">
+        <main className="py-10 w-11/12 max-w-7xl gap-4 flex flex-col">
             <Link
                 href={"/"}
                 className="flex items-center gap-2 text-neutral-500 hover:text-neutral-700 dark:text-neutral-400 dark:hover:text-neutral-200 transition duration-200"
