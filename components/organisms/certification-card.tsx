@@ -23,7 +23,7 @@ export const CertificationCard = ({ className }: { className?: string }) => {
                     </CardTitle>
                 </CardHeader>
                 <CardContent>
-                    <div className="w-full flex flex-col gap-3">
+                    <div className="w-full flex flex-col gap-4">
                         {CertificationsListsPreview.slice(0, 4).map((cert) => {
                             return (
                                 <Link
@@ -31,12 +31,12 @@ export const CertificationCard = ({ className }: { className?: string }) => {
                                     target="_blank"
                                     rel="noreferrer"
                                     key={cert.link}
-                                    className="flex gap-2 items-center p-5 rounded-md border transition duration-200"
+                                    className="flex flex-col gap-1 group"
                                 >
-                                    <div>
-                                        <h1 className="text-sm md:text-base">{cert.title}</h1>
-                                        <p>{cert.description}</p>
-                                    </div>
+                                    <h1 className="text-sm font-medium group-hover:underline underline-offset-2">
+                                        {cert.title}
+                                    </h1>
+                                    <p className="text-xs text-muted-foreground">{cert.description}</p>
                                 </Link>
                             );
                         })}

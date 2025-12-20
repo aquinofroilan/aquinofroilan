@@ -32,36 +32,33 @@ function ProjectsCard({ className }: { className?: string }) {
                     </CardTitle>
                 </CardHeader>
                 <CardContent>
-                    <div className="flex flex-col gap-2">
+                    <div className="flex flex-col gap-6">
                         {ProjectsList.slice(0, 2).map((project) => (
-                            <div
-                                className="flex-col flex gap-2 items-start p-5 rounded-md border transition duration-200"
-                                key={project.pageLink}
-                            >
+                            <div className="flex flex-col gap-2" key={project.pageLink}>
                                 <section className="flex justify-between w-full items-center">
                                     <Link
                                         href={project.projectLink}
                                         target="_blank"
                                         rel="noreferrer"
-                                        className="text-base font-semibold hover:underline underline-offset-2"
+                                        className="text-sm font-medium hover:underline underline-offset-2"
                                     >
                                         {project.title}
                                     </Link>
                                     <Link
                                         href={project.pageLink}
                                         rel="noreferrer"
-                                        className="text-sm hover:underline underline-offset-2"
+                                        className="text-xs text-muted-foreground hover:text-foreground transition-colors"
                                     >
                                         Details
                                     </Link>
                                 </section>
-                                <p>{project.description}</p>
+                                <p className="text-xs text-muted-foreground line-clamp-2">{project.description}</p>
                                 <div className="flex flex-wrap gap-2">
                                     {project.footerContent.map((footer) => (
                                         <Badge
                                             key={footer.text}
-                                            variant="outline"
-                                            className="w-fit text-xs flex flex-row gap-1 items-center font-semibold"
+                                            variant="secondary"
+                                            className="w-fit text-[10px] px-2 py-0 h-5 flex flex-row gap-1 items-center font-normal"
                                         >
                                             {footer.icon}
                                             {footer.text}
