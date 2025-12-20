@@ -46,7 +46,7 @@ const Masonry = forwardRef<HTMLDivElement, MasonryProps>(
                 const width = window.innerWidth;
                 if (width < 768) {
                     setCurrentColumnCount(1);
-                } else if (width < 768) {
+                } else if (width < 1024) {
                     setCurrentColumnCount(2);
                 } else {
                     setCurrentColumnCount(columnCount);
