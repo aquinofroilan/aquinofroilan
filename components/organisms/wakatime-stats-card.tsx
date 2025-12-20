@@ -33,6 +33,7 @@ type WakatimeStatsTypes = {
 export const WakatimeStatsLanguages = async ({ className }: { className?: string }) => {
     const wakatimeStats: WakatimeStatsTypes | null = await FetchWakaTimeStats();
     const wakatimeLanguages = wakatimeStats?.data.languages;
+    if (!wakatimeStats) return null;
 
     return (
         <Card className={className}>

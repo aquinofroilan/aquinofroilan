@@ -128,21 +128,25 @@ export const ContactMe = ({ className }: { className?: string }) => {
                             <Link
                                 href="https://calendly.com/froilan/consultation"
                                 className="group w-full justify-between flex items-center py-2 px-2 rounded-md mt-2 hover:bg-muted transition-colors"
+                                aria-label="Schedule a consultation call via Calendly"
                             >
                                 Schedule a call
                                 <ArrowRight size={15} className="transition-transform group-hover:translate-x-1" />
                             </Link>
                         </div>
-                        <div>
-                            <h1>My Resume/CV:</h1>
-                            <Link
-                                href={process.env.RESUME_CV_LINK ?? "#"}
-                                className="group w-full justify-between flex items-center py-2 px-2 rounded-md mt-2 hover:bg-muted transition-colors"
-                            >
-                                View my CV
-                                <ArrowRight size={15} className="transition-transform group-hover:translate-x-1" />
-                            </Link>
-                        </div>
+                        {process.env.RESUME_CV_LINK && (
+                            <div>
+                                <h1>My Resume/CV:</h1>
+                                <Link
+                                    href={process.env.RESUME_CV_LINK}
+                                    className="group w-full justify-between flex items-center py-2 px-2 rounded-md mt-2 hover:bg-muted transition-colors"
+                                    aria-label="View resume or CV document"
+                                >
+                                    View my CV
+                                    <ArrowRight size={15} className="transition-transform group-hover:translate-x-1" />
+                                </Link>
+                            </div>
+                        )}
                     </div>
                 </CardContent>
             </Card>
