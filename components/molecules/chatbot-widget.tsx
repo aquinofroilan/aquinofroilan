@@ -90,7 +90,6 @@ export const ChatbotWidget = () => {
                 {isOpen ? <X size={18} /> : <MessageCircle size={18} />}
             </Button>
 
-            {/* Chat Window */}
             <div
                 className={cn(
                     "fixed bottom-24 right-6 z-50 w-[380px] max-w-[calc(100vw-3rem)] h-[500px] max-h-[calc(100vh-8rem)]",
@@ -99,7 +98,6 @@ export const ChatbotWidget = () => {
                     isOpen ? "scale-100 opacity-100" : "scale-0 opacity-0 pointer-events-none",
                 )}
             >
-                {/* Header */}
                 <div className="flex items-center gap-3 p-4 border-b bg-muted/50 rounded-t-lg">
                     <div className="w-10 h-10 rounded-full bg-primary flex items-center justify-center">
                         <Bot size={20} className="text-primary-foreground" />
@@ -108,13 +106,14 @@ export const ChatbotWidget = () => {
                         <h3 className="font-semibold text-sm">Chat with Froilan&apos;s AI</h3>
                         <p className="text-xs text-muted-foreground">Ask me anything about Froilan!</p>
                     </div>
-                    <button
+                    <Button
                         onClick={() => setIsOpen(false)}
                         className="p-1 hover:bg-muted rounded-md transition-colors"
                         aria-label="Close chat"
+                        size={"icon"}
                     >
                         <X size={18} />
-                    </button>
+                    </Button>
                 </div>
 
                 {/* Messages */}

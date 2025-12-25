@@ -1,6 +1,6 @@
 "use server";
 
-import { GoogleGenAI } from "@google/genai";
+import { GoogleGenAI, HarmBlockThreshold, HarmCategory, ThinkingLevel } from "@google/genai";
 
 const SYSTEM_PROMPT = `
 # About Froilan Aquino
@@ -83,7 +83,7 @@ export async function getChatResponse(messages: ChatMessage[]): Promise<string> 
     const lastMessage = messages[messages.length - 1];
 
     const chat = ai.chats.create({
-        model: "gemini-2.5-flash",
+        model: process.env.GEMINI_MODEL || "gemini-2.5-flash",
         history: [
             {
                 role: "user",
@@ -104,6 +104,22 @@ export async function getChatResponse(messages: ChatMessage[]): Promise<string> 
             topK: 40,
             topP: 0.95,
             maxOutputTokens: 1024,
+            safetySettings: [
+                {
+                    category: HarmCategory.HARM_CATEGORY_HATE_SPEECH,
+                    threshold: HarmBlockThreshold.BLOCK_LOW_AND_ABOVE,
+                },
+                {
+                    category: HarmCategory.HARM_CATEGORY_SEXUALLY_EXPLICIT,
+                    threshold: HarmBlockThreshold.BLOCK_LOW_AND_ABOVE,
+                },
+                {
+                    category: HarmCategory.HARM_CATEGORY_DANGEROUS_CONTENT,
+                    threshold: HarmBlockThreshold.BLOCK_LOW_AND_ABOVE,
+                },
+            ],
+            systemInstruction:
+                "You are a helpful AI assistant representing Froilan Aquino, a Software Engineer. Answer questions about his skills, experience, and projects in a friendly and professional manner.",
         },
     });
 
