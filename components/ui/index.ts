@@ -1,5 +1,4 @@
 export { Separator } from "./separator";
-export { Progress } from "./progress";
 export {
     DropdownMenu,
     DropdownMenuCheckboxItem,

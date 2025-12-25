@@ -141,7 +141,11 @@ export const SpotifyNowPlaying = () => {
         <div className="flex flex-row items-center gap-1 text-xs text-muted-foreground mt-4 justify-start w-full">
             <Spotify className="w-4 h-4" />
             <span>-</span>
-            <Link href={nowPlaying.songUrl} target="_blank" className="hover:underline font-medium text-foreground truncate max-w-[150px]">
+            <Link
+                href={nowPlaying.songUrl}
+                target="_blank"
+                className="hover:underline font-medium text-foreground truncate max-w-[150px]"
+            >
                 {nowPlaying.title}
             </Link>
             <span>·</span>
