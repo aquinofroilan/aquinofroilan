@@ -1,6 +1,7 @@
 "use server";
 
 import { GoogleGenAI, HarmBlockThreshold, HarmCategory } from "@google/genai";
+import { headers } from "next/headers";
 
 const SYSTEM_PROMPT = `
 # About Froilan Aquino
@@ -64,6 +65,11 @@ export type ChatMessage = {
     content: string;
 };
 
+// Simple in-memory rate limiting
+const lastRequests = new Map<string, { count: number; resetTime: number }>();
+const RATE_LIMIT_WINDOW = 60 * 1000; // 1 minute
+const MAX_REQUESTS_PER_WINDOW = 10;
+
 const getAI = () => {
     const apiKey = process.env.GEMINI_API_KEY;
     if (!apiKey) {
@@ -73,57 +79,91 @@ const getAI = () => {
 };
 
 export async function getChatResponse(messages: ChatMessage[]): Promise<string> {
-    const ai = getAI();
+    try {
+        // Rate limiting check
+        const headerList = await headers();
+        const ip = headerList.get("x-forwarded-for") || "anonymous";
+        const now = Date.now();
+        const userRateData = lastRequests.get(ip);
 
-    const history = messages.slice(0, -1).map((msg) => ({
-        role: msg.role === "user" ? ("user" as const) : ("model" as const),
-        parts: [{ text: msg.content }],
-    }));
+        if (userRateData) {
+            if (now < userRateData.resetTime) {
+                if (userRateData.count >= MAX_REQUESTS_PER_WINDOW) {
+                    throw new Error("RATE_LIMIT_EXCEEDED");
+                }
+                userRateData.count++;
+            } else {
+                lastRequests.set(ip, { count: 1, resetTime: now + RATE_LIMIT_WINDOW });
+            }
+        } else {
+            lastRequests.set(ip, { count: 1, resetTime: now + RATE_LIMIT_WINDOW });
+        }
 
-    const lastMessage = messages[messages.length - 1];
+        const ai = getAI();
 
-    const chat = ai.chats.create({
-        model: process.env.GEMINI_MODEL || "gemini-2.5-flash",
-        history: [
-            {
-                role: "user",
-                parts: [{ text: SYSTEM_PROMPT }],
-            },
-            {
-                role: "model",
-                parts: [
+        const history = messages.slice(0, -1).map((msg) => ({
+            role: msg.role === "user" ? ("user" as const) : ("model" as const),
+            parts: [{ text: msg.content }],
+        }));
+
+        const lastMessage = messages[messages.length - 1];
+
+        const chat = ai.chats.create({
+            model: process.env.GEMINI_MODEL || "gemini-2.5-flash",
+            history: [...history],
+            config: {
+                temperature: 0.7,
+                topK: 40,
+                topP: 0.95,
+                maxOutputTokens: 1024,
+                safetySettings: [
                     {
-                        text: "I understand. I am now acting as an AI assistant representing Froilan Aquino. I'll help visitors learn about his skills, experience, and projects. How can I help you today?",
+                        category: HarmCategory.HARM_CATEGORY_HATE_SPEECH,
+                        threshold: HarmBlockThreshold.BLOCK_LOW_AND_ABOVE,
+                    },
+                    {
+                        category: HarmCategory.HARM_CATEGORY_SEXUALLY_EXPLICIT,
+                        threshold: HarmBlockThreshold.BLOCK_LOW_AND_ABOVE,
+                    },
+                    {
+                        category: HarmCategory.HARM_CATEGORY_DANGEROUS_CONTENT,
+                        threshold: HarmBlockThreshold.BLOCK_LOW_AND_ABOVE,
+                    },
+                    {
+                        category: HarmCategory.HARM_CATEGORY_HARASSMENT,
+                        threshold: HarmBlockThreshold.BLOCK_LOW_AND_ABOVE,
                     },
                 ],
+                systemInstruction: SYSTEM_PROMPT,
             },
-            ...history,
-        ],
-        config: {
-            temperature: 0.7,
-            topK: 40,
-            topP: 0.95,
-            maxOutputTokens: 1024,
-            safetySettings: [
-                {
-                    category: HarmCategory.HARM_CATEGORY_HATE_SPEECH,
-                    threshold: HarmBlockThreshold.BLOCK_LOW_AND_ABOVE,
-                },
-                {
-                    category: HarmCategory.HARM_CATEGORY_SEXUALLY_EXPLICIT,
-                    threshold: HarmBlockThreshold.BLOCK_LOW_AND_ABOVE,
-                },
-                {
-                    category: HarmCategory.HARM_CATEGORY_DANGEROUS_CONTENT,
-                    threshold: HarmBlockThreshold.BLOCK_LOW_AND_ABOVE,
-                },
-            ],
-            systemInstruction:
-                "You are a helpful AI assistant representing Froilan Aquino, a Software Engineer. Answer questions about his skills, experience, and projects in a friendly and professional manner.",
-        },
-    });
+        });
 
-    const response = await chat.sendMessage({ message: lastMessage.content });
+        const response = await chat.sendMessage({ message: lastMessage.content });
 
-    return response.text || "Sorry, I couldn't generate a response.";
+        if (!response.text) {
+            throw new Error("NO_RESPONSE");
+        }
+
+        return response.text;
+    } catch (error: any) {
+        if (error.message === "RATE_LIMIT_EXCEEDED") {
+            throw error;
+        }
+
+        console.error("Gemini API Error:", error);
+
+        if (error.status === 429 || error.message?.includes("429") || error.message?.includes("quota")) {
+            throw new Error("RATE_LIMIT_EXCEEDED");
+        }
+
+        if (error.message?.includes("safety") || error.message?.includes("blocked")) {
+            throw new Error("SAFETY_BLOCK");
+        }
+
+        if (error.message?.includes("network") || error.message?.includes("fetch")) {
+            throw new Error("NETWORK_ERROR");
+        }
+
+        throw new Error("GENERIC_ERROR");
+    }
 }

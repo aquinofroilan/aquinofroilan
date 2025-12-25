@@ -2,7 +2,7 @@
 
 import { useState, useRef, useEffect, useCallback } from "react";
 import { MessageCircle, X, Send, Bot, User } from "lucide-react";
-import { Button } from "@/components/ui";
+import { Button, Input } from "@/components/ui";
 import { cn } from "@/lib/utils";
 import { getChatResponse, type ChatMessage } from "@/actions";
 
@@ -58,9 +58,21 @@ export const ChatbotWidget = () => {
 
             setMessages((prev) => [...prev, { role: "assistant", content: response }]);
             setStreamingContent("");
-        } catch (error) {
+        } catch (error: any) {
             console.error("Chat error:", error);
-            const errorMessage = "Sorry, I encountered an error. Please try again.";
+
+            let errorMessage = "Sorry, I encountered an error. Please try again.";
+
+            if (error.message === "RATE_LIMIT_EXCEEDED") {
+                errorMessage = "I'm receiving too many messages right now. Please wait a moment before trying again.";
+            } else if (error.message === "SAFETY_BLOCK") {
+                errorMessage = "I can't respond to that message as it violates safety guidelines.";
+            } else if (error.message === "NETWORK_ERROR") {
+                errorMessage = "I'm having trouble connecting to the server. Please check your internet connection.";
+            } else if (error.message === "NO_RESPONSE") {
+                errorMessage = "I couldn't generate a response. Please try rephrasing your question.";
+            }
+
             setMessages((prev) => [...prev, { role: "assistant", content: errorMessage }]);
         } finally {
             setIsLoading(false);
@@ -98,8 +110,8 @@ export const ChatbotWidget = () => {
                 )}
             >
                 <div className="flex items-center gap-3 p-4 border-b bg-muted/50 rounded-t-lg">
-                    <div className="w-10 h-10 rounded-full bg-primary flex items-center justify-center">
-                        <Bot size={20} className="text-primary-foreground" />
+                    <div className="w-10 h-10 rounded-full flex items-center justify-center">
+                        <Bot size={20} />
                     </div>
                     <div className="flex-1">
                         <h3 className="font-semibold text-sm">Chat with Froilan&apos;s AI</h3>
@@ -107,8 +119,8 @@ export const ChatbotWidget = () => {
                     </div>
                     <Button
                         onClick={() => setIsOpen(false)}
-                        className="p-1 hover:bg-muted rounded-md transition-colors"
-                        aria-label="Close chat"
+                        className="p-1 hover:bg-muted rounded-md transition-colors cursor-pointer"
+                        variant={"ghost"}
                         size={"icon"}
                     >
                         <X size={18} />
@@ -126,7 +138,7 @@ export const ChatbotWidget = () => {
 
                     {messages.map((message, index) => (
                         <div
-                            key={index}
+                            key={`${message.role}-${message.content}-${index}`}
                             className={cn("flex gap-2", message.role === "user" ? "justify-end" : "justify-start")}
                         >
                             {message.role === "assistant" && (
@@ -182,7 +194,7 @@ export const ChatbotWidget = () => {
 
                 <div className="p-4 border-t bg-muted/30">
                     <div className="flex gap-2">
-                        <input
+                        <Input
                             ref={inputRef}
                             type="text"
                             value={input}
