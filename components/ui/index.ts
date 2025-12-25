@@ -1,5 +1,4 @@
 export { Separator } from "./separator";
-export { Progress } from "./progress";
 export {
     DropdownMenu,
     DropdownMenuCheckboxItem,
@@ -33,3 +32,4 @@ export {
     DialogTitle,
     DialogTrigger,
 } from "./dialog";
+export { Skeleton } from "./skeleton";

@@ -1,6 +1,6 @@
 import React from "react";
 import { FetchWakaTimeStats } from "@/actions/wakatime";
-import { Card, CardHeader, CardContent, CardTitle, Progress } from "@/components/ui";
+import { Card, CardHeader, CardContent, CardTitle } from "@/components/ui";
 import { Clock, Code, Laptop, Monitor } from "lucide-react";
 import { Github } from "@/components/atoms";
 import { getGithubStats } from "@/actions";
@@ -45,13 +45,10 @@ export const WakatimeStatsLanguages = async ({ className }: { className?: string
             </CardHeader>
             <CardContent>
                 <div className="space-y-3">
-                    {wakatimeLanguages?.slice(0, 6).map((lang, index) => (
-                        <div key={index} className="flex flex-col">
-                            <div className="flex justify-between text-xs mb-1">
-                                <span>{lang.name}</span>
-                                <span>{lang.percent.toFixed(1)}%</span>
-                            </div>
-                            <Progress value={lang.percent} />
+                    {wakatimeLanguages?.slice(0, 5).map((lang, index) => (
+                        <div key={index} className="flex justify-between text-xs">
+                            <span>{lang.name}</span>
+                            <span>{lang.percent.toFixed(1)}%</span>
                         </div>
                     ))}
                 </div>
