@@ -33,3 +33,4 @@ export {
     DialogTitle,
     DialogTrigger,
 } from "./dialog";
+export { Skeleton } from "./skeleton";

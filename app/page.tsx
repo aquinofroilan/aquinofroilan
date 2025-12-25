@@ -11,7 +11,6 @@ import {
     WakatimeStatsEditors,
     WakatimeStatsOS,
     GithubStatsCard,
-    SpotifyCard,
 } from "@/components/organisms/";
 import ProjectsCard from "@/components/organisms/projects-card";
 import { Masonry, FadeIn } from "@/components/ui";
@@ -65,9 +64,6 @@ export default function Home() {
                     </FadeIn>
                     <FadeIn delay={0.7} className="h-auto overflow-visible">
                         <ContactMe className="h-full" />
-                    </FadeIn>
-                    <FadeIn delay={0.75} className="h-auto overflow-visible w-full">
-                        <SpotifyCard className="h-full w-full" />
                     </FadeIn>
                 </Masonry>
             </main>

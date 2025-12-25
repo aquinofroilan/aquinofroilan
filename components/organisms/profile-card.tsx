@@ -3,6 +3,7 @@ import Image from "next/image";
 import { BadgeCheckIcon, Mail, MapPin, Phone } from "lucide-react";
 import Link from "next/link";
 import { Button, Card, CardContent, CardFooter } from "@/components/ui";
+import { SpotifyNowPlaying } from "@/components/molecules";
 
 export const ProfileCard = ({ className }: { className?: string }) => {
     return (
@@ -36,7 +37,7 @@ export const ProfileCard = ({ className }: { className?: string }) => {
                         </p>
                     </div>
                 </CardContent>
-                <CardFooter className="p-6 pt-0">
+                <CardFooter className="p-6 pt-0 flex flex-col">
                     <div className="flex flex-row gap-2 w-full">
                         <Button
                             className="text-white rounded-md flex flex-row gap-2 flex-1"
@@ -61,6 +62,7 @@ export const ProfileCard = ({ className }: { className?: string }) => {
                             </Link>
                         </Button>
                     </div>
+                    <SpotifyNowPlaying />
                 </CardFooter>
             </Card>
         </div>
