@@ -1,6 +1,6 @@
 "use server";
 
-import { GoogleGenAI, HarmBlockThreshold, HarmCategory, ThinkingLevel } from "@google/genai";
+import { GoogleGenAI, HarmBlockThreshold, HarmCategory } from "@google/genai";
 
 const SYSTEM_PROMPT = `
 # About Froilan Aquino
