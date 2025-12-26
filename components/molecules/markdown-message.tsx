@@ -39,12 +39,16 @@ export const MarkdownMessage = ({ content, className }: MarkdownMessageProps) =>
                                 {children}
                             </code>
                         ) : (
-                            <code className="block bg-muted/60 p-2 rounded text-xs font-mono overflow-x-auto">
+                            <code className="text-xs font-mono">
                                 {children}
                             </code>
                         );
                     },
-                    pre: ({ children }) => <pre className="mb-0">{children}</pre>,
+                    pre: ({ children }) => (
+                        <pre className="bg-muted/60 p-2 rounded text-xs font-mono overflow-x-auto mb-2">
+                            {children}
+                        </pre>
+                    ),
                     // Emphasis
                     strong: ({ children }) => <strong className="font-bold">{children}</strong>,
                     em: ({ children }) => <em className="italic">{children}</em>,
