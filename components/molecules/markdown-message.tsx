@@ -32,14 +32,14 @@ export const MarkdownMessage = ({ content, className }: MarkdownMessageProps) =>
                     ol: ({ children }) => <ol className="list-decimal pl-5 mb-2 space-y-1">{children}</ol>,
                     li: ({ children }) => <li className="text-sm">{children}</li>,
                     // Code
-                    code: ({ className, children }) => {
-                        const isInline = !className?.startsWith('language-');
+                    code: ({ node, inline, className, children, ...props }) => {
+                        const isInline = inline ?? !className?.startsWith('language-');
                         return isInline ? (
-                            <code className="bg-muted/60 px-1.5 py-0.5 rounded text-xs font-mono">
+                            <code className="bg-muted/60 px-1.5 py-0.5 rounded text-xs font-mono" {...props}>
                                 {children}
                             </code>
                         ) : (
-                            <code className="text-xs font-mono">
+                            <code className="text-xs font-mono" {...props}>
                                 {children}
                             </code>
                         );
@@ -53,16 +53,25 @@ export const MarkdownMessage = ({ content, className }: MarkdownMessageProps) =>
                     strong: ({ children }) => <strong className="font-bold">{children}</strong>,
                     em: ({ children }) => <em className="italic">{children}</em>,
                     // Links
-                    a: ({ href, children }) => (
-                        <a
-                            href={href}
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            className="text-primary hover:underline"
-                        >
-                            {children}
-                        </a>
-                    ),
+                    a: ({ href, children }) => {
+                        // Validate href to prevent XSS via javascript: or data: schemes
+                        const isValidHref = href && (href.startsWith('http://') || href.startsWith('https://') || href.startsWith('/'));
+                        if (!isValidHref) {
+                            return <span>{children}</span>;
+                        }
+                        
+                        const isExternal = href.startsWith('http://') || href.startsWith('https://');
+                        return (
+                            <a
+                                href={href}
+                                target={isExternal ? "_blank" : undefined}
+                                rel={isExternal ? "noopener noreferrer" : undefined}
+                                className="text-primary hover:underline"
+                            >
+                                {children}
+                            </a>
+                        );
+                    },
                     // Blockquote
                     blockquote: ({ children }) => (
                         <blockquote className="border-l-2 border-muted-foreground/30 pl-3 italic my-2">
