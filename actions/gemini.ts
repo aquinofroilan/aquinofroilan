@@ -80,6 +80,16 @@ const getAI = () => {
 
 export async function getChatResponse(messages: ChatMessage[]): Promise<string> {
     try {
+        // Input validation
+        if (!messages || messages.length === 0) {
+            throw new Error("NO_RESPONSE");
+        }
+
+        const lastMessage = messages[messages.length - 1];
+        if (!lastMessage || !lastMessage.content || !lastMessage.content.trim()) {
+            throw new Error("NO_RESPONSE");
+        }
+
         // Rate limiting check
         const headerList = await headers();
         const ip = headerList.get("x-forwarded-for") || "anonymous";
@@ -105,8 +115,6 @@ export async function getChatResponse(messages: ChatMessage[]): Promise<string> 
             role: msg.role === "user" ? ("user" as const) : ("model" as const),
             parts: [{ text: msg.content }],
         }));
-
-        const lastMessage = messages[messages.length - 1];
 
         const chat = ai.chats.create({
             model: process.env.GEMINI_MODEL || "gemini-2.5-flash",
