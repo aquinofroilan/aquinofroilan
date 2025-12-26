@@ -32,8 +32,9 @@ export const MarkdownMessage = ({ content, className }: MarkdownMessageProps) =>
                     ol: ({ children }) => <ol className="list-decimal pl-5 mb-2 space-y-1">{children}</ol>,
                     li: ({ children }) => <li className="text-sm">{children}</li>,
                     // Code
-                    code: ({ node, inline, className, children, ...props }) => {
-                        const isInline = inline ?? !className?.startsWith('language-');
+                    code: ({ className, children, ...props }: any) => {
+                        // Block code elements have className like 'language-*', inline code doesn't
+                        const isInline = !className?.startsWith('language-');
                         return isInline ? (
                             <code className="bg-muted/60 px-1.5 py-0.5 rounded text-xs font-mono" {...props}>
                                 {children}
