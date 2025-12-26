@@ -78,18 +78,31 @@ export const ChatbotWidget = () => {
         try {
             for (let i = 0; i < words.length; i++) {
                 if (signal.aborted) {
+                    // Clear pending timeout on abort
+                    if (typingTimeoutRef.current) {
+                        clearTimeout(typingTimeoutRef.current);
+                        typingTimeoutRef.current = null;
+                    }
                     break;
                 }
                 
                 currentText += words[i] + (i < words.length - 1 ? " " : "");
                 setStreamingContent(currentText);
                 await new Promise((resolve) => {
-                    typingTimeoutRef.current = setTimeout(resolve, CHATBOT_CONFIG.TYPING_SPEED_MS);
+                    typingTimeoutRef.current = setTimeout(() => {
+                        typingTimeoutRef.current = null;
+                        resolve(undefined);
+                    }, CHATBOT_CONFIG.TYPING_SPEED_MS);
                 });
             }
         } catch (error) {
             // Handle abortion gracefully
             if (signal.aborted) {
+                // Clean up timeout on error
+                if (typingTimeoutRef.current) {
+                    clearTimeout(typingTimeoutRef.current);
+                    typingTimeoutRef.current = null;
+                }
                 return currentText;
             }
             throw error;
@@ -103,9 +116,13 @@ export const ChatbotWidget = () => {
         
         if (!textToSend || isLoading) return;
 
-        // Client-side rate limiting
+        // Client-side rate limiting with user feedback
         const now = Date.now();
         if (now - lastMessageTime < CHATBOT_CONFIG.MIN_MESSAGE_INTERVAL_MS) {
+            setMessages((prev) => [
+                ...prev,
+                { role: "assistant", content: "Please wait a moment before sending another message." },
+            ]);
             return;
         }
 

@@ -39,9 +39,11 @@ export const chatbotStorage = {
             if (!Array.isArray(parsed)) return [];
             
             return parsed.filter(
-                (msg: any) =>
-                    msg &&
+                (msg: unknown): msg is ChatMessage =>
                     typeof msg === "object" &&
+                    msg !== null &&
+                    "role" in msg &&
+                    "content" in msg &&
                     (msg.role === "user" || msg.role === "assistant") &&
                     typeof msg.content === "string"
             );
@@ -84,11 +86,22 @@ export const validateInput = (input: string): { valid: boolean; error?: string }
 
 /**
  * Sanitize user input to prevent XSS attacks
+ * Note: This is a basic sanitization for text-only content.
+ * For richer content, consider using a library like DOMPurify.
  */
 export const sanitizeInput = (input: string): string => {
     return input
         .trim()
-        // Remove any potentially dangerous characters
-        .replace(/[<>]/g, "")
+        // Remove HTML tags and potentially dangerous characters
+        .replace(/[<>'"&]/g, (char) => {
+            const entities: Record<string, string> = {
+                '<': '&lt;',
+                '>': '&gt;',
+                '"': '&quot;',
+                "'": '&#x27;',
+                '&': '&amp;',
+            };
+            return entities[char] || char;
+        })
         .slice(0, CHATBOT_CONFIG.MAX_MESSAGE_LENGTH);
 };
