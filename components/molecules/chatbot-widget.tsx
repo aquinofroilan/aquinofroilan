@@ -120,7 +120,7 @@ export const ChatbotWidget = () => {
         
         if (!textToSend || isLoading) return;
 
-        // Client-side rate limiting with user feedback
+        // Client-side rate limiting with user feedback (check early to avoid unnecessary work)
         const now = Date.now();
         if (now - lastMessageTime < CHATBOT_CONFIG.MIN_MESSAGE_INTERVAL_MS) {
             setMessages((prev) => [
@@ -185,8 +185,7 @@ export const ChatbotWidget = () => {
     };
 
     const handleSuggestionClick = (suggestion: string) => {
-        setInput(suggestion);
-        inputRef.current?.focus();
+        handleSend(suggestion);
     };
 
     const handleKeyDown = (e: React.KeyboardEvent) => {

@@ -86,8 +86,9 @@ export const validateInput = (input: string): { valid: boolean; error?: string }
 
 /**
  * Sanitize user input to prevent XSS attacks
- * Note: This is a basic sanitization for text-only content.
- * For richer content, consider using a library like DOMPurify.
+ * Note: React provides built-in XSS protection when rendering text content through JSX.
+ * This function provides an additional layer of security by encoding HTML entities.
+ * For rich HTML content, consider using a library like DOMPurify.
  */
 export const sanitizeInput = (input: string): string => {
     return input
