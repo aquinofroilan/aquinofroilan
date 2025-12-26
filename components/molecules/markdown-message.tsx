@@ -33,7 +33,7 @@ export const MarkdownMessage = ({ content, className }: MarkdownMessageProps) =>
                     li: ({ children }) => <li className="text-sm">{children}</li>,
                     // Code
                     code: ({ className, children }) => {
-                        const isInline = !className;
+                        const isInline = !className?.startsWith('language-');
                         return isInline ? (
                             <code className="bg-muted/60 px-1.5 py-0.5 rounded text-xs font-mono">
                                 {children}
@@ -44,7 +44,7 @@ export const MarkdownMessage = ({ content, className }: MarkdownMessageProps) =>
                             </code>
                         );
                     },
-                    pre: ({ children }) => <pre className="mb-2">{children}</pre>,
+                    pre: ({ children }) => <pre className="mb-0">{children}</pre>,
                     // Emphasis
                     strong: ({ children }) => <strong className="font-bold">{children}</strong>,
                     em: ({ children }) => <em className="italic">{children}</em>,
