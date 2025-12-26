@@ -88,21 +88,5 @@ export const validateInput = (input: string): { valid: boolean; error?: string }
  * For rich HTML content, consider using a library like DOMPurify.
  */
 export const sanitizeInput = (input: string): string => {
-    return (
-        input
-            .trim()
-            // Encode ampersand first to prevent double-encoding
-            .replace(/&/g, "&amp;")
-            // Then encode other HTML entities
-            .replace(/[<>'"]/g, (char) => {
-                const entities: Record<string, string> = {
-                    "<": "&lt;",
-                    ">": "&gt;",
-                    '"': "&quot;",
-                    "'": "&#x27;",
-                };
-                return entities[char] || char;
-            })
-            .slice(0, CHATBOT_CONFIG.MAX_MESSAGE_LENGTH)
-    );
+    return input.trim().slice(0, CHATBOT_CONFIG.MAX_MESSAGE_LENGTH);
 };
