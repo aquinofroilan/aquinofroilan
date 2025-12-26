@@ -17,7 +17,7 @@ export const ContactMe = ({ className }: { className?: string }) => {
                     <div className="flex flex-col gap-5">
                         <div>
                             <span className="text-xs">Email:</span>
-                        <div className="flex flex-col">
+                            <div className="flex flex-col">
                                 <Link
                                     className="underline underline-offset-1"
                                     href="mailto:aquino.froilan.dev@outlook.com?subject=Contact%20from%20Website"
