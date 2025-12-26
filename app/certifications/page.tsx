@@ -1,6 +1,6 @@
 import { ArrowLeft } from "lucide-react";
 import Link from "next/link";
-import { Card, CardHeader, CardTitle, CardContent } from "@/components/ui";
+import { Card, CardHeader, CardTitle, CardDescription } from "@/components/ui";
 import { CertificationsListsPreview } from "@/data/certification-list-preview";
 import * as motion from "motion/react-client";
 import type { Metadata } from "next";
@@ -43,11 +43,9 @@ function Certifications() {
                                 <Link href={c.link} target="_blank">
                                     <Card className="h-full hover:bg-muted/50 transition-colors">
                                         <CardHeader>
-                                            <CardTitle className="text-lg">{c.title}</CardTitle>
+                                            <CardTitle className="text-sm">{c.title}</CardTitle>
+                                            <CardDescription className="text-sm">{c.description}</CardDescription>
                                         </CardHeader>
-                                        <CardContent>
-                                            <h1 className="text-xs md:text-base">{c.description}</h1>
-                                        </CardContent>
                                     </Card>
                                 </Link>
                             </motion.div>

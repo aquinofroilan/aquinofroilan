@@ -6,6 +6,7 @@ import { type ReactNode } from "react";
 import { SpeedInsights } from "@vercel/speed-insights/next";
 import { Footer } from "@/components/organisms";
 import { TooltipProvider } from "@/components/ui";
+import { ChatbotWidget } from "@/components/molecules";
 import { Metadata } from "next";
 
 const inter = Inter({
@@ -70,6 +71,7 @@ export default function RootLayout({ children }: { children: ReactNode }) {
                     <Analytics />
                     <SpeedInsights />
                     <Footer />
+                    <ChatbotWidget />
                 </TooltipProvider>
             </body>
         </html>

@@ -116,7 +116,7 @@ export const SpotifyNowPlaying = () => {
     if (loading) {
         return (
             <div className="flex flex-row items-center gap-1 text-xs text-muted-foreground mt-4 justify-start w-full">
-                <Spotify className="w-4 h-4" />
+                <Skeleton className="h-4 w-4" />
                 <Skeleton className="h-4 w-20" />
                 <span>·</span>
                 <Skeleton className="h-4 w-20" />
@@ -140,7 +140,6 @@ export const SpotifyNowPlaying = () => {
     return (
         <div className="flex flex-row items-center gap-1 text-xs text-muted-foreground mt-4 justify-start w-full">
             <Spotify className="w-4 h-4" />
-            <span>-</span>
             <Link
                 href={nowPlaying.songUrl}
                 target="_blank"

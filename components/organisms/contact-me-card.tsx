@@ -16,20 +16,20 @@ export const ContactMe = ({ className }: { className?: string }) => {
                 <CardContent>
                     <div className="flex flex-col gap-5">
                         <div>
-                            <h1>Email:</h1>
+                            <span className="text-xs">Email:</span>
                             <div className="flex flex-col">
                                 <Link
-                                    className="underline underline-offset-1 font-bold"
+                                    className="underline underline-offset-1"
                                     href="mailto:aquino.froilan.dev@outlook.com?subject=Contact%20from%20Website"
                                     target="_blank"
                                     rel="noopener noreferrer"
                                 >
-                                    aquino.froilan.dev@outlook.com
+                                    <span className="text-xs">aquino.froilan.dev@outlook.com</span>
                                 </Link>
                             </div>
                         </div>
                         <div>
-                            <h1>Social Links:</h1>
+                            <span className="text-xs">Social Links:</span>
                             <div className="grid grid-cols-3 gap-2">
                                 <Tooltip>
                                     <TooltipTrigger>
@@ -43,7 +43,7 @@ export const ContactMe = ({ className }: { className?: string }) => {
                                         </Link>
                                     </TooltipTrigger>
                                     <TooltipContent>
-                                        <p>GitHub</p>
+                                        <span className="text-xs">GitHub</span>
                                     </TooltipContent>
                                 </Tooltip>
                                 <Tooltip>
@@ -58,7 +58,7 @@ export const ContactMe = ({ className }: { className?: string }) => {
                                         </Link>
                                     </TooltipTrigger>
                                     <TooltipContent>
-                                        <p>Instagram</p>
+                                        <span className="text-xs">Instagram</span>
                                     </TooltipContent>
                                 </Tooltip>
                                 <Tooltip>
@@ -73,7 +73,7 @@ export const ContactMe = ({ className }: { className?: string }) => {
                                         </Link>
                                     </TooltipTrigger>
                                     <TooltipContent>
-                                        <p>LinkedIn</p>
+                                        <span className="text-xs">LinkedIn</span>
                                     </TooltipContent>
                                 </Tooltip>
                                 <Tooltip>
@@ -88,7 +88,7 @@ export const ContactMe = ({ className }: { className?: string }) => {
                                         </Link>
                                     </TooltipTrigger>
                                     <TooltipContent>
-                                        <p>Credly</p>
+                                        <span className="text-xs">Credly</span>
                                     </TooltipContent>
                                 </Tooltip>
                                 <Tooltip>
@@ -103,7 +103,7 @@ export const ContactMe = ({ className }: { className?: string }) => {
                                         </Link>
                                     </TooltipTrigger>
                                     <TooltipContent>
-                                        <p>HackerRank</p>
+                                        <span className="text-xs">HackerRank</span>
                                     </TooltipContent>
                                 </Tooltip>
                                 <Tooltip>
@@ -118,31 +118,31 @@ export const ContactMe = ({ className }: { className?: string }) => {
                                         </Link>
                                     </TooltipTrigger>
                                     <TooltipContent>
-                                        <p>LeetCode</p>
+                                        <span className="text-xs">LeetCode</span>
                                     </TooltipContent>
                                 </Tooltip>
                             </div>
                         </div>
                         <div>
-                            <h1>Let&apos;s talk:</h1>
+                            <span className="text-xs">Let&apos;s talk:</span>
                             <Link
                                 href="https://calendly.com/froilan/consultation"
                                 className="group w-full justify-between flex items-center py-2 px-2 rounded-md mt-2 hover:bg-muted transition-colors"
                                 aria-label="Schedule a consultation call via Calendly"
                             >
-                                Schedule a call
+                                <span className="text-xs">Schedule a call</span>
                                 <ArrowRight size={15} className="transition-transform group-hover:translate-x-1" />
                             </Link>
                         </div>
                         {process.env.RESUME_CV_LINK && (
                             <div>
-                                <h1>My Resume/CV:</h1>
+                                <span className="text-xs">My Resume/CV:</span>
                                 <Link
                                     href={process.env.RESUME_CV_LINK}
                                     className="group w-full justify-between flex items-center py-2 px-2 rounded-md mt-2 hover:bg-muted transition-colors"
                                     aria-label="View resume or CV document"
                                 >
-                                    View my CV
+                                    <span className="text-xs">View my CV</span>
                                     <ArrowRight size={15} className="transition-transform group-hover:translate-x-1" />
                                 </Link>
                             </div>
