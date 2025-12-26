@@ -54,7 +54,12 @@ export const MarkdownMessage = ({ content, className }: MarkdownMessageProps) =>
                     // Links
                     a: ({ href, children }) => {
                         // Validate href to prevent XSS via javascript: or data: schemes
-                        const isValidHref = href && (href.startsWith('http://') || href.startsWith('https://') || href.startsWith('/'));
+                        // Also prevent protocol-relative URLs like //evil.com
+                        const isValidHref = href && (
+                            href.startsWith('http://') || 
+                            href.startsWith('https://') || 
+                            (href.startsWith('/') && !href.startsWith('//'))
+                        );
                         if (!isValidHref) {
                             return <span>{children}</span>;
                         }
