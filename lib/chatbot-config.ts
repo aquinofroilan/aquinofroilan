@@ -26,9 +26,10 @@ export const CHATBOT_CONFIG = {
 
 export const ERROR_MESSAGES = {
     RATE_LIMIT_EXCEEDED: "I'm receiving too many messages right now. Please wait a moment before trying again.",
+    RATE_LIMIT_CLIENT: "Please wait a moment before sending another message.",
     SAFETY_BLOCK: "I can't respond to that message as it violates safety guidelines.",
     NETWORK_ERROR: "I'm having trouble connecting to the server. Please check your internet connection.",
     NO_RESPONSE: "I couldn't generate a response. Please try rephrasing your question.",
     GENERIC_ERROR: "Sorry, I encountered an error. Please try again.",
-    MESSAGE_TOO_LONG: `Message is too long. Please keep it under ${CHATBOT_CONFIG.MAX_MESSAGE_LENGTH} characters.`,
+    MESSAGE_TOO_LONG: "Message is too long. Please keep it under 500 characters.",
 } as const;

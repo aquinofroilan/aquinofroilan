@@ -92,14 +92,15 @@ export const validateInput = (input: string): { valid: boolean; error?: string }
 export const sanitizeInput = (input: string): string => {
     return input
         .trim()
-        // Remove HTML tags and potentially dangerous characters
-        .replace(/[<>'"&]/g, (char) => {
+        // Encode ampersand first to prevent double-encoding
+        .replace(/&/g, '&amp;')
+        // Then encode other HTML entities
+        .replace(/[<>'"]/g, (char) => {
             const entities: Record<string, string> = {
                 '<': '&lt;',
                 '>': '&gt;',
                 '"': '&quot;',
                 "'": '&#x27;',
-                '&': '&amp;',
             };
             return entities[char] || char;
         })

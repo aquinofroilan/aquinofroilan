@@ -75,37 +75,41 @@ export const ChatbotWidget = () => {
         const words = text.split(" ");
         let currentText = "";
 
-        try {
-            for (let i = 0; i < words.length; i++) {
-                if (signal.aborted) {
-                    // Clear pending timeout on abort
-                    if (typingTimeoutRef.current) {
-                        clearTimeout(typingTimeoutRef.current);
-                        typingTimeoutRef.current = null;
-                    }
-                    break;
-                }
-                
-                currentText += words[i] + (i < words.length - 1 ? " " : "");
-                setStreamingContent(currentText);
-                await new Promise((resolve) => {
-                    typingTimeoutRef.current = setTimeout(() => {
-                        typingTimeoutRef.current = null;
-                        resolve(undefined);
-                    }, CHATBOT_CONFIG.TYPING_SPEED_MS);
-                });
-            }
-        } catch (error) {
-            // Handle abortion gracefully
+        for (let i = 0; i < words.length; i++) {
             if (signal.aborted) {
-                // Clean up timeout on error
+                // Clear pending timeout on abort
                 if (typingTimeoutRef.current) {
                     clearTimeout(typingTimeoutRef.current);
                     typingTimeoutRef.current = null;
                 }
-                return currentText;
+                break;
             }
-            throw error;
+            
+            currentText += words[i] + (i < words.length - 1 ? " " : "");
+            setStreamingContent(currentText);
+            
+            // Create a cancellable promise for the timeout
+            await new Promise<void>((resolve) => {
+                typingTimeoutRef.current = setTimeout(() => {
+                    typingTimeoutRef.current = null;
+                    resolve();
+                }, CHATBOT_CONFIG.TYPING_SPEED_MS);
+                
+                // Setup abort listener to clear timeout and resolve immediately
+                const abortHandler = () => {
+                    if (typingTimeoutRef.current) {
+                        clearTimeout(typingTimeoutRef.current);
+                        typingTimeoutRef.current = null;
+                    }
+                    resolve();
+                };
+                
+                if (signal.aborted) {
+                    abortHandler();
+                } else {
+                    signal.addEventListener('abort', abortHandler, { once: true });
+                }
+            });
         }
 
         return currentText;
@@ -121,7 +125,7 @@ export const ChatbotWidget = () => {
         if (now - lastMessageTime < CHATBOT_CONFIG.MIN_MESSAGE_INTERVAL_MS) {
             setMessages((prev) => [
                 ...prev,
-                { role: "assistant", content: "Please wait a moment before sending another message." },
+                { role: "assistant", content: ERROR_MESSAGES.RATE_LIMIT_CLIENT },
             ]);
             return;
         }
