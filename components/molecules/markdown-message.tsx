@@ -14,15 +14,9 @@ export const MarkdownMessage = ({ content, className }: MarkdownMessageProps) =>
                 remarkPlugins={[remarkGfm]}
                 components={{
                     // Headings
-                    h1: ({ children }) => (
-                        <h1 className="text-lg font-bold mt-3 mb-2">{children}</h1>
-                    ),
-                    h2: ({ children }) => (
-                        <h2 className="text-base font-bold mt-2 mb-1.5">{children}</h2>
-                    ),
-                    h3: ({ children }) => (
-                        <h3 className="text-sm font-bold mt-2 mb-1">{children}</h3>
-                    ),
+                    h1: ({ children }) => <h1 className="text-lg font-bold mt-3 mb-2">{children}</h1>,
+                    h2: ({ children }) => <h2 className="text-base font-bold mt-2 mb-1.5">{children}</h2>,
+                    h3: ({ children }) => <h3 className="text-sm font-bold mt-2 mb-1">{children}</h3>,
                     // Paragraphs
                     p: ({ children }) => <p className="mb-2 last:mb-0">{children}</p>,
                     // Lists
@@ -32,7 +26,7 @@ export const MarkdownMessage = ({ content, className }: MarkdownMessageProps) =>
                     // Code
                     code: ({ className, children, ...props }: any) => {
                         // Block code elements have className like 'language-*', inline code doesn't
-                        const isInline = !className?.startsWith('language-');
+                        const isInline = !className?.startsWith("language-");
                         return isInline ? (
                             <code className="bg-muted/60 px-1.5 py-0.5 rounded text-xs font-mono" {...props}>
                                 {children}
@@ -44,9 +38,7 @@ export const MarkdownMessage = ({ content, className }: MarkdownMessageProps) =>
                         );
                     },
                     pre: ({ children }) => (
-                        <pre className="bg-muted/60 p-2 rounded text-xs font-mono overflow-x-auto mb-2">
-                            {children}
-                        </pre>
+                        <pre className="bg-muted/60 p-2 rounded text-xs font-mono overflow-x-auto mb-2">{children}</pre>
                     ),
                     // Emphasis
                     strong: ({ children }) => <strong className="font-bold">{children}</strong>,
@@ -55,16 +47,16 @@ export const MarkdownMessage = ({ content, className }: MarkdownMessageProps) =>
                     a: ({ href, children }) => {
                         // Validate href to prevent XSS via javascript: or data: schemes
                         // Also prevent protocol-relative URLs like //evil.com
-                        const isValidHref = href && (
-                            href.startsWith('http://') || 
-                            href.startsWith('https://') || 
-                            (href.startsWith('/') && !href.startsWith('//'))
-                        );
+                        const isValidHref =
+                            href &&
+                            (href.startsWith("http://") ||
+                                href.startsWith("https://") ||
+                                (href.startsWith("/") && !href.startsWith("//")));
                         if (!isValidHref) {
                             return <span>{children}</span>;
                         }
-                        
-                        const isExternal = href.startsWith('http://') || href.startsWith('https://');
+
+                        const isExternal = href.startsWith("http://") || href.startsWith("https://");
                         return (
                             <a
                                 href={href}

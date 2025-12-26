@@ -7,14 +7,14 @@ export const CHATBOT_CONFIG = {
     TYPING_SPEED_MS: 30,
     AUTO_SCROLL_BEHAVIOR: "smooth" as ScrollBehavior,
     MAX_MESSAGE_LENGTH: 500,
-    
+
     // Storage
     STORAGE_KEY: "chatbot_conversation_history",
     MAX_STORED_MESSAGES: 50,
-    
+
     // Rate Limiting (client-side)
     MIN_MESSAGE_INTERVAL_MS: 1000,
-    
+
     // Quick Prompts
     SUGGESTED_PROMPTS: [
         "What are Froilan's technical skills?",

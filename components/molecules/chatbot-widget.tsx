@@ -69,7 +69,7 @@ export const ChatbotWidget = () => {
         if (abortControllerRef.current) {
             abortControllerRef.current.abort();
         }
-        
+
         abortControllerRef.current = new AbortController();
         const { signal } = abortControllerRef.current;
 
@@ -85,17 +85,17 @@ export const ChatbotWidget = () => {
                 }
                 break;
             }
-            
+
             currentText += words[i] + (i < words.length - 1 ? " " : "");
             setStreamingContent(currentText);
-            
+
             // Create a cancellable promise for the timeout
             await new Promise<void>((resolve) => {
                 typingTimeoutRef.current = setTimeout(() => {
                     typingTimeoutRef.current = null;
                     resolve();
                 }, CHATBOT_CONFIG.TYPING_SPEED_MS);
-                
+
                 // Setup abort listener to clear timeout and resolve immediately
                 const abortHandler = () => {
                     if (typingTimeoutRef.current) {
@@ -104,11 +104,11 @@ export const ChatbotWidget = () => {
                     }
                     resolve();
                 };
-                
+
                 if (signal.aborted) {
                     abortHandler();
                 } else {
-                    signal.addEventListener('abort', abortHandler, { once: true });
+                    signal.addEventListener("abort", abortHandler, { once: true });
                 }
             });
         }
@@ -118,16 +118,13 @@ export const ChatbotWidget = () => {
 
     const handleSend = async (messageText?: string) => {
         const textToSend = messageText || input.trim();
-        
+
         if (!textToSend || isLoading) return;
 
         // Client-side rate limiting with user feedback (check early to avoid unnecessary work)
         const now = Date.now();
         if (now - lastMessageTime < CHATBOT_CONFIG.MIN_MESSAGE_INTERVAL_MS) {
-            setMessages((prev) => [
-                ...prev,
-                { role: "assistant", content: ERROR_MESSAGES.RATE_LIMIT_CLIENT },
-            ]);
+            setMessages((prev) => [...prev, { role: "assistant", content: ERROR_MESSAGES.RATE_LIMIT_CLIENT }]);
             return;
         }
 
@@ -144,7 +141,7 @@ export const ChatbotWidget = () => {
         const sanitizedInput = sanitizeInput(textToSend);
         const userMessage: ChatMessage = { role: "user", content: sanitizedInput };
         const newMessages = [...messages, userMessage];
-        
+
         setMessages(newMessages);
         setInput("");
         setIsLoading(true);
@@ -250,7 +247,7 @@ export const ChatbotWidget = () => {
                     </Button>
                 </div>
 
-                <div 
+                <div
                     className="flex-1 overflow-y-auto p-4 space-y-4"
                     role="log"
                     aria-live="polite"
@@ -262,7 +259,7 @@ export const ChatbotWidget = () => {
                             <Bot size={48} className="mx-auto mb-4 opacity-50" />
                             <p>Hi! I&apos;m Froilan&apos;s AI assistant.</p>
                             <p className="mt-1">Ask me about his skills, projects, or experience!</p>
-                            
+
                             {showSuggestions && (
                                 <div className="mt-6 space-y-2">
                                     <p className="text-xs font-medium flex items-center justify-center gap-2">
@@ -369,10 +366,10 @@ export const ChatbotWidget = () => {
                             )}
                             aria-label="Type your message"
                         />
-                        <Button 
-                            onClick={() => handleSend()} 
-                            disabled={!input.trim() || isLoading} 
-                            size="sm" 
+                        <Button
+                            onClick={() => handleSend()}
+                            disabled={!input.trim() || isLoading}
+                            size="sm"
                             className="px-3"
                             aria-label="Send message"
                         >
