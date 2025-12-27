@@ -35,9 +35,23 @@ jobs:
         env:
           GH_PAT: ${{ secrets.GH_PAT }}
         run: |
-          # Get a list of public repositories that are not forks
-          REPOS=$(curl -H "Authorization: token $GH_PAT" -s "https://api.github.com/user/repos?per_page=100" | jq -r '.[] | select(.fork == false) | .full_name') || echo "Error fetching repositories"
+          # Get a list of public repositories that are not forks (paginate over all pages)
+          REPOS=""
+          PAGE=1
+          while true; do
+            PAGE_REPOS=$(curl -H "Authorization: token $GH_PAT" -s "https://api.github.com/user/repos?per_page=100&page=$PAGE" | jq -r '.[] | select(.fork == false) | .full_name') || {
+              echo "Error fetching repositories on page $PAGE"
+              break
+            }
 
+            # If no repositories are returned, we've reached the end
+            if [ -z "$PAGE_REPOS" ]; then
+              break
+            fi
+
+            REPOS="$REPOS $PAGE_REPOS"
+            PAGE=$((PAGE + 1))
+          done
           mkdir -p public-repos
           cd public-repos
 
