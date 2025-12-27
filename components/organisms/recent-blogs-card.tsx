@@ -52,11 +52,7 @@ async function RecentBlogsCard({ className }: { className?: string }) {
                     ) : (
                         <div className="w-full flex flex-col gap-4">
                             {posts.map((post) => (
-                                <Link
-                                    key={post.id}
-                                    href={`/blog/${post.id}`}
-                                    className="flex flex-col gap-1 group"
-                                >
+                                <Link key={post.id} href={`/blog/${post.id}`} className="flex flex-col gap-1 group">
                                     <h1 className="text-sm font-medium group-hover:underline underline-offset-2 line-clamp-1">
                                         {post.title}
                                     </h1>
@@ -64,10 +60,16 @@ async function RecentBlogsCard({ className }: { className?: string }) {
                                         {post.content.substring(0, 150)}...
                                     </p>
                                     <div className="flex flex-wrap gap-2 items-center mt-1">
-                                        <Badge variant="outline" className="w-fit text-[10px] font-normal px-1.5 py-0 h-5">
+                                        <Badge
+                                            variant="outline"
+                                            className="w-fit text-[10px] font-normal px-1.5 py-0 h-5"
+                                        >
                                             {formatDistance(new Date(post.created_at), new Date())}
                                         </Badge>
-                                        <Badge variant="outline" className="w-fit text-[10px] font-normal px-1.5 py-0 h-5">
+                                        <Badge
+                                            variant="outline"
+                                            className="w-fit text-[10px] font-normal px-1.5 py-0 h-5"
+                                        >
                                             {post.likes} likes
                                         </Badge>
                                     </div>
