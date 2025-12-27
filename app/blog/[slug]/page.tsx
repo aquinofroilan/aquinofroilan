@@ -1,26 +1,41 @@
-import { ArrowLeft } from "lucide-react";
+import { getBlogPostById } from "@/actions";
+import { notFound } from "next/navigation";
 import Link from "next/link";
+import { ArrowLeft } from "lucide-react";
+import { MarkdownContent } from "@/components/molecules/markdown-content";
+import BlogInteractions from "./blog-interactions";
 
 const Blog = async ({ params }: { params: Promise<{ slug: string }> }) => {
     const slug = (await params).slug;
+    const post = await getBlogPostById(slug);
+
+    if (!post) {
+        notFound();
+    }
+
     return (
-        <main className="py-10 w-11/12 max-w-5xl gap-2 flex flex-col md:grid md:grid-cols-2">
+        <main className="py-10 w-11/12 max-w-7xl gap-6 flex flex-col">
             <Link
-                href={"/"}
+                href={"/blog"}
                 className="flex items-center gap-2 text-neutral-500 hover:text-neutral-700 dark:text-neutral-400 dark:hover:text-neutral-200 transition duration-200"
             >
                 <ArrowLeft size={15} />
-                <h1 className="text-sm">Back</h1>
+                <h1 className="text-sm">Back to Blog</h1>
             </Link>
-            <div className="grid place-content-center col-span-2 w-full h-full">
-                <h1 className="text-2xl text-center font-bold">Blogs</h1>
-                <p className="text-center text-neutral-500 dark:text-neutral-400">
-                    This page is currently under construction. I am working on creating a blog section where I can share
-                    my thoughts, experiences, and insights on various topics. Stay tuned for updates. In the meantime,
-                    feel free to check out my other pages.
-                </p>
-                <p className="text-center text-neutral-500 dark:text-neutral-400">Slug: {slug}</p>
-            </div>
+
+            <article className="flex flex-col gap-6">
+                <BlogInteractions
+                    postId={post.id}
+                    initialLikes={post.likes}
+                    formattedDate={new Date(post.created_at).toLocaleDateString()}
+                >
+                    <h1 className="text-4xl font-bold">{post.title}</h1>
+                </BlogInteractions>
+
+                <div className="prose prose-neutral dark:prose-invert max-w-none">
+                    <MarkdownContent content={post.content} />
+                </div>
+            </article>
         </main>
     );
 };

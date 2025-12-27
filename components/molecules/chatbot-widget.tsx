@@ -7,7 +7,7 @@ import { cn } from "@/lib/utils";
 import { getChatResponse, type ChatMessage } from "@/actions";
 import { CHATBOT_CONFIG, ERROR_MESSAGES } from "@/lib/chatbot-config";
 import { chatbotStorage, validateInput, sanitizeInput } from "@/lib/chatbot-utils";
-import { MarkdownMessage } from "./markdown-message";
+import { MarkdownContent } from "./markdown-content";
 
 export const ChatbotWidget = () => {
     const [isOpen, setIsOpen] = useState(false);
@@ -301,7 +301,7 @@ export const ChatbotWidget = () => {
                                 )}
                             >
                                 {message.role === "assistant" ? (
-                                    <MarkdownMessage content={message.content} />
+                                    <MarkdownContent content={message.content} />
                                 ) : (
                                     <p className="whitespace-pre-wrap">{message.content}</p>
                                 )}
@@ -320,7 +320,7 @@ export const ChatbotWidget = () => {
                                 <Bot size={14} className="text-primary-foreground" />
                             </div>
                             <div className="max-w-[80%] px-3 py-2 rounded-lg text-sm bg-muted">
-                                <MarkdownMessage content={streamingContent} />
+                                <MarkdownContent content={streamingContent} />
                                 <span className="inline-block w-2 h-4 bg-foreground/50 animate-pulse ml-1" />
                             </div>
                         </div>
