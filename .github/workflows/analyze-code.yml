@@ -142,5 +142,5 @@ jobs:
           rm temp_block.txt
 
           git add output/cloc-output.json README.md
-          git commit -m "chore: update README and cloc-output.json with latest code stats" || echo "No changes to commit"
+          git commit -m "chore: update README and cloc-output.json with latest code stats" || echo "No new statistics to update"
           git push origin HEAD
