@@ -1,9 +1,25 @@
-# **👋 Hello there!**
+# Hey There <img src="https://raw.githubusercontent.com/Tarikul-Islam-Anik/Animated-Fluent-Emojis/master/Emojis/Hand%20gestures/Love-You%20Gesture.png" alt="Love-You Gesture" width="35" height="35" />
 
-Hello World! I am **Froilan Aquino**, web-developer based on Caloocan City Philippines. I am passionate about things like new emerging technologies like AI Advancements.
+I'm Froilan, a **Software Developer** based in the Philippines working with  
+![JavaScript](https://img.shields.io/badge/JavaScript-F7DF1E?style=flat&logo=javascript&logoColor=black)
+![TypeScript](https://img.shields.io/badge/TypeScript-3178C6?style=flat&logo=typescript&logoColor=white)
+& the React/Next.js ecosystem.
 
-As a web developer, I am passionate in using modern JavaScript technologies, particularly React and its potent Next.js framework, which powers this website, to create scalable, maintainable, and smart apps. I use solutions like Supabase for database orchestration integration and Firebase for seamless authentication when it comes to service and backend architecture.
+With a passion for clean design and functional interfaces, I build web applications while exploring new technologies and the creative side of development.
 
-In 2025, I earned my bachelor's degree in information technology, but I'm constantly learning new things outside of the classroom. I actively use websites like YouTube and FreeCode as well as AI-based applications like ChatGPT since I take a very self-directed approach to learning. and Claude to reinforce concepts and broaden my comprehension. Because I'm naturally curious, I usually use Dev.to, Medium, and technical discussions on GitHub and Stack Overflow to research topics. records.
+### Code in Numbers
+> Lines written across my repositories. Auto-updated weekly.
 
-I am currently broadening my technical foundation by studying system-level programming languages such as C and Go, with the aim of deepening my understanding of low-level operations and enhancing my algorithmic thinking. In parallel, I am exploring Java and Kotlin to adopt a native-first approach to mobile development.
+<!-- LANGUAGES BREAKDOWN START -->
+```
+[ LANGUAGES BREAKDOWN ]
+
+TypeScript   --> 0 lines
+JavaScript   --> 0 lines
+
+[ TOTAL LINES OF CODE: 0 ]
+```
+<!-- LANGUAGES BREAKDOWN END -->
+
+### Want to connect?
+Find me on [GitHub](https://github.com/aquinofroilan) or check out my [portfolio](https://aquinofroilan.vercel.app).
