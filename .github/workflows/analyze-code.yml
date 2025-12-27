@@ -39,9 +39,22 @@ jobs:
           REPOS=""
           PAGE=1
           while true; do
-            PAGE_REPOS=$(curl -H "Authorization: token $GH_PAT" -s "https://api.github.com/user/repos?per_page=100&page=$PAGE" | jq -r '.[] | select(.fork == false) | .full_name') || {
-              echo "Error fetching repositories on page $PAGE"
-              break
+            # Fetch repositories with proper error handling for network failures and rate limiting
+            RESPONSE=$(curl -H "Authorization: token $GH_PAT" -s -w "\n%{http_code}" "https://api.github.com/user/repos?per_page=100&page=$PAGE&visibility=public")
+            HTTP_CODE=$(echo "$RESPONSE" | tail -n1)
+            BODY=$(echo "$RESPONSE" | sed '$d')
+
+            if [ "$HTTP_CODE" != "200" ]; then
+              echo "Error: GitHub API returned HTTP $HTTP_CODE on page $PAGE"
+              if [ "$HTTP_CODE" = "403" ]; then
+                echo "This may be due to rate limiting. Please try again later."
+              fi
+              exit 1
+            fi
+
+            PAGE_REPOS=$(echo "$BODY" | jq -r '.[] | select(.fork == false) | .full_name') || {
+              echo "Error parsing repositories on page $PAGE"
+              exit 1
             }
 
             # If no repositories are returned, we've reached the end
@@ -123,7 +136,7 @@ jobs:
 
             if [[ "$HL" == *",$LANG,"* ]]; then
               FORMATTED=$(format_number "$LINES")
-              FORMATTED_BREAKDOWN+=$(printf "%-12s --> %s lines\n" "$LANG" "$FORMATTED")$'\n'
+              FORMATTED_BREAKDOWN+=$(printf "%-12s --> %s lines\n" "$LANG" "$FORMATTED")
             else
               OTHER_LINES=$((OTHER_LINES + LINES))
             fi
@@ -138,8 +151,11 @@ jobs:
           # "Others" includes all non-highlighted languages that cloc reported
           if [[ $OTHER_LINES -gt 0 ]]; then
             FORMATTED_OTHER=$(format_number "$OTHER_LINES")
-            FORMATTED_BREAKDOWN+=$(printf "%-12s --> %s lines\n" "Others" "$FORMATTED_OTHER")$'\n'
+            FORMATTED_BREAKDOWN+=$(printf "%-12s --> %s lines\n" "Others" "$FORMATTED_OTHER")
           fi
+
+          # Remove trailing newline from FORMATTED_BREAKDOWN
+          FORMATTED_BREAKDOWN="${FORMATTED_BREAKDOWN%$'\n'}"
 
           # Format total
           FORMATTED_TOTAL=$(format_number "$TOTAL_LINES")
