@@ -43,7 +43,7 @@ export default function Home() {
                         <ProjectsCard className="h-full" />
                     </FadeIn>
                     <FadeIn delay={0.3} className="h-auto overflow-visible">
-                        <RecentBlogsCard className="h-full overflow-scroll col-span-2 row-span-1" />
+                        <RecentBlogsCard className="h-full overflow-auto col-span-2 row-span-1" />
                     </FadeIn>
                     <FadeIn delay={0.35} className="h-auto overflow-visible">
                         <TrascendingCodeCard className="h-full" />
