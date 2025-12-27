@@ -1,5 +1,5 @@
 import * as motion from "motion/react-client";
-import { Badge, BentoGridItem } from "@/components/ui";
+import { Badge, Card, CardHeader, CardTitle, CardContent } from "@/components/ui";
 import Link from "next/link";
 import { ArrowRightCircle, BookOpen } from "lucide-react";
 import { getRecentBlogPosts } from "@/actions";
@@ -28,12 +28,13 @@ async function RecentBlogsCard({ className }: { className?: string }) {
             }}
             className={className}
         >
-            <BentoGridItem
-                className="flex flex-col gap-3 h-full w-full"
-                icon={<BookOpen size={15} />}
-                title={
-                    <div className="flex justify-between items-center w-full">
-                        <h1 className="text-lg">Recent Blogs</h1>
+            <Card className="w-full h-full">
+                <CardHeader>
+                    <CardTitle className="flex gap-2 items-center justify-between w-full">
+                        <div className="flex items-center gap-2">
+                            <BookOpen size={15} />
+                            <span className="text-lg">Recent Blogs</span>
+                        </div>
                         <Link
                             href={"/blog"}
                             className="text-xs md:text-base text-neutral-500 hover:text-neutral-700 dark:text-neutral-400 dark:hover:text-neutral-200 transition duration-200 flex items-center gap-2"
@@ -41,43 +42,41 @@ async function RecentBlogsCard({ className }: { className?: string }) {
                             View All
                             <ArrowRightCircle size={15} />
                         </Link>
-                    </div>
-                }
-                description={
-                    posts.length === 0 ? (
+                    </CardTitle>
+                </CardHeader>
+                <CardContent>
+                    {posts.length === 0 ? (
                         <div className="text-sm text-neutral-500 dark:text-neutral-400">
                             No blog posts yet. Check back soon!
                         </div>
                     ) : (
-                        <div className="flex flex-col gap-2">
+                        <div className="w-full flex flex-col gap-4">
                             {posts.map((post) => (
                                 <Link
                                     key={post.id}
                                     href={`/blog/${post.id}`}
-                                    className="flex-col flex gap-2 items-start p-5 rounded-md border transition duration-200 hover:border-neutral-300 dark:hover:border-neutral-700"
+                                    className="flex flex-col gap-1 group"
                                 >
-                                    <section className="flex justify-between w-full items-center">
-                                        <h3 className="text-base font-semibold hover:underline underline-offset-2 line-clamp-1">
-                                            {post.title}
-                                        </h3>
-                                    </section>
-                                    <p className="text-xs text-neutral-600 dark:text-neutral-400 line-clamp-2">
+                                    <h1 className="text-sm font-medium group-hover:underline underline-offset-2 line-clamp-1">
+                                        {post.title}
+                                    </h1>
+                                    <p className="text-xs text-muted-foreground line-clamp-2">
                                         {post.content.substring(0, 150)}...
                                     </p>
-                                    <div className="flex flex-wrap gap-2 items-center">
-                                        <Badge variant="outline" className="w-fit text-xs font-normal">
+                                    <div className="flex flex-wrap gap-2 items-center mt-1">
+                                        <Badge variant="outline" className="w-fit text-[10px] font-normal px-1.5 py-0 h-5">
                                             {formatDistance(new Date(post.created_at), new Date())}
                                         </Badge>
-                                        <Badge variant="outline" className="w-fit text-xs font-normal">
+                                        <Badge variant="outline" className="w-fit text-[10px] font-normal px-1.5 py-0 h-5">
                                             {post.likes} likes
                                         </Badge>
                                     </div>
                                 </Link>
                             ))}
                         </div>
-                    )
-                }
-            />
+                    )}
+                </CardContent>
+            </Card>
         </motion.div>
     );
 }
