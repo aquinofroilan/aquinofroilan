@@ -14,10 +14,13 @@ interface BlogInteractionsProps {
 export default function BlogInteractions({ children, postId, initialLikes, formattedDate }: BlogInteractionsProps) {
     const [likes, setLikes] = useState(initialLikes);
     const [hasLiked, setHasLiked] = useState(false);
+    const [isLiking, setIsLiking] = useState(false);
     const [copied, setCopied] = useState(false);
 
     const handleLike = async () => {
-        if (hasLiked) return;
+        if (hasLiked || isLiking) return;
+
+        setIsLiking(true);
 
         try {
             const response = await fetch("/api/blog/like", {
@@ -35,6 +38,8 @@ export default function BlogInteractions({ children, postId, initialLikes, forma
             }
         } catch (error) {
             console.error("Error liking post:", error);
+        } finally {
+            setIsLiking(false);
         }
     };
 
@@ -78,7 +83,7 @@ export default function BlogInteractions({ children, postId, initialLikes, forma
             </div>
 
             <div className="flex gap-3">
-                <Button onClick={handleLike} disabled={hasLiked} size={"icon"} className="cursor-pointer " aria-label="Like this post">
+                <Button onClick={handleLike} disabled={hasLiked || isLiking} size={"icon"} className="cursor-pointer " aria-label="Like this post">
                     <Heart size={18} className={hasLiked ? "fill-current" : ""} />
                 </Button>
 

@@ -3,7 +3,7 @@ import { Badge, Card, CardHeader, CardTitle, CardContent } from "@/components/ui
 import Link from "next/link";
 import { ArrowRightCircle, BookOpen } from "lucide-react";
 import { getRecentBlogPosts } from "@/actions";
-import { formatDistance } from "@/lib/utils";
+import { formatDistance, stripMarkdown } from "@/lib/utils";
 
 /**
  * Render a motion-enabled "Recent Blogs" card that displays a header with a "View All" link and up to four recent blog entries.
@@ -57,7 +57,7 @@ async function RecentBlogsCard({ className }: { className?: string }) {
                                         {post.title}
                                     </h1>
                                     <p className="text-xs text-muted-foreground line-clamp-2">
-                                        {post.content.substring(0, 150)}...
+                                        {stripMarkdown(post.content, 150)}
                                     </p>
                                     <div className="flex flex-wrap gap-2 items-center mt-1">
                                         <Badge

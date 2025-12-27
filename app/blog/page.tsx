@@ -1,7 +1,7 @@
 import { ArrowLeft } from "lucide-react";
 import Link from "next/link";
 import { getAllBlogPosts } from "@/actions";
-import { formatDistance } from "@/lib/utils";
+import { formatDistance, stripMarkdown } from "@/lib/utils";
 
 async function Blog() {
     const posts = await getAllBlogPosts();
@@ -40,7 +40,7 @@ async function Blog() {
                                         {post.title}
                                     </h2>
                                     <p className="text-sm text-neutral-500 dark:text-neutral-400 line-clamp-3">
-                                        {post.content.substring(0, 200)}...
+                                        {stripMarkdown(post.content, 200)}
                                     </p>
                                     <div className="flex items-center gap-4 text-xs text-neutral-500 dark:text-neutral-400">
                                         <span>{formatDistance(new Date(post.created_at), new Date())}</span>

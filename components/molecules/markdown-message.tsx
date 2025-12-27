@@ -39,11 +39,8 @@ export const MarkdownContent = ({ content, className }: MarkdownContentProps) =>
                             </code>
                         );
                     },
-                    pre: ({ children }) => (
-                        <pre className="bg-muted/60 p-2 rounded-lg text-xs font-mono overflow-x-auto mb-2">
-                            {children}
-                        </pre>
-                    ),
+                    // Note: rehype-highlight already wraps code blocks in pre elements
+                    // So we don't need to customize pre styling here
                     // Emphasis
                     strong: ({ children }) => <strong className="font-bold">{children}</strong>,
                     em: ({ children }) => <em className="italic">{children}</em>,
