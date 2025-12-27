@@ -8,16 +8,19 @@ I'm Froilan, a **Software Developer** based in the Philippines working with
 With a passion for clean design and functional interfaces, I build web applications while exploring new technologies and the creative side of development.
 
 ### Code in Numbers
+
 > Lines written across my repositories. Auto-updated weekly.
 
 <!-- LANGUAGES BREAKDOWN START -->
 ```
 [ LANGUAGES BREAKDOWN ]
 
-TypeScript   --> 49,118 linesPython       --> 10,672 linesJava         --> 2,150 linesJavaScript   --> 424 linesOthers       --> 1,091 lines
+
+
 [ TOTAL LINES OF CODE: 63,455 ]
 ```
 <!-- LANGUAGES BREAKDOWN END -->
 
 ### Want to connect?
+
 Find me on [GitHub](https://github.com/aquinofroilan) or check out my [portfolio](https://aquinofroilan.vercel.app).

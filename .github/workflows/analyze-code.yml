@@ -127,31 +127,33 @@ jobs:
           OTHER_LINES=0
           FORMATTED_BREAKDOWN=""
 
-          # Normalize the highlight list for exact, comma-bounded matching (no false partial matches)
-          HL=",$(echo "$HIGHLIGHT_LANGS" | tr -d ' '),"
-
           # Create a temporary file to build the formatted breakdown
           BREAKDOWN_FILE=$(mktemp)
+          OTHER_LINES=0
 
-          while read -r entry; do
+          # Process languages using jq to determine highlighting
+          # We pass HIGHLIGHT_LANGS to jq to handle the logic there
+          jq -c --arg hl "$HIGHLIGHT_LANGS" '
+            ($hl | split(",")) as $hls |
+            to_entries |
+            map(select(.key != "header" and .key != "SUM")) |
+            map({lang: .key, lines: .value.code}) |
+            map(select(.lines > 0)) |
+            sort_by(.lines) | reverse |
+            .[] |
+            {lang: .lang, lines: .lines, is_highlighted: ($hls | index(.lang) != null)}
+          ' output/cloc-output.json | while read -r entry; do
             LANG=$(echo "$entry" | jq -r '.lang')
             LINES=$(echo "$entry" | jq -r '.lines')
+            IS_HL=$(echo "$entry" | jq -r '.is_highlighted')
 
-            if [[ "$HL" == *",$LANG,"* ]]; then
+            if [[ "$IS_HL" == "true" ]]; then
               FORMATTED=$(format_number "$LINES")
               printf "%-12s --> %s lines\n" "$LANG" "$FORMATTED" >> "$BREAKDOWN_FILE"
             else
               OTHER_LINES=$((OTHER_LINES + LINES))
             fi
-          done < <(
-            jq -c 'to_entries
-              | map(select(.key != "header" and .key != "SUM"))
-              | map({lang: .key, lines: .value.code})
-              | map(select(.lines > 0))
-              | sort_by(.value.code | tonumber)
-              | reverse
-              | .[]' output/cloc-output.json
-          )
+          done
 
           # "Others" includes all non-highlighted languages that cloc reported
           if [[ $OTHER_LINES -gt 0 ]]; then
