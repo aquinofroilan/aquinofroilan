@@ -131,18 +131,11 @@ jobs:
           BREAKDOWN_FILE=$(mktemp)
           OTHER_LINES=0
 
+          echo "Highlighting languages: $HIGHLIGHT_LANGS"
+
           # Process languages using jq to determine highlighting
           # We pass HIGHLIGHT_LANGS to jq to handle the logic there
-          jq -c --arg hl "$HIGHLIGHT_LANGS" '
-            ($hl | split(",")) as $hls |
-            to_entries |
-            map(select(.key != "header" and .key != "SUM")) |
-            map({lang: .key, lines: .value.code}) |
-            map(select(.lines > 0)) |
-            sort_by(.lines) | reverse |
-            .[] |
-            {lang: .lang, lines: .lines, is_highlighted: ($hls | index(.lang) != null)}
-          ' output/cloc-output.json | while read -r entry; do
+          while read -r entry; do
             LANG=$(echo "$entry" | jq -r '.lang')
             LINES=$(echo "$entry" | jq -r '.lines')
             IS_HL=$(echo "$entry" | jq -r '.is_highlighted')
@@ -153,7 +146,17 @@ jobs:
             else
               OTHER_LINES=$((OTHER_LINES + LINES))
             fi
-          done
+          done < <(jq -c --arg hl "$HIGHLIGHT_LANGS" '
+            ($hl | split(",")) as $hls |
+            to_entries |
+            map(select(.key != "header" and .key != "SUM")) |
+            map({lang: .key, lines: .value.code}) |
+            map(select(.lines > 0)) |
+            sort_by(.lines) | reverse |
+            .[] |
+            .lang as $l |
+            {lang: $l, lines: .lines, is_highlighted: ($hls | index($l) != null)}
+          ' output/cloc-output.json)
 
           # "Others" includes all non-highlighted languages that cloc reported
           if [[ $OTHER_LINES -gt 0 ]]; then

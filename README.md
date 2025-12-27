@@ -12,6 +12,7 @@ With a passion for clean design and functional interfaces, I build web applicati
 > Lines written across my repositories. Auto-updated weekly.
 
 <!-- LANGUAGES BREAKDOWN START -->
+
 ```
 [ LANGUAGES BREAKDOWN ]
 
@@ -19,6 +20,7 @@ With a passion for clean design and functional interfaces, I build web applicati
 
 [ TOTAL LINES OF CODE: 63,455 ]
 ```
+
 <!-- LANGUAGES BREAKDOWN END -->
 
 ### Want to connect?
