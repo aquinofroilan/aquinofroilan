@@ -89,9 +89,23 @@ jobs:
             printf "%'d\n" "$1"
           }
 
-          # Grab total from cloc
-          TOTAL_LINES=$(jq '.SUM.code // 0' output/cloc-output.json)
+          # Validate cloc output JSON before processing
+          if [ ! -s output/cloc-output.json ]; then
+            echo "Error: output/cloc-output.json does not exist or is empty."
+            exit 1
+          fi
 
+          if ! jq empty output/cloc-output.json >/dev/null 2>&1; then
+            echo "Error: output/cloc-output.json is not valid JSON."
+            exit 1
+          fi
+
+          # Grab total from cloc (require a numeric SUM.code)
+          TOTAL_LINES=$(jq -r '.SUM.code' output/cloc-output.json 2>/dev/null || echo "")
+          if ! [[ "$TOTAL_LINES" =~ ^[0-9]+$ ]]; then
+            echo "Error: .SUM.code is missing or not a non-negative integer in output/cloc-output.json."
+            exit 1
+          fi
           OTHER_LINES=0
           FORMATTED_BREAKDOWN=""
 
