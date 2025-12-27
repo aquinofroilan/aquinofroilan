@@ -13,3 +13,4 @@ export { ProfileCard } from "./profile-card";
 export { Footer } from "./footer";
 export { ContactMe } from "./contact-me-card";
 export { CompetenciesCard } from "./competencies-card";
+export { default as RecentBlogsCard } from "./recent-blogs-card";

@@ -11,6 +11,7 @@ import {
     WakatimeStatsEditors,
     WakatimeStatsOS,
     GithubStatsCard,
+    RecentBlogsCard,
 } from "@/components/organisms/";
 import ProjectsCard from "@/components/organisms/projects-card";
 import { Masonry, FadeIn } from "@/components/ui";
@@ -40,6 +41,9 @@ export default function Home() {
                     </FadeIn>
                     <FadeIn delay={0.3} className="h-auto overflow-visible">
                         <ProjectsCard className="h-full" />
+                    </FadeIn>
+                    <FadeIn delay={0.3} className="h-auto overflow-visible">
+                        <RecentBlogsCard className="h-full overflow-auto col-span-2 row-span-1" />
                     </FadeIn>
                     <FadeIn delay={0.35} className="h-auto overflow-visible">
                         <TrascendingCodeCard className="h-full" />
