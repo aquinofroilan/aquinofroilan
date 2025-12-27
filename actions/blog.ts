@@ -11,7 +11,7 @@ export async function getAllBlogPosts(): Promise<BlogPost[]> {
 
     try {
         const result = await turso.execute(
-            "SELECT id, title, content, created_at, likes FROM blog_posts ORDER BY created_at DESC"
+            "SELECT id, title, content, created_at, likes FROM blog_posts ORDER BY created_at DESC",
         );
 
         return result.rows.map((row) => ({

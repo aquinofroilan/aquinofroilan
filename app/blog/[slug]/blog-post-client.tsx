@@ -3,9 +3,7 @@
 import { ArrowLeft, Heart, Share2, Check } from "lucide-react";
 import Link from "next/link";
 import { useState } from "react";
-import ReactMarkdown from "react-markdown";
-import rehypeHighlight from "rehype-highlight";
-import remarkGfm from "remark-gfm";
+import { MarkdownContent } from "@/components/molecules/markdown-content";
 
 interface BlogPost {
     id: string;
@@ -103,9 +101,7 @@ export default function BlogPostClient({ post }: { post: BlogPost }) {
                         }`}
                     >
                         <Heart size={18} className={hasLiked ? "fill-current" : ""} />
-                        <span className="text-sm font-medium">
-                            {hasLiked ? "Liked" : "Like"}
-                        </span>
+                        <span className="text-sm font-medium">{hasLiked ? "Liked" : "Like"}</span>
                     </button>
 
                     <button
@@ -127,56 +123,7 @@ export default function BlogPostClient({ post }: { post: BlogPost }) {
                 </div>
 
                 <div className="prose prose-neutral dark:prose-invert max-w-none">
-                    <ReactMarkdown
-                        remarkPlugins={[remarkGfm]}
-                        rehypePlugins={[rehypeHighlight]}
-                        components={{
-                            h1: ({ ...props }) => (
-                                <h1 className="text-3xl font-bold mt-8 mb-4" {...props} />
-                            ),
-                            h2: ({ ...props }) => (
-                                <h2 className="text-2xl font-bold mt-6 mb-3" {...props} />
-                            ),
-                            h3: ({ ...props }) => (
-                                <h3 className="text-xl font-bold mt-4 mb-2" {...props} />
-                            ),
-                            p: ({ ...props }) => (
-                                <p className="mb-4 leading-7" {...props} />
-                            ),
-                            code: ({ className, children, ...props }) => {
-                                const match = /language-(\w+)/.exec(className || "");
-                                return match ? (
-                                    <code className={className} {...props}>
-                                        {children}
-                                    </code>
-                                ) : (
-                                    <code
-                                        className="bg-neutral-100 dark:bg-neutral-900 px-1.5 py-0.5 rounded text-sm"
-                                        {...props}
-                                    >
-                                        {children}
-                                    </code>
-                                );
-                            },
-                            pre: ({ ...props }) => (
-                                <pre className="bg-neutral-900 dark:bg-neutral-950 p-4 rounded-lg overflow-x-auto mb-4" {...props} />
-                            ),
-                            ul: ({ ...props }) => (
-                                <ul className="list-disc list-inside mb-4 space-y-2" {...props} />
-                            ),
-                            ol: ({ ...props }) => (
-                                <ol className="list-decimal list-inside mb-4 space-y-2" {...props} />
-                            ),
-                            blockquote: ({ ...props }) => (
-                                <blockquote className="border-l-4 border-neutral-300 dark:border-neutral-700 pl-4 italic my-4" {...props} />
-                            ),
-                            a: ({ ...props }) => (
-                                <a className="text-blue-600 dark:text-blue-400 hover:underline" {...props} />
-                            ),
-                        }}
-                    >
-                        {post.content}
-                    </ReactMarkdown>
+                    <MarkdownContent content={post.content} />
                 </div>
             </article>
         </main>

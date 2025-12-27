@@ -17,9 +17,6 @@ export async function POST(request: Request) {
         });
     } catch (error) {
         console.error("Error incrementing likes:", error);
-        return NextResponse.json(
-            { error: "Failed to increment likes" },
-            { status: 500 }
-        );
+        return NextResponse.json({ error: "Failed to increment likes" }, { status: 500 });
     }
 }

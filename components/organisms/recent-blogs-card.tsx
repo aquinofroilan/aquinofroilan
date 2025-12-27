@@ -65,16 +65,10 @@ async function RecentBlogsCard({ className }: { className?: string }) {
                                         {post.content.substring(0, 150)}...
                                     </p>
                                     <div className="flex flex-wrap gap-2 items-center">
-                                        <Badge
-                                            variant="outline"
-                                            className="w-fit text-xs font-normal"
-                                        >
+                                        <Badge variant="outline" className="w-fit text-xs font-normal">
                                             {formatDistance(new Date(post.created_at), new Date())}
                                         </Badge>
-                                        <Badge
-                                            variant="outline"
-                                            className="w-fit text-xs font-normal"
-                                        >
+                                        <Badge variant="outline" className="w-fit text-xs font-normal">
                                             {post.likes} likes
                                         </Badge>
                                     </div>

@@ -25,9 +25,7 @@ async function Blog() {
 
                 {posts.length === 0 ? (
                     <div className="text-center py-12">
-                        <p className="text-neutral-500 dark:text-neutral-400">
-                            No blog posts yet. Check back soon!
-                        </p>
+                        <p className="text-neutral-500 dark:text-neutral-400">No blog posts yet. Check back soon!</p>
                     </div>
                 ) : (
                     <div className="grid gap-4">
@@ -45,9 +43,7 @@ async function Blog() {
                                         {post.content.substring(0, 200)}...
                                     </p>
                                     <div className="flex items-center gap-4 text-xs text-neutral-500 dark:text-neutral-400">
-                                        <span>
-                                            {formatDistance(new Date(post.created_at), new Date())}
-                                        </span>
+                                        <span>{formatDistance(new Date(post.created_at), new Date())}</span>
                                         <span>•</span>
                                         <span>{post.likes} likes</span>
                                     </div>

@@ -26,9 +26,6 @@ export async function GET(request: Request) {
         });
     } catch (error) {
         console.error("Error in CRON job:", error);
-        return NextResponse.json(
-            { error: "Failed to generate blog post" },
-            { status: 500 }
-        );
+        return NextResponse.json({ error: "Failed to generate blog post" }, { status: 500 });
     }
 }

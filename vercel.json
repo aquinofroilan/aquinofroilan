@@ -1,8 +1,8 @@
 {
-  "crons": [
-    {
-      "path": "/api/cron/generate-blog",
-      "schedule": "0 10 * * 1,4"
-    }
-  ]
+    "crons": [
+        {
+            "path": "/api/cron/generate-blog",
+            "schedule": "0 10 * * 1,4"
+        }
+    ]
 }
