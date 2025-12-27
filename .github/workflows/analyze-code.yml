@@ -148,7 +148,7 @@ jobs:
 
           # Replace content between markers
           echo "$CODE_BLOCK" > temp_block.txt
-          sed -i '/<!-- LANGUAGES BREAKDOWN START -->/,/<!-- LANGUAGES BREAKDOWN END -->/{
+          sed -i.bak '/<!-- LANGUAGES BREAKDOWN START -->/,/<!-- LANGUAGES BREAKDOWN END -->/{
               //!d
               /<!-- LANGUAGES BREAKDOWN START -->/r temp_block.txt
           }' README.md
