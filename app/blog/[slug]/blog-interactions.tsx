@@ -78,11 +78,11 @@ export default function BlogInteractions({ children, postId, initialLikes, forma
             </div>
 
             <div className="flex gap-3">
-                <Button onClick={handleLike} disabled={hasLiked} size={"icon"} className="cursor-pointer ">
+                <Button onClick={handleLike} disabled={hasLiked} size={"icon"} className="cursor-pointer " aria-label="Like this post">
                     <Heart size={18} className={hasLiked ? "fill-current" : ""} />
                 </Button>
 
-                <Button onClick={handleShare} className="cursor-pointer " size={"icon"}>
+                <Button onClick={handleShare} className="cursor-pointer " size={"icon"} aria-label="Share this post">
                     {copied ? <Check size={18} /> : <Share2 size={18} />}
                 </Button>
             </div>
