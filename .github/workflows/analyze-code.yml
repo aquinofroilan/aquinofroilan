@@ -103,7 +103,7 @@ jobs:
           # Grab total from cloc (require a numeric SUM.code)
           TOTAL_LINES=$(jq -r '.SUM.code' output/cloc-output.json 2>/dev/null || echo "")
           if ! [[ "$TOTAL_LINES" =~ ^[0-9]+$ ]]; then
-            echo "Error: .SUM.code is missing or not a non-negative integer in output/cloc-output.json."
+            echo "Error: .SUM.code is missing or not a valid non-negative integer in output/cloc-output.json."
             exit 1
           fi
           OTHER_LINES=0
