@@ -143,4 +143,7 @@ jobs:
 
           git add output/cloc-output.json README.md
           git commit -m "chore: update README and cloc-output.json with latest code stats" || echo "No new statistics to update"
-          git push origin HEAD
+          git push origin HEAD || {
+            echo "Failed to push changes to origin. The branch may be protected or there may be merge conflicts.";
+            exit 1
+          }
