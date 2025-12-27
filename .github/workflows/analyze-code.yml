@@ -139,10 +139,17 @@ jobs:
             LANG=$(echo "$entry" | jq -r '.lang')
             LINES=$(echo "$entry" | jq -r '.lines')
             IS_HL=$(echo "$entry" | jq -r '.is_highlighted')
+            DISPLAY_LANG="$LANG"
+
+            if [[ "$LANG" == "Kotlin" ]]; then
+              DISPLAY_LANG="KT"
+            elif [[ "$LANG" == "Java" ]]; then
+              DISPLAY_LANG="JAVA"
+            fi
 
             if [[ "$IS_HL" == "true" ]]; then
               FORMATTED=$(format_number "$LINES")
-              printf "%-12s --> %s lines\n" "$LANG" "$FORMATTED" >> "$BREAKDOWN_FILE"
+              printf "%-12s --> %s lines\n" "$DISPLAY_LANG" "$FORMATTED" >> "$BREAKDOWN_FILE"
             else
               OTHER_LINES=$((OTHER_LINES + LINES))
             fi

@@ -17,7 +17,7 @@ With a passion for clean design and functional interfaces, I build web applicati
 
 TypeScript   --> 49,118 lines
 Python       --> 10,672 lines
-Java         --> 2,150 lines
+JAVA         --> 2,150 lines
 JavaScript   --> 424 lines
 Others       --> 1,091 lines
 
