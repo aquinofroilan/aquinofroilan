@@ -153,6 +153,7 @@ jobs:
               /<!-- LANGUAGES BREAKDOWN START -->/r temp_block.txt
           }' README.md
 
+          rm README.md.bak
           rm temp_block.txt
 
           git add output/cloc-output.json README.md
