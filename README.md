@@ -14,10 +14,8 @@ With a passion for clean design and functional interfaces, I build web applicati
 ```
 [ LANGUAGES BREAKDOWN ]
 
-TypeScript   --> 0 lines
-JavaScript   --> 0 lines
-
-[ TOTAL LINES OF CODE: 0 ]
+TypeScript   --> 49,118 linesPython       --> 10,672 linesJava         --> 2,150 linesJavaScript   --> 424 linesOthers       --> 1,091 lines
+[ TOTAL LINES OF CODE: 63,455 ]
 ```
 <!-- LANGUAGES BREAKDOWN END -->
 
