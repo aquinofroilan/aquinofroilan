@@ -1,5 +1,6 @@
 "use client";
 
+import { Button } from "@/components/ui";
 import { Heart, Share2, Check } from "lucide-react";
 import { useState } from "react";
 
@@ -10,12 +11,7 @@ interface BlogInteractionsProps {
     formattedDate: string;
 }
 
-export default function BlogInteractions({
-    children,
-    postId,
-    initialLikes,
-    formattedDate,
-}: BlogInteractionsProps) {
+export default function BlogInteractions({ children, postId, initialLikes, formattedDate }: BlogInteractionsProps) {
     const [likes, setLikes] = useState(initialLikes);
     const [hasLiked, setHasLiked] = useState(false);
     const [copied, setCopied] = useState(false);
@@ -82,35 +78,13 @@ export default function BlogInteractions({
             </div>
 
             <div className="flex gap-3">
-                <button
-                    onClick={handleLike}
-                    disabled={hasLiked}
-                    className={`flex items-center gap-2 px-4 py-2 rounded-lg border transition-all duration-200 ${
-                        hasLiked
-                            ? "bg-red-100 dark:bg-red-900/30 border-red-300 dark:border-red-700 text-red-700 dark:text-red-300"
-                            : "border-neutral-200 dark:border-neutral-800 hover:border-red-300 dark:hover:border-red-700 hover:bg-red-50 dark:hover:bg-red-900/20"
-                    }`}
-                >
+                <Button onClick={handleLike} disabled={hasLiked} size={"icon"} className="cursor-pointer ">
                     <Heart size={18} className={hasLiked ? "fill-current" : ""} />
-                    <span className="text-sm font-medium">{hasLiked ? "Liked" : "Like"}</span>
-                </button>
+                </Button>
 
-                <button
-                    onClick={handleShare}
-                    className="flex items-center gap-2 px-4 py-2 rounded-lg border border-neutral-200 dark:border-neutral-800 hover:border-neutral-300 dark:hover:border-neutral-700 transition-all duration-200"
-                >
-                    {copied ? (
-                        <>
-                            <Check size={18} />
-                            <span className="text-sm font-medium">Copied!</span>
-                        </>
-                    ) : (
-                        <>
-                            <Share2 size={18} />
-                            <span className="text-sm font-medium">Share</span>
-                        </>
-                    )}
-                </button>
+                <Button onClick={handleShare} className="cursor-pointer " size={"icon"}>
+                    {copied ? <Check size={18} /> : <Share2 size={18} />}
+                </Button>
             </div>
         </>
     );
