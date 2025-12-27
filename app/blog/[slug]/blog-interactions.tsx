@@ -62,7 +62,7 @@ export default function BlogInteractions({ children, postId, initialLikes, forma
             }
         } catch (error) {
             console.error("Error copying to clipboard:", error);
-            alert(`Please copy this URL manually: ${url}`);
+            alert("Failed to copy link. Please copy it from your browser's address bar.");
         }
     };
 
