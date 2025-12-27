@@ -12,15 +12,17 @@ With a passion for clean design and functional interfaces, I build web applicati
 > Lines written across my repositories. Auto-updated weekly.
 
 <!-- LANGUAGES BREAKDOWN START -->
-
 ```
 [ LANGUAGES BREAKDOWN ]
 
-
+TypeScript   --> 49,118 lines
+Python       --> 10,672 lines
+Java         --> 2,150 lines
+JavaScript   --> 424 lines
+Others       --> 1,091 lines
 
 [ TOTAL LINES OF CODE: 63,455 ]
 ```
-
 <!-- LANGUAGES BREAKDOWN END -->
 
 ### Want to connect?
