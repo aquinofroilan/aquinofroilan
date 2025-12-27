@@ -71,7 +71,7 @@ jobs:
           for REPO in $REPOS; do
             REPO_URL="https://github.com/$REPO.git"
             AUTHENTICATED_REPO=$(echo "$REPO_URL" | sed "s/https:\/\//https:\/\/$GH_PAT@/g")
-            
+
             # Determine the default branch dynamically and clone only that branch
             DEFAULT_BRANCH=$(curl -H "Authorization: token $GH_PAT" -s "https://api.github.com/repos/$REPO" | jq -r '.default_branch' || echo "")
 
@@ -130,13 +130,16 @@ jobs:
           # Normalize the highlight list for exact, comma-bounded matching (no false partial matches)
           HL=",$(echo "$HIGHLIGHT_LANGS" | tr -d ' '),"
 
+          # Create a temporary file to build the formatted breakdown
+          BREAKDOWN_FILE=$(mktemp)
+
           while read -r entry; do
             LANG=$(echo "$entry" | jq -r '.lang')
             LINES=$(echo "$entry" | jq -r '.lines')
 
             if [[ "$HL" == *",$LANG,"* ]]; then
               FORMATTED=$(format_number "$LINES")
-              FORMATTED_BREAKDOWN+=$(printf "%-12s --> %s lines\n" "$LANG" "$FORMATTED")
+              printf "%-12s --> %s lines\n" "$LANG" "$FORMATTED" >> "$BREAKDOWN_FILE"
             else
               OTHER_LINES=$((OTHER_LINES + LINES))
             fi
@@ -145,37 +148,40 @@ jobs:
               | map(select(.key != "header" and .key != "SUM"))
               | map({lang: .key, lines: .value.code})
               | map(select(.lines > 0))
+              | sort_by(.value.code | tonumber)
+              | reverse
               | .[]' output/cloc-output.json
           )
 
           # "Others" includes all non-highlighted languages that cloc reported
           if [[ $OTHER_LINES -gt 0 ]]; then
             FORMATTED_OTHER=$(format_number "$OTHER_LINES")
-            FORMATTED_BREAKDOWN+=$(printf "%-12s --> %s lines\n" "Others" "$FORMATTED_OTHER")
+            printf "%-12s --> %s lines\n" "Others" "$FORMATTED_OTHER" >> "$BREAKDOWN_FILE"
           fi
 
-          # Remove trailing newline from FORMATTED_BREAKDOWN
-          FORMATTED_BREAKDOWN="${FORMATTED_BREAKDOWN%$'\n'}"
+          # Read the formatted breakdown from the temporary file
+          FORMATTED_BREAKDOWN=$(cat "$BREAKDOWN_FILE")
+          rm "$BREAKDOWN_FILE"
 
           # Format total
           FORMATTED_TOTAL=$(format_number "$TOTAL_LINES")
 
-          CODE_BLOCK="\`\`\`
-          [ LANGUAGES BREAKDOWN ]
+          # Create the code block with proper formatting
+          echo '```' > temp_code_block.txt
+          echo '[ LANGUAGES BREAKDOWN ]' >> temp_code_block.txt
+          echo '' >> temp_code_block.txt
+          echo "$FORMATTED_BREAKDOWN" >> temp_code_block.txt
+          echo '' >> temp_code_block.txt
+          echo "[ TOTAL LINES OF CODE: $FORMATTED_TOTAL ]" >> temp_code_block.txt
+          echo '```' >> temp_code_block.txt
 
-          $FORMATTED_BREAKDOWN
-          [ TOTAL LINES OF CODE: $FORMATTED_TOTAL ]
-          \`\`\`"
+          # Replace content between markers using a more robust approach
+          sed '/<!-- LANGUAGES BREAKDOWN START -->/q' README.md > temp_readme.txt
+          cat temp_code_block.txt >> temp_readme.txt
+          sed -n '/<!-- LANGUAGES BREAKDOWN END -->/,$p' README.md >> temp_readme.txt
 
-          # Replace content between markers
-          echo "$CODE_BLOCK" > temp_block.txt
-          sed -i.bak '/<!-- LANGUAGES BREAKDOWN START -->/,/<!-- LANGUAGES BREAKDOWN END -->/{
-              //!d
-              /<!-- LANGUAGES BREAKDOWN START -->/r temp_block.txt
-          }' README.md
-
-          rm README.md.bak
-          rm temp_block.txt
+          mv temp_readme.txt README.md
+          rm temp_code_block.txt
 
           git add output/cloc-output.json README.md
           git commit -m "chore: update README and cloc-output.json with latest code stats" || echo "No new statistics to update"
