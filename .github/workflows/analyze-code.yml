@@ -60,10 +60,15 @@ jobs:
             AUTHENTICATED_REPO=$(echo "$REPO_URL" | sed "s/https:\/\//https:\/\/$GH_PAT@/g")
             
             # Determine the default branch dynamically and clone only that branch
-            DEFAULT_BRANCH=$(curl -H "Authorization: token $GH_PAT" -s "https://api.github.com/repos/$REPO" | jq -r '.default_branch')
+            DEFAULT_BRANCH=$(curl -H "Authorization: token $GH_PAT" -s "https://api.github.com/repos/$REPO" | jq -r '.default_branch' || echo "")
+
+            if [ -z "$DEFAULT_BRANCH" ] || [ "$DEFAULT_BRANCH" = "null" ]; then
+              echo "Warning: Could not determine default branch for $REPO. Skipping repository."
+              continue
+            fi
 
             echo "Cloning $REPO (default branch: $DEFAULT_BRANCH) with shallow history..."
-            git clone --depth 1 --branch "$DEFAULT_BRANCH" --single-branch "$AUTHENTICATED_REPO" "$(basename $REPO)-$DEFAULT_BRANCH" || echo "Failed to clone $REPO."
+            git clone --depth 1 --branch "$DEFAULT_BRANCH" --single-branch "$AUTHENTICATED_REPO" "$(basename "$REPO")-$DEFAULT_BRANCH" || echo "Failed to clone $REPO."
           done
 
           # Run cloc to analyze lines of code, excluding non-source code files
