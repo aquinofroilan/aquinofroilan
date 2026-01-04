@@ -19,9 +19,10 @@ TypeScript   --> 51,363 lines
 Python       --> 10,672 lines
 Java         --> 2,150 lines
 JavaScript   --> 487 lines
-Others       --> 1,091 lines
+Kotlin       --> 17 lines
+Others       --> 1,324 lines
 
-[ TOTAL LINES OF CODE: 65,763 ]
+[ TOTAL LINES OF CODE: 66,013 ]
 ```
 <!-- LANGUAGES BREAKDOWN END -->
 

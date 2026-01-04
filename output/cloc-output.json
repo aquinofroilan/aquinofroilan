@@ -1,11 +1,11 @@
 {"header" : {
   "cloc_url"           : "github.com/AlDanial/cloc",
   "cloc_version"       : "1.98",
-  "elapsed_seconds"    : 0.606962203979492,
-  "n_files"            : 1030,
-  "n_lines"            : 80466,
-  "files_per_second"   : 1696.97551716878,
-  "lines_per_second"   : 132571.681518935,
+  "elapsed_seconds"    : 0.598207950592041,
+  "n_files"            : 1036,
+  "n_lines"            : 80900,
+  "files_per_second"   : 1731.83923579531,
+  "lines_per_second"   : 135237.253065483,
   "report_file"        : "../output/cloc-output.json"},
 "TypeScript" :{
   "nFiles": 725,
@@ -27,31 +27,31 @@
   "blank": 55,
   "comment": 104,
   "code": 487},
+"Bourne Shell" :{
+  "nFiles": 3,
+  "blank": 79,
+  "comment": 272,
+  "code": 333},
 "SQL" :{
   "nFiles": 2,
   "blank": 83,
   "comment": 50,
   "code": 268},
-"Bourne Shell" :{
-  "nFiles": 2,
-  "blank": 51,
-  "comment": 154,
-  "code": 231},
 "Gradle" :{
-  "nFiles": 10,
-  "blank": 25,
+  "nFiles": 12,
+  "blank": 33,
   "comment": 2,
-  "code": 174},
+  "code": 235},
+"DOS Batch" :{
+  "nFiles": 3,
+  "blank": 63,
+  "comment": 6,
+  "code": 207},
 "INI" :{
   "nFiles": 7,
   "blank": 41,
   "comment": 0,
   "code": 171},
-"DOS Batch" :{
-  "nFiles": 2,
-  "blank": 42,
-  "comment": 4,
-  "code": 137},
 "Jupyter Notebook" :{
   "nFiles": 1,
   "blank": 0,
@@ -67,6 +67,11 @@
   "blank": 0,
   "comment": 0,
   "code": 18},
+"Kotlin" :{
+  "nFiles": 2,
+  "blank": 7,
+  "comment": 0,
+  "code": 17},
 "PHP" :{
   "nFiles": 1,
   "blank": 2,
@@ -83,7 +88,7 @@
   "comment": 18,
   "code": 0},
 "SUM": {
-  "blank": 8119,
-  "comment": 6584,
-  "code": 65763,
-  "nFiles": 1030} }
+  "blank": 8183,
+  "comment": 6704,
+  "code": 66013,
+  "nFiles": 1036} }
