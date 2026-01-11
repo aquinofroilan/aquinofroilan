@@ -13,7 +13,14 @@ export const metadata: Metadata = {
 };
 
 const SynectixDetails = async () => {
-    const snapshotLinks = await fetchImagesWithPrefix("synectix-");
+    const project = ProjectsList.find((p) => p.slug === "synectix");
+
+    if (!project) {
+        redirect("/projects");
+    }
+
+    const { title, longDescription, imgPrefix, projectLink, techStackEntries } = project;
+    const snapshotLinks = imgPrefix ? await fetchImagesWithPrefix(imgPrefix) : [];
 
     return (
         <main className="py-10 w-11/12 max-w-7xl gap-2 flex flex-col md:grid md:grid-cols-2">
@@ -26,10 +33,10 @@ const SynectixDetails = async () => {
             </Link>
             <div className="grid place-content-center col-span-2 w-full h-full">
                 <section className="flex flex-row justify-between items-center gap-4 mb-5">
-                    <h1 className="text-2xl text-center font-bold">Synectix</h1>
+                    <h1 className="text-2xl text-center font-bold">{title}</h1>
                     <Tooltip>
                         <TooltipTrigger asChild>
-                            <Link href={"https://github.com/aquinofroilan/synectix"} target="_blank">
+                            <Link href={projectLink[0] || "#"} target="_blank">
                                 <Github className="w-5 h-5 md:w-6 md:h-6" />
                             </Link>
                         </TooltipTrigger>
@@ -41,10 +48,7 @@ const SynectixDetails = async () => {
                 <section>
                     <h6 className="text-lg font-semibold">Overview</h6>
                     <p className="mt-2 text-neutral-700 dark:text-neutral-300">
-                        Synectix is a comprehensive Enterprise Resource Planning (ERP) system tailored for hobbyist
-                        businesses and small-to-medium enterprises. Its backend, built with modern Java technologies,
-                        delivers robust solutions for inventory management, warehouse operations, user management, and
-                        business analytics.
+                        {longDescription}
                     </p>
                 </section>
                 <Separator className="my-4" />
@@ -54,12 +58,7 @@ const SynectixDetails = async () => {
                 </section>
                 <section className="flex justify-end items-center my-4">
                     <div className="flex flex-row gap-4">
-                        <TailwindCSS className="w-6 h-6" />
-                        <Java className="w-6 h-6" />
-                        <PostgreSQL className="w-6 h-6" />
-                        <Angular className="w-6 h-6" />
-                        <TypeScript className="w-6 h-6" />
-                        <SpringBoot className="w-6 h-6" />
+                        {techStackEntries}
                     </div>
                 </section>
             </div>

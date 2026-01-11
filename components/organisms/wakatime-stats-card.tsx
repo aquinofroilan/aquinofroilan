@@ -102,7 +102,7 @@ export const WakatimeStatsEditors = async ({ className }: { className?: string }
             </CardHeader>
             <CardContent>
                 <div className="space-y-2">
-                    {wakatimeEditors?.map((editor, index) => (
+                    {wakatimeEditors.slice(0, 5).map((editor, index) => (
                         <div key={index} className="flex justify-between items-center text-xs">
                             <span>{editor.name}</span>
                             <span>{editor.percent.toFixed(1)}%</span>
