@@ -4,6 +4,7 @@ import { PostgreSQL } from "@/components/atoms/icons/postgresql";
 import { Python } from "@/components/atoms/icons/python";
 import { Flask } from "@/components/atoms/icons/flask";
 import { NextJS } from "@/components/atoms/icons/nextjs";
+import { Kotlin } from '@/components/atoms/icons/kotlin';
 
 import { ReactNode } from "react";
 
@@ -16,36 +17,24 @@ type ProjectItem = {
     title: string;
     description: string;
     pageLink: string;
-    projectLink: string;
+    projectLink: string[];
     footerContent: FooterItem[];
 };
 
 export const ProjectsList: ProjectItem[] = [
     {
-        title: "Pawsitive Health | Capstone",
-        description: "Full stack app for a pet health management system built with NextJS and PostgreSQL",
-        pageLink: "/projects/pawsitive",
-        projectLink: "https://github.com/aquinofroilan/pawsitive-health",
-        footerContent: [
-            {
-                text: "NextJS",
-                icon: <NextJS className="w-5 h-5" />,
-            },
-            {
-                text: "PostgreSQL",
-                icon: <PostgreSQL className="w-5 h-5" />,
-            },
-        ],
-    },
-    {
         title: "Synectix",
-        description: "Backend for an ERP system built with Spring Boot",
+        description: "Full stack ERP system built with Spring Boot and NextJS",
         pageLink: "/projects/synectix",
-        projectLink: "https://github.com/aquinofroilan/synectix",
+        projectLink: ["https://github.com/aquinofroilan/synectix-kt", "https://github.com/aquinofroilan/synectix-next"],
         footerContent: [
             {
                 text: "Java",
                 icon: <Java className="w-5 h-5" />,
+            },
+            {
+                text: "Kotlin",
+                icon: <Kotlin className="w-5 h-5" />,
             },
             {
                 text: "Spring Boot",
@@ -58,10 +47,26 @@ export const ProjectsList: ProjectItem[] = [
         ],
     },
     {
+        title: "Pawsitive Health | Capstone",
+        description: "Full stack app for a pet health management system built with NextJS and PostgreSQL",
+        pageLink: "/projects/pawsitive",
+        projectLink:[ "https://github.com/aquinofroilan/pawsitive-health"],
+        footerContent: [
+            {
+                text: "NextJS",
+                icon: <NextJS className="w-5 h-5" />,
+            },
+            {
+                text: "PostgreSQL",
+                icon: <PostgreSQL className="w-5 h-5" />,
+            },
+        ],
+    },
+    {
         title: "EZ Parking System",
         description: "Backend for a parking management system built with Python Flask",
         pageLink: "/projects/ezp",
-        projectLink: "https://github.com/aquinofroilan/ez-parking-system",
+        projectLink: ["https://github.com/aquinofroilan/ez-parking-system"],
         footerContent: [
             {
                 text: "Python",

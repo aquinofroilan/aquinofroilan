@@ -1,6 +1,6 @@
 import { BadgeCheckIcon, ArrowRightCircle } from "lucide-react";
 import { Card, CardHeader, CardTitle, CardContent } from "@/components/ui";
-import { getCredlyCertifications } from "@/actions";
+import { CertificationsListsPreview } from "@/data/certification-list-preview";
 import Link from "next/link";
 
 export const CertificationCard = async ({ className }: { className?: string }) => {
