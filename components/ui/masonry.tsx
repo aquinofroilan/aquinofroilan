@@ -18,9 +18,22 @@ interface MasonryProps extends HTMLAttributes<HTMLDivElement> {
     asChild?: boolean;
 }
 
+// Mapping of column counts to Tailwind grid classes for desktop breakpoint
+const DESKTOP_GRID_COLS: Record<number, string> = {
+    1: "lg:grid-cols-1",
+    2: "lg:grid-cols-2",
+    3: "lg:grid-cols-3",
+    4: "lg:grid-cols-4",
+    5: "lg:grid-cols-5",
+    6: "lg:grid-cols-6",
+};
+
 /**
  * Masonry layout component using CSS Grid
- * Responsive: 1 column on mobile (<768px), 2 columns on tablet (<1024px), configurable on desktop
+ * Responsive breakpoints:
+ * - Mobile (<768px): 1 column
+ * - Tablet (≥768px, <1024px): 2 columns
+ * - Desktop (≥1024px): configurable columns (default: 3, supports 1-6, fallback to 3 for others)
  * Uses pure CSS for immediate responsive behavior without JS hydration issues
  */
 const Masonry = forwardRef<HTMLDivElement, MasonryProps>(
@@ -45,24 +58,13 @@ const Masonry = forwardRef<HTMLDivElement, MasonryProps>(
         },
         ref,
     ) => {
-        // Create responsive column mapping based on standard Tailwind breakpoints
-        const getGridColsClass = () => {
-            // Handle common column counts with pre-defined Tailwind classes
-            const colMap: Record<number, string> = {
-                1: "lg:grid-cols-1",
-                2: "lg:grid-cols-2",
-                3: "lg:grid-cols-3",
-                4: "lg:grid-cols-4",
-                5: "lg:grid-cols-5",
-                6: "lg:grid-cols-6",
-            };
-            return colMap[columnCount] || "lg:grid-cols-3";
-        };
+        // Get responsive grid classes based on Tailwind breakpoints
+        const gridColsClass = DESKTOP_GRID_COLS[columnCount] || "lg:grid-cols-3";
 
         return (
             <div
                 ref={ref}
-                className={cn("w-full grid grid-cols-1 md:grid-cols-2", getGridColsClass(), className)}
+                className={cn("w-full grid grid-cols-1 md:grid-cols-2", gridColsClass, className)}
                 style={{
                     gap: `${gap}px`,
                     ...style,
