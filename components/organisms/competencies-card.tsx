@@ -4,8 +4,8 @@ import { Card, CardHeader, CardTitle, CardContent, Badge } from "@/components/ui
 const milestones = [
     {
         year: "09/29/2025 - Present",
-        title: "AI/Software Engineer",
-        description: "Hired as AI/Software Engineer at Journey Better Business Group Inc.",
+        title: "Frontend Developer",
+        description: "Hired as Frontend Developer at Journey Better Business Group Inc.",
         badge: "Full time",
     },
     {
