@@ -1,5 +1,14 @@
 "use client";
-import { forwardRef, type HTMLAttributes } from "react";
+import {
+    Children,
+    forwardRef,
+    isValidElement,
+    useMemo,
+    useState,
+    useEffect,
+    type HTMLAttributes,
+    type ReactNode,
+} from "react";
 import { Slot } from "@radix-ui/react-slot";
 import { cn } from "@/lib/utils";
 
@@ -15,26 +24,17 @@ interface MasonryProps extends HTMLAttributes<HTMLDivElement> {
     overscan?: number;
     scrollFps?: number;
     linear?: boolean;
-    asChild?: boolean;
 }
 
-// Mapping of column counts to Tailwind grid classes for desktop breakpoint
-const DESKTOP_GRID_COLS: Record<number, string> = {
-    1: "lg:grid-cols-1",
-    2: "lg:grid-cols-2",
-    3: "lg:grid-cols-3",
-    4: "lg:grid-cols-4",
-    5: "lg:grid-cols-5",
-    6: "lg:grid-cols-6",
-};
-
 /**
- * Masonry layout component using CSS Grid
+ * Masonry layout component with true Pinterest-style column distribution
  * Responsive breakpoints:
  * - Mobile (<768px): 1 column
  * - Tablet (≥768px, <1024px): 2 columns
- * - Desktop (≥1024px): configurable columns (default: 3, supports 1-6, fallback to 3 for others)
- * Uses pure CSS for immediate responsive behavior without JS hydration issues
+ * - Desktop (≥1024px): configurable columns (default: 3)
+ * 
+ * Uses flexbox columns to allow items of varying heights to pack efficiently.
+ * Initializes with mobile-first approach to prevent hydration mismatches.
  */
 const Masonry = forwardRef<HTMLDivElement, MasonryProps>(
     (
@@ -52,27 +52,57 @@ const Masonry = forwardRef<HTMLDivElement, MasonryProps>(
             overscan,
             scrollFps,
             linear,
-            asChild,
-            style,
             ...props
         },
         ref,
     ) => {
-        // Get responsive grid classes based on Tailwind breakpoints
-        const normalizedColumnCount = Math.min(6, Math.max(1, Math.floor(Number.isFinite(columnCount) ? columnCount : 3)));
-        const gridColsClass = DESKTOP_GRID_COLS[normalizedColumnCount];
+        // Initialize with 1 column (mobile-first) to prevent hydration mismatch
+        const [currentColumnCount, setCurrentColumnCount] = useState(1);
+        const [mounted, setMounted] = useState(false);
+
+        useEffect(() => {
+            setMounted(true);
+            
+            const updateColumns = () => {
+                const width = window.innerWidth;
+                if (width < 768) {
+                    setCurrentColumnCount(1);
+                } else if (width < 1024) {
+                    setCurrentColumnCount(2);
+                } else {
+                    setCurrentColumnCount(columnCount);
+                }
+            };
+
+            updateColumns();
+            window.addEventListener("resize", updateColumns);
+            return () => window.removeEventListener("resize", updateColumns);
+        }, [columnCount]);
+
+        // Distribute children into columns (round-robin distribution)
+        const columns = useMemo(() => {
+            const cols: ReactNode[][] = Array.from({ length: currentColumnCount }, () => []);
+
+            Children.forEach(children, (child, index) => {
+                if (isValidElement(child)) {
+                    cols[index % currentColumnCount].push(child);
+                }
+            });
+            return cols;
+        }, [children, currentColumnCount]);
 
         return (
-            <div
-                ref={ref}
-                className={cn("w-full grid grid-cols-1 md:grid-cols-2", gridColsClass, className)}
-                style={{
-                    gap: `${gap}px`,
-                    ...style,
-                }}
+            <div 
+                ref={ref} 
+                className={cn("flex w-full", className)} 
+                style={{ gap: `${gap}px` }} 
                 {...props}
             >
-                {children}
+                {columns.map((col, i) => (
+                    <div key={i} className="flex flex-col flex-1" style={{ gap: `${gap}px` }}>
+                        {col}
+                    </div>
+                ))}
             </div>
         );
     },
