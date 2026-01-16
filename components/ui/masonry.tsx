@@ -1,5 +1,5 @@
 "use client";
-import { forwardRef, type HTMLAttributes, type CSSProperties } from "react";
+import { forwardRef, type HTMLAttributes } from "react";
 import { Slot } from "@radix-ui/react-slot";
 import { cn } from "@/lib/utils";
 
@@ -59,7 +59,8 @@ const Masonry = forwardRef<HTMLDivElement, MasonryProps>(
         ref,
     ) => {
         // Get responsive grid classes based on Tailwind breakpoints
-        const gridColsClass = DESKTOP_GRID_COLS[columnCount] || "lg:grid-cols-3";
+        const normalizedColumnCount = Math.min(6, Math.max(1, Math.floor(Number.isFinite(columnCount) ? columnCount : 3)));
+        const gridColsClass = DESKTOP_GRID_COLS[normalizedColumnCount];
 
         return (
             <div
