@@ -58,11 +58,8 @@ const Masonry = forwardRef<HTMLDivElement, MasonryProps>(
     ) => {
         // Initialize with 1 column (mobile-first) to prevent hydration mismatch
         const [currentColumnCount, setCurrentColumnCount] = useState(1);
-        const [mounted, setMounted] = useState(false);
 
         useEffect(() => {
-            setMounted(true);
-            
             const updateColumns = () => {
                 const width = window.innerWidth;
                 if (width < 768) {
