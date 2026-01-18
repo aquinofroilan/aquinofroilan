@@ -1,7 +1,7 @@
 import { fetchImagesWithPrefix } from "@/actions";
 import { ArrowLeft } from "lucide-react";
 import Link from "next/link";
-import { Separator, Tooltip, TooltipContent, TooltipTrigger } from "@/components/ui";
+import { Separator, Tooltip, TooltipContent, TooltipTrigger, DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from "@/components/ui";
 import ImageGallery from "@/components/organisms/image-gallery";
 import { Java, PostgreSQL, Angular, Github, TailwindCSS, TypeScript, SpringBoot } from "@/components/atoms";
 import type { Metadata } from "next";
@@ -34,16 +34,35 @@ const SynectixDetails = async () => {
             <div className="grid place-content-center col-span-2 w-full h-full">
                 <section className="flex flex-row justify-between items-center gap-4 mb-5">
                     <h1 className="text-2xl text-center font-bold">{title}</h1>
-                    <Tooltip>
-                        <TooltipTrigger asChild>
-                            <Link href={projectLink[0] || "#"} target="_blank">
-                                <Github className="w-5 h-5 md:w-6 md:h-6" />
-                            </Link>
-                        </TooltipTrigger>
-                        <TooltipContent>
-                            <p className="text-sm">View Source Code</p>
-                        </TooltipContent>
-                    </Tooltip>
+                    {projectLink.length > 1 ? (
+                        <DropdownMenu>
+                            <DropdownMenuTrigger asChild>
+                                <div className="cursor-pointer hover:opacity-75 transition-opacity">
+                                    <Github className="w-5 h-5 md:w-6 md:h-6" />
+                                </div>
+                            </DropdownMenuTrigger>
+                            <DropdownMenuContent>
+                                {projectLink.map((link) => (
+                                    <DropdownMenuItem key={link.url} asChild>
+                                        <Link href={link.url} target="_blank">
+                                            {link.label}
+                                        </Link>
+                                    </DropdownMenuItem>
+                                ))}
+                            </DropdownMenuContent>
+                        </DropdownMenu>
+                    ) : (
+                        <Tooltip>
+                            <TooltipTrigger asChild>
+                                <Link href={projectLink[0]?.url || "#"} target="_blank">
+                                    <Github className="w-5 h-5 md:w-6 md:h-6" />
+                                </Link>
+                            </TooltipTrigger>
+                            <TooltipContent>
+                                <p className="text-sm">View Source Code</p>
+                            </TooltipContent>
+                        </Tooltip>
+                    )}
                 </section>
                 <section>
                     <h6 className="text-lg font-semibold">Overview</h6>

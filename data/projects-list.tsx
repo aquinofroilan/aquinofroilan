@@ -27,7 +27,7 @@ export type ProjectItem = {
     description: string;
     longDescription?: string;
     pageLink: string;
-    projectLink: string[];
+    projectLink: { label: string; url: string }[];
     footerContent: FooterItem[];
     // Details page specific
     imgPrefix?: string;
@@ -44,8 +44,8 @@ export const ProjectsList: ProjectItem[] = [
         imgPrefix: "synectix-",
         pageLink: "/projects/synectix",
         projectLink: [
-            "https://github.com/aquinofroilan/synectix-kt",
-            "https://github.com/aquinofroilan/synectix-next",
+            { label: "Backend", url: "https://github.com/aquinofroilan/synectix-kt" },
+            { label: "Frontend", url: "https://github.com/aquinofroilan/synectix-next" },
         ],
         footerContent: [
             {
@@ -82,7 +82,7 @@ export const ProjectsList: ProjectItem[] = [
             "Pet health management app that helps pet owners keep track of their pets' health records, appointments, and medications. Built with React Next.Js, Vercel, Tailwind CSS, and PostgreSQL.",
         imgPrefix: "pawsitive-",
         pageLink: "/projects/pawsitive",
-        projectLink: ["https://github.com/aquinofroilan/pawsitive-health"],
+        projectLink: [{ label: "Repository", url: "https://github.com/aquinofroilan/pawsitive-health" }],
         footerContent: [
             {
                 text: "NextJS",
@@ -111,7 +111,7 @@ export const ProjectsList: ProjectItem[] = [
             "EZ Parking System is a comprehensive parking management solution designed to streamline parking operations. Built with Python Flask, it offers features such as real-time parking space tracking, and automated ticketing, enhancing the overall efficiency and user experience for both parking operators and customers.",
         imgPrefix: "ez-parking-",
         pageLink: "/projects/ezp",
-        projectLink: ["https://github.com/aquinofroilan/ez-parking-system"],
+        projectLink: [{ label: "Repository", url: "https://github.com/aquinofroilan/ez-parking-system" }],
         footerContent: [
             {
                 text: "Python",
