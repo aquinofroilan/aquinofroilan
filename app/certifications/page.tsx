@@ -6,10 +6,8 @@ import * as motion from "motion/react-client";
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-    title: process.env.PAGE_TITLE
-        ? process.env.PAGE_TITLE + " | Certifications"
-        : "Froilan | Software Engineer | Certifications",
-    description: "A showcase of Froilan's certifications and achievements.",
+    title: `Froilan | ${process.env.CURRENT_TITLE || "Software Engineer"} | ${process.env.CURRENT_COMPANY || ""} | ${process.env.CURRENT_WORK_LOCATION || "Philippines"} | Certifications`,
+    description: `A showcase of Froilan's certifications and achievements as a ${process.env.CURRENT_TITLE || "Software Engineer"}.`,
     keywords: ["Froilan's Certifications", "Froilan's Achievements", "Froilan's Showcase"],
 };
 

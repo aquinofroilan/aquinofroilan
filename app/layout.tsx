@@ -27,12 +27,11 @@ export const metadata: Metadata & {
     "twitter:description": string;
     canonical: string;
 } = {
-    title: "Froilan | Software Engineer",
-    description: "Personal Website of Froilan, Software Engineer based in Caloocan, Philippines.",
+    description: `Personal Website of Froilan, ${process.env.CURRENT_TITLE || "Software Engineer"} based in Caloocan, Philippines.${process.env.CURRENT_COMPANY ? ` Currently working at ${process.env.CURRENT_COMPANY}.` : ""}`,
     "google-site-verification": "cea09eQxw2xZKhdxfMUKhILNuAzqAeQnrIWLUC027IA",
     applicationName: "Froilan",
     authors: [{ name: "Froilan Aquino", url: "https://froilan.vercel.app" }],
-    abstract: "Personal Website of Froilan, Software Engineer based in the Caloocan Philippines.",
+    abstract: `Personal Website of Froilan, ${process.env.CURRENT_TITLE || "Software Engineer"} based in the Caloocan Philippines.${process.env.CURRENT_COMPANY ? ` Currently working at ${process.env.CURRENT_COMPANY}.` : ""}`,
     publisher: "Froilan Aquino",
     generator: "Next.js",
     keywords: [
@@ -46,14 +45,14 @@ export const metadata: Metadata & {
         "Personal Website",
     ],
     robots: "index, follow",
-    "og:title": "Froilan | Software Engineer",
-    "og:description": "Personal Website of Froilan, Software Engineer based in the Caloocan Philippines.",
+    "og:title": `Froilan | ${process.env.CURRENT_TITLE || "Software Engineer"}`,
+    "og:description": `Personal Website of Froilan, ${process.env.CURRENT_TITLE || "Software Engineer"} based in the Caloocan Philippines.${process.env.CURRENT_COMPANY ? ` Currently working at ${process.env.CURRENT_COMPANY}.` : ""}`,
     "og:type": "website",
     "og:url": "https://froilan.vercel.app",
     "og:site_name": "Froilan Portfolio",
     "twitter:card": "summary_large_image",
-    "twitter:title": "Froilan | Software Engineer",
-    "twitter:description": "Personal Website of Froilan, Software Engineer based in Caloocan, Philippines.",
+    "twitter:title": `Froilan | ${process.env.CURRENT_TITLE || "Software Engineer"}`,
+    "twitter:description": `Personal Website of Froilan, ${process.env.CURRENT_TITLE || "Software Engineer"} based in Caloocan, Philippines.${process.env.CURRENT_COMPANY ? ` Currently working at ${process.env.CURRENT_COMPANY}.` : ""}`,
     canonical: "https://froilan.vercel.app",
     metadataBase: new URL("https://froilan.vercel.app"),
 };

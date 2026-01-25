@@ -4,6 +4,13 @@ import Link from "next/link";
 import { Separator, Tooltip, TooltipContent, TooltipTrigger } from "@/components/ui";
 import ImageGallery from "@/components/organisms/image-gallery";
 import { Java, PostgreSQL, Angular, Github, TailwindCSS, TypeScript, SpringBoot } from "@/components/atoms";
+import type { Metadata } from "next";
+
+export const metadata: Metadata = {
+    title: `Froilan | ${process.env.CURRENT_TITLE || "Software Engineer"} | ${process.env.CURRENT_WORK_LOCATION || "Philippines"} | Synectix`,
+    description: `Synectix - A comprehensive business management solution by Froilan, ${process.env.CURRENT_TITLE || "Software Engineer"}. Built with Spring Boot, Angular, and PostgreSQL.`,
+    keywords: ["Synectix", "Business Management", "Spring Boot", "Angular", "Froilan's Projects"],
+};
 
 const SynectixDetails = async () => {
     const snapshotLinks = await fetchImagesWithPrefix("synectix-");

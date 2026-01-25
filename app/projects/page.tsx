@@ -7,8 +7,8 @@ import { ProjectsList } from "@/data/projects-list";
 import React from "react";
 
 export const metadata: Metadata = {
-    title: process.env.PAGE_TITLE ? process.env.PAGE_TITLE + " | Projects" : "Froilan | Software Engineer | Projects",
-    description: "A showcase of Froilan's projects and contributions.",
+    title: `Froilan | ${process.env.CURRENT_TITLE || "Software Engineer"} | ${process.env.CURRENT_COMPANY || ""} | ${process.env.CURRENT_WORK_LOCATION || "Philippines"} | Projects`,
+    description: `A showcase of Froilan's projects and contributions as a ${process.env.CURRENT_TITLE || "Software Engineer"}.`,
     keywords: ["Froilan's Projects", "Froilan's Showcase", "Froilan's Contributions"],
 };
 

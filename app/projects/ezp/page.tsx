@@ -4,6 +4,13 @@ import ImageGallery from "@/components/organisms/image-gallery";
 import { Separator, Tooltip, TooltipContent, TooltipTrigger } from "@/components/ui";
 import { ArrowLeft } from "lucide-react";
 import Link from "next/link";
+import type { Metadata } from "next";
+
+export const metadata: Metadata = {
+    title: `Froilan | ${process.env.CURRENT_TITLE || "Software Engineer"} | ${process.env.CURRENT_WORK_LOCATION || "Philippines"} | EZ Parking System`,
+    description: `EZ Parking System - A comprehensive parking management solution by Froilan, ${process.env.CURRENT_TITLE || "Software Engineer"}. Built with Python Flask, React, and PostgreSQL.`,
+    keywords: ["EZ Parking System", "Parking Management", "Python Flask", "React", "Froilan's Projects"],
+};
 
 const EZP = async () => {
     const snapshotLinks = await fetchImagesWithPrefix("ez-parking-");

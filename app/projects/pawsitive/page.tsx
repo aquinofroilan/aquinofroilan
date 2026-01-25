@@ -7,11 +7,9 @@ import { fetchImagesWithPrefix } from "@/actions";
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-    title: process.env.PAGE_TITLE
-        ? process.env.PAGE_TITLE + " | Project | Pawsitive"
-        : "Froilan | Software Engineer | Project | Pawsitive",
-    description: "A showcase of Froilan's technical skills and tools.",
-    keywords: ["Froilan's Projects", "Froilan's Skills", "Froilan's Technologies"],
+    title: `Froilan | ${process.env.CURRENT_TITLE || "Software Engineer"} | ${process.env.CURRENT_WORK_LOCATION || "Philippines"} | Pawsitive`,
+    description: `Pawsitive - A pet care management application by Froilan, ${process.env.CURRENT_TITLE || "Software Engineer"}. Built with Next.js, PostgreSQL, and Prisma.`,
+    keywords: ["Pawsitive", "Pet Care", "Next.js", "PostgreSQL", "Froilan's Projects"],
 };
 
 const PawsitiveDetails = async () => {
