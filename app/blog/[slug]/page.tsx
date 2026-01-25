@@ -4,6 +4,25 @@ import Link from "next/link";
 import { ArrowLeft } from "lucide-react";
 import { MarkdownContent } from "@/components/molecules/markdown-content";
 import BlogInteractions from "./blog-interactions";
+import type { Metadata } from "next";
+
+export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }): Promise<Metadata> {
+    const slug = (await params).slug;
+    const post = await getBlogPostById(slug);
+
+    if (!post) {
+        return {
+            title: "Blog Post Not Found",
+            description: "The requested blog post could not be found.",
+        };
+    }
+
+    return {
+        title: `Froilan | ${process.env.CURRENT_TITLE || "Software Engineer"} | ${process.env.CURRENT_WORK_LOCATION || "Philippines"} | Blog | ${post.title}`,
+        description: `${post.content.substring(0, 150)}...`,
+        keywords: ["Froilan's Blog", "Technical Articles", "Programming", post.title],
+    };
+}
 
 const Blog = async ({ params }: { params: Promise<{ slug: string }> }) => {
     const slug = (await params).slug;

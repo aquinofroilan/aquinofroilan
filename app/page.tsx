@@ -18,8 +18,8 @@ import { Masonry, FadeIn } from "@/components/ui";
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-    title: process.env.PAGE_TITLE ? process.env.PAGE_TITLE : "Froilan | Software Engineer",
-    description: "Welcome to my portfolio website.",
+    title: `Froilan | ${process.env.CURRENT_TITLE || "Software Engineer"} | ${process.env.CURRENT_COMPANY || ""} | ${process.env.CURRENT_WORK_LOCATION || "Philippines"}`,
+    description: `Personal Website of Froilan, ${process.env.CURRENT_TITLE || "Software Engineer"} based in Caloocan, Philippines.${process.env.CURRENT_COMPANY ? ` Currently working at ${process.env.CURRENT_COMPANY}.` : ""}`,
     keywords: ["Froilan", "Software Engineer", "Portfolio"],
 };
 export default function Home() {
