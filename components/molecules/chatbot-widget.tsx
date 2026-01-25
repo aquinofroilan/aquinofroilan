@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useRef, useEffect, useCallback } from "react";
+import { useState, useRef, useEffect, useCallback, type KeyboardEvent } from "react";
 import { MessageCircle, X, Send, Bot, User, RotateCcw, Sparkles } from "lucide-react";
 import { Button, Input } from "@/components/ui";
 import { cn } from "@/lib/utils";
@@ -183,13 +183,13 @@ export const ChatbotWidget = () => {
     };
 
     const handleSuggestionClick = (suggestion: string) => {
-        handleSend(suggestion);
+        handleSend(suggestion).then();
     };
 
-    const handleKeyDown = (e: React.KeyboardEvent) => {
+    const handleKeyDown = (e: KeyboardEvent) => {
         if (e.key === "Enter" && !e.shiftKey) {
             e.preventDefault();
-            handleSend();
+            handleSend().then();
         }
     };
 
@@ -210,7 +210,7 @@ export const ChatbotWidget = () => {
 
             <div
                 className={cn(
-                    "fixed bottom-24 right-6 z-50 w-[380px] max-w-[calc(100vw-3rem)] h-[500px] max-h-[calc(100vh-8rem)]",
+                    "fixed bottom-24 right-6 z-50 w-95 max-w-[calc(100vw-3rem)] h-125 max-h-[calc(100vh-8rem)]",
                     "bg-background border rounded-lg shadow-2xl flex flex-col",
                     "transition-all duration-300 origin-bottom-right",
                     isOpen ? "scale-100 opacity-100" : "scale-0 opacity-0 pointer-events-none",
@@ -290,7 +290,7 @@ export const ChatbotWidget = () => {
                             className={cn("flex gap-2", message.role === "user" ? "justify-end" : "justify-start")}
                         >
                             {message.role === "assistant" && (
-                                <div className="w-7 h-7 rounded-full bg-primary flex-shrink-0 flex items-center justify-center">
+                                <div className="w-7 h-7 rounded-full bg-primary shrink-0 flex items-center justify-center">
                                     <Bot size={14} className="text-primary-foreground" />
                                 </div>
                             )}
@@ -307,7 +307,7 @@ export const ChatbotWidget = () => {
                                 )}
                             </div>
                             {message.role === "user" && (
-                                <div className="w-7 h-7 rounded-full bg-muted flex-shrink-0 flex items-center justify-center">
+                                <div className="w-7 h-7 rounded-full bg-muted shrink-0 flex items-center justify-center">
                                     <User size={14} />
                                 </div>
                             )}
@@ -316,7 +316,7 @@ export const ChatbotWidget = () => {
 
                     {streamingContent && (
                         <div className="flex gap-2 justify-start">
-                            <div className="w-7 h-7 rounded-full bg-primary flex-shrink-0 flex items-center justify-center">
+                            <div className="w-7 h-7 rounded-full bg-primary shrink-0 flex items-center justify-center">
                                 <Bot size={14} className="text-primary-foreground" />
                             </div>
                             <div className="max-w-[80%] px-3 py-2 rounded-lg text-sm bg-muted">
@@ -328,7 +328,7 @@ export const ChatbotWidget = () => {
 
                     {isLoading && !streamingContent && (
                         <div className="flex gap-2 justify-start">
-                            <div className="w-7 h-7 rounded-full bg-primary flex-shrink-0 flex items-center justify-center">
+                            <div className="w-7 h-7 rounded-full bg-primary shrink-0 flex items-center justify-center">
                                 <Bot size={14} className="text-primary-foreground" />
                             </div>
                             <div className="px-3 py-2 rounded-lg bg-muted">
