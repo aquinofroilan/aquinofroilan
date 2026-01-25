@@ -2,10 +2,10 @@
 
 import { Button } from "@/components/ui";
 import { Heart, Share2, Check } from "lucide-react";
-import { useState } from "react";
+import { useState, type ReactNode } from "react";
 
 interface BlogInteractionsProps {
-    children: React.ReactNode;
+    children: ReactNode;
     postId: string;
     initialLikes: number;
     formattedDate: string;
@@ -83,7 +83,13 @@ export default function BlogInteractions({ children, postId, initialLikes, forma
             </div>
 
             <div className="flex gap-3">
-                <Button onClick={handleLike} disabled={hasLiked || isLiking} size={"icon"} className="cursor-pointer " aria-label="Like this post">
+                <Button
+                    onClick={handleLike}
+                    disabled={hasLiked || isLiking}
+                    size={"icon"}
+                    className="cursor-pointer "
+                    aria-label="Like this post"
+                >
                     <Heart size={18} className={hasLiked ? "fill-current" : ""} />
                 </Button>
 
