@@ -18,7 +18,7 @@ async function Certifications() {
     // Fetch certifications from Credly API if username is configured
     const credlyUsername = process.env.CREDLY_USERNAME;
     let certifications = CertificationsListsPreview;
-    
+
     if (credlyUsername) {
         const credlyCerts = await getCredlyCertifications(credlyUsername);
         // Use Credly data if available, otherwise fallback to static data

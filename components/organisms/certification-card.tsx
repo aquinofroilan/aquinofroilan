@@ -1,21 +1,10 @@
 import { BadgeCheckIcon, ArrowRightCircle } from "lucide-react";
 import { Card, CardHeader, CardTitle, CardContent } from "@/components/ui";
-import { CertificationsListsPreview } from "@/data/certification-list-preview";
 import { getCredlyCertifications } from "@/actions";
 import Link from "next/link";
 
 export const CertificationCard = async ({ className }: { className?: string }) => {
-    // Fetch certifications from Credly API if username is configured
-    const credlyUsername = process.env.CREDLY_USERNAME;
-    let certifications = CertificationsListsPreview;
-    
-    if (credlyUsername) {
-        const credlyCerts = await getCredlyCertifications(credlyUsername);
-        // Use Credly data if available, otherwise fallback to static data
-        if (credlyCerts && credlyCerts.length > 0) {
-            certifications = credlyCerts;
-        }
-    }
+    const credlyCerts = await getCredlyCertifications();
 
     return (
         <div className={className}>
@@ -37,19 +26,19 @@ export const CertificationCard = async ({ className }: { className?: string }) =
                 </CardHeader>
                 <CardContent>
                     <div className="w-full flex flex-col gap-4">
-                        {certifications.slice(0, 4).map((cert) => {
+                        {credlyCerts.slice(0, 4).map((cert, i) => {
                             return (
                                 <Link
                                     href={cert.link}
                                     target="_blank"
                                     rel="noreferrer"
-                                    key={cert.link}
+                                    key={i}
                                     className="flex flex-col gap-1 group"
                                 >
                                     <h1 className="text-sm font-medium group-hover:underline underline-offset-2">
                                         {cert.title}
                                     </h1>
-                                    <p className="text-xs text-muted-foreground">{cert.description}</p>
+                                    <p className="text-xs text-muted-foreground">{cert.issuer}</p>
                                 </Link>
                             );
                         })}

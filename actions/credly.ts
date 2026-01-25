@@ -1,28 +1,28 @@
 "use server";
 
 import { unstable_cache } from "next/cache";
+const CREDLY_USERNAME = process.env.CREDLY_USERNAME || "";
 
 export interface CredlyBadge {
     id: string;
-    title: string;
+    name: string;
+    expires_at_date: Date | null;
+    issued_at_date: Date;
     description: string;
+    level: string | null;
+    time_to_earn: string | null;
+    cost: string | null;
+    type_category: string;
+    image: unknown;
     image_url: string;
-    badge_template: {
-        name: string;
-        description: string;
-        id: string;
-    };
-    issued_at: string;
-    expires_at: string | null;
-    public_url: string;
-    issuer: {
-        name: string;
-        entities: Array<{
-            entity: {
-                name: string;
-            };
-        }>;
-    };
+    url: string;
+    badge_template_earnable: boolean;
+    issuer: { summary: string };
+    related_badge_templates: unknown[];
+    alignments: unknown[];
+    badge_template_activities: unknown[];
+    endorsements: unknown[];
+    skills: unknown[];
 }
 
 interface CredlyApiResponse {
@@ -47,11 +47,11 @@ async function fetchCredlyBadges(username: string): Promise<CredlyBadge[]> {
             `https://www.credly.com/users/${username}/badges.json?per_page=100&sort=-issued_at`,
             {
                 headers: {
-                    "Accept": "application/json",
+                    Accept: "application/json",
                     "User-Agent": "Portfolio-Website",
                 },
                 next: { revalidate: 3600 }, // Cache for 1 hour
-            }
+            },
         );
 
         if (!response.ok) {
@@ -79,31 +79,19 @@ export const getCredlyBadges = unstable_cache(
     {
         revalidate: 3600, // Revalidate every 1 hour
         tags: ["credly-badges"],
-    }
+    },
 );
-
-/**
- * Format Credly badge for display in certification list
- */
-export function formatCredlyBadge(badge: CredlyBadge) {
-    // Get the issuer name - prefer the entity name if available
-    const issuerName =
-        badge.issuer.entities?.[0]?.entity?.name || badge.issuer.name;
-
-    return {
-        title: badge.badge_template.name || badge.title,
-        description: issuerName,
-        link: badge.public_url,
-        imageUrl: badge.image_url,
-        issuedAt: badge.issued_at,
-        expiresAt: badge.expires_at,
-    };
-}
 
 /**
  * Get formatted certification list from Credly
  */
-export async function getCredlyCertifications(username: string) {
-    const badges = await getCredlyBadges(username);
-    return badges.map(formatCredlyBadge);
+export async function getCredlyCertifications() {
+    const badges = await getCredlyBadges(CREDLY_USERNAME);
+    return badges.map((b) => ({
+        title: b.name,
+        link: `https://www.credly.com/badges/${b.id}/public_url`,
+        issuer: b.issuer.summary,
+        issuedAt: b.issued_at_date,
+        expiresAt: b.expires_at_date,
+    }));
 }
