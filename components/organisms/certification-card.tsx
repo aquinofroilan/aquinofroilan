@@ -1,9 +1,22 @@
 import { BadgeCheckIcon, ArrowRightCircle } from "lucide-react";
 import { Card, CardHeader, CardTitle, CardContent } from "@/components/ui";
 import { CertificationsListsPreview } from "@/data/certification-list-preview";
+import { getCredlyCertifications } from "@/actions";
 import Link from "next/link";
 
-export const CertificationCard = ({ className }: { className?: string }) => {
+export const CertificationCard = async ({ className }: { className?: string }) => {
+    // Fetch certifications from Credly API if username is configured
+    const credlyUsername = process.env.CREDLY_USERNAME;
+    let certifications = CertificationsListsPreview;
+    
+    if (credlyUsername) {
+        const credlyCerts = await getCredlyCertifications(credlyUsername);
+        // Use Credly data if available, otherwise fallback to static data
+        if (credlyCerts && credlyCerts.length > 0) {
+            certifications = credlyCerts;
+        }
+    }
+
     return (
         <div className={className}>
             <Card className="w-full h-full">
@@ -24,7 +37,7 @@ export const CertificationCard = ({ className }: { className?: string }) => {
                 </CardHeader>
                 <CardContent>
                     <div className="w-full flex flex-col gap-4">
-                        {CertificationsListsPreview.slice(0, 4).map((cert) => {
+                        {certifications.slice(0, 4).map((cert) => {
                             return (
                                 <Link
                                     href={cert.link}

@@ -2,6 +2,7 @@ import { ArrowLeft } from "lucide-react";
 import Link from "next/link";
 import { Card, CardHeader, CardTitle, CardDescription } from "@/components/ui";
 import { CertificationsListsPreview } from "@/data/certification-list-preview";
+import { getCredlyCertifications } from "@/actions";
 import * as motion from "motion/react-client";
 import type { Metadata } from "next";
 
@@ -13,7 +14,19 @@ export const metadata: Metadata = {
     keywords: ["Froilan's Certifications", "Froilan's Achievements", "Froilan's Showcase"],
 };
 
-function Certifications() {
+async function Certifications() {
+    // Fetch certifications from Credly API if username is configured
+    const credlyUsername = process.env.CREDLY_USERNAME;
+    let certifications = CertificationsListsPreview;
+    
+    if (credlyUsername) {
+        const credlyCerts = await getCredlyCertifications(credlyUsername);
+        // Use Credly data if available, otherwise fallback to static data
+        if (credlyCerts && credlyCerts.length > 0) {
+            certifications = credlyCerts;
+        }
+    }
+
     return (
         <main className="py-10 w-11/12 max-w-7xl gap-2 flex flex-col md:grid md:grid-cols-2">
             <Link
@@ -26,7 +39,7 @@ function Certifications() {
             <div className="col-span-2 w-full flex flex-col gap-5">
                 <h1 className="text-2xl text-center font-bold">All Certifications</h1>
                 <div className="col-span-2 grid grid-cols-1 md:grid-cols-2 gap-2">
-                    {CertificationsListsPreview.map((c, index) => {
+                    {certifications.map((c, index) => {
                         return (
                             <motion.div
                                 key={c.link}
