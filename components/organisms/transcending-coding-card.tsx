@@ -14,18 +14,20 @@ export const TrascendingCodeCard = ({ className }: { className?: string }) => {
                 <CardContent>
                     <div className="flex flex-col gap-5">
                         <p className="text-sm text-justify">
-                            I am not just a coder, I am a reader, a thinker, a tech enthusiast, and a problem solver.
+                            Beyond the IDE, I see myself as a problem solver and a lifelong learner. I believe that true
+                            engineering excellence requires not just technical skill, but a holistic mindset that
+                            embraces constant evolution.
                         </p>
                         <p className="text-sm text-justify">
-                            I am passionate about learning and growing as a developer. To do this, I read books like C
-                            Programming A Modern Approach, Design Patterns, and Java The Complete Reference. I also read
-                            articles and watch videos on various topics related to programming, technology, and software
-                            development.
+                            To deepen my craft, I turn to foundational literature. I study classics like{" "}
+                            <i>C Programming: A Modern Approach</i>, <i>Design Patterns</i>, and{" "}
+                            <i>Java: The Complete Reference</i> to ground my modern development work in timeless
+                            software engineering principles.
                         </p>
                         <p className="text-sm text-justify">
-                            Apart from coding books, I also read books on personal development, productivity, and
-                            self-improvement. For instance Atomic Habits, Surrounded by Idiots and The Subtle Art of Not
-                            Giving a F*ck.
+                            My growth isn&apos;t limited to technology. I actively cultivate productivity and emotional
+                            intelligence through books like <i>Atomic Habits</i> and <i>Surrounded by Idiots</i>,
+                            ensuring I bring both technical acuity and personal effectiveness to every team I join.
                         </p>
                     </div>
                 </CardContent>

@@ -10,7 +10,7 @@ export const ProfileCard = ({ className }: { className?: string }) => {
         <div className={className}>
             <Card className="w-full h-full">
                 <CardContent className="flex flex-row items-center gap-5 p-6">
-                    <div className="flex-shrink-0 md:block flex justify-center items-center">
+                    <div className="shrink-0 md:block flex justify-center items-center">
                         <Image
                             priority={true}
                             src={Me}
@@ -33,7 +33,8 @@ export const ProfileCard = ({ className }: { className?: string }) => {
                             <span className="truncate">Caloocan City, MNL, PH</span>
                         </p>
                         <p className="text-[11px] md:text-sm">
-                            {process.env.PAGE_TITLE ? String(process.env.PAGE_TITLE).slice(10) : "Software Engineer"}
+                            {process.env.CURRENT_TITLE || "Software Engineer"} - {process.env.CURRENT_COMPANY || ""} -{" "}
+                            {process.env.CURRENT_WORK_LOCATION || "Philippines"}
                         </p>
                     </div>
                 </CardContent>

@@ -24,9 +24,18 @@ interface MasonryProps extends HTMLAttributes<HTMLDivElement> {
     overscan?: number;
     scrollFps?: number;
     linear?: boolean;
-    asChild?: boolean;
 }
 
+/**
+ * Masonry layout component with true Pinterest-style column distribution
+ * Responsive breakpoints:
+ * - Mobile (<768px): 1 column
+ * - Tablet (≥768px, <1024px): 2 columns
+ * - Desktop (≥1024px): configurable columns (default: 3)
+ * 
+ * Uses flexbox columns to allow items of varying heights to pack efficiently.
+ * Initializes with mobile-first approach to prevent hydration mismatches.
+ */
 const Masonry = forwardRef<HTMLDivElement, MasonryProps>(
     (
         {
@@ -43,12 +52,12 @@ const Masonry = forwardRef<HTMLDivElement, MasonryProps>(
             overscan,
             scrollFps,
             linear,
-            asChild,
             ...props
         },
         ref,
     ) => {
-        const [currentColumnCount, setCurrentColumnCount] = useState(columnCount);
+        // Initialize with 1 column (mobile-first) to prevent hydration mismatch
+        const [currentColumnCount, setCurrentColumnCount] = useState(1);
 
         useEffect(() => {
             const updateColumns = () => {
@@ -67,7 +76,7 @@ const Masonry = forwardRef<HTMLDivElement, MasonryProps>(
             return () => window.removeEventListener("resize", updateColumns);
         }, [columnCount]);
 
-        // Distribute children into columns
+        // Distribute children into columns (round-robin distribution)
         const columns = useMemo(() => {
             const cols: ReactNode[][] = Array.from({ length: currentColumnCount }, () => []);
 
@@ -80,7 +89,12 @@ const Masonry = forwardRef<HTMLDivElement, MasonryProps>(
         }, [children, currentColumnCount]);
 
         return (
-            <div ref={ref} className={cn("flex w-full", className)} style={{ gap: `${gap}px` }} {...props}>
+            <div 
+                ref={ref} 
+                className={cn("flex w-full", className)} 
+                style={{ gap: `${gap}px` }} 
+                {...props}
+            >
                 {columns.map((col, i) => (
                     <div key={i} className="flex flex-col flex-1" style={{ gap: `${gap}px` }}>
                         {col}

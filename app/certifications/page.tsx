@@ -1,19 +1,18 @@
 import { ArrowLeft } from "lucide-react";
 import Link from "next/link";
 import { Card, CardHeader, CardTitle, CardDescription } from "@/components/ui";
-import { CertificationsListsPreview } from "@/data/certification-list-preview";
+import { getCredlyCertifications } from "@/actions";
 import * as motion from "motion/react-client";
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-    title: process.env.PAGE_TITLE
-        ? process.env.PAGE_TITLE + " | Certifications"
-        : "Froilan | Software Engineer | Certifications",
-    description: "A showcase of Froilan's certifications and achievements.",
+    title: `Froilan | ${process.env.CURRENT_TITLE || "Software Engineer"} | ${process.env.CURRENT_COMPANY || ""} | ${process.env.CURRENT_WORK_LOCATION || "Philippines"} | Certifications`,
+    description: `A showcase of Froilan's certifications and achievements as a ${process.env.CURRENT_TITLE || "Software Engineer"}.`,
     keywords: ["Froilan's Certifications", "Froilan's Achievements", "Froilan's Showcase"],
 };
 
-function Certifications() {
+async function Certifications() {
+    const credlyCerts = await getCredlyCertifications();
     return (
         <main className="py-10 w-11/12 max-w-7xl gap-2 flex flex-col md:grid md:grid-cols-2">
             <Link
@@ -26,7 +25,7 @@ function Certifications() {
             <div className="col-span-2 w-full flex flex-col gap-5">
                 <h1 className="text-2xl text-center font-bold">All Certifications</h1>
                 <div className="col-span-2 grid grid-cols-1 md:grid-cols-2 gap-2">
-                    {CertificationsListsPreview.map((c, index) => {
+                    {credlyCerts.map((c, index) => {
                         return (
                             <motion.div
                                 key={c.link}
@@ -44,7 +43,7 @@ function Certifications() {
                                     <Card className="h-full hover:bg-muted/50 transition-colors">
                                         <CardHeader>
                                             <CardTitle className="text-sm">{c.title}</CardTitle>
-                                            <CardDescription className="text-sm">{c.description}</CardDescription>
+                                            <CardDescription className="text-sm">{c.issuer}</CardDescription>
                                         </CardHeader>
                                     </Card>
                                 </Link>

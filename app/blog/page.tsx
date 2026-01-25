@@ -2,6 +2,13 @@ import { ArrowLeft } from "lucide-react";
 import Link from "next/link";
 import { getAllBlogPosts } from "@/actions";
 import { formatDistance, stripMarkdown } from "@/lib/utils";
+import type { Metadata } from "next";
+
+export const metadata: Metadata = {
+    title: `Froilan | ${process.env.CURRENT_TITLE || "Software Engineer"} | ${process.env.CURRENT_COMPANY || ""} | ${process.env.CURRENT_WORK_LOCATION || "Philippines"} | Blog`,
+    description: `Technical articles, programming insights, and coding best practices by Froilan, ${process.env.CURRENT_TITLE || "Software Engineer"}.`,
+    keywords: ["Froilan's Blog", "Technical Articles", "Programming", "Coding", "Software Development"],
+};
 
 async function Blog() {
     const posts = await getAllBlogPosts();
