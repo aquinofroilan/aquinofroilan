@@ -46,20 +46,10 @@ function Projects() {
                                 }}
                                 className="w-full h-full"
                             >
-                                <div
-                                    key={project.projectLink}
-                                    className="grid grid-cols-1 gap-2 items-center p-5 rounded-md border transition duration-200 w-full"
-                                >
+                                <div className="grid grid-cols-1 gap-2 items-center p-5 rounded-md border transition duration-200 w-full">
                                     <div className="flex flex-col gap-1">
                                         <section className="flex justify-between w-full items-center">
-                                            <Link
-                                                href={project.projectLink}
-                                                target="_blank"
-                                                rel="noreferrer"
-                                                className="text-base font-semibold hover:underline underline-offset-2"
-                                            >
-                                                {project.title}
-                                            </Link>
+                                            <p className="text-base font-semibold">{project.title}</p>
                                             <Link
                                                 className="text-base font-semibold hover:underline underline-offset-2"
                                                 href={project.pageLink}

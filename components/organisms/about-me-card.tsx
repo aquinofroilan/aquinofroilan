@@ -14,27 +14,28 @@ export const AboutCard = ({ className }: { className?: string }) => {
                 <CardContent>
                     <div className="w-full flex flex-col gap-3">
                         <p className="text-sm text-justify">
-                            I work as a web developer and have a passion for creating scalable, maintainable, and
-                            sophisticated applications utilizing contemporary JavaScript technologies, especially React
-                            and its powerful Next.js, the framework that powers this website. In terms of service and
-                            backend architecture, I use platforms such as Firebase for smooth authentication and,
-                            Supabase for database orchestration integration.
+                            I am an <b>AI/Software Engineer</b> at <b>Journey Better Business Group Inc.</b>, passionate
+                            about crafting scalable and sophisticated applications. While I have a strong command of the
+                            JavaScript/TypeScript ecosystem (React, Next.js), my expertise extends to backend
+                            development with Java (Spring Boot) and Python (Flask), utilizing robust database solutions
+                            like PostgreSQL and Supabase.
                         </p>
                         <p className="text-sm text-justify">
-                            I recently received my information technology bachelor&apos;s degree in 2025. I have a very
-                            self-directed approach to learning—I actively use AI-based tools like ChatGPT and websites
-                            like YouTube, FreeCodeCamp and, Claude to deepen my understanding and, reaffirm ideas.
+                            I hold a <b>Bachelor&apos;s degree in Information Technology (2025)</b>. My approach to
+                            engineering is deeply self-directed; I leverage AI-augmented workflows and continuous
+                            learning resources to solve complex problems and accelerate development, ensuring I stay at
+                            the forefront of industry trends.
                         </p>
                         <p className="text-sm text-justify">
-                            A growing interest in UI/UX design complements my programming journey, which I develop using
-                            Figma and organized education from sites such as Udemy, EdX, and Coursera.
+                            I believe great software requires great usability. My growing proficiency in <b>UI/UX design</b>
+                            and tools like Figma allows me to bridge the gap between technical functionality and
+                            intuitive user experiences.
                         </p>
                         <p className="text-sm text-justify">
-                            I am currently broadening my technical foundation by studying system-level programming
-                            languages such as C and Go, with the aim of deepening my understanding of low-level
-                            operations and, enhancing my algorithmic thinking. In parallel, I am deepening my abstract
-                            thinking and, understanding with regards to Data Structures and Algorithms, how to optimize
-                            systems.
+                            Currently, I am expanding my technical horizons by diving into system-level programming with
+                            <b> C</b> and <b>Go</b>. This pursuit aims to deepen my understanding of low-level operations,
+                            memory management, and advanced Data Structures and Algorithms, enabling me to write more
+                            efficient and optimized code.
                         </p>
                     </div>
                 </CardContent>

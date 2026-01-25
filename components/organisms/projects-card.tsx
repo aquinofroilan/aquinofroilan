@@ -35,14 +35,7 @@ function ProjectsCard({ className }: { className?: string }) {
                         {ProjectsList.slice(0, 2).map((project) => (
                             <div className="flex flex-col gap-2" key={project.pageLink}>
                                 <section className="flex justify-between w-full items-center">
-                                    <Link
-                                        href={project.projectLink}
-                                        target="_blank"
-                                        rel="noreferrer"
-                                        className="text-sm font-medium hover:underline underline-offset-2"
-                                    >
-                                        {project.title}
-                                    </Link>
+                                    <p>{project.title}</p>
                                     <Link
                                         href={project.pageLink}
                                         rel="noreferrer"

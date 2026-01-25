@@ -9,7 +9,7 @@ export { Spotify } from "./icons/spotify";
 export { TypeScript } from "./icons/typescript";
 export { TailwindCSS } from "./icons/tailwind-css";
 export { Java } from "./icons/java";
-export { Angular } from "./icons/angular";
+export { Kotlin } from "./icons/kotlin";
 export { PostgreSQL } from "./icons/postgresql";
 export { SpringBoot } from "./icons/springboot";
 export { Prisma } from "./icons/prisma";
