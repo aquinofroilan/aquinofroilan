@@ -1,4 +1,4 @@
-import { Badge, Card, CardHeader, CardTitle, CardContent, DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from "@/components/ui";
+import { Badge, Card, CardHeader, CardTitle, CardContent } from "@/components/ui";
 import Link from "next/link";
 import { ArrowRightCircle, FolderCode } from "lucide-react";
 import { ProjectsList } from "@/data/projects-list";
@@ -35,31 +35,7 @@ function ProjectsCard({ className }: { className?: string }) {
                         {ProjectsList.slice(0, 2).map((project) => (
                             <div className="flex flex-col gap-2" key={project.pageLink}>
                                 <section className="flex justify-between w-full items-center">
-                                    {project.projectLink.length > 1 ? (
-                                        <DropdownMenu>
-                                            <DropdownMenuTrigger className="text-sm font-medium hover:underline underline-offset-2 cursor-pointer">
-                                                    {project.title}
-                                            </DropdownMenuTrigger>
-                                            <DropdownMenuContent>
-                                                {project.projectLink.map((link) => (
-                                                    <DropdownMenuItem key={link.url} asChild>
-                                                        <Link href={link.url} target="_blank" rel="noreferrer">
-                                                            {link.label}
-                                                        </Link>
-                                                    </DropdownMenuItem>
-                                                ))}
-                                            </DropdownMenuContent>
-                                        </DropdownMenu>
-                                    ) : (
-                                        <Link
-                                            href={project.projectLink[0].url}
-                                            target="_blank"
-                                            rel="noreferrer"
-                                            className="text-sm font-medium hover:underline underline-offset-2"
-                                        >
-                                            {project.title}
-                                        </Link>
-                                    )}
+                                    <p>{project.title}</p>
                                     <Link
                                         href={project.pageLink}
                                         rel="noreferrer"

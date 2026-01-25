@@ -1,10 +1,21 @@
 import { fetchImagesWithPrefix } from "@/actions";
 import { ArrowLeft } from "lucide-react";
 import Link from "next/link";
-import { Separator, Tooltip, TooltipContent, TooltipTrigger, DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from "@/components/ui";
+import { redirect } from "next/navigation";
+import {
+    Separator,
+    Tooltip,
+    TooltipContent,
+    TooltipTrigger,
+    DropdownMenu,
+    DropdownMenuContent,
+    DropdownMenuItem,
+    DropdownMenuTrigger,
+} from "@/components/ui";
 import ImageGallery from "@/components/organisms/image-gallery";
-import { Java, PostgreSQL, Angular, Github, TailwindCSS, TypeScript, SpringBoot } from "@/components/atoms";
+import { Github } from "@/components/atoms";
 import type { Metadata } from "next";
+import { ProjectsList } from "@/data/projects-list";
 
 export const metadata: Metadata = {
     title: `Froilan | ${process.env.CURRENT_TITLE || "Software Engineer"} | ${process.env.CURRENT_WORK_LOCATION || "Philippines"} | Synectix`,
@@ -66,9 +77,7 @@ const SynectixDetails = async () => {
                 </section>
                 <section>
                     <h6 className="text-lg font-semibold">Overview</h6>
-                    <p className="mt-2 text-neutral-700 dark:text-neutral-300">
-                        {longDescription}
-                    </p>
+                    <p className="mt-2 text-neutral-700 dark:text-neutral-300">{longDescription}</p>
                 </section>
                 <Separator className="my-4" />
                 <section>
@@ -76,9 +85,7 @@ const SynectixDetails = async () => {
                     <ImageGallery images={snapshotLinks} />
                 </section>
                 <section className="flex justify-end items-center my-4">
-                    <div className="flex flex-row gap-4">
-                        {techStackEntries}
-                    </div>
+                    <div className="flex flex-row gap-4">{techStackEntries}</div>
                 </section>
             </div>
         </main>

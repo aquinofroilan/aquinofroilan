@@ -2,7 +2,7 @@ import { ArrowLeft } from "lucide-react";
 import type { Metadata } from "next";
 import Link from "next/link";
 import * as motion from "motion/react-client";
-import { Badge, DropdownMenu, DropdownMenuTrigger, DropdownMenuContent, DropdownMenuItem } from "@/components/ui";
+import { Badge } from "@/components/ui";
 import { ProjectsList } from "@/data/projects-list";
 import React from "react";
 
@@ -46,36 +46,10 @@ function Projects() {
                                 }}
                                 className="w-full h-full"
                             >
-                                <div
-                                    className="grid grid-cols-1 gap-2 items-center p-5 rounded-md border transition duration-200 w-full"
-                                >
+                                <div className="grid grid-cols-1 gap-2 items-center p-5 rounded-md border transition duration-200 w-full">
                                     <div className="flex flex-col gap-1">
                                         <section className="flex justify-between w-full items-center">
-                                            {project.projectLink.length > 1 ? (
-                                                <DropdownMenu>
-                                                    <DropdownMenuTrigger className='text-base font-semibold hover:underline underline-offset-2 cursor-pointer'>
-                                                        {project.title}
-                                                    </DropdownMenuTrigger>
-                                                    <DropdownMenuContent>
-                                                        {project.projectLink.map((link) => (
-                                                            <DropdownMenuItem key={link.url} asChild>
-                                                                <Link href={link.url} target="_blank" rel="noreferrer">
-                                                                    {link.label}
-                                                                </Link>
-                                                            </DropdownMenuItem>
-                                                        ))}
-                                                    </DropdownMenuContent>
-                                                </DropdownMenu>
-                                            ) : (
-                                                <Link
-                                                    href={project.projectLink[0].url}
-                                                    target="_blank"
-                                                    rel="noreferrer"
-                                                    className="text-base font-semibold hover:underline underline-offset-2"
-                                                >
-                                                    {project.title}
-                                                </Link>
-                                            )}
+                                            <p className="text-base font-semibold">{project.title}</p>
                                             <Link
                                                 className="text-base font-semibold hover:underline underline-offset-2"
                                                 href={project.pageLink}

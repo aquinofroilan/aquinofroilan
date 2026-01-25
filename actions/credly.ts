@@ -1,6 +1,6 @@
 "use server";
 import { unstable_cache } from "next/cache";
-import { CertificationsListsPreview } from "@/data/certification-list-preview";
+import { CertificationsListsPreview } from "@/data/certification-list";
 const CREDLY_USERNAME = process.env.CREDLY_USERNAME || "";
 
 export interface CredlyBadge {
