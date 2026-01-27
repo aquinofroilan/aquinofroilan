@@ -14,7 +14,7 @@ export const AboutCard = ({ className }: { className?: string }) => {
                 <CardContent>
                     <div className="w-full flex flex-col gap-3">
                         <p className="text-sm text-justify">
-                            I am an <b>Frontend Developer</b> at <b>Journey Better Business Group Inc.</b>, passionate
+                            I am a <b>Frontend Developer</b> at <b>Journey Better Business Group Inc.</b>, passionate
                             about crafting scalable and sophisticated applications. While I have a strong command of the
                             JavaScript/TypeScript ecosystem (React, Next.js), my expertise extends to backend
                             development with Java (Spring Boot) and Python (Flask), utilizing robust database solutions
