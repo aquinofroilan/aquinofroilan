@@ -25,3 +25,9 @@ export interface BlogPost {
     created_at: string;
     likes: number;
 }
+
+export interface Book {
+    id: string;
+    title: string;
+    date_read: string;
+}
