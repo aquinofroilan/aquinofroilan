@@ -45,8 +45,6 @@ async function Books() {
                                         <span>{new Date(book.date_read).toLocaleDateString()}</span>
                                         <span>•</span>
                                         <span>{formatDistance(new Date(book.date_read), new Date())}</span>
-                                        <span>•</span>
-                                        <span>ID: {book.id}</span>
                                     </div>
                                 </div>
                             </div>
