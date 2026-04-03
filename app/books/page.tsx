@@ -21,7 +21,7 @@ async function Books() {
                 className="flex items-center gap-2 text-neutral-500 hover:text-neutral-700 dark:text-neutral-400 dark:hover:text-neutral-200 transition duration-200"
             >
                 <ArrowLeft size={15} />
-                <h1 className="text-sm">Back</h1>
+                <span className="text-sm">Back</span>
             </Link>
             <div className="flex flex-col gap-6 w-full">
                 <div className="flex flex-col gap-2">
@@ -37,6 +37,7 @@ async function Books() {
                     <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
                         {books.map((book) => {
                             const coverUrl = getBookCoverUrl(book.isbn, "L");
+                            const readDate = new Date(book.date_read);
                             return (
                                 <div
                                     key={book.id}
@@ -59,9 +60,9 @@ async function Books() {
                                         <h2 className="text-lg font-bold line-clamp-2">{book.title}</h2>
                                         <p className="text-sm text-neutral-500 dark:text-neutral-400">{book.author}</p>
                                         <div className="flex items-center gap-3 text-xs text-neutral-500 dark:text-neutral-400 mt-auto">
-                                            <span>{new Date(book.date_read).toLocaleDateString()}</span>
+                                            <span>{readDate.toLocaleDateString()}</span>
                                             <span>•</span>
-                                            <span>{formatDistance(new Date(book.date_read), new Date())}</span>
+                                            <span>{formatDistance(readDate, new Date())}</span>
                                         </div>
                                     </div>
                                 </div>

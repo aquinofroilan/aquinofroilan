@@ -35,6 +35,7 @@ async function BooksCard({ className }: { className?: string }) {
                         <div className="w-full flex flex-col gap-4">
                             {books.map((book) => {
                                 const coverUrl = getBookCoverUrl(book.isbn, "M");
+                                const readDate = new Date(book.date_read);
                                 return (
                                     <div key={book.id} className="flex gap-3 items-start">
                                         {coverUrl ? (
@@ -51,11 +52,11 @@ async function BooksCard({ className }: { className?: string }) {
                                             </div>
                                         )}
                                         <div className="flex flex-col gap-1 min-w-0">
-                                            <h1 className="text-sm font-medium line-clamp-1">{book.title}</h1>
+                                            <h3 className="text-sm font-medium line-clamp-1">{book.title}</h3>
                                             <p className="text-xs text-neutral-500 dark:text-neutral-400 line-clamp-1">{book.author}</p>
                                             <div className="flex flex-wrap gap-2 items-center">
                                                 <Badge variant="outline" className="w-fit text-[10px] font-normal px-1.5 py-0 h-5">
-                                                    {formatDistance(new Date(book.date_read), new Date())}
+                                                    {formatDistance(readDate, new Date())}
                                                 </Badge>
                                             </div>
                                         </div>
