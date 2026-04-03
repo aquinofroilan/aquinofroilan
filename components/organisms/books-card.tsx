@@ -6,7 +6,7 @@ import { Badge, Card, CardContent, CardHeader, CardTitle } from "@/components/ui
 import { formatDistance, getBookCoverUrl } from "@/lib/utils";
 
 async function BooksCard({ className }: { className?: string }) {
-    let books;
+    let books: Awaited<ReturnType<typeof getRecentBooks>>;
     try {
         books = await getRecentBooks(4);
     } catch (error) {
