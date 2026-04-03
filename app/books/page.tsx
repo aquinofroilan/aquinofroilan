@@ -53,7 +53,10 @@ async function Books() {
                                         />
                                     ) : (
                                         <div className="w-[80px] h-[120px] rounded-md bg-neutral-200 dark:bg-neutral-800 shrink-0 flex items-center justify-center">
-                                            <BookOpenText size={24} className="text-neutral-400 dark:text-neutral-600" />
+                                            <BookOpenText
+                                                size={24}
+                                                className="text-neutral-400 dark:text-neutral-600"
+                                            />
                                         </div>
                                     )}
                                     <div className="flex flex-col gap-2 min-w-0">

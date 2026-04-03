@@ -32,10 +32,7 @@ export async function POST(request: Request) {
 
         // Check rate limit
         if (!checkRateLimit(ip)) {
-            return NextResponse.json(
-                { error: "Too many requests. Please try again later." },
-                { status: 429 }
-            );
+            return NextResponse.json({ error: "Too many requests. Please try again later." }, { status: 429 });
         }
 
         const { id } = await request.json();

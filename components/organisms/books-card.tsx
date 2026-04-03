@@ -54,14 +54,22 @@ async function BooksCard({ className }: { className?: string }) {
                                             />
                                         ) : (
                                             <div className="w-[40px] h-[60px] rounded-sm bg-neutral-200 dark:bg-neutral-800 shrink-0 flex items-center justify-center">
-                                                <BookOpenText size={16} className="text-neutral-400 dark:text-neutral-600" />
+                                                <BookOpenText
+                                                    size={16}
+                                                    className="text-neutral-400 dark:text-neutral-600"
+                                                />
                                             </div>
                                         )}
                                         <div className="flex flex-col gap-1 min-w-0">
                                             <h3 className="text-sm font-medium line-clamp-1">{book.title}</h3>
-                                            <p className="text-xs text-neutral-500 dark:text-neutral-400 line-clamp-1">{book.author}</p>
+                                            <p className="text-xs text-neutral-500 dark:text-neutral-400 line-clamp-1">
+                                                {book.author}
+                                            </p>
                                             <div className="flex flex-wrap gap-2 items-center">
-                                                <Badge variant="outline" className="w-fit text-[10px] font-normal px-1.5 py-0 h-5">
+                                                <Badge
+                                                    variant="outline"
+                                                    className="w-fit text-[10px] font-normal px-1.5 py-0 h-5"
+                                                >
                                                     {formatDistance(readDate, new Date())}
                                                 </Badge>
                                             </div>

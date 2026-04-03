@@ -88,24 +88,23 @@ export const CompetenciesCard = ({ className }: { className?: string }) => {
                             {milestones.map((milestone, index) => {
                                 const duration = getDuration(milestone.year);
                                 return (
-                                <div key={index} className="relative group">
-                                    <div className="absolute -left-2 top-1 w-3 h-3 rounded-full bg-transparent border-primary border-2 group-hover:bg-primary transition-colors" />
-                                    <div className="pb-2 pl-3">
-                                        <Badge variant="outline" className="text-xs py-0">
-                                            {duration ? `${milestone.year} | ${duration}` : milestone.year}
-                                        </Badge>
-                                        <Badge
-                                            variant="secondary"
-                                            className="ml-2 text-xs py-0"
-                                        >
-                                            {milestone.badge}
-                                        </Badge>
+                                    <div key={index} className="relative group">
+                                        <div className="absolute -left-2 top-1 w-3 h-3 rounded-full bg-transparent border-primary border-2 group-hover:bg-primary transition-colors" />
+                                        <div className="pb-2 pl-3">
+                                            <Badge variant="outline" className="text-xs py-0">
+                                                {duration ? `${milestone.year} | ${duration}` : milestone.year}
+                                            </Badge>
+                                            <Badge variant="secondary" className="ml-2 text-xs py-0">
+                                                {milestone.badge}
+                                            </Badge>
+                                        </div>
+                                        <div>
+                                            <h3 className="text-base font-medium">{milestone.title}</h3>
+                                            <p className="text-sm text-muted-foreground mt-1">
+                                                {milestone.description}
+                                            </p>
+                                        </div>
                                     </div>
-                                    <div>
-                                        <h3 className="text-base font-medium">{milestone.title}</h3>
-                                        <p className="text-sm text-muted-foreground mt-1">{milestone.description}</p>
-                                    </div>
-                                </div>
                                 );
                             })}
                         </div>
