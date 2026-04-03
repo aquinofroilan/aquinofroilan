@@ -32,7 +32,7 @@ interface MasonryProps extends HTMLAttributes<HTMLDivElement> {
  * - Mobile (<768px): 1 column
  * - Tablet (≥768px, <1024px): 2 columns
  * - Desktop (≥1024px): configurable columns (default: 3)
- * 
+ *
  * Uses flexbox columns to allow items of varying heights to pack efficiently.
  * Initializes with mobile-first approach to prevent hydration mismatches.
  */
@@ -89,12 +89,7 @@ const Masonry = forwardRef<HTMLDivElement, MasonryProps>(
         }, [children, currentColumnCount]);
 
         return (
-            <div 
-                ref={ref} 
-                className={cn("flex w-full", className)} 
-                style={{ gap: `${gap}px` }} 
-                {...props}
-            >
+            <div ref={ref} className={cn("flex w-full", className)} style={{ gap: `${gap}px` }} {...props}>
                 {columns.map((col, i) => (
                     <div key={i} className="flex flex-col flex-1" style={{ gap: `${gap}px` }}>
                         {col}

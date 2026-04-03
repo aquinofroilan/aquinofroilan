@@ -95,3 +95,10 @@ export function stripMarkdown(markdown: string, maxLength?: number): string {
 export function isValidUUID(id: string): boolean {
     return uuidValidate(id);
 }
+
+export function getBookCoverUrl(isbn: string | null, size: "S" | "M" | "L" = "M"): string | null {
+    if (!isbn) return null;
+    const sanitized = isbn.replace(/[^a-zA-Z0-9]/g, "").toUpperCase();
+    if (!sanitized) return null;
+    return `https://covers.openlibrary.org/b/isbn/${encodeURIComponent(sanitized)}-${size}.jpg`;
+}

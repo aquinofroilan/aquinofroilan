@@ -27,15 +27,16 @@ export const AboutCard = ({ className }: { className?: string }) => {
                             the forefront of industry trends.
                         </p>
                         <p className="text-sm text-justify">
-                            I believe great software requires great usability. My growing proficiency in <b>UI/UX design</b>
+                            I believe great software requires great usability. My growing proficiency in{" "}
+                            <b>UI/UX design</b>
                             and tools like Figma allows me to bridge the gap between technical functionality and
                             intuitive user experiences.
                         </p>
                         <p className="text-sm text-justify">
                             Currently, I am expanding my technical horizons by diving into system-level programming with
-                            <b> C</b> and <b>Go</b>. This pursuit aims to deepen my understanding of low-level operations,
-                            memory management, and advanced Data Structures and Algorithms, enabling me to write more
-                            efficient and optimized code.
+                            <b> C</b> and <b>Go</b>. This pursuit aims to deepen my understanding of low-level
+                            operations, memory management, and advanced Data Structures and Algorithms, enabling me to
+                            write more efficient and optimized code.
                         </p>
                     </div>
                 </CardContent>
