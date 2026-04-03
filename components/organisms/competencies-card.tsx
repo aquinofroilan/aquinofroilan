@@ -48,7 +48,7 @@ const milestones = [
         badge: "Education",
     },
     {
-        year: "01/2025 - 05/2025",
+        year: "01/22/2025 - 05/07/2025",
         title: "Web Development Internship",
         description: "Internship as web developer at Ishkaster Media",
         badge: "Internship",
