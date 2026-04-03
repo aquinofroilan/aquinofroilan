@@ -25,3 +25,11 @@ export interface BlogPost {
     created_at: string;
     likes: number;
 }
+
+export interface Book {
+    id: string;
+    title: string;
+    author: string;
+    isbn: string | null;
+    date_read: string;
+}

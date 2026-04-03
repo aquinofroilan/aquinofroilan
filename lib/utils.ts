@@ -95,3 +95,8 @@ export function stripMarkdown(markdown: string, maxLength?: number): string {
 export function isValidUUID(id: string): boolean {
     return uuidValidate(id);
 }
+
+export function getBookCoverUrl(isbn: string | null, size: "S" | "M" | "L" = "M"): string | null {
+    if (!isbn) return null;
+    return `https://covers.openlibrary.org/b/isbn/${isbn}-${size}.jpg`;
+}
