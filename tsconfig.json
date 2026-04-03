@@ -19,10 +19,9 @@
                 "name": "next"
             }
         ],
-        "baseUrl": ".",
         "paths": {
             "@/*": ["./*"],
-            "@hooks/*": ["hooks/*"]
+            "@hooks/*": ["./hooks/*"]
         }
     },
     "include": [
