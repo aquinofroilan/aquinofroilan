@@ -1,11 +1,11 @@
 {"header" : {
   "cloc_url"           : "github.com/AlDanial/cloc",
   "cloc_version"       : "1.98",
-  "elapsed_seconds"    : 0.611723184585571,
-  "n_files"            : 1031,
-  "n_lines"            : 80963,
-  "files_per_second"   : 1685.40285210618,
-  "lines_per_second"   : 132352.348317239,
+  "elapsed_seconds"    : 0.619720935821533,
+  "n_files"            : 1064,
+  "n_lines"            : 83918,
+  "files_per_second"   : 1716.90181579796,
+  "lines_per_second"   : 135412.562573433,
   "report_file"        : "../output/cloc-output.json"},
 "TypeScript" :{
   "nFiles": 722,
@@ -17,6 +17,11 @@
   "blank": 2414,
   "comment": 2546,
   "code": 10672},
+"Kotlin" :{
+  "nFiles": 34,
+  "blank": 389,
+  "comment": 49,
+  "code": 2492},
 "Java" :{
   "nFiles": 64,
   "blank": 427,
@@ -39,19 +44,19 @@
   "code": 268},
 "Gradle" :{
   "nFiles": 12,
-  "blank": 33,
+  "blank": 35,
   "comment": 2,
-  "code": 235},
+  "code": 254},
 "DOS Batch" :{
   "nFiles": 3,
   "blank": 63,
   "comment": 6,
   "code": 207},
 "INI" :{
-  "nFiles": 7,
-  "blank": 41,
+  "nFiles": 8,
+  "blank": 46,
   "comment": 0,
-  "code": 171},
+  "code": 194},
 "Jupyter Notebook" :{
   "nFiles": 1,
   "blank": 0,
@@ -67,11 +72,6 @@
   "blank": 0,
   "comment": 0,
   "code": 18},
-"Kotlin" :{
-  "nFiles": 2,
-  "blank": 7,
-  "comment": 0,
-  "code": 17},
 "PHP" :{
   "nFiles": 1,
   "blank": 2,
@@ -88,7 +88,7 @@
   "comment": 18,
   "code": 0},
 "SUM": {
-  "blank": 8207,
-  "comment": 6630,
-  "code": 66126,
-  "nFiles": 1031} }
+  "blank": 8596,
+  "comment": 6679,
+  "code": 68643,
+  "nFiles": 1064} }
