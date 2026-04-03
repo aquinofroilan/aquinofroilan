@@ -92,7 +92,7 @@ export const CompetenciesCard = ({ className }: { className?: string }) => {
                                     <div className="absolute -left-2 top-1 w-3 h-3 rounded-full bg-transparent border-primary border-2 group-hover:bg-primary transition-colors" />
                                     <div className="pb-2 pl-3">
                                         <Badge variant="outline" className="text-xs py-0">
-                                            {milestone.year}
+                                            {duration ? `${milestone.year} | ${duration}` : milestone.year}
                                         </Badge>
                                         <Badge
                                             variant="secondary"
@@ -100,11 +100,6 @@ export const CompetenciesCard = ({ className }: { className?: string }) => {
                                         >
                                             {milestone.badge}
                                         </Badge>
-                                        {duration && (
-                                            <Badge variant="outline" className="ml-2 text-xs py-0">
-                                                {duration}
-                                            </Badge>
-                                        )}
                                     </div>
                                     <div>
                                         <h3 className="text-base font-medium">{milestone.title}</h3>
