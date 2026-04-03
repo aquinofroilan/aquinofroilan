@@ -6,7 +6,13 @@ import { Badge, Card, CardContent, CardHeader, CardTitle } from "@/components/ui
 import { formatDistance, getBookCoverUrl } from "@/lib/utils";
 
 async function BooksCard({ className }: { className?: string }) {
-    const books = await getRecentBooks(4);
+    let books;
+    try {
+        books = await getRecentBooks(4);
+    } catch (error) {
+        console.error("Failed to fetch recent books:", error);
+        books = [];
+    }
 
     return (
         <div className={className}>
