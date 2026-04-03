@@ -1,8 +1,9 @@
-import { ArrowLeft } from "lucide-react";
+import { ArrowLeft, BookOpenText } from "lucide-react";
+import Image from "next/image";
 import Link from "next/link";
 import type { Metadata } from "next";
 import { getAllBooks } from "@/actions";
-import { formatDistance } from "@/lib/utils";
+import { formatDistance, getBookCoverUrl } from "@/lib/utils";
 
 export const metadata: Metadata = {
     title: `Froilan | ${process.env.CURRENT_TITLE || "Software Engineer"} | ${process.env.CURRENT_COMPANY || ""} | ${process.env.CURRENT_WORK_LOCATION || "Philippines"} | Books`,
@@ -33,22 +34,39 @@ async function Books() {
                         <p className="text-neutral-500 dark:text-neutral-400">No books listed yet. Check back soon!</p>
                     </div>
                 ) : (
-                    <div className="grid gap-4">
-                        {books.map((book) => (
-                            <div
-                                key={book.id}
-                                className="border border-neutral-200 dark:border-neutral-800 rounded-xl p-6"
-                            >
-                                <div className="flex flex-col gap-2">
-                                    <h2 className="text-xl font-bold">{book.title}</h2>
-                                    <div className="flex items-center gap-3 text-xs text-neutral-500 dark:text-neutral-400">
-                                        <span>{new Date(book.date_read).toLocaleDateString()}</span>
-                                        <span>•</span>
-                                        <span>{formatDistance(new Date(book.date_read), new Date())}</span>
+                    <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+                        {books.map((book) => {
+                            const coverUrl = getBookCoverUrl(book.isbn, "L");
+                            return (
+                                <div
+                                    key={book.id}
+                                    className="border border-neutral-200 dark:border-neutral-800 rounded-xl p-6 flex gap-4"
+                                >
+                                    {coverUrl ? (
+                                        <Image
+                                            src={coverUrl}
+                                            alt={book.title}
+                                            width={80}
+                                            height={120}
+                                            className="rounded-md object-cover shrink-0"
+                                        />
+                                    ) : (
+                                        <div className="w-[80px] h-[120px] rounded-md bg-neutral-200 dark:bg-neutral-800 shrink-0 flex items-center justify-center">
+                                            <BookOpenText size={24} className="text-neutral-400 dark:text-neutral-600" />
+                                        </div>
+                                    )}
+                                    <div className="flex flex-col gap-2 min-w-0">
+                                        <h2 className="text-lg font-bold line-clamp-2">{book.title}</h2>
+                                        <p className="text-sm text-neutral-500 dark:text-neutral-400">{book.author}</p>
+                                        <div className="flex items-center gap-3 text-xs text-neutral-500 dark:text-neutral-400 mt-auto">
+                                            <span>{new Date(book.date_read).toLocaleDateString()}</span>
+                                            <span>•</span>
+                                            <span>{formatDistance(new Date(book.date_read), new Date())}</span>
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
-                        ))}
+                            );
+                        })}
                     </div>
                 )}
             </div>

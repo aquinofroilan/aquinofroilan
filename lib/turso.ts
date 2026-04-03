@@ -29,5 +29,7 @@ export interface BlogPost {
 export interface Book {
     id: string;
     title: string;
+    author: string;
+    isbn: string | null;
     date_read: string;
 }
