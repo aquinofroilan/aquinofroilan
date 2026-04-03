@@ -3,8 +3,11 @@ import { Card, CardHeader, CardTitle, CardContent, Badge } from "@/components/ui
 
 function parseFlexibleDate(str: string): Date {
     const trimmed = str.trim();
-    // MM/DD/YYYY
-    if (/^\d{2}\/\d{2}\/\d{4}$/.test(trimmed)) return new Date(trimmed);
+    // DD/MM/YYYY
+    if (/^\d{2}\/\d{2}\/\d{4}$/.test(trimmed)) {
+        const [day, month, year] = trimmed.split("/");
+        return new Date(`${year}-${month}-${day}`);
+    }
     // MM/YYYY
     if (/^\d{2}\/\d{4}$/.test(trimmed)) return new Date(`${trimmed.split("/")[1]}-${trimmed.split("/")[0]}-01`);
     return new Date(trimmed);
@@ -36,7 +39,7 @@ function getDuration(year: string): string | null {
 
 const milestones = [
     {
-        year: "09/29/2025 - Present",
+        year: "29/09/2025 - Present",
         title: "Frontend Developer",
         description: "Hired as Frontend Developer at Journey Better Business Group Inc.",
         badge: "Full time",
@@ -48,7 +51,7 @@ const milestones = [
         badge: "Education",
     },
     {
-        year: "01/22/2025 - 05/07/2025",
+        year: "22/01/2025 - 07/05/2025",
         title: "Web Development Internship",
         description: "Internship as web developer at Ishkaster Media",
         badge: "Internship",
