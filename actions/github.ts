@@ -21,9 +21,9 @@ const queryGithub = async <T>(query: string): Promise<T> => {
 
     const errors: string[] = [];
 
-    for (let index = 0; index < graphqlClients.length; index++) {
+    for (let clientIndex = 0; clientIndex < graphqlClients.length; clientIndex++) {
         try {
-            const result = await graphqlClients[index](query);
+            const result = await graphqlClients[clientIndex](query);
             return result as T;
         } catch (error) {
             errors.push(error instanceof Error ? error.message : String(error));
@@ -31,7 +31,7 @@ const queryGithub = async <T>(query: string): Promise<T> => {
     }
 
     throw new Error(
-        `GitHub query failed after trying ${graphqlClients.length} token(s). Check token validity and rate limits. Errors: ${errors.join(" | ") || "Unknown error"}`,
+        `GitHub query failed after trying ${graphqlClients.length} token(s). Check token validity and rate limits. Errors: ${errors.join(" | ")}`,
     );
 };
 
