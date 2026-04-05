@@ -1,114 +1,94 @@
-{
-    "header": {
-        "cloc_url": "github.com/AlDanial/cloc",
-        "cloc_version": "1.98",
-        "elapsed_seconds": 0.619720935821533,
-        "n_files": 1064,
-        "n_lines": 83918,
-        "files_per_second": 1716.90181579796,
-        "lines_per_second": 135412.562573433,
-        "report_file": "../output/cloc-output.json"
-    },
-    "TypeScript": {
-        "nFiles": 722,
-        "blank": 5004,
-        "comment": 2092,
-        "code": 51501
-    },
-    "Python": {
-        "nFiles": 187,
-        "blank": 2414,
-        "comment": 2546,
-        "code": 10672
-    },
-    "Kotlin": {
-        "nFiles": 34,
-        "blank": 389,
-        "comment": 49,
-        "code": 2492
-    },
-    "Java": {
-        "nFiles": 64,
-        "blank": 427,
-        "comment": 254,
-        "code": 2150
-    },
-    "JavaScript": {
-        "nFiles": 23,
-        "blank": 50,
-        "comment": 104,
-        "code": 462
-    },
-    "Bourne Shell": {
-        "nFiles": 3,
-        "blank": 79,
-        "comment": 272,
-        "code": 333
-    },
-    "SQL": {
-        "nFiles": 2,
-        "blank": 83,
-        "comment": 50,
-        "code": 268
-    },
-    "Gradle": {
-        "nFiles": 12,
-        "blank": 35,
-        "comment": 2,
-        "code": 254
-    },
-    "DOS Batch": {
-        "nFiles": 3,
-        "blank": 63,
-        "comment": 6,
-        "code": 207
-    },
-    "INI": {
-        "nFiles": 8,
-        "blank": 46,
-        "comment": 0,
-        "code": 194
-    },
-    "Jupyter Notebook": {
-        "nFiles": 1,
-        "blank": 0,
-        "comment": 1284,
-        "code": 56
-    },
-    "Nix": {
-        "nFiles": 1,
-        "blank": 1,
-        "comment": 0,
-        "code": 25
-    },
-    "Maven": {
-        "nFiles": 1,
-        "blank": 0,
-        "comment": 0,
-        "code": 18
-    },
-    "PHP": {
-        "nFiles": 1,
-        "blank": 2,
-        "comment": 2,
-        "code": 10
-    },
-    "Dockerfile": {
-        "nFiles": 1,
-        "blank": 0,
-        "comment": 0,
-        "code": 1
-    },
-    "ProGuard": {
-        "nFiles": 1,
-        "blank": 3,
-        "comment": 18,
-        "code": 0
-    },
-    "SUM": {
-        "blank": 8596,
-        "comment": 6679,
-        "code": 68643,
-        "nFiles": 1064
-    }
-}
+{"header" : {
+  "cloc_url"           : "github.com/AlDanial/cloc",
+  "cloc_version"       : "1.98",
+  "elapsed_seconds"    : 0.637195110321045,
+  "n_files"            : 1088,
+  "n_lines"            : 87029,
+  "files_per_second"   : 1707.48328475374,
+  "lines_per_second"   : 136581.399622089,
+  "report_file"        : "../output/cloc-output.json"},
+"TypeScript" :{
+  "nFiles": 726,
+  "blank": 5029,
+  "comment": 2094,
+  "code": 51746},
+"Python" :{
+  "nFiles": 187,
+  "blank": 2414,
+  "comment": 2546,
+  "code": 10672},
+"Kotlin" :{
+  "nFiles": 54,
+  "blank": 746,
+  "comment": 51,
+  "code": 4958},
+"Java" :{
+  "nFiles": 64,
+  "blank": 427,
+  "comment": 254,
+  "code": 2150},
+"JavaScript" :{
+  "nFiles": 23,
+  "blank": 50,
+  "comment": 104,
+  "code": 468},
+"Bourne Shell" :{
+  "nFiles": 3,
+  "blank": 79,
+  "comment": 272,
+  "code": 333},
+"SQL" :{
+  "nFiles": 2,
+  "blank": 83,
+  "comment": 50,
+  "code": 268},
+"Gradle" :{
+  "nFiles": 12,
+  "blank": 36,
+  "comment": 2,
+  "code": 261},
+"DOS Batch" :{
+  "nFiles": 3,
+  "blank": 63,
+  "comment": 6,
+  "code": 207},
+"INI" :{
+  "nFiles": 8,
+  "blank": 46,
+  "comment": 0,
+  "code": 194},
+"Jupyter Notebook" :{
+  "nFiles": 1,
+  "blank": 0,
+  "comment": 1284,
+  "code": 56},
+"Nix" :{
+  "nFiles": 1,
+  "blank": 1,
+  "comment": 0,
+  "code": 25},
+"Maven" :{
+  "nFiles": 1,
+  "blank": 0,
+  "comment": 0,
+  "code": 18},
+"PHP" :{
+  "nFiles": 1,
+  "blank": 2,
+  "comment": 2,
+  "code": 10},
+"Dockerfile" :{
+  "nFiles": 1,
+  "blank": 0,
+  "comment": 0,
+  "code": 1},
+"ProGuard" :{
+  "nFiles": 1,
+  "blank": 3,
+  "comment": 18,
+  "code": 0},
+"SUM": {
+  "blank": 8979,
+  "comment": 6683,
+  "code": 71367,
+  "nFiles": 1088} }
