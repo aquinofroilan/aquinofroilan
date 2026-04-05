@@ -21,10 +21,9 @@ const queryGithub = async <T>(query: string): Promise<T> => {
 
     const errors: string[] = [];
 
-    for (let clientIndex = 0; clientIndex < graphqlClients.length; clientIndex++) {
+    for (const graphqlClient of graphqlClients) {
         try {
-            const result = await graphqlClients[clientIndex](query);
-            return result as T;
+            return await graphqlClient<T>(query);
         } catch (error) {
             errors.push(error instanceof Error ? error.message : String(error));
         }
