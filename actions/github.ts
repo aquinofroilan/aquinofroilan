@@ -33,7 +33,10 @@ const queryGithub = async <T>(query: string): Promise<T> => {
         }
     }
 
-    throw lastError ?? new Error(`GitHub query failed after trying ${graphqlClients.length} token(s). Check token validity and rate limits.`);
+    const lastErrorMessage = lastError instanceof Error ? lastError.message : String(lastError ?? "Unknown error");
+    throw new Error(
+        `GitHub query failed after trying ${graphqlClients.length} token(s). Check token validity and rate limits. Last error: ${lastErrorMessage}`,
+    );
 };
 
 interface GraphQLResponse {
