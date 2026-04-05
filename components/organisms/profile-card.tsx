@@ -1,11 +1,19 @@
 import Me from "@/public/images/me.webp";
 import Image from "next/image";
-import { BadgeCheckIcon, Mail, MapPin, Phone } from "lucide-react";
+import { BadgeCheckIcon, CircleDot, GitCommitVertical, GitPullRequest, Mail, MapPin, Phone, Star } from "lucide-react";
 import Link from "next/link";
 import { Button, Card, CardContent, CardFooter } from "@/components/ui";
 import { SpotifyNowPlaying } from "@/components/molecules";
+import { getGithubStats } from "@/actions";
 
-export const ProfileCard = ({ className }: { className?: string }) => {
+export const ProfileCard = async ({ className }: { className?: string }) => {
+    let githubStats;
+    try {
+        githubStats = await getGithubStats();
+    } catch {
+        githubStats = null;
+    }
+
     return (
         <div className={className}>
             <Card className="w-full h-full">
@@ -38,7 +46,31 @@ export const ProfileCard = ({ className }: { className?: string }) => {
                         </p>
                     </div>
                 </CardContent>
-                <CardFooter className="p-6 pt-0 flex flex-col">
+                <CardFooter className="p-6 pt-0 flex flex-col gap-3">
+                    {githubStats && (
+                        <div className="w-full grid grid-cols-4 text-xs text-muted-foreground">
+                            <div className="flex flex-col items-center gap-0.5">
+                                <Star size={14} />
+                                <span className="font-medium text-foreground">{githubStats.stars}</span>
+                                <span>stars</span>
+                            </div>
+                            <div className="flex flex-col items-center gap-0.5">
+                                <GitPullRequest size={14} />
+                                <span className="font-medium text-foreground">{githubStats.pullRequests}</span>
+                                <span>PRs</span>
+                            </div>
+                            <div className="flex flex-col items-center gap-0.5">
+                                <CircleDot size={14} />
+                                <span className="font-medium text-foreground">{githubStats.issues}</span>
+                                <span>issues</span>
+                            </div>
+                            <div className="flex flex-col items-center gap-0.5">
+                                <GitCommitVertical size={14} />
+                                <span className="font-medium text-foreground">{githubStats.commits}</span>
+                                <span>commits</span>
+                            </div>
+                        </div>
+                    )}
                     <div className="flex flex-row gap-2 w-full">
                         <Button
                             className="text-white rounded-md flex flex-row gap-2 flex-1"
