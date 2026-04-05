@@ -1,11 +1,19 @@
 import Me from "@/public/images/me.webp";
 import Image from "next/image";
-import { BadgeCheckIcon, Mail, MapPin, Phone } from "lucide-react";
+import { BadgeCheckIcon, GitCommitVertical, GitPullRequest, Mail, MapPin, MessageSquare, Phone, Star } from "lucide-react";
 import Link from "next/link";
 import { Button, Card, CardContent, CardFooter } from "@/components/ui";
 import { SpotifyNowPlaying } from "@/components/molecules";
+import { getGithubStats } from "@/actions";
 
-export const ProfileCard = ({ className }: { className?: string }) => {
+export const ProfileCard = async ({ className }: { className?: string }) => {
+    let githubStats;
+    try {
+        githubStats = await getGithubStats();
+    } catch {
+        githubStats = null;
+    }
+
     return (
         <div className={className}>
             <Card className="w-full h-full">
@@ -38,7 +46,27 @@ export const ProfileCard = ({ className }: { className?: string }) => {
                         </p>
                     </div>
                 </CardContent>
-                <CardFooter className="p-6 pt-0 flex flex-col">
+                <CardFooter className="p-6 pt-0 flex flex-col gap-3">
+                    {githubStats && (
+                        <div className="w-full flex items-center justify-between text-xs text-muted-foreground">
+                            <span className="flex items-center gap-1">
+                                <Star size={12} />
+                                {githubStats.stars} stars
+                            </span>
+                            <span className="flex items-center gap-1">
+                                <GitPullRequest size={12} />
+                                {githubStats.pullRequests} PRs
+                            </span>
+                            <span className="flex items-center gap-1">
+                                <MessageSquare size={12} />
+                                {githubStats.issues} issues
+                            </span>
+                            <span className="flex items-center gap-1">
+                                <GitCommitVertical size={12} />
+                                {githubStats.commits} commits
+                            </span>
+                        </div>
+                    )}
                     <div className="flex flex-row gap-2 w-full">
                         <Button
                             className="text-white rounded-md flex flex-row gap-2 flex-1"

@@ -6,13 +6,14 @@ import {
     ProfileCard,
     TechStackCard,
     TrascendingCodeCard,
-    GithubStatsCard,
     RecentBlogsCard,
     BooksCard,
 } from "@/components/organisms/";
 import ProjectsCard from "@/components/organisms/projects-card";
 import { Masonry, FadeIn } from "@/components/ui";
 import type { Metadata } from "next";
+
+export const revalidate = 3600;
 
 export const metadata: Metadata = {
     title: `Froilan | ${process.env.CURRENT_TITLE || "Software Engineer"} | ${process.env.CURRENT_COMPANY || ""} | ${process.env.CURRENT_WORK_LOCATION || "Philippines"}`,
@@ -47,9 +48,6 @@ export default function Home() {
                     </FadeIn>
                     <FadeIn delay={0.35} className="h-auto overflow-visible">
                         <TrascendingCodeCard className="h-full" />
-                    </FadeIn>
-                    <FadeIn delay={0.55} className="h-auto overflow-visible">
-                        <GithubStatsCard className="h-full" />
                     </FadeIn>
                     <FadeIn delay={0.65} className="h-auto overflow-visible">
                         <CompetenciesCard className="h-full" />
