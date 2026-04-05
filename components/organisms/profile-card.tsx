@@ -1,6 +1,6 @@
 import Me from "@/public/images/me.webp";
 import Image from "next/image";
-import { BadgeCheckIcon, GitCommitVertical, GitPullRequest, Mail, MapPin, MessageSquare, Phone, Star } from "lucide-react";
+import { BadgeCheckIcon, CircleDot, GitCommitVertical, GitPullRequest, Mail, MapPin, Phone, Star } from "lucide-react";
 import Link from "next/link";
 import { Button, Card, CardContent, CardFooter } from "@/components/ui";
 import { SpotifyNowPlaying } from "@/components/molecules";
@@ -60,7 +60,7 @@ export const ProfileCard = async ({ className }: { className?: string }) => {
                                 <span>PRs</span>
                             </div>
                             <div className="flex flex-col items-center gap-0.5">
-                                <MessageSquare size={14} />
+                                <CircleDot size={14} />
                                 <span className="font-medium text-foreground">{githubStats.issues}</span>
                                 <span>issues</span>
                             </div>
