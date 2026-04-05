@@ -48,23 +48,27 @@ export const ProfileCard = async ({ className }: { className?: string }) => {
                 </CardContent>
                 <CardFooter className="p-6 pt-0 flex flex-col gap-3">
                     {githubStats && (
-                        <div className="w-full flex items-center justify-between text-xs text-muted-foreground">
-                            <span className="flex items-center gap-1">
-                                <Star size={12} />
-                                {githubStats.stars} stars
-                            </span>
-                            <span className="flex items-center gap-1">
-                                <GitPullRequest size={12} />
-                                {githubStats.pullRequests} PRs
-                            </span>
-                            <span className="flex items-center gap-1">
-                                <MessageSquare size={12} />
-                                {githubStats.issues} issues
-                            </span>
-                            <span className="flex items-center gap-1">
-                                <GitCommitVertical size={12} />
-                                {githubStats.commits} commits
-                            </span>
+                        <div className="w-full grid grid-cols-4 text-xs text-muted-foreground">
+                            <div className="flex flex-col items-center gap-0.5">
+                                <Star size={14} />
+                                <span className="font-medium text-foreground">{githubStats.stars}</span>
+                                <span>stars</span>
+                            </div>
+                            <div className="flex flex-col items-center gap-0.5">
+                                <GitPullRequest size={14} />
+                                <span className="font-medium text-foreground">{githubStats.pullRequests}</span>
+                                <span>PRs</span>
+                            </div>
+                            <div className="flex flex-col items-center gap-0.5">
+                                <MessageSquare size={14} />
+                                <span className="font-medium text-foreground">{githubStats.issues}</span>
+                                <span>issues</span>
+                            </div>
+                            <div className="flex flex-col items-center gap-0.5">
+                                <GitCommitVertical size={14} />
+                                <span className="font-medium text-foreground">{githubStats.commits}</span>
+                                <span>commits</span>
+                            </div>
                         </div>
                     )}
                     <div className="flex flex-row gap-2 w-full">
