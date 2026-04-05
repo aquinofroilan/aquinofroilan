@@ -14,28 +14,26 @@ const graphqlClients = githubTokens.map((token) =>
     }),
 );
 
-let tokenCursor = 0;
-
 const queryGithub = async <T>(query: string): Promise<T> => {
     if (graphqlClients.length === 0) {
         throw new Error("Missing GITHUB_TOKEN");
     }
 
     let lastError: unknown;
+    const startIndex = Math.floor(Math.random() * graphqlClients.length);
 
     for (let index = 0; index < graphqlClients.length; index++) {
-        const clientIndex = (tokenCursor + index) % graphqlClients.length;
+        const clientIndex = (startIndex + index) % graphqlClients.length;
 
         try {
             const result = await graphqlClients[clientIndex](query);
-            tokenCursor = (clientIndex + 1) % graphqlClients.length;
             return result as T;
         } catch (error) {
             lastError = error;
         }
     }
 
-    throw lastError ?? new Error("GitHub query failed");
+    throw lastError ?? new Error(`GitHub query failed after trying ${graphqlClients.length} token(s). Check token validity and rate limits.`);
 };
 
 interface GraphQLResponse {
