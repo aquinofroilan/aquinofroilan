@@ -19,23 +19,19 @@ const queryGithub = async <T>(query: string): Promise<T> => {
         throw new Error("Missing GITHUB_TOKEN");
     }
 
-    let lastError: unknown;
-    const startIndex = Math.floor(Math.random() * graphqlClients.length);
+    const errors: string[] = [];
 
     for (let index = 0; index < graphqlClients.length; index++) {
-        const clientIndex = (startIndex + index) % graphqlClients.length;
-
         try {
-            const result = await graphqlClients[clientIndex](query);
+            const result = await graphqlClients[index](query);
             return result as T;
         } catch (error) {
-            lastError = error;
+            errors.push(error instanceof Error ? error.message : String(error));
         }
     }
 
-    const lastErrorMessage = lastError instanceof Error ? lastError.message : String(lastError ?? "Unknown error");
     throw new Error(
-        `GitHub query failed after trying ${graphqlClients.length} token(s). Check token validity and rate limits. Last error: ${lastErrorMessage}`,
+        `GitHub query failed after trying ${graphqlClients.length} token(s). Check token validity and rate limits. Errors: ${errors.join(" | ") || "Unknown error"}`,
     );
 };
 
