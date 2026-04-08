@@ -6,49 +6,32 @@ const githubTokens = (process.env.GITHUB_TOKEN ?? "")
     .map((token) => token.trim())
     .filter(Boolean);
 
-const graphqlClients = githubTokens.map((token) =>
-    graphql.defaults({
-        headers: {
-            authorization: `token ${token}`,
-        },
-    }),
-);
-
-const queryGithub = async <T>(query: string): Promise<T> => {
-    if (graphqlClients.length === 0) {
-        throw new Error("Missing GITHUB_TOKEN");
-    }
-
-    const errors: string[] = [];
-
-    for (const graphqlClient of graphqlClients) {
-        try {
-            return await graphqlClient<T>(query);
-        } catch (error) {
-            errors.push(error instanceof Error ? error.message : String(error));
-        }
-    }
-
-    throw new Error(
-        `GitHub query failed after trying ${graphqlClients.length} token(s). Check token validity and rate limits. Errors: ${errors.join(" | ")}`,
-    );
-};
-
-interface GraphQLResponse {
+interface UserStatsResponse {
+    viewer: { login: string };
     user: {
         createdAt: string;
         pullRequests: { totalCount: number };
         issues: { totalCount: number };
-        contributionsCollection: { totalCommitContributions: number };
         repositories: {
             nodes: { stargazerCount: number }[];
         };
     };
 }
 
-export const getGithubStats = async () => {
-    const { user: userInfo }: GraphQLResponse = await queryGithub<GraphQLResponse>(`
+interface CommitResponse {
+    user: {
+        contributionsCollection: { totalCommitContributions: number };
+    };
+}
+
+const getAccountStats = async (token: string) => {
+    const client = graphql.defaults({
+        headers: { authorization: `token ${token}` },
+    });
+
+    const { viewer, user } = await client<UserStatsResponse>(`
         query {
+            viewer { login }
             user(login: "${process.env.GITHUB_USERNAME}") {
                 createdAt
                 pullRequests { totalCount }
@@ -56,46 +39,72 @@ export const getGithubStats = async () => {
                 repositories(first: 100) {
                     nodes { stargazerCount }
                 }
-                contributionsCollection {
-                    totalCommitContributions
-                }
             }
         }
     `);
 
-    const createdAt = new Date(userInfo.createdAt);
+    // Only count commits for the viewer's own account
+    const login = viewer.login;
+    const createdAt = new Date(user.createdAt);
     const now = new Date();
     let totalCommits = 0;
 
     for (let year = createdAt.getFullYear(); year <= now.getFullYear(); year++) {
-        const from = new Date(Math.max(createdAt.getTime(), new Date(`${year}-01-01T00:00:00Z`).getTime())).toISOString();
-        const to = new Date(Math.min(now.getTime(), new Date(`${year}-12-31T23:59:59Z`).getTime())).toISOString();
+        const from = new Date(
+            Math.max(createdAt.getTime(), new Date(`${year}-01-01T00:00:00Z`).getTime()),
+        ).toISOString();
+        const to = new Date(
+            Math.min(now.getTime(), new Date(`${year}-12-31T23:59:59Z`).getTime()),
+        ).toISOString();
 
-        const { user }: GraphQLResponse = await queryGithub<GraphQLResponse>(`
+        const data = await client<CommitResponse>(`
             query {
-                user(login: "${process.env.GITHUB_USERNAME}") {
-                    createdAt
-                    pullRequests { totalCount }
-                    issues { totalCount }
-                    repositories(first: 1) { nodes { stargazerCount } }
+                user(login: "${login}") {
                     contributionsCollection(from: "${from}", to: "${to}") {
                         totalCommitContributions
                     }
                 }
             }
         `);
-        totalCommits += user.contributionsCollection.totalCommitContributions;
+        totalCommits += data.user.contributionsCollection.totalCommitContributions;
     }
 
-    const totalStars = userInfo.repositories.nodes.reduce(
-        (acc: number, repo: { stargazerCount: number }) => acc + repo.stargazerCount,
+    const stars = user.repositories.nodes.reduce(
+        (acc, repo) => acc + repo.stargazerCount,
         0,
     );
 
     return {
-        pullRequests: userInfo.pullRequests.totalCount,
-        issues: userInfo.issues.totalCount,
+        login,
+        pullRequests: user.pullRequests.totalCount,
+        issues: user.issues.totalCount,
         commits: totalCommits,
-        stars: totalStars,
+        stars,
     };
+};
+
+export const getGithubStats = async () => {
+    if (githubTokens.length === 0) {
+        throw new Error("Missing GITHUB_TOKEN");
+    }
+
+    const results = await Promise.all(githubTokens.map(getAccountStats));
+    const seen = new Set<string>();
+
+    let pullRequests = 0;
+    let issues = 0;
+    let commits = 0;
+    let stars = 0;
+
+    for (const result of results) {
+        if (seen.has(result.login)) continue;
+        seen.add(result.login);
+
+        pullRequests += result.pullRequests;
+        issues += result.issues;
+        commits += result.commits;
+        stars += result.stars;
+    }
+
+    return { pullRequests, issues, commits, stars };
 };
