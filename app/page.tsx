@@ -13,7 +13,7 @@ import ProjectsCard from "@/components/organisms/projects-card";
 import { Masonry, FadeIn } from "@/components/ui";
 import type { Metadata } from "next";
 
-export const revalidate = 3600;
+export const revalidate = 14400;
 
 export const metadata: Metadata = {
     title: `Froilan | ${process.env.CURRENT_TITLE || "Software Engineer"} | ${process.env.CURRENT_COMPANY || ""} | ${process.env.CURRENT_WORK_LOCATION || "Philippines"}`,

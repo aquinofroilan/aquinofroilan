@@ -53,9 +53,7 @@ const getAccountStats = async (token: string) => {
         const from = new Date(
             Math.max(createdAt.getTime(), new Date(`${year}-01-01T00:00:00Z`).getTime()),
         ).toISOString();
-        const to = new Date(
-            Math.min(now.getTime(), new Date(`${year}-12-31T23:59:59Z`).getTime()),
-        ).toISOString();
+        const to = new Date(Math.min(now.getTime(), new Date(`${year}-12-31T23:59:59Z`).getTime())).toISOString();
 
         const data = await client<CommitResponse>(`
             query {
@@ -69,10 +67,7 @@ const getAccountStats = async (token: string) => {
         totalCommits += data.user.contributionsCollection.totalCommitContributions;
     }
 
-    const stars = user.repositories.nodes.reduce(
-        (acc, repo) => acc + repo.stargazerCount,
-        0,
-    );
+    const stars = user.repositories.nodes.reduce((acc, repo) => acc + repo.stargazerCount, 0);
 
     return {
         login,
