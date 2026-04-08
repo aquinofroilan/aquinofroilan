@@ -49,7 +49,7 @@ async function Books() {
                                             alt={book.title}
                                             width={80}
                                             height={120}
-                                            className="rounded-md object-cover shrink-0"
+                                            className="rounded-md object-cover shrink-0 w-auto h-auto"
                                         />
                                     ) : (
                                         <div className="w-[80px] h-[120px] rounded-md bg-neutral-200 dark:bg-neutral-800 shrink-0 flex items-center justify-center">

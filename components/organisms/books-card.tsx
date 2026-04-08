@@ -50,7 +50,7 @@ async function BooksCard({ className }: { className?: string }) {
                                                 alt={book.title}
                                                 width={40}
                                                 height={60}
-                                                className="rounded-sm object-cover shrink-0"
+                                                className="rounded-sm object-cover shrink-0 w-auto h-auto"
                                             />
                                         ) : (
                                             <div className="w-[40px] h-[60px] rounded-sm bg-neutral-200 dark:bg-neutral-800 shrink-0 flex items-center justify-center">
