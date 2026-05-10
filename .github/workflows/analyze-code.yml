@@ -12,6 +12,7 @@ jobs:
   count-lines:
     runs-on: ubuntu-latest
     env:
+      FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true
       # Check cloc docs for supported languages and exact names (e.g., "Vuejs Component", "C#")
       # HIGHLIGHT_LANGS: show these languages individually; everything else goes to "Others"
       HIGHLIGHT_LANGS: "JavaScript,TypeScript,JSX,Go,Java,Kotlin,C,Python"
