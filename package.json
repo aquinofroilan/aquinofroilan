@@ -72,7 +72,7 @@
         "tailwindcss": "^4.2.2",
         "ts-node": "^10.9.2",
         "typescript": "^6.0.2",
-        "typescript-eslint": "8.59.2"
+        "typescript-eslint": "8.60.0"
     },
     "trustedDependencies": [
         "@google/genai",
@@ -81,6 +81,6 @@
         "unrs-resolver"
     ],
     "resolutions": {
-        "typescript-eslint": "8.59.2"
+        "typescript-eslint": "8.60.0"
     }
 }
