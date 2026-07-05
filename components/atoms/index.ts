@@ -4,7 +4,6 @@ export { LinkedIn } from "./icons/linkedin";
 export { CredlyIcon } from "./icons/credly";
 export { HackerRank } from "./icons/hackerrank";
 export { LeetCode } from "./icons/leetcode";
-export { Spotify } from "./icons/spotify";
 export { TypeScript } from "./icons/typescript";
 export { TailwindCSS } from "./icons/tailwind-css";
 export { Java } from "./icons/java";
