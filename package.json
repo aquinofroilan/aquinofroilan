@@ -67,12 +67,12 @@
         "eslint-config-next": "^16.2.1",
         "jest": "^30.3.0",
         "jest-environment-jsdom": "^30.3.0",
-        "postcss": "^8.5.8",
+        "postcss": "8.5.16",
         "prettier": "^3.8.1",
         "tailwindcss": "^4.2.2",
         "ts-node": "^10.9.2",
         "typescript": "^6.0.2",
-        "typescript-eslint": "8.62.0"
+        "typescript-eslint": "8.62.1"
     },
     "trustedDependencies": [
         "@google/genai",
