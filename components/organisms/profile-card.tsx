@@ -3,7 +3,6 @@ import Image from "next/image";
 import { BadgeCheckIcon, CircleDot, GitCommitVertical, GitPullRequest, Mail, MapPin, Phone, Star } from "lucide-react";
 import Link from "next/link";
 import { Button, Card, CardContent, CardFooter } from "@/components/ui";
-import { SpotifyNowPlaying } from "@/components/molecules";
 import { getGithubStats } from "@/actions";
 
 export const ProfileCard = async ({ className }: { className?: string }) => {
@@ -95,7 +94,6 @@ export const ProfileCard = async ({ className }: { className?: string }) => {
                             </Link>
                         </Button>
                     </div>
-                    <SpotifyNowPlaying />
                 </CardFooter>
             </Card>
         </div>
