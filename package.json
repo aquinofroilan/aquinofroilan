@@ -45,7 +45,7 @@
         "react-markdown": "^10.1.0",
         "rehype-highlight": "^7.0.2",
         "remark-gfm": "^4.0.1",
-        "sharp": "^0.34.5",
+        "sharp": "^0.35.2",
         "tailwind-merge": "^3.5.0",
         "tailwindcss-animate": "^1.0.7",
         "uuid": "^14.0.0"
@@ -60,19 +60,19 @@
         "@types/bun": "latest",
         "@types/eslint__eslintrc": "^2.1.2",
         "@types/jest": "^30.0.0",
-        "@types/node": "^25.5.0",
+        "@types/node": "^26.0.1",
         "@types/react": "^19.2.14",
         "@types/react-dom": "^19.2.3",
         "eslint": "^10.1.0",
         "eslint-config-next": "^16.2.1",
         "jest": "^30.3.0",
         "jest-environment-jsdom": "^30.3.0",
-        "postcss": "^8.5.8",
+        "postcss": "8.5.16",
         "prettier": "^3.8.1",
         "tailwindcss": "^4.2.2",
         "ts-node": "^10.9.2",
         "typescript": "^6.0.2",
-        "typescript-eslint": "8.59.2"
+        "typescript-eslint": "8.62.1"
     },
     "trustedDependencies": [
         "@google/genai",
@@ -81,6 +81,6 @@
         "unrs-resolver"
     ],
     "resolutions": {
-        "typescript-eslint": "8.59.2"
+        "typescript-eslint": "8.62.0"
     }
 }
