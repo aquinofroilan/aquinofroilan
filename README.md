@@ -1,33 +1,42 @@
-# Hey There <img src="https://raw.githubusercontent.com/Tarikul-Islam-Anik/Animated-Fluent-Emojis/master/Emojis/Hand%20gestures/Love-You%20Gesture.png" alt="Love-You Gesture" width="35" height="35" />
+# sv
 
-I'm Froilan, a **Software Developer** based in the Philippines working with  
-![JavaScript](https://img.shields.io/badge/JavaScript-F7DF1E?style=flat&logo=javascript&logoColor=black)
-![TypeScript](https://img.shields.io/badge/TypeScript-3178C6?style=flat&logo=typescript&logoColor=white)
-& the React/Next.js ecosystem.
+Everything you need to build a Svelte project, powered by [`sv`](https://github.com/sveltejs/cli).
 
-With a passion for clean design and functional interfaces, I build web applications while exploring new technologies and the creative side of development.
+## Creating a project
 
-### Code in Numbers
+If you're seeing this, you've probably already done this step. Congrats!
 
-> Lines written across my repositories. Auto-updated weekly.
-
-<!-- LANGUAGES BREAKDOWN START -->
-
-```
-[ LANGUAGES BREAKDOWN ]
-
-TypeScript   --> 68,379 lines
-Kotlin       --> 35,105 lines
-Python       --> 7,074 lines
-JavaScript   --> 320 lines
-Java         --> 79 lines
-Others       --> 1,818 lines
-
-[ TOTAL LINES OF CODE: 112,775 ]
+```sh
+# create a new project
+npx sv create my-app
 ```
 
-<!-- LANGUAGES BREAKDOWN END -->
+To recreate this project with the same configuration:
 
-### Want to connect?
+```sh
+# recreate this project
+bun x sv@0.16.3 create --template minimal --types ts --add prettier eslint tailwindcss="plugins:none" mdsvex --install bun svelte-portfolio
+```
 
-Find me on [GitHub](https://github.com/aquinofroilan) or check out my [portfolio](https://aquinofroilan.vercel.app).
+## Developing
+
+Once you've created a project and installed dependencies with `npm install` (or `pnpm install` or `yarn`), start a development server:
+
+```sh
+npm run dev
+
+# or start the server and open the app in a new browser tab
+npm run dev -- --open
+```
+
+## Building
+
+To create a production version of your app:
+
+```sh
+npm run build
+```
+
+You can preview the production build with `npm run preview`.
+
+> To deploy your app, you may need to install an [adapter](https://svelte.dev/docs/kit/adapters) for your target environment.
