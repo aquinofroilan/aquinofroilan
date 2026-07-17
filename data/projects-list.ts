@@ -13,12 +13,12 @@ import {
     TailwindCSS,
     TypeScript,
     Vercel,
-} from "@/components/atoms";
-import { ReactNode } from "react";
+} from "$lib/components/atoms";
+import type { Component } from 'svelte';
 
 type FooterItem = {
     text: string;
-    icon: ReactNode;
+    icon: Component<any>;
 };
 
 export type ProjectItem = {
@@ -31,7 +31,7 @@ export type ProjectItem = {
     footerContent: FooterItem[];
     // Details page specific
     imgPrefix?: string;
-    techStackEntries?: ReactNode[];
+    techStackEntries?: Component<any>[];
 };
 
 export const ProjectsList: ProjectItem[] = [
@@ -50,28 +50,28 @@ export const ProjectsList: ProjectItem[] = [
         footerContent: [
             {
                 text: "Java",
-                icon: <Java className="w-5 h-5" />,
+                icon: Java,
             },
             {
                 text: "Kotlin",
-                icon: <Kotlin className="w-5 h-5" />,
+                icon: Kotlin,
             },
             {
                 text: "Spring Boot",
-                icon: <SpringBoot className="w-5 h-5" />,
+                icon: SpringBoot,
             },
             {
                 text: "PostgreSQL",
-                icon: <PostgreSQL className="w-5 h-5" />,
+                icon: PostgreSQL,
             },
         ],
         techStackEntries: [
-            <TailwindCSS key="tailwind" className="w-6 h-6" />,
-            <Java key="java" className="w-6 h-6" />,
-            <PostgreSQL key="postgres" className="w-6 h-6" />,
-            <NextJS key="nextjs" className="w-6 h-6" />,
-            <TypeScript key="ts" className="w-6 h-6" />,
-            <SpringBoot key="spring" className="w-6 h-6" />,
+            TailwindCSS,
+            Java,
+            PostgreSQL,
+            NextJS,
+            TypeScript,
+            SpringBoot,
         ],
     },
     {
@@ -86,21 +86,21 @@ export const ProjectsList: ProjectItem[] = [
         footerContent: [
             {
                 text: "NextJS",
-                icon: <NextJS className="w-5 h-5" />,
+                icon: NextJS,
             },
             {
                 text: "PostgreSQL",
-                icon: <PostgreSQL className="w-5 h-5" />,
+                icon: PostgreSQL,
             },
         ],
         techStackEntries: [
-            <TailwindCSS key="tailwind" className="w-6 h-6" />,
-            <PostgreSQL key="postgres" className="w-6 h-6" />,
-            <TypeScript key="ts" className="w-6 h-6" />,
-            <Prisma key="prisma" className="w-6 h-6" />,
-            <NextJS key="next" className="w-6 h-6" />,
-            <React key="react" className="w-6 h-6" />,
-            <Vercel key="vercel" className="w-6 h-6" />,
+            TailwindCSS,
+            PostgreSQL,
+            TypeScript,
+            Prisma,
+            NextJS,
+            React,
+            Vercel,
         ],
     },
     {
@@ -115,25 +115,25 @@ export const ProjectsList: ProjectItem[] = [
         footerContent: [
             {
                 text: "Python",
-                icon: <Python className="w-5 h-5" />,
+                icon: Python,
             },
             {
                 text: "Flask",
-                icon: <Flask className="w-5 h-5" />,
+                icon: Flask,
             },
             {
                 text: "PostgreSQL",
-                icon: <PostgreSQL className="w-5 h-5" />,
+                icon: PostgreSQL,
             },
         ],
         techStackEntries: [
-            <PostgreSQL key="postgres" className="w-6 h-6" />,
-            <TypeScript key="ts" className="w-6 h-6" />,
-            <React key="react" className="w-6 h-6" />,
-            <Expo key="expo" className="w-6 h-6" />,
-            <Python key="python" className="w-6 h-6" />,
-            <Flask key="flask" className="w-6 h-6" />,
-            <MapBox key="mapbox" className="w-6 h-6" />,
+            PostgreSQL,
+            TypeScript,
+            React,
+            Expo,
+            Python,
+            Flask,
+            MapBox,
         ],
     },
 ];
