@@ -36,7 +36,7 @@
 					width={75}
 					height={75}
 					alt="Froilan Aquino"
-					class="rounded-lg"
+					class="rounded-none"
 				/>
 			</div>
 
@@ -83,7 +83,7 @@
 				<a
 					href={SCHEDULE_A_CALL_URL}
 					target="_blank"
-					class="{buttonVariants({ variant: 'default', size: 'sm' })} text-white rounded-md flex flex-row gap-2 flex-1"
+					class="{buttonVariants({ variant: 'default', size: 'sm' })} text-white flex flex-row gap-2 flex-1"
 				>
 					<Phone class="hidden md:block" size={16} />
 					<span>Schedule a call</span>
@@ -92,7 +92,7 @@
 					href={SEND_EMAIL_URL}
 					target="_blank"
 					rel="noopener noreferrer"
-					class="{buttonVariants({ variant: 'outline', size: 'sm' })} rounded-md flex flex-row gap-2 flex-1"
+					class="{buttonVariants({ variant: 'outline', size: 'sm' })} flex flex-row gap-2 flex-1"
 				>
 					<Mail class="hidden md:block" size={16} />
 					<span>Send email</span>

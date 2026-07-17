@@ -35,10 +35,10 @@
                 </div>
                 <div>
                     <span class="text-xs">Social Links:</span>
-                    <div class="grid grid-cols-3 gap-2">
+                    <div class="flex flex-wrap gap-2.5 mt-1.5">
                         <Tooltip.Provider>
                             <Tooltip.Root>
-                                <Tooltip.Trigger class="w-full justify-center flex items-center py-2 px-2 rounded-md hover:bg-muted transition-colors">
+                                <Tooltip.Trigger class="w-fit justify-center flex items-center p-2 rounded-none hover:bg-muted transition-colors">
                                     <a aria-label="Github link" target="_blank" href="https://github.com/aquinofroilan" class="w-full h-full flex justify-center items-center">
                                         <Github class="w-5 h-5" />
                                     </a>
@@ -48,7 +48,7 @@
                                 </Tooltip.Content>
                             </Tooltip.Root>
                             <Tooltip.Root>
-                                <Tooltip.Trigger class="w-full justify-center flex items-center py-2 px-2 rounded-md hover:bg-muted transition-colors">
+                                <Tooltip.Trigger class="w-fit justify-center flex items-center p-2 rounded-none hover:bg-muted transition-colors">
                                     <a aria-label="Instagram link" target="_blank" href="https://www.instagram.com/aquinofroilan_" class="w-full h-full flex justify-center items-center">
                                         <Instagram class="w-5 h-5" />
                                     </a>
@@ -58,7 +58,7 @@
                                 </Tooltip.Content>
                             </Tooltip.Root>
                             <Tooltip.Root>
-                                <Tooltip.Trigger class="w-full justify-center flex items-center py-2 px-2 rounded-md hover:bg-muted transition-colors">
+                                <Tooltip.Trigger class="w-fit justify-center flex items-center p-2 rounded-none hover:bg-muted transition-colors">
                                     <a aria-label="LinkedIn link" target="_blank" href="https://linkedin.com/in/aquinofroilan" class="w-full h-full flex justify-center items-center">
                                         <LinkedIn class="w-6 h-6 hover:scale-105 transition duration-200" />
                                     </a>
@@ -68,7 +68,7 @@
                                 </Tooltip.Content>
                             </Tooltip.Root>
                             <Tooltip.Root>
-                                <Tooltip.Trigger class="w-full justify-center flex items-center py-2 px-2 rounded-md hover:bg-muted transition-colors">
+                                <Tooltip.Trigger class="w-fit justify-center flex items-center p-2 rounded-none hover:bg-muted transition-colors">
                                     <a aria-label="Credly link" target="_blank" href="https://www.credly.com/users/froilan" class="w-full h-full flex justify-center items-center">
                                         <CredlyIcon class="w-5 h-5" />
                                     </a>
@@ -78,7 +78,7 @@
                                 </Tooltip.Content>
                             </Tooltip.Root>
                             <Tooltip.Root>
-                                <Tooltip.Trigger class="w-full justify-center flex items-center py-2 px-2 rounded-md hover:bg-muted transition-colors">
+                                <Tooltip.Trigger class="w-fit justify-center flex items-center p-2 rounded-none hover:bg-muted transition-colors">
                                     <a aria-label="HackerRank link" target="_blank" href="https://www.hackerrank.com/profile/froilanaquino" class="w-full h-full flex justify-center items-center">
                                         <HackerRank class="w-5 h-5" />
                                     </a>
@@ -88,7 +88,7 @@
                                 </Tooltip.Content>
                             </Tooltip.Root>
                             <Tooltip.Root>
-                                <Tooltip.Trigger class="w-full justify-center flex items-center py-2 px-2 rounded-md hover:bg-muted transition-colors">
+                                <Tooltip.Trigger class="w-fit justify-center flex items-center p-2 rounded-none hover:bg-muted transition-colors">
                                     <a aria-label="LeetCode link" target="_blank" href="https://leetcode.com/u/froilan_/" class="w-full h-full flex justify-center items-center">
                                         <LeetCode class="w-5 h-5" />
                                     </a>
@@ -104,7 +104,7 @@
                     <span class="text-xs">Let's talk:</span>
                     <a
                         href="https://calendly.com/froilan/consultation"
-                        class="group w-full justify-between flex items-center py-2 px-2 rounded-md mt-2 hover:bg-muted transition-colors"
+                        class="group w-full justify-between flex items-center py-2 px-2 rounded-none mt-2 hover:bg-muted transition-colors"
                         aria-label="Schedule a consultation call via Calendly"
                     >
                         <span class="text-xs">Schedule a call</span>
@@ -116,7 +116,7 @@
                         <span class="text-xs">My Resume/CV:</span>
                         <a
                             href={RESUME_CV_LINK}
-                            class="group w-full justify-between flex items-center py-2 px-2 rounded-md mt-2 hover:bg-muted transition-colors"
+                            class="group w-full justify-between flex items-center py-2 px-2 rounded-none mt-2 hover:bg-muted transition-colors"
                             aria-label="View resume or CV document"
                         >
                             <span class="text-xs">View my CV</span>
