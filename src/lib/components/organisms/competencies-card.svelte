@@ -41,7 +41,13 @@
 
     const milestones = [
         {
-            year: "29/09/2025 - Present",
+            year: "15/07/2026 - Present",
+            title: "AI Developer",
+            description: "AI Developer at Salesperson Inc.",
+            badge: "Independent Contractor",
+        },
+        {
+            year: "29/09/2025 - 15/07/2026",
             title: "Frontend Developer",
             description: "Hired as Frontend Developer at Journey Better Business Group Inc.",
             badge: "Full time",

@@ -35,7 +35,7 @@
 					src="/images/me.webp"
 					width={75}
 					height={75}
-					alt="Picture of the Developer"
+					alt="Froilan Aquino"
 					class="rounded-lg"
 				/>
 			</div>

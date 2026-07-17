@@ -6,8 +6,6 @@
     import CertificationCard from '$lib/components/organisms/certification-card.svelte';
     import TechStackCard from '$lib/components/organisms/tech-stack-card.svelte';
     import ProjectsCard from '$lib/components/organisms/projects-card.svelte';
-    import RecentBlogsCard from '$lib/components/organisms/recent-blogs-card.svelte';
-    import BooksCard from '$lib/components/organisms/books-card.svelte';
     import TranscendingCodeCard from '$lib/components/organisms/transcending-coding-card.svelte';
     import CompetenciesCard from '$lib/components/organisms/competencies-card.svelte';
     import ContactMe from '$lib/components/organisms/contact-me-card.svelte';
@@ -39,12 +37,6 @@
         </FadeIn>
         <FadeIn delay={0.3} class="h-auto overflow-visible">
             <ProjectsCard class="h-full" />
-        </FadeIn>
-        <FadeIn delay={0.3} class="h-auto overflow-visible">
-            <RecentBlogsCard class="h-full" posts={data.posts} />
-        </FadeIn>
-        <FadeIn delay={0.33} class="h-auto overflow-visible">
-            <BooksCard class="h-full" books={data.books} />
         </FadeIn>
         <FadeIn delay={0.35} class="h-auto overflow-visible">
             <TranscendingCodeCard class="h-full" />

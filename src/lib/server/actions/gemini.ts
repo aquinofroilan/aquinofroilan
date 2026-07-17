@@ -1,7 +1,4 @@
-"use server";
-
 import { GoogleGenAI, HarmBlockThreshold, HarmCategory } from "@google/genai";
-import { headers } from "next/headers";
 
 const SYSTEM_PROMPT = `
 # About Froilan Aquino
@@ -78,7 +75,7 @@ const getAI = () => {
     return new GoogleGenAI({ apiKey });
 };
 
-export async function getChatResponse(messages: ChatMessage[]): Promise<string> {
+export async function getChatResponse(messages: ChatMessage[], ip: string = "anonymous"): Promise<string> {
     try {
         // Input validation
         if (!messages || messages.length === 0) {
@@ -91,8 +88,6 @@ export async function getChatResponse(messages: ChatMessage[]): Promise<string> 
         }
 
         // Rate limiting check
-        const headerList = await headers();
-        const ip = headerList.get("x-forwarded-for") || "anonymous";
         const now = Date.now();
         const userRateData = lastRequests.get(ip);
 
@@ -161,17 +156,17 @@ export async function getChatResponse(messages: ChatMessage[]): Promise<string> 
         console.error("Gemini API Error:", error);
 
         if (error.status === 429 || error.message?.includes("429") || error.message?.includes("quota")) {
-            throw new Error("RATE_LIMIT_EXCEEDED");
+            throw new Error("RATE_LIMIT_EXCEEDED", { cause: error });
         }
 
         if (error.message?.includes("safety") || error.message?.includes("blocked")) {
-            throw new Error("SAFETY_BLOCK");
+            throw new Error("SAFETY_BLOCK", { cause: error });
         }
 
         if (error.message?.includes("network") || error.message?.includes("fetch")) {
-            throw new Error("NETWORK_ERROR");
+            throw new Error("NETWORK_ERROR", { cause: error });
         }
 
-        throw new Error("GENERIC_ERROR");
+        throw new Error("GENERIC_ERROR", { cause: error });
     }
 }
