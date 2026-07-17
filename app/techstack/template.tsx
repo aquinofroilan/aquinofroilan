@@ -1,6 +1,0 @@
-import type { ReactNode } from "react";
-import AnimationTemplate from "@/components/templates/animation-template";
-
-export default function TechStackTemplate({ children }: { children: ReactNode }) {
-    return <AnimationTemplate>{children}</AnimationTemplate>;
-}
