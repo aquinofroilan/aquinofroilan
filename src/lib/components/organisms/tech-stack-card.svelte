@@ -4,7 +4,7 @@
     import { ArrowRightCircle, FlaskConical } from 'lucide-svelte';
     
     // Fallback data if import fails
-    import { FRONTEND, BACKEND, DEVELOPER_TOOLS, DEVOPS } from '../../../../data/techstack-list';
+    import { FRONTEND, BACKEND, DEVELOPER_TOOLS, DEVOPS } from '$lib/data/techstack-list';
     
     let { class: className = '' } = $props<{ class?: string }>();
 </script>

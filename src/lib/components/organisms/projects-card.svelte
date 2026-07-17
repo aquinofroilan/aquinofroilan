@@ -2,8 +2,7 @@
     import { Badge } from '$lib/components/ui/badge';
     import * as Card from '$lib/components/ui/card';
     import { ArrowRightCircle, FolderCode } from 'lucide-svelte';
-    // Fallback if not moved yet
-    import { ProjectsList } from '../../../../data/projects-list';
+    import { ProjectsList } from '$lib/data/projects-list';
 
     let { class: className = '' } = $props<{ class?: string }>();
 </script>
