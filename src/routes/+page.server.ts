@@ -1,7 +1,7 @@
-import { getGithubStats } from '../../actions/github';
-import { getCredlyCertifications } from '../../actions/credly';
-import { getRecentBlogPosts } from '../../actions/blog';
-import { getRecentBooks } from '../../actions/books';
+import { getGithubStats } from '$lib/server/actions/github';
+import { getCredlyCertifications } from '$lib/server/actions/credly';
+import { getRecentBlogPosts } from '$lib/server/actions/blog';
+import { getRecentBooks } from '$lib/server/actions/books';
 import { env } from '$env/dynamic/private';
 
 export const load = async () => {
