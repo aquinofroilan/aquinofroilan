@@ -21,16 +21,18 @@
 					a holistic mindset that embraces constant evolution.
 				</p>
 				<p class="text-justify text-sm">
-					To deepen my craft, I turn to foundational literature. I study classics like
-					<i>C Programming: A Modern Approach</i>, <i>Design Patterns</i>, and
-					<i>Java: The Complete Reference</i> to ground my modern development work in timeless
-					software engineering principles.
+					To deepen my craft, I turn to foundational literature. I study books such as
+					<i>C Programming: A Modern Approach</i>, <i>Design Patterns</i>,
+					<i>Java: The Complete Reference</i>, <i>Kotlin in Action</i>, and
+					<i>The Rust Programming Language</i> to build a strong foundation in software engineering,
+					language design, and systems programming.
 				</p>
 				<p class="text-justify text-sm">
-					My growth isn't limited to technology. I actively cultivate productivity and
-					emotional intelligence through books like <i>Atomic Habits</i> and
-					<i>Surrounded by Idiots</i>, ensuring I bring both technical acuity and personal
-					effectiveness to every team I join.
+					My interests extend beyond software engineering. I enjoy reading about personal
+					development and investing through books like <i>Atomic Habits</i>,
+					<i>Surrounded by Idiots</i>, <i>The Psychology of Money</i>, and
+					<i>The Intelligent Investor</i>, which continue to shape how I think, learn, and
+					make decisions.
 				</p>
 			</div>
 		</Card.Content>
