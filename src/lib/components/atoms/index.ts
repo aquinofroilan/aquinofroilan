@@ -19,4 +19,25 @@ import TailwindCSS from './icons/tailwind-css.svelte';
 import TypeScript from './icons/typescript.svelte';
 import Vercel from './icons/vercel.svelte';
 
-export { CredlyIcon, Expo, Flask, Github, HackerRank, Instagram, Java, Kotlin, LeetCode, LinkedIn, MapBox, NextJS, PostgreSQL, Prisma, Python, React, SpringBoot, TailwindCSS, TypeScript, Vercel };
+export {
+	CredlyIcon,
+	Expo,
+	Flask,
+	Github,
+	HackerRank,
+	Instagram,
+	Java,
+	Kotlin,
+	LeetCode,
+	LinkedIn,
+	MapBox,
+	NextJS,
+	PostgreSQL,
+	Prisma,
+	Python,
+	React,
+	SpringBoot,
+	TailwindCSS,
+	TypeScript,
+	Vercel
+};

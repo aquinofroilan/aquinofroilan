@@ -1,197 +1,197 @@
 name: Update Lines of Code in Readme
 
 on:
-  schedule:
-    - cron: "0 0 * * 0" # Runs weekly on Sunday at midnight (UTC)
-  workflow_dispatch: # Allows manual trigger
+    schedule:
+        - cron: '0 0 * * 0' # Runs weekly on Sunday at midnight (UTC)
+    workflow_dispatch: # Allows manual trigger
 
 permissions:
-  contents: write
+    contents: write
 
 jobs:
-  count-lines:
-    runs-on: ubuntu-latest
-    env:
-      FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true
-      # Check cloc docs for supported languages and exact names (e.g., "Vuejs Component", "C#")
-      # HIGHLIGHT_LANGS: show these languages individually; everything else goes to "Others"
-      HIGHLIGHT_LANGS: "JavaScript,TypeScript,JSX,Go,Java,Kotlin,C,Python"
-
-      # IGNORE_LANGS: drop these languages entirely (not shown and not counted)
-      IGNORE_LANGS: "JSON,HTML,CSS,SCSS,Sass,Markdown,SVG,XML,YAML,TOML,CSV,Text,Properties"
-
-    steps:
-      - name: Checkout Code
-        uses: actions/checkout@v4
-
-      # Install required dependencies: jq (JSON processor), cloc (count lines of code), and locale settings
-      - name: Install Dependencies
-        run: |
-          sudo apt-get update
-          sudo apt-get install -y jq cloc locales
-          sudo locale-gen en_US.UTF-8
-
-      # Fetch public repositories (excluding forks) and clone only the default branch
-      - name: Fetch and Clone Repositories
+    count-lines:
+        runs-on: ubuntu-latest
         env:
-          GH_PAT: ${{ secrets.GH_PAT }}
-        run: |
-          # Get a list of public repositories that are not forks (paginate over all pages)
-          REPOS=""
-          PAGE=1
-          while true; do
-            # Fetch repositories with proper error handling for network failures and rate limiting
-            RESPONSE=$(curl -H "Authorization: token $GH_PAT" -s -w "\n%{http_code}" "https://api.github.com/user/repos?per_page=100&page=$PAGE&visibility=public")
-            HTTP_CODE=$(echo "$RESPONSE" | tail -n1)
-            BODY=$(echo "$RESPONSE" | sed '$d')
+            FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true
+            # Check cloc docs for supported languages and exact names (e.g., "Vuejs Component", "C#")
+            # HIGHLIGHT_LANGS: show these languages individually; everything else goes to "Others"
+            HIGHLIGHT_LANGS: 'JavaScript,TypeScript,JSX,Go,Java,Kotlin,C,Python'
 
-            if [ "$HTTP_CODE" != "200" ]; then
-              echo "Error: GitHub API returned HTTP $HTTP_CODE on page $PAGE"
-              if [ "$HTTP_CODE" = "403" ]; then
-                echo "This may be due to rate limiting. Please try again later."
-              fi
-              exit 1
-            fi
+            # IGNORE_LANGS: drop these languages entirely (not shown and not counted)
+            IGNORE_LANGS: 'JSON,HTML,CSS,SCSS,Sass,Markdown,SVG,XML,YAML,TOML,CSV,Text,Properties'
 
-            PAGE_REPOS=$(echo "$BODY" | jq -r '.[] | select(.fork == false) | .full_name') || {
-              echo "Error parsing repositories on page $PAGE"
-              exit 1
-            }
+        steps:
+            - name: Checkout Code
+              uses: actions/checkout@v4
 
-            # If no repositories are returned, we've reached the end
-            if [ -z "$PAGE_REPOS" ]; then
-              break
-            fi
+            # Install required dependencies: jq (JSON processor), cloc (count lines of code), and locale settings
+            - name: Install Dependencies
+              run: |
+                  sudo apt-get update
+                  sudo apt-get install -y jq cloc locales
+                  sudo locale-gen en_US.UTF-8
 
-            REPOS="$REPOS $PAGE_REPOS"
-            PAGE=$((PAGE + 1))
-          done
-          mkdir -p public-repos
-          cd public-repos
+            # Fetch public repositories (excluding forks) and clone only the default branch
+            - name: Fetch and Clone Repositories
+              env:
+                  GH_PAT: ${{ secrets.GH_PAT }}
+              run: |
+                  # Get a list of public repositories that are not forks (paginate over all pages)
+                  REPOS=""
+                  PAGE=1
+                  while true; do
+                    # Fetch repositories with proper error handling for network failures and rate limiting
+                    RESPONSE=$(curl -H "Authorization: token $GH_PAT" -s -w "\n%{http_code}" "https://api.github.com/user/repos?per_page=100&page=$PAGE&visibility=public")
+                    HTTP_CODE=$(echo "$RESPONSE" | tail -n1)
+                    BODY=$(echo "$RESPONSE" | sed '$d')
 
-          for REPO in $REPOS; do
-            REPO_URL="https://github.com/$REPO.git"
-            AUTHENTICATED_REPO=$(echo "$REPO_URL" | sed "s/https:\/\//https:\/\/$GH_PAT@/g")
+                    if [ "$HTTP_CODE" != "200" ]; then
+                      echo "Error: GitHub API returned HTTP $HTTP_CODE on page $PAGE"
+                      if [ "$HTTP_CODE" = "403" ]; then
+                        echo "This may be due to rate limiting. Please try again later."
+                      fi
+                      exit 1
+                    fi
 
-            # Determine the default branch dynamically and clone only that branch
-            DEFAULT_BRANCH=$(curl -H "Authorization: token $GH_PAT" -s "https://api.github.com/repos/$REPO" | jq -r '.default_branch' || echo "")
+                    PAGE_REPOS=$(echo "$BODY" | jq -r '.[] | select(.fork == false) | .full_name') || {
+                      echo "Error parsing repositories on page $PAGE"
+                      exit 1
+                    }
 
-            if [ -z "$DEFAULT_BRANCH" ] || [ "$DEFAULT_BRANCH" = "null" ]; then
-              echo "Warning: Could not determine default branch for $REPO. Skipping repository."
-              continue
-            fi
+                    # If no repositories are returned, we've reached the end
+                    if [ -z "$PAGE_REPOS" ]; then
+                      break
+                    fi
 
-            echo "Cloning $REPO (default branch: $DEFAULT_BRANCH) with shallow history..."
-            git clone --depth 1 --branch "$DEFAULT_BRANCH" --single-branch "$AUTHENTICATED_REPO" "$(basename "$REPO")-$DEFAULT_BRANCH" || echo "Failed to clone $REPO."
-          done
+                    REPOS="$REPOS $PAGE_REPOS"
+                    PAGE=$((PAGE + 1))
+                  done
+                  mkdir -p public-repos
+                  cd public-repos
 
-          # Run cloc to analyze lines of code, excluding non-source code files
-          echo "Calculating lines of code..."
-          mkdir -p ../output
-          # Count LOC for all cloned repos; exclude languages via cloc's own --exclude-lang so totals match SUM
-          cloc . --json --report-file=../output/cloc-output.json --exclude-lang="${IGNORE_LANGS}"
+                  for REPO in $REPOS; do
+                    REPO_URL="https://github.com/$REPO.git"
+                    AUTHENTICATED_REPO=$(echo "$REPO_URL" | sed "s/https:\/\//https:\/\/$GH_PAT@/g")
 
-      # Commit and push the updated cloc-output.json and README.md to the current branch
-      - name: Commit and Push Output
-        env:
-          GH_PAT: ${{ secrets.GH_PAT }}
-        run: |
-          git config --global user.name "github-actions[bot]"
-          git config --global user.email "github-actions[bot]@users.noreply.github.com"
+                    # Determine the default branch dynamically and clone only that branch
+                    DEFAULT_BRANCH=$(curl -H "Authorization: token $GH_PAT" -s "https://api.github.com/repos/$REPO" | jq -r '.default_branch' || echo "")
 
-          # Number formatting: enable thousands separators for all printf in this step
-          export LC_ALL="en_US.UTF-8"
-          export LANG="en_US.UTF-8"
+                    if [ -z "$DEFAULT_BRANCH" ] || [ "$DEFAULT_BRANCH" = "null" ]; then
+                      echo "Warning: Could not determine default branch for $REPO. Skipping repository."
+                      continue
+                    fi
 
-          # --- format helper ---
-          format_number() {
-            printf "%'d\n" "$1"
-          }
+                    echo "Cloning $REPO (default branch: $DEFAULT_BRANCH) with shallow history..."
+                    git clone --depth 1 --branch "$DEFAULT_BRANCH" --single-branch "$AUTHENTICATED_REPO" "$(basename "$REPO")-$DEFAULT_BRANCH" || echo "Failed to clone $REPO."
+                  done
 
-          # Validate cloc output JSON before processing
-          if [ ! -s output/cloc-output.json ]; then
-            echo "Error: output/cloc-output.json does not exist or is empty."
-            exit 1
-          fi
+                  # Run cloc to analyze lines of code, excluding non-source code files
+                  echo "Calculating lines of code..."
+                  mkdir -p ../output
+                  # Count LOC for all cloned repos; exclude languages via cloc's own --exclude-lang so totals match SUM
+                  cloc . --json --report-file=../output/cloc-output.json --exclude-lang="${IGNORE_LANGS}"
 
-          if ! jq empty output/cloc-output.json >/dev/null 2>&1; then
-            echo "Error: output/cloc-output.json is not valid JSON."
-            exit 1
-          fi
+            # Commit and push the updated cloc-output.json and README.md to the current branch
+            - name: Commit and Push Output
+              env:
+                  GH_PAT: ${{ secrets.GH_PAT }}
+              run: |
+                  git config --global user.name "github-actions[bot]"
+                  git config --global user.email "github-actions[bot]@users.noreply.github.com"
 
-          # Grab total from cloc (require a numeric SUM.code)
-          TOTAL_LINES=$(jq -r '.SUM.code' output/cloc-output.json 2>/dev/null || echo "")
-          if ! [[ "$TOTAL_LINES" =~ ^[0-9]+$ ]]; then
-            echo "Error: .SUM.code is missing or not a valid non-negative integer in output/cloc-output.json."
-            exit 1
-          fi
-          OTHER_LINES=0
-          FORMATTED_BREAKDOWN=""
+                  # Number formatting: enable thousands separators for all printf in this step
+                  export LC_ALL="en_US.UTF-8"
+                  export LANG="en_US.UTF-8"
 
-          # Create a temporary file to build the formatted breakdown
-          BREAKDOWN_FILE=$(mktemp)
-          OTHER_LINES=0
+                  # --- format helper ---
+                  format_number() {
+                    printf "%'d\n" "$1"
+                  }
 
-          echo "Highlighting languages: $HIGHLIGHT_LANGS"
+                  # Validate cloc output JSON before processing
+                  if [ ! -s output/cloc-output.json ]; then
+                    echo "Error: output/cloc-output.json does not exist or is empty."
+                    exit 1
+                  fi
 
-          # Process languages using jq to determine highlighting
-          # We pass HIGHLIGHT_LANGS to jq to handle the logic there
-          while read -r entry; do
-            LANG=$(echo "$entry" | jq -r '.lang')
-            LINES=$(echo "$entry" | jq -r '.lines')
-            IS_HL=$(echo "$entry" | jq -r '.is_highlighted')
+                  if ! jq empty output/cloc-output.json >/dev/null 2>&1; then
+                    echo "Error: output/cloc-output.json is not valid JSON."
+                    exit 1
+                  fi
 
-            if [[ "$IS_HL" == "true" ]]; then
-              FORMATTED=$(format_number "$LINES")
-              printf "%-12s --> %s lines\n" "$LANG" "$FORMATTED" >> "$BREAKDOWN_FILE"
-            else
-              OTHER_LINES=$((OTHER_LINES + LINES))
-            fi
-          done < <(jq -c --arg hl "$HIGHLIGHT_LANGS" '
-            ($hl | split(",")) as $hls |
-            to_entries |
-            map(select(.key != "header" and .key != "SUM")) |
-            map({lang: .key, lines: .value.code}) |
-            map(select(.lines > 0)) |
-            sort_by(.lines) | reverse |
-            .[] |
-            .lang as $l |
-            {lang: $l, lines: .lines, is_highlighted: ($hls | index($l) != null)}
-          ' output/cloc-output.json)
+                  # Grab total from cloc (require a numeric SUM.code)
+                  TOTAL_LINES=$(jq -r '.SUM.code' output/cloc-output.json 2>/dev/null || echo "")
+                  if ! [[ "$TOTAL_LINES" =~ ^[0-9]+$ ]]; then
+                    echo "Error: .SUM.code is missing or not a valid non-negative integer in output/cloc-output.json."
+                    exit 1
+                  fi
+                  OTHER_LINES=0
+                  FORMATTED_BREAKDOWN=""
 
-          # "Others" includes all non-highlighted languages that cloc reported
-          if [[ $OTHER_LINES -gt 0 ]]; then
-            FORMATTED_OTHER=$(format_number "$OTHER_LINES")
-            printf "%-12s --> %s lines\n" "Others" "$FORMATTED_OTHER" >> "$BREAKDOWN_FILE"
-          fi
+                  # Create a temporary file to build the formatted breakdown
+                  BREAKDOWN_FILE=$(mktemp)
+                  OTHER_LINES=0
 
-          # Read the formatted breakdown from the temporary file
-          FORMATTED_BREAKDOWN=$(cat "$BREAKDOWN_FILE")
-          rm "$BREAKDOWN_FILE"
+                  echo "Highlighting languages: $HIGHLIGHT_LANGS"
 
-          # Format total
-          FORMATTED_TOTAL=$(format_number "$TOTAL_LINES")
+                  # Process languages using jq to determine highlighting
+                  # We pass HIGHLIGHT_LANGS to jq to handle the logic there
+                  while read -r entry; do
+                    LANG=$(echo "$entry" | jq -r '.lang')
+                    LINES=$(echo "$entry" | jq -r '.lines')
+                    IS_HL=$(echo "$entry" | jq -r '.is_highlighted')
 
-          # Create the code block with proper formatting
-          echo '```' > temp_code_block.txt
-          echo '[ LANGUAGES BREAKDOWN ]' >> temp_code_block.txt
-          echo '' >> temp_code_block.txt
-          echo "$FORMATTED_BREAKDOWN" >> temp_code_block.txt
-          echo '' >> temp_code_block.txt
-          echo "[ TOTAL LINES OF CODE: $FORMATTED_TOTAL ]" >> temp_code_block.txt
-          echo '```' >> temp_code_block.txt
+                    if [[ "$IS_HL" == "true" ]]; then
+                      FORMATTED=$(format_number "$LINES")
+                      printf "%-12s --> %s lines\n" "$LANG" "$FORMATTED" >> "$BREAKDOWN_FILE"
+                    else
+                      OTHER_LINES=$((OTHER_LINES + LINES))
+                    fi
+                  done < <(jq -c --arg hl "$HIGHLIGHT_LANGS" '
+                    ($hl | split(",")) as $hls |
+                    to_entries |
+                    map(select(.key != "header" and .key != "SUM")) |
+                    map({lang: .key, lines: .value.code}) |
+                    map(select(.lines > 0)) |
+                    sort_by(.lines) | reverse |
+                    .[] |
+                    .lang as $l |
+                    {lang: $l, lines: .lines, is_highlighted: ($hls | index($l) != null)}
+                  ' output/cloc-output.json)
 
-          # Replace content between markers using a more robust approach
-          sed '/<!-- LANGUAGES BREAKDOWN START -->/q' README.md > temp_readme.txt
-          cat temp_code_block.txt >> temp_readme.txt
-          sed -n '/<!-- LANGUAGES BREAKDOWN END -->/,$p' README.md >> temp_readme.txt
+                  # "Others" includes all non-highlighted languages that cloc reported
+                  if [[ $OTHER_LINES -gt 0 ]]; then
+                    FORMATTED_OTHER=$(format_number "$OTHER_LINES")
+                    printf "%-12s --> %s lines\n" "Others" "$FORMATTED_OTHER" >> "$BREAKDOWN_FILE"
+                  fi
 
-          mv temp_readme.txt README.md
-          rm temp_code_block.txt
+                  # Read the formatted breakdown from the temporary file
+                  FORMATTED_BREAKDOWN=$(cat "$BREAKDOWN_FILE")
+                  rm "$BREAKDOWN_FILE"
 
-          git add output/cloc-output.json README.md
-          git commit -m "chore: update README and cloc-output.json with latest code stats" || echo "No new statistics to update"
-          git push origin "HEAD:${GITHUB_REF_NAME:-main}" || {
-            echo "Failed to push changes to origin. The branch may be protected or there may be merge conflicts.";
-            exit 1
-          }
+                  # Format total
+                  FORMATTED_TOTAL=$(format_number "$TOTAL_LINES")
+
+                  # Create the code block with proper formatting
+                  echo '```' > temp_code_block.txt
+                  echo '[ LANGUAGES BREAKDOWN ]' >> temp_code_block.txt
+                  echo '' >> temp_code_block.txt
+                  echo "$FORMATTED_BREAKDOWN" >> temp_code_block.txt
+                  echo '' >> temp_code_block.txt
+                  echo "[ TOTAL LINES OF CODE: $FORMATTED_TOTAL ]" >> temp_code_block.txt
+                  echo '```' >> temp_code_block.txt
+
+                  # Replace content between markers using a more robust approach
+                  sed '/<!-- LANGUAGES BREAKDOWN START -->/q' README.md > temp_readme.txt
+                  cat temp_code_block.txt >> temp_readme.txt
+                  sed -n '/<!-- LANGUAGES BREAKDOWN END -->/,$p' README.md >> temp_readme.txt
+
+                  mv temp_readme.txt README.md
+                  rm temp_code_block.txt
+
+                  git add output/cloc-output.json README.md
+                  git commit -m "chore: update README and cloc-output.json with latest code stats" || echo "No new statistics to update"
+                  git push origin "HEAD:${GITHUB_REF_NAME:-main}" || {
+                    echo "Failed to push changes to origin. The branch may be protected or there may be merge conflicts.";
+                    exit 1
+                  }

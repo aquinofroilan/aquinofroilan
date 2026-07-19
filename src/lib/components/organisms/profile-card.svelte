@@ -1,5 +1,14 @@
 <script lang="ts">
-	import { BadgeCheck, CircleDot, GitCommitVertical, GitPullRequest, Mail, MapPin, Phone, Star } from 'lucide-svelte';
+	import {
+		BadgeCheck,
+		CircleDot,
+		GitCommitVertical,
+		GitPullRequest,
+		Mail,
+		MapPin,
+		Phone,
+		Star
+	} from 'lucide-svelte';
 	import { buttonVariants } from '$lib/components/ui/button';
 	import * as Card from '$lib/components/ui/card';
 
@@ -28,9 +37,9 @@
 </script>
 
 <div class={className}>
-	<Card.Root class="w-full h-full">
+	<Card.Root class="h-full w-full gap-0">
 		<Card.Content class="flex flex-row items-center gap-5 p-6">
-			<div class="shrink-0 md:block flex justify-center items-center">
+			<div class="flex shrink-0 items-center justify-center md:block">
 				<img
 					src="/images/me.webp"
 					width={75}
@@ -40,50 +49,54 @@
 				/>
 			</div>
 
-			<div class="flex flex-col justify-center flex-1 min-w-0">
-				<div class="flex flex-row gap-2 items-center">
-					<h1 class="font-bold text-md lg:text-lg">Froilan Aquino</h1>
+			<div class="flex min-w-0 flex-1 flex-col justify-center">
+				<div class="flex flex-row items-center gap-2">
+					<h1 class="text-md font-bold lg:text-lg">Froilan Aquino</h1>
 					<BadgeCheck size={15} color="#0087ED" />
 				</div>
-				<p class="text-[11px] md:text-sm flex items-center gap-2">
+				<p class="flex items-center gap-2 text-[11px] md:text-sm">
 					<MapPin size={15} />
 					<span class="truncate">Caloocan City, MNL, PH</span>
 				</p>
 				<p class="text-[11px] md:text-sm">
-					{CURRENT_TITLE} {CURRENT_COMPANY ? `- ${CURRENT_COMPANY}` : ''} - {CURRENT_WORK_LOCATION}
+					{CURRENT_TITLE}
+					{CURRENT_COMPANY ? `- ${CURRENT_COMPANY}` : ''} - {CURRENT_WORK_LOCATION}
 				</p>
 			</div>
 		</Card.Content>
-		<Card.Footer class="p-6 pt-0 flex flex-col gap-3">
+		<Card.Footer class="flex flex-col gap-3 border-none bg-transparent p-6 pt-0">
 			{#if githubStats}
-				<div class="w-full grid grid-cols-4 text-xs text-muted-foreground">
+				<div class="text-muted-foreground grid w-full grid-cols-4 text-xs">
 					<div class="flex flex-col items-center gap-0.5">
 						<Star size={14} />
-						<span class="font-medium text-foreground">{githubStats.stars}</span>
+						<span class="text-foreground font-medium">{githubStats.stars}</span>
 						<span>stars</span>
 					</div>
 					<div class="flex flex-col items-center gap-0.5">
 						<GitPullRequest size={14} />
-						<span class="font-medium text-foreground">{githubStats.pullRequests}</span>
+						<span class="text-foreground font-medium">{githubStats.pullRequests}</span>
 						<span>PRs</span>
 					</div>
 					<div class="flex flex-col items-center gap-0.5">
 						<CircleDot size={14} />
-                        <span class="font-medium text-foreground">{githubStats.issues}</span>
+						<span class="text-foreground font-medium">{githubStats.issues}</span>
 						<span>issues</span>
 					</div>
 					<div class="flex flex-col items-center gap-0.5">
 						<GitCommitVertical size={14} />
-						<span class="font-medium text-foreground">{githubStats.commits}</span>
+						<span class="text-foreground font-medium">{githubStats.commits}</span>
 						<span>commits</span>
 					</div>
 				</div>
 			{/if}
-			<div class="flex flex-row gap-2 w-full">
+			<div class="flex w-full flex-row gap-2">
 				<a
 					href={SCHEDULE_A_CALL_URL}
 					target="_blank"
-					class="{buttonVariants({ variant: 'default', size: 'sm' })} text-white flex flex-row gap-2 flex-1"
+					class="{buttonVariants({
+						variant: 'default',
+						size: 'sm'
+					})} flex flex-1 flex-row gap-2 text-white"
 				>
 					<Phone class="hidden md:block" size={16} />
 					<span>Schedule a call</span>
@@ -92,7 +105,10 @@
 					href={SEND_EMAIL_URL}
 					target="_blank"
 					rel="noopener noreferrer"
-					class="{buttonVariants({ variant: 'outline', size: 'sm' })} flex flex-row gap-2 flex-1"
+					class="{buttonVariants({
+						variant: 'outline',
+						size: 'sm'
+					})} flex flex-1 flex-row gap-2"
 				>
 					<Mail class="hidden md:block" size={16} />
 					<span>Send email</span>
