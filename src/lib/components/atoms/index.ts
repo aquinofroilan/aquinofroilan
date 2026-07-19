@@ -1,0 +1,43 @@
+import CredlyIcon from './icons/credly.svelte';
+import Expo from './icons/expo.svelte';
+import Flask from './icons/flask.svelte';
+import Github from './icons/github.svelte';
+import HackerRank from './icons/hackerrank.svelte';
+import Instagram from './icons/instagram.svelte';
+import Java from './icons/java.svelte';
+import Kotlin from './icons/kotlin.svelte';
+import LeetCode from './icons/leetcode.svelte';
+import LinkedIn from './icons/linkedin.svelte';
+import MapBox from './icons/mapbox.svelte';
+import NextJS from './icons/nextjs.svelte';
+import PostgreSQL from './icons/postgresql.svelte';
+import Prisma from './icons/prisma.svelte';
+import Python from './icons/python.svelte';
+import React from './icons/react.svelte';
+import SpringBoot from './icons/springboot.svelte';
+import TailwindCSS from './icons/tailwind-css.svelte';
+import TypeScript from './icons/typescript.svelte';
+import Vercel from './icons/vercel.svelte';
+
+export {
+	CredlyIcon,
+	Expo,
+	Flask,
+	Github,
+	HackerRank,
+	Instagram,
+	Java,
+	Kotlin,
+	LeetCode,
+	LinkedIn,
+	MapBox,
+	NextJS,
+	PostgreSQL,
+	Prisma,
+	Python,
+	React,
+	SpringBoot,
+	TailwindCSS,
+	TypeScript,
+	Vercel
+};
