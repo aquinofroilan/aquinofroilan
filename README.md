@@ -20,9 +20,9 @@ Kotlin       --> 35,132 lines
 Python       --> 7,074 lines
 JavaScript   --> 331 lines
 Java         --> 79 lines
-Others       --> 3,792 lines
+Others       --> 3,809 lines
 
-[ TOTAL LINES OF CODE: 110,653 ]
+[ TOTAL LINES OF CODE: 110,670 ]
 ```
 <!-- LANGUAGES BREAKDOWN END -->
 
