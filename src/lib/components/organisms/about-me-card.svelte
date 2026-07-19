@@ -16,23 +16,27 @@
 		<Card.Content>
 			<div class="flex w-full flex-col gap-3">
 				<p class="text-justify text-sm">
-					I am a <b>Frontend Developer</b> at <b>Journey Better Business Group Inc.</b>,
-					passionate about crafting scalable and sophisticated applications. While I have
-					a strong command of the JavaScript/TypeScript ecosystem (React, Next.js), my
-					expertise extends to backend development with Java (Spring Boot) and Python
-					(Flask), utilizing robust database solutions like PostgreSQL and Supabase.
+					I am an <b>AI Developer</b> at <b>Salesperson Inc.</b> with 1 year of professional
+					experience building scalable AI-powered applications. My work focuses on maintaining
+					and improving AI Search solutions by developing new features, refactoring the codebase
+					for long-term maintainability, resolving bugs, responding to security vulnerabilities
+					(CVEs), reducing technical debt, and supporting the AI Search infrastructure. I also
+					collaborate with stakeholders to plan features, analyze data, and translate business
+					requirements into practical technical solutions. While my primary expertise is in
+					the JavaScript/TypeScript ecosystem (React and Next.js), I also develop backend services
+					using Java/Kotlin (Spring Framework) and Python (Flask/FastAPI), working with databases
+					such as PostgreSQL and Supabase.
 				</p>
 				<p class="text-justify text-sm">
-					I hold a <b>Bachelor's degree in Information Technology (2025)</b>. My approach
-					to engineering is deeply self-directed; I leverage AI-augmented workflows and
-					continuous learning resources to solve complex problems and accelerate
-					development, ensuring I stay at the forefront of industry trends.
+					I hold a <b>Bachelor's degree in Information Technology (2025)</b>. I believe
+					continuous learning is part of the job. I use AI to speed up research and
+					experimentation, but I rely on engineering fundamentals and careful reasoning to
+					build simple, maintainable software.
 				</p>
 				<p class="text-justify text-sm">
-					I believe great software requires great usability. My growing proficiency in
-					<b>UI/UX design</b>
-					and tools like Figma allows me to bridge the gap between technical functionality and
-					intuitive user experiences.
+					I believe the best software is often the least noticeable. My goal is to build
+					applications that are simple, dependable, and let users focus on their work
+					instead of the software itself.
 				</p>
 				<p class="text-justify text-sm">
 					Currently, I am expanding my technical horizons by diving into system-level
