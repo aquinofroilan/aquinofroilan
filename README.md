@@ -15,14 +15,14 @@ With a passion for clean design and functional interfaces, I build web applicati
 ```
 [ LANGUAGES BREAKDOWN ]
 
-Kotlin       --> 77,044 lines
+Kotlin       --> 80,878 lines
 TypeScript   --> 64,245 lines
 Python       --> 7,074 lines
 JavaScript   --> 331 lines
 Java         --> 79 lines
-Others       --> 5,398 lines
+Others       --> 5,523 lines
 
-[ TOTAL LINES OF CODE: 154,171 ]
+[ TOTAL LINES OF CODE: 158,130 ]
 ```
 <!-- LANGUAGES BREAKDOWN END -->
 

@@ -1,17 +1,17 @@
 {"header" : {
   "cloc_url"           : "github.com/AlDanial/cloc",
   "cloc_version"       : "1.98",
-  "elapsed_seconds"    : 0.45351505279541,
-  "n_files"            : 1986,
-  "n_lines"            : 176134,
-  "files_per_second"   : 4379.12697221083,
-  "lines_per_second"   : 388375.201471995,
+  "elapsed_seconds"    : 0.873836040496826,
+  "n_files"            : 2042,
+  "n_lines"            : 180576,
+  "files_per_second"   : 2336.82281957495,
+  "lines_per_second"   : 206647.462031129,
   "report_file"        : "../output/cloc-output.json"},
 "Kotlin" :{
-  "nFiles": 798,
-  "blank": 8299,
-  "comment": 772,
-  "code": 77044},
+  "nFiles": 846,
+  "blank": 8752,
+  "comment": 779,
+  "code": 80878},
 "TypeScript" :{
   "nFiles": 880,
   "blank": 6661,
@@ -23,10 +23,10 @@
   "comment": 1814,
   "code": 7074},
 "SQL" :{
-  "nFiles": 80,
-  "blank": 251,
-  "comment": 295,
-  "code": 2750},
+  "nFiles": 88,
+  "blank": 265,
+  "comment": 304,
+  "code": 2873},
 "Svelte" :{
   "nFiles": 62,
   "blank": 127,
@@ -46,7 +46,7 @@
   "nFiles": 2,
   "blank": 12,
   "comment": 0,
-  "code": 103},
+  "code": 105},
 "Bourne Shell" :{
   "nFiles": 1,
   "blank": 28,
@@ -73,7 +73,7 @@
   "comment": 2,
   "code": 10},
 "SUM": {
-  "blank": 17045,
-  "comment": 4918,
-  "code": 154171,
-  "nFiles": 1986} }
+  "blank": 17512,
+  "comment": 4934,
+  "code": 158130,
+  "nFiles": 2042} }
