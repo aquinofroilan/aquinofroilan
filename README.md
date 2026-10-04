@@ -16,13 +16,13 @@ With a passion for clean design and functional interfaces, I build web applicati
 [ LANGUAGES BREAKDOWN ]
 
 Kotlin       --> 80,878 lines
-TypeScript   --> 64,245 lines
+TypeScript   --> 39,811 lines
 Python       --> 7,074 lines
-JavaScript   --> 331 lines
+JavaScript   --> 453 lines
 Java         --> 79 lines
 Others       --> 5,523 lines
 
-[ TOTAL LINES OF CODE: 158,130 ]
+[ TOTAL LINES OF CODE: 133,818 ]
 ```
 <!-- LANGUAGES BREAKDOWN END -->
 
