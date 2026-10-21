@@ -39,32 +39,38 @@ function getDuration(year: string): string | null {
 
 const milestones = [
     {
-        year: "29/09/2025 - Present",
+        year: "07/15 - Present",
+        title: "AI Developer",
+        description: "Hired as AI Developer at Salesperson Inc. Working on AI-powered solutions for sales and marketing.",
+        badge: "Full time",
+    },
+    {
+        year: "09/25 - 07/15",
         title: "Frontend Developer",
         description: "Hired as Frontend Developer at Journey Better Business Group Inc.",
         badge: "Full time",
     },
     {
-        year: "05/2025",
+        year: "05/25",
         title: "Bachelor's Degree & Academic Excellence",
         description: "Graduated with a degree in Information Technology. Awarded Best in Capstone and Practicum.",
         badge: "Education",
     },
     {
-        year: "22/01/2025 - 07/05/2025",
+        year: "01/25 - 05/25",
         title: "Web Development Internship",
         description: "Internship as web developer at Ishkaster Media",
         badge: "Internship",
     },
     {
-        year: "11/2023",
+        year: "11/23",
         title: "IT Olympics 2023 | Quiz Bee Participant",
         description:
             'Quiz Bee University of Makati — Theme: "The IT Innovators\' Gauntlet: Forging Ahead the Future of Technology"',
         badge: "Competition",
     },
     {
-        year: "10/2020",
+        year: "10/20",
         title: "Humble Beginnings",
         description: "Wrote my first line of code",
         badge: "Beginning",
