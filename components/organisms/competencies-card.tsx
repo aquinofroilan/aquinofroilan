@@ -4,14 +4,14 @@ import { Card, CardHeader, CardTitle, CardContent, Badge } from "@/components/ui
 const milestones = [
     {
         year: "07/15 - Present",
-        title: "AI Developer",
-        description: "Hired as AI Developer at Salesperson Inc. Working on AI-powered solutions for sales and marketing.",
+        title: "AI Developer | Salesperson Inc.",
+        description: "Developed client-facing AI services and applications with a focus on clean code and architecture decisions, while serving as a primary maintainer for the company's AI Search infrastructure to ensure swift issue resolution and high uptime.",
         badge: "Full time",
     },
     {
         year: "09/25 - 07/15",
-        title: "Frontend Developer",
-        description: "Hired as Frontend Developer at Journey Better Business Group Inc.",
+        title: "Frontend Developer | Journey Better Business Group Inc.",
+        description: "Stabilized the company's AI Search product by refactoring monolithic Python modules into modular, object-oriented components (reducing file sizes by up to 50%), resolving architectural bottlenecks, and contributing across the full stack (backend logic, AI integration, Magento) alongside CI/CD and security workflows.",
         badge: "Full time",
     },
     {
