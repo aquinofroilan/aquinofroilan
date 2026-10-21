@@ -21,8 +21,6 @@
     "dependencies": {
         "@aws-sdk/client-s3": "^3.1014.0",
         "@aws-sdk/s3-request-presigner": "^3.1014.0",
-        "@google/genai": "^2.0.1",
-        "@libsql/client": "^0.17.2",
         "@octokit/graphql": "^9.0.3",
         "@radix-ui/react-dialog": "^1.1.15",
         "@radix-ui/react-dropdown-menu": "^2.1.16",
@@ -31,7 +29,6 @@
         "@radix-ui/react-slot": "^1.2.4",
         "@radix-ui/react-tooltip": "^1.2.8",
         "@radix-ui/themes": "^3.3.0",
-        "@types/uuid": "^11.0.0",
         "@vercel/analytics": "^2.0.1",
         "@vercel/speed-insights": "^2.0.0",
         "class-variance-authority": "^0.7.1",
@@ -42,13 +39,9 @@
         "next-themes": "^0.4.6",
         "react": "^19.2.4",
         "react-dom": "^19.2.4",
-        "react-markdown": "^10.1.0",
-        "rehype-highlight": "^7.0.2",
-        "remark-gfm": "^4.0.1",
         "sharp": "^0.35.2",
         "tailwind-merge": "^3.5.0",
-        "tailwindcss-animate": "^1.0.7",
-        "uuid": "^14.0.0"
+        "tailwindcss-animate": "^1.0.7"
     },
     "devDependencies": {
         "@eslint/eslintrc": "^3.3.5",
