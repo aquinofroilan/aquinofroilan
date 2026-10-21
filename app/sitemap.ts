@@ -12,12 +12,6 @@ export default function sitemap(): MetadataRoute.Sitemap {
             priority: 1,
         },
         {
-            url: `${baseUrl}/blog`,
-            lastModified: currentDate,
-            changeFrequency: "weekly",
-            priority: 0.8,
-        },
-        {
             url: `${baseUrl}/projects`,
             lastModified: currentDate,
             changeFrequency: "monthly",
@@ -25,12 +19,6 @@ export default function sitemap(): MetadataRoute.Sitemap {
         },
         {
             url: `${baseUrl}/certifications`,
-            lastModified: currentDate,
-            changeFrequency: "monthly",
-            priority: 0.7,
-        },
-        {
-            url: `${baseUrl}/books`,
             lastModified: currentDate,
             changeFrequency: "monthly",
             priority: 0.7,
