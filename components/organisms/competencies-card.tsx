@@ -1,7 +1,6 @@
 import { PartyPopper } from "lucide-react";
 import { Card, CardHeader, CardTitle, CardContent, Badge } from "@/components/ui";
 
-
 const milestones = [
     {
         year: "07/15 - Present",
@@ -61,6 +60,9 @@ export const CompetenciesCard = ({ className }: { className?: string }) => {
                                     <div key={index} className="relative group">
                                         <div className="absolute -left-2 top-1 w-3 h-3 rounded-full bg-transparent border-primary border-2 group-hover:bg-primary transition-colors" />
                                         <div className="pb-2 pl-3">
+                                            <Badge variant="outline" className="text-xs py-0">
+                                                {milestone.year}
+                                            </Badge>
                                             <Badge variant="secondary" className="ml-2 text-xs py-0">
                                                 {milestone.badge}
                                             </Badge>
