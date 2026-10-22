@@ -1,17 +1,20 @@
+import { cn } from "@/lib/utils";
+import { BlueprintSectionHeader } from "@/components/ui/blueprint-section-header";
 import { PartyPopper } from "lucide-react";
-import { Card, CardHeader, CardTitle, CardContent, Badge } from "@/components/ui";
 
 const milestones = [
     {
-        year: "07/15 - Present",
+        year: "07/25 – Present",
         title: "AI Developer | Salesperson Inc.",
-        description: "Developed client-facing AI services and applications with a focus on clean code and architecture decisions, while serving as a primary maintainer for the company's AI Search infrastructure to ensure swift issue resolution and high uptime.",
+        description:
+            "Developed client-facing AI services and applications with a focus on clean code and architecture decisions, while serving as a primary maintainer for the company's AI Search infrastructure to ensure swift issue resolution and high uptime.",
         badge: "Full time",
     },
     {
-        year: "09/25 - 07/15",
+        year: "09/24 – 07/25",
         title: "Frontend Developer | Journey Better Business Group Inc.",
-        description: "Stabilized the company's AI Search product by refactoring monolithic Python modules into modular, object-oriented components (reducing file sizes by up to 50%), resolving architectural bottlenecks, and contributing across the full stack (backend logic, AI integration, Magento) alongside CI/CD and security workflows.",
+        description:
+            "Stabilized the company's AI Search product by refactoring monolithic Python modules into modular, object-oriented components (reducing file sizes by up to 50%), resolving architectural bottlenecks, and contributing across the full stack.",
         badge: "Full time",
     },
     {
@@ -21,7 +24,7 @@ const milestones = [
         badge: "Education",
     },
     {
-        year: "01/25 - 05/25",
+        year: "01/25 – 05/25",
         title: "Web Development Internship",
         description: "Internship as web developer at Ishkaster Media",
         badge: "Internship",
@@ -41,45 +44,63 @@ const milestones = [
     },
 ];
 
+const badgeVariant: Record<string, string> = {
+    "Full time": "text-primary border-primary/40 bg-primary/5",
+    Education: "text-emerald-600 border-emerald-400/40 bg-emerald-50/20 dark:text-emerald-400",
+    Internship: "text-amber-600 border-amber-400/40 bg-amber-50/20 dark:text-amber-400",
+    Competition: "text-violet-600 border-violet-400/40 bg-violet-50/20 dark:text-violet-400",
+    Beginning: "text-muted-foreground border-border/40 bg-muted/20",
+};
+
 export const CompetenciesCard = ({ className }: { className?: string }) => {
     return (
-        <div className={className}>
-            <Card className="w-full h-full">
-                <CardHeader>
-                    <CardTitle className="flex items-center gap-2">
-                        <PartyPopper size={15} />
-                        <span className="text-lg">My Journey</span>
-                    </CardTitle>
-                </CardHeader>
-                <CardContent>
-                    <div className="relative pl-8 mt-4">
-                        <div className="absolute left-0 top-1 bottom-8 w-0.5 bg-linear-to-t to-primary/80 from-primary/20 rounded-full" />
-                        <div className="space-y-8">
-                            {milestones.map((milestone, index) => {
-                                return (
-                                    <div key={index} className="relative group">
-                                        <div className="absolute -left-2 top-1 w-3 h-3 rounded-full bg-transparent border-primary border-2 group-hover:bg-primary transition-colors" />
-                                        <div className="pb-2 pl-3">
-                                            <Badge variant="outline" className="text-xs py-0">
-                                                {milestone.year}
-                                            </Badge>
-                                            <Badge variant="secondary" className="ml-2 text-xs py-0">
-                                                {milestone.badge}
-                                            </Badge>
-                                        </div>
-                                        <div>
-                                            <h3 className="text-base font-medium">{milestone.title}</h3>
-                                            <p className="text-sm text-muted-foreground mt-1">
-                                                {milestone.description}
-                                            </p>
-                                        </div>
-                                    </div>
-                                );
-                            })}
+        <div className={cn("relative border border-border/60 bg-card/60 p-5 backdrop-blur-xs", className)}>
+            {/* corner brackets */}
+            <span className="pointer-events-none absolute top-0 left-0 h-3 w-3 border-t-2 border-l-2 border-primary/50" />
+            <span className="pointer-events-none absolute top-0 right-0 h-3 w-3 border-t-2 border-r-2 border-primary/50" />
+            <span className="pointer-events-none absolute bottom-0 left-0 h-3 w-3 border-b-2 border-l-2 border-primary/50" />
+            <span className="pointer-events-none absolute bottom-0 right-0 h-3 w-3 border-b-2 border-r-2 border-primary/50" />
+
+            <BlueprintSectionHeader
+                index="06"
+                title="My Journey"
+                tag="timeline"
+                icon={<PartyPopper size={14} />}
+            />
+
+            <div className="relative pl-6">
+                {/* vertical line */}
+                <div className="absolute left-0 top-1 bottom-6 w-px bg-gradient-to-b from-primary/70 to-primary/10" />
+
+                <div className="space-y-6">
+                    {milestones.map((milestone, index) => (
+                        <div key={index} className="relative group">
+                            {/* timeline dot */}
+                            <div className="absolute -left-[25px] top-1 h-2.5 w-2.5 border-2 border-primary bg-background group-hover:bg-primary transition-colors" />
+
+                            <div className="flex items-center gap-2 mb-1 flex-wrap">
+                                <span className="font-mono text-[10px] border border-border/40 px-1.5 py-0.5 text-muted-foreground bg-muted/20 uppercase tracking-wide">
+                                    {milestone.year}
+                                </span>
+                                <span
+                                    className={cn(
+                                        "font-mono text-[10px] border px-1.5 py-0.5 uppercase tracking-wide",
+                                        badgeVariant[milestone.badge] ?? "text-muted-foreground border-border/40",
+                                    )}
+                                >
+                                    {milestone.badge}
+                                </span>
+                            </div>
+                            <h3 className="font-mono text-xs font-semibold text-foreground leading-snug">
+                                {milestone.title}
+                            </h3>
+                            <p className="font-mono text-[11px] text-muted-foreground mt-1 leading-relaxed">
+                                {milestone.description}
+                            </p>
                         </div>
-                    </div>
-                </CardContent>
-            </Card>
+                    ))}
+                </div>
+            </div>
         </div>
     );
 };

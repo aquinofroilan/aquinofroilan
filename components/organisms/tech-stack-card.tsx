@@ -1,72 +1,58 @@
-import { Card, CardHeader, CardTitle, CardContent, Badge } from "@/components/ui";
+import { cn } from "@/lib/utils";
+import { BlueprintSectionHeader } from "@/components/ui/blueprint-section-header";
 import { FRONTEND, BACKEND, DEVELOPER_TOOLS, DEVOPS } from "@/data/techstack-list";
-import { ArrowRightCircle, FlaskConical } from "lucide-react";
+import { ArrowRight, FlaskConical } from "lucide-react";
 import Link from "next/link";
+
+function TechGroup({ label, items }: { label: string; items: string[] }) {
+    return (
+        <div className="flex flex-col gap-1.5">
+            <span className="font-mono text-[10px] uppercase tracking-widest text-muted-foreground/60 select-none">
+                {label}
+            </span>
+            <div className="flex flex-wrap gap-1.5">
+                {items.slice(0, 6).map((item) => (
+                    <span
+                        key={item}
+                        className="font-mono text-[11px] border border-border/50 px-2 py-0.5 text-foreground bg-muted/20"
+                    >
+                        {item}
+                    </span>
+                ))}
+            </div>
+        </div>
+    );
+}
 
 export const TechStackCard = ({ className }: { className?: string }) => {
     return (
-        <div className={className}>
-            <Card className="flex flex-col gap-3 h-full w-full">
-                <CardHeader>
-                    <CardTitle className="flex justify-between items-center w-full">
-                        <div className="flex items-center gap-2">
-                            <FlaskConical size={15} />
-                            <span className="text-lg">Tech Stack</span>
-                        </div>
-                        <Link
-                            className="text-xs md:text-base text-neutral-500 hover:text-neutral-700 dark:text-neutral-400 dark:hover:text-neutral-200 transition duration-200 flex items-center gap-2"
-                            href={"/techstack"}
-                        >
-                            View All
-                            <ArrowRightCircle size={15} />
-                        </Link>
-                    </CardTitle>
-                </CardHeader>
-                <CardContent>
-                    <div className="flex flex-col gap-5">
-                        <div>
-                            <h1>Frontend</h1>
-                            <div className="flex flex-wrap gap-2">
-                                {FRONTEND.slice(0, 6).map((item) => (
-                                    <Badge key={item} variant={"outline"} className="w-fit font-semibold text-xs">
-                                        {item}
-                                    </Badge>
-                                ))}
-                            </div>
-                        </div>
-                        <div>
-                            <h1>Backend</h1>
-                            <div className="flex flex-wrap gap-2">
-                                {BACKEND.slice(0, 6).map((item) => (
-                                    <Badge key={item} variant={"outline"} className="w-fit font-semibold text-xs">
-                                        {item}
-                                    </Badge>
-                                ))}
-                            </div>
-                        </div>
-                        <div>
-                            <h1>DevOps & Cloud</h1>
-                            <div className="flex flex-wrap gap-2">
-                                {DEVOPS.slice(0, 6).map((item) => (
-                                    <Badge key={item} variant={"outline"} className="w-fit font-semibold text-xs">
-                                        {item}
-                                    </Badge>
-                                ))}
-                            </div>
-                        </div>
-                        <div className="flex flex-col gap-2">
-                            <h1>Developer Tools</h1>
-                            <div className="flex flex-wrap gap-2">
-                                {DEVELOPER_TOOLS.slice(0, 6).map((item) => (
-                                    <Badge key={item} variant={"outline"} className="w-fit font-semibold text-xs">
-                                        {item}
-                                    </Badge>
-                                ))}
-                            </div>
-                        </div>
-                    </div>
-                </CardContent>
-            </Card>
+        <div className={cn("relative border border-border/60 bg-card/60 p-5 backdrop-blur-xs", className)}>
+            {/* corner brackets */}
+            <span className="pointer-events-none absolute top-0 left-0 h-3 w-3 border-t-2 border-l-2 border-primary/50" />
+            <span className="pointer-events-none absolute top-0 right-0 h-3 w-3 border-t-2 border-r-2 border-primary/50" />
+            <span className="pointer-events-none absolute bottom-0 left-0 h-3 w-3 border-b-2 border-l-2 border-primary/50" />
+            <span className="pointer-events-none absolute bottom-0 right-0 h-3 w-3 border-b-2 border-r-2 border-primary/50" />
+
+            <BlueprintSectionHeader
+                index="03"
+                title="Tech Stack"
+                tag="developer stack"
+                icon={<FlaskConical size={14} />}
+            >
+                <Link
+                    href="/techstack"
+                    className="font-mono text-xs text-muted-foreground hover:text-foreground transition-colors flex items-center gap-1 uppercase tracking-wider"
+                >
+                    View All <ArrowRight size={12} />
+                </Link>
+            </BlueprintSectionHeader>
+
+            <div className="flex flex-col gap-4">
+                <TechGroup label="Frontend" items={FRONTEND} />
+                <TechGroup label="Backend" items={BACKEND} />
+                <TechGroup label="DevOps & Cloud" items={DEVOPS} />
+                <TechGroup label="Developer Tools" items={DEVELOPER_TOOLS} />
+            </div>
         </div>
     );
 };

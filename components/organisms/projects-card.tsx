@@ -1,67 +1,71 @@
-import { Badge, Card, CardHeader, CardTitle, CardContent } from "@/components/ui";
+import { cn } from "@/lib/utils";
+import { BlueprintSectionHeader } from "@/components/ui/blueprint-section-header";
 import Link from "next/link";
-import { ArrowRightCircle, FolderCode } from "lucide-react";
+import { ArrowRight, FolderCode } from "lucide-react";
 import { ProjectsList } from "@/data/projects-list";
 
 /**
- * Render a motion-enabled "Projects" card that displays a header with a "View All" link and up to two project entries.
- *
- * Each project entry shows a title (opens in a new tab), a "Details" link, a short description, and a row of footer badges.
- *
- * @param className - Optional CSS classes applied to the root motion container
- * @returns A React element representing the Projects card with animated entrance/exit, header controls, and project entries
+ * Blueprint-styled Projects card — shows a summary of the top 2 projects with
+ * a "View All" link. Content layout follows the technical-blueprint aesthetic.
  */
 function ProjectsCard({ className }: { className?: string }) {
     return (
-        <div className={className}>
-            <Card className="flex flex-col gap-3 h-full w-full">
-                <CardHeader>
-                    <CardTitle className="flex justify-between items-center w-full">
-                        <div className="flex items-center gap-2">
-                            <FolderCode size={15} />
-                            <span className="text-lg">Projects</span>
+        <div className={cn("relative border border-border/60 bg-card/60 p-5 backdrop-blur-xs", className)}>
+            {/* corner brackets */}
+            <span className="pointer-events-none absolute top-0 left-0 h-3 w-3 border-t-2 border-l-2 border-primary/50" />
+            <span className="pointer-events-none absolute top-0 right-0 h-3 w-3 border-t-2 border-r-2 border-primary/50" />
+            <span className="pointer-events-none absolute bottom-0 left-0 h-3 w-3 border-b-2 border-l-2 border-primary/50" />
+            <span className="pointer-events-none absolute bottom-0 right-0 h-3 w-3 border-b-2 border-r-2 border-primary/50" />
+
+            <BlueprintSectionHeader
+                index="04"
+                title="Projects"
+                tag="selected work"
+                icon={<FolderCode size={14} />}
+            >
+                <Link
+                    href="/projects"
+                    className="font-mono text-xs text-muted-foreground hover:text-foreground transition-colors flex items-center gap-1 uppercase tracking-wider"
+                >
+                    View All <ArrowRight size={12} />
+                </Link>
+            </BlueprintSectionHeader>
+
+            <div className="flex flex-col gap-4">
+                {ProjectsList.slice(0, 2).map((project) => (
+                    <div
+                        key={project.pageLink}
+                        className="border border-border/30 px-3 py-3 flex flex-col gap-2 hover:border-primary/40 hover:bg-muted/20 transition-all"
+                    >
+                        <div className="flex items-center justify-between">
+                            <span className="font-mono text-xs font-semibold text-foreground uppercase tracking-wide">
+                                {project.title}
+                            </span>
+                            <Link
+                                href={project.pageLink}
+                                rel="noreferrer"
+                                className="font-mono text-[11px] text-muted-foreground hover:text-primary transition-colors flex items-center gap-1"
+                            >
+                                Details <ArrowRight size={11} />
+                            </Link>
                         </div>
-                        <Link
-                            href={"/projects"}
-                            className="text-xs md:text-base text-neutral-500 hover:text-neutral-700 dark:text-neutral-400 dark:hover:text-neutral-200 transition duration-200 flex items-center gap-2"
-                        >
-                            View All
-                            <ArrowRightCircle size={15} />
-                        </Link>
-                    </CardTitle>
-                </CardHeader>
-                <CardContent>
-                    <div className="flex flex-col gap-6">
-                        {ProjectsList.slice(0, 2).map((project) => (
-                            <div className="flex flex-col gap-2" key={project.pageLink}>
-                                <section className="flex justify-between w-full items-center">
-                                    <p>{project.title}</p>
-                                    <Link
-                                        href={project.pageLink}
-                                        rel="noreferrer"
-                                        className="text-xs text-muted-foreground hover:text-foreground transition-colors"
-                                    >
-                                        Details
-                                    </Link>
-                                </section>
-                                <p className="text-xs text-muted-foreground line-clamp-2">{project.description}</p>
-                                <div className="flex flex-wrap gap-2">
-                                    {project.footerContent.map((footer) => (
-                                        <Badge
-                                            key={footer.text}
-                                            variant="secondary"
-                                            className="w-fit text-[10px] px-2 py-0 h-5 flex flex-row gap-1 items-center font-normal"
-                                        >
-                                            {footer.icon}
-                                            {footer.text}
-                                        </Badge>
-                                    ))}
-                                </div>
-                            </div>
-                        ))}
+                        <p className="font-mono text-[11px] text-muted-foreground line-clamp-2 leading-relaxed">
+                            {project.description}
+                        </p>
+                        <div className="flex flex-wrap gap-1.5 pt-1">
+                            {project.footerContent.map((footer) => (
+                                <span
+                                    key={footer.text}
+                                    className="inline-flex items-center gap-1 font-mono text-[10px] border border-border/40 px-1.5 py-0.5 text-muted-foreground bg-muted/20"
+                                >
+                                    {footer.icon}
+                                    {footer.text}
+                                </span>
+                            ))}
+                        </div>
                     </div>
-                </CardContent>
-            </Card>
+                ))}
+            </div>
         </div>
     );
 }
