@@ -6,3 +6,6 @@ export { ProfileCard } from "./profile-card";
 export { Footer } from "./footer";
 export { ContactMe } from "./contact-me-card";
 export { CompetenciesCard } from "./competencies-card";
+export { BlueprintNavbar, type BlueprintNavbarProps } from "./navbar";
+export { HeroSection } from "./hero-section";
+export { WorkflowsCard } from "./workflows-card";

@@ -1,37 +1,42 @@
+import { cn } from "@/lib/utils";
+import { BlueprintSectionHeader } from "@/components/ui/blueprint-section-header";
 import { Rocket } from "lucide-react";
-import { Card, CardHeader, CardTitle, CardContent } from "@/components/ui";
 
 export const TrascendingCodeCard = ({ className }: { className?: string }) => {
     return (
-        <div className={className}>
-            <Card className="w-full h-full">
-                <CardHeader>
-                    <CardTitle className="flex items-center gap-2">
-                        <Rocket size={15} />
-                        <span className="text-lg">Beyond Coding</span>
-                    </CardTitle>
-                </CardHeader>
-                <CardContent>
-                    <div className="flex flex-col gap-5">
-                        <p className="text-sm text-justify">
-                            Beyond the IDE, I see myself as a problem solver and a lifelong learner. I believe that true
-                            engineering excellence requires not just technical skill, but a holistic mindset that
-                            embraces constant evolution.
-                        </p>
-                        <p className="text-sm text-justify">
-                            To deepen my craft, I turn to foundational literature. I study classics like{" "}
-                            <i>C Programming: A Modern Approach</i>, <i>Design Patterns</i>, and{" "}
-                            <i>Java: The Complete Reference</i> to ground my modern development work in timeless
-                            software engineering principles.
-                        </p>
-                        <p className="text-sm text-justify">
-                            My growth isn&apos;t limited to technology. I actively cultivate productivity and emotional
-                            intelligence through books like <i>Atomic Habits</i> and <i>Surrounded by Idiots</i>,
-                            ensuring I bring both technical acuity and personal effectiveness to every team I join.
-                        </p>
-                    </div>
-                </CardContent>
-            </Card>
+        <div className={cn("relative border border-border/60 bg-card/60 p-5 backdrop-blur-xs", className)}>
+            {/* corner brackets */}
+            <span className="pointer-events-none absolute top-0 left-0 h-3 w-3 border-t-2 border-l-2 border-primary/50" />
+            <span className="pointer-events-none absolute top-0 right-0 h-3 w-3 border-t-2 border-r-2 border-primary/50" />
+            <span className="pointer-events-none absolute bottom-0 left-0 h-3 w-3 border-b-2 border-l-2 border-primary/50" />
+            <span className="pointer-events-none absolute bottom-0 right-0 h-3 w-3 border-b-2 border-r-2 border-primary/50" />
+
+            <BlueprintSectionHeader
+                index="05"
+                title="Beyond Coding"
+                tag="mindset & growth"
+                icon={<Rocket size={14} />}
+            />
+
+            <div className="flex flex-col gap-3 text-sm leading-relaxed text-muted-foreground">
+                <p>
+                    Beyond the IDE, I see myself as a problem solver and a lifelong learner. True engineering excellence
+                    requires not just technical skill, but a holistic mindset that embraces constant evolution.
+                </p>
+                <p>
+                    To deepen my craft, I study classics like{" "}
+                    <span className="italic text-foreground">C Programming: A Modern Approach</span>,{" "}
+                    <span className="italic text-foreground">Design Patterns</span>, and{" "}
+                    <span className="italic text-foreground">Java: The Complete Reference</span> to ground my modern
+                    development work in timeless software engineering principles.
+                </p>
+                <p>
+                    My growth isn&apos;t limited to technology. I actively cultivate productivity and emotional
+                    intelligence through books like <span className="italic text-foreground">Atomic Habits</span> and{" "}
+                    <span className="italic text-foreground">Surrounded by Idiots</span>, ensuring I bring both
+                    technical acuity and personal effectiveness to every team I join.
+                </p>
+            </div>
         </div>
     );
 };
