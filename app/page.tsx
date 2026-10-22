@@ -6,6 +6,7 @@ import {
     HeroSection,
     TechStackCard,
     TrascendingCodeCard,
+    WorkflowsCard,
 } from "@/components/organisms/";
 import ProjectsCard from "@/components/organisms/projects-card";
 import { Masonry, FadeIn } from "@/components/ui";
@@ -40,6 +41,9 @@ export default function Home() {
                     </FadeIn>
                     <FadeIn delay={0.35} className="h-auto overflow-visible">
                         <TrascendingCodeCard className="h-full" />
+                    </FadeIn>
+                    <FadeIn delay={0.4} className="h-auto overflow-visible">
+                        <WorkflowsCard className="h-full" />
                     </FadeIn>
                     <FadeIn delay={0.65} className="h-auto overflow-visible">
                         <CompetenciesCard className="h-full" />
