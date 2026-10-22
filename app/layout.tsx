@@ -4,7 +4,7 @@ import { Analytics } from "@vercel/analytics/react";
 import { ThemeProvider } from "@/provider/theme-provider";
 import { type ReactNode } from "react";
 import { SpeedInsights } from "@vercel/speed-insights/next";
-import { Footer } from "@/components/organisms";
+import { Footer, BlueprintNavbar } from "@/components/organisms";
 import { TooltipProvider } from "@/components/ui";
 import { Metadata } from "next";
 
@@ -66,12 +66,18 @@ export const metadata: Metadata & {
 
 export default function RootLayout({ children }: { children: ReactNode }) {
     return (
-        <html lang="en" data-scroll-behavior="smooth" className={`${inter.variable} ${mono.variable}`} suppressHydrationWarning>
+        <html
+            lang="en"
+            data-scroll-behavior="smooth"
+            className={`${inter.variable} ${mono.variable}`}
+            suppressHydrationWarning
+        >
             <body
                 className={`${inter.className} font-sans w-full flex items-center flex-col min-h-screen bg-background text-foreground antialiased transition-colors duration-200 bg-dot-grid`}
             >
                 <TooltipProvider>
                     <ThemeProvider attribute="class" defaultTheme="system" enableSystem disableTransitionOnChange>
+                        <BlueprintNavbar />
                         {children}
                     </ThemeProvider>
                     <Analytics />
