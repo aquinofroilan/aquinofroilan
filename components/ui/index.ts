@@ -34,3 +34,6 @@ export {
 } from "./dialog";
 export { Skeleton } from "./skeleton";
 export { Input } from "./input";
+export { TechnicalCard, type TechnicalCardProps } from "./technical-card";
+export { TechBadge, type TechBadgeProps, techBadgeVariants } from "./tech-badge";
+export { BlueprintSectionHeader, type BlueprintSectionHeaderProps } from "./blueprint-section-header";
