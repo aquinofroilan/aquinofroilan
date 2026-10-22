@@ -9,7 +9,7 @@ import {
     WorkflowsCard,
 } from "@/components/organisms/";
 import ProjectsCard from "@/components/organisms/projects-card";
-import { Masonry, FadeIn } from "@/components/ui";
+import { FadeIn } from "@/components/ui";
 import type { Metadata } from "next";
 
 export const revalidate = 14400;
@@ -19,40 +19,56 @@ export const metadata: Metadata = {
     description: `Personal Website of Froilan, ${process.env.CURRENT_TITLE || "Software Engineer"} based in Caloocan, Philippines.${process.env.CURRENT_COMPANY ? ` Currently working at ${process.env.CURRENT_COMPANY}.` : ""}`,
     keywords: ["Froilan", "Software Engineer", "Portfolio"],
 };
+
 export default function Home() {
     return (
-        <>
-            <main className="py-10 w-11/12 max-w-7xl flex flex-col gap-6">
-                <FadeIn delay={0.05}>
-                    <HeroSection />
+        <main className="py-10 w-11/12 max-w-7xl flex flex-col gap-6">
+
+            {/* 00 · Hero — full width 3-col */}
+            <FadeIn delay={0.05}>
+                <HeroSection />
+            </FadeIn>
+
+            {/* 01 + 03 · About & Tech Stack — side by side */}
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <FadeIn delay={0.1}>
+                    <AboutCard className="h-full" />
                 </FadeIn>
-                <Masonry columnCount={3} gap={16} className="w-full">
-                    <FadeIn delay={0.15} className="h-auto overflow-visible">
-                        <AboutCard className="h-full" />
-                    </FadeIn>
-                    <FadeIn delay={0.2} className="h-auto overflow-visible">
-                        <CertificationCard className="h-full" />
-                    </FadeIn>
-                    <FadeIn delay={0.25} className="h-auto overflow-visible">
-                        <TechStackCard className="h-full" />
-                    </FadeIn>
-                    <FadeIn delay={0.3} className="h-auto overflow-visible">
-                        <ProjectsCard className="h-full" />
-                    </FadeIn>
-                    <FadeIn delay={0.35} className="h-auto overflow-visible">
-                        <TrascendingCodeCard className="h-full" />
-                    </FadeIn>
-                    <FadeIn delay={0.4} className="h-auto overflow-visible">
-                        <WorkflowsCard className="h-full" />
-                    </FadeIn>
-                    <FadeIn delay={0.65} className="h-auto overflow-visible">
-                        <CompetenciesCard className="h-full" />
-                    </FadeIn>
-                    <FadeIn delay={0.7} className="h-auto overflow-visible">
-                        <ContactMe className="h-full" />
-                    </FadeIn>
-                </Masonry>
-            </main>
-        </>
+                <FadeIn delay={0.15}>
+                    <TechStackCard className="h-full" />
+                </FadeIn>
+            </div>
+
+            {/* 02 · Certifications — full width */}
+            <FadeIn delay={0.2}>
+                <CertificationCard />
+            </FadeIn>
+
+            {/* 04 · Projects — full width */}
+            <FadeIn delay={0.25}>
+                <ProjectsCard />
+            </FadeIn>
+
+            {/* 08 · Workflows simulator — full width */}
+            <FadeIn delay={0.3}>
+                <WorkflowsCard />
+            </FadeIn>
+
+            {/* 06 + 05 · Journey & Beyond Coding — side by side */}
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <FadeIn delay={0.35}>
+                    <CompetenciesCard className="h-full" />
+                </FadeIn>
+                <FadeIn delay={0.4}>
+                    <TrascendingCodeCard className="h-full" />
+                </FadeIn>
+            </div>
+
+            {/* 07 · Contact desk — full width */}
+            <FadeIn delay={0.45}>
+                <ContactMe />
+            </FadeIn>
+
+        </main>
     );
 }
