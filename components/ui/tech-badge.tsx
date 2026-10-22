@@ -26,9 +26,7 @@ const techBadgeVariants = cva(
     },
 );
 
-export interface TechBadgeProps
-    extends HTMLAttributes<HTMLSpanElement>,
-        VariantProps<typeof techBadgeVariants> {
+export interface TechBadgeProps extends HTMLAttributes<HTMLSpanElement>, VariantProps<typeof techBadgeVariants> {
     prefixChar?: string;
 }
 

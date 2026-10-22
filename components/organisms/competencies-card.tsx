@@ -61,12 +61,7 @@ export const CompetenciesCard = ({ className }: { className?: string }) => {
             <span className="pointer-events-none absolute bottom-0 left-0 h-3 w-3 border-b-2 border-l-2 border-primary/50" />
             <span className="pointer-events-none absolute bottom-0 right-0 h-3 w-3 border-b-2 border-r-2 border-primary/50" />
 
-            <BlueprintSectionHeader
-                index="06"
-                title="My Journey"
-                tag="timeline"
-                icon={<PartyPopper size={14} />}
-            />
+            <BlueprintSectionHeader index="06" title="My Journey" tag="timeline" icon={<PartyPopper size={14} />} />
 
             <div className="relative pl-6">
                 {/* vertical line */}

@@ -13,7 +13,10 @@ const BlueprintSectionHeader = forwardRef<HTMLDivElement, BlueprintSectionHeader
         return (
             <div
                 ref={ref}
-                className={cn("flex flex-wrap items-center justify-between gap-4 border-b border-border/40 pb-3 mb-8", className)}
+                className={cn(
+                    "flex flex-wrap items-center justify-between gap-4 border-b border-border/40 pb-3 mb-8",
+                    className,
+                )}
                 {...props}
             >
                 <div className="flex items-center gap-2.5 font-mono">

@@ -20,13 +20,7 @@ import { cn } from "@/lib/utils";
 
 // ─── Column wrapper ─────────────────────────────────────────────────────────
 
-function HeroColumn({
-    className,
-    children,
-}: {
-    className?: string;
-    children: React.ReactNode;
-}) {
+function HeroColumn({ className, children }: { className?: string; children: React.ReactNode }) {
     return (
         <div
             className={cn(
@@ -68,15 +62,7 @@ function ColumnTag({ label }: { label: string }) {
 
 // ─── Stat item ───────────────────────────────────────────────────────────────
 
-function StatItem({
-    icon,
-    label,
-    value,
-}: {
-    icon: React.ReactNode;
-    label: string;
-    value: string | number;
-}) {
+function StatItem({ icon, label, value }: { icon: React.ReactNode; label: string; value: string | number }) {
     return (
         <div className="flex flex-col items-center gap-0.5 font-mono text-xs text-muted-foreground">
             {icon}
@@ -103,12 +89,7 @@ export const HeroSection = async ({ className }: { className?: string }) => {
     ];
 
     return (
-        <section
-            className={cn(
-                "w-full grid grid-cols-1 md:grid-cols-3 gap-px bg-border/30",
-                className,
-            )}
-        >
+        <section className={cn("w-full grid grid-cols-1 md:grid-cols-3 gap-px bg-border/30", className)}>
             {/* ── Col 1 · Identity ─────────────────────────────── */}
             <HeroColumn className="items-start">
                 <CornerBrackets />
@@ -127,9 +108,7 @@ export const HeroSection = async ({ className }: { className?: string }) => {
                     />
                     <div className="flex flex-col gap-0.5">
                         <div className="flex items-center gap-1.5">
-                            <h1 className="font-mono font-bold tracking-tight text-base uppercase">
-                                Froilan Aquino
-                            </h1>
+                            <h1 className="font-mono font-bold tracking-tight text-base uppercase">Froilan Aquino</h1>
                             <BadgeCheckIcon size={14} color="#0087ED" />
                         </div>
                         <p className="font-mono text-[11px] text-muted-foreground flex items-center gap-1">
@@ -150,9 +129,7 @@ export const HeroSection = async ({ className }: { className?: string }) => {
                     <p>
                         <span className="text-primary">org</span>
                         <span className="text-muted-foreground/50 mx-1">=</span>
-                        <span className="text-foreground">
-                            &quot;{process.env.CURRENT_COMPANY ?? "—"}&quot;
-                        </span>
+                        <span className="text-foreground">&quot;{process.env.CURRENT_COMPANY ?? "—"}&quot;</span>
                     </p>
                     <p>
                         <span className="text-primary">location</span>
@@ -170,17 +147,8 @@ export const HeroSection = async ({ className }: { className?: string }) => {
                             Schedule a call
                         </Link>
                     </Button>
-                    <Button
-                        variant="outline"
-                        className="flex-1 rounded-none font-mono text-xs"
-                        size="sm"
-                        asChild
-                    >
-                        <Link
-                            href={process.env.SEND_EMAIL_URL as string}
-                            target="_blank"
-                            rel="noopener noreferrer"
-                        >
+                    <Button variant="outline" className="flex-1 rounded-none font-mono text-xs" size="sm" asChild>
+                        <Link href={process.env.SEND_EMAIL_URL as string} target="_blank" rel="noopener noreferrer">
                             <Mail size={12} className="hidden sm:block" />
                             Send email
                         </Link>
@@ -234,27 +202,17 @@ export const HeroSection = async ({ className }: { className?: string }) => {
                             label="pull requests"
                             value={githubStats.pullRequests}
                         />
-                        <StatItem
-                            icon={<CircleDot size={14} />}
-                            label="issues"
-                            value={githubStats.issues}
-                        />
-                        <StatItem
-                            icon={<GitCommitVertical size={14} />}
-                            label="commits"
-                            value={githubStats.commits}
-                        />
+                        <StatItem icon={<CircleDot size={14} />} label="issues" value={githubStats.issues} />
+                        <StatItem icon={<GitCommitVertical size={14} />} label="commits" value={githubStats.commits} />
                     </div>
                 ) : (
-                    <p className="font-mono text-xs text-muted-foreground pt-2">
-                        — github stats unavailable —
-                    </p>
+                    <p className="font-mono text-xs text-muted-foreground pt-2">— github stats unavailable —</p>
                 )}
 
                 <div className="mt-auto border-t border-border/40 pt-3 font-mono text-[11px] leading-relaxed text-muted-foreground">
                     <p>
-                        Frontend-first fullstack engineer. Currently building AI-powered search
-                        infrastructure and client-facing developer tooling.
+                        Frontend-first fullstack engineer. Currently building AI-powered search infrastructure and
+                        client-facing developer tooling.
                     </p>
                 </div>
             </HeroColumn>

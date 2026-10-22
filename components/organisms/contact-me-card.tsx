@@ -105,7 +105,10 @@ export const ContactMe = ({ className }: { className?: string }) => {
                         aria-label="Schedule a consultation call via Calendly"
                     >
                         <span className="font-mono text-xs text-foreground">Schedule a call</span>
-                        <ArrowRight size={13} className="text-muted-foreground transition-transform group-hover:translate-x-1" />
+                        <ArrowRight
+                            size={13}
+                            className="text-muted-foreground transition-transform group-hover:translate-x-1"
+                        />
                     </Link>
 
                     {process.env.RESUME_CV_LINK && (
@@ -115,7 +118,10 @@ export const ContactMe = ({ className }: { className?: string }) => {
                             aria-label="View resume or CV document"
                         >
                             <span className="font-mono text-xs text-foreground">View my CV</span>
-                            <ArrowRight size={13} className="text-muted-foreground transition-transform group-hover:translate-x-1" />
+                            <ArrowRight
+                                size={13}
+                                className="text-muted-foreground transition-transform group-hover:translate-x-1"
+                            />
                         </Link>
                     )}
                 </div>

@@ -17,12 +17,7 @@ function ProjectsCard({ className }: { className?: string }) {
             <span className="pointer-events-none absolute bottom-0 left-0 h-3 w-3 border-b-2 border-l-2 border-primary/50" />
             <span className="pointer-events-none absolute bottom-0 right-0 h-3 w-3 border-b-2 border-r-2 border-primary/50" />
 
-            <BlueprintSectionHeader
-                index="04"
-                title="Projects"
-                tag="selected work"
-                icon={<FolderCode size={14} />}
-            >
+            <BlueprintSectionHeader index="04" title="Projects" tag="selected work" icon={<FolderCode size={14} />}>
                 <Link
                     href="/projects"
                     className="font-mono text-xs text-muted-foreground hover:text-foreground transition-colors flex items-center gap-1 uppercase tracking-wider"
