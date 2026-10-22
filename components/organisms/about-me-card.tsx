@@ -21,7 +21,7 @@ export const AboutCard = ( { className }: { className?: string } ) =>
 
             <div className="flex flex-col gap-3 text-sm leading-relaxed text-muted-foreground">
                 <p>
-                    I am a <span className="font-semibold text-foreground">AI Developer</span> at{ " " }
+                    I am an <span className="font-semibold text-foreground">AI Developer</span> at{ " " }
                     <span className="font-semibold text-foreground">Salesperson Inc.</span> passionate about crafting
                     scalable, production-grade applications. My core is the JavaScript/TypeScript ecosystem (React,
                     Next.js), but my work now spans the full stack: I build multi-tenant SaaS products on Vercel with
