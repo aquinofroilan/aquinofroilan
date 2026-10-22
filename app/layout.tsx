@@ -1,17 +1,25 @@
 import "./globals.css";
-import { Inter } from "next/font/google";
+import { Inter, JetBrains_Mono } from "next/font/google";
 import { Analytics } from "@vercel/analytics/react";
 import { ThemeProvider } from "@/provider/theme-provider";
 import { type ReactNode } from "react";
 import { SpeedInsights } from "@vercel/speed-insights/next";
-import { Footer } from "@/components/organisms";
-import { TooltipProvider } from "@/components/ui";
+import { Footer, BlueprintNavbar } from "@/components/organisms";
+import { TooltipProvider, SpiderCrawler } from "@/components/ui";
 import { Metadata } from "next";
 
 const inter = Inter({
     weight: ["400", "500", "600", "700", "800"],
     style: "normal",
     subsets: ["latin"],
+    variable: "--font-sans",
+});
+
+const mono = JetBrains_Mono({
+    weight: ["400", "500", "600", "700"],
+    style: "normal",
+    subsets: ["latin"],
+    variable: "--font-mono",
 });
 
 export const metadata: Metadata & {
@@ -58,13 +66,20 @@ export const metadata: Metadata & {
 
 export default function RootLayout({ children }: { children: ReactNode }) {
     return (
-        <html lang="en" data-scroll-behavior="smooth" suppressHydrationWarning>
+        <html
+            lang="en"
+            data-scroll-behavior="smooth"
+            className={`${inter.variable} ${mono.variable}`}
+            suppressHydrationWarning
+        >
             <body
-                className={`${inter.className} w-full flex items-center flex-col min-h-screen bg-background text-foreground antialiased transition-colors duration-200`}
+                className={`${inter.className} font-sans w-full flex items-center flex-col min-h-screen bg-background text-foreground antialiased transition-colors duration-200 bg-dot-grid`}
             >
                 <TooltipProvider>
                     <ThemeProvider attribute="class" defaultTheme="system" enableSystem disableTransitionOnChange>
+                        <BlueprintNavbar />
                         {children}
+                        <SpiderCrawler />
                     </ThemeProvider>
                     <Analytics />
                     <SpeedInsights />
