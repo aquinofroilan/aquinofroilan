@@ -1,79 +1,96 @@
-{"header" : {
-  "cloc_url"           : "github.com/AlDanial/cloc",
-  "cloc_version"       : "1.98",
-  "elapsed_seconds"    : 0.380934000015259,
-  "n_files"            : 1645,
-  "n_lines"            : 153922,
-  "files_per_second"   : 4318.33335941162,
-  "lines_per_second"   : 404064.746107815,
-  "report_file"        : "../output/cloc-output.json"},
-"Kotlin" :{
-  "nFiles": 846,
-  "blank": 8752,
-  "comment": 779,
-  "code": 80878},
-"TypeScript" :{
-  "nFiles": 479,
-  "blank": 4312,
-  "comment": 1840,
-  "code": 39811},
-"Python" :{
-  "nFiles": 127,
-  "blank": 1521,
-  "comment": 1814,
-  "code": 7074},
-"SQL" :{
-  "nFiles": 88,
-  "blank": 265,
-  "comment": 304,
-  "code": 2873},
-"Svelte" :{
-  "nFiles": 62,
-  "blank": 127,
-  "comment": 0,
-  "code": 1991},
-"JavaScript" :{
-  "nFiles": 15,
-  "blank": 58,
-  "comment": 45,
-  "code": 453},
-"GraphQL" :{
-  "nFiles": 16,
-  "blank": 60,
-  "comment": 0,
-  "code": 313},
-"Gradle" :{
-  "nFiles": 2,
-  "blank": 12,
-  "comment": 0,
-  "code": 105},
-"Bourne Shell" :{
-  "nFiles": 1,
-  "blank": 28,
-  "comment": 118,
-  "code": 102},
-"Java" :{
-  "nFiles": 4,
-  "blank": 8,
-  "comment": 22,
-  "code": 79},
-"INI" :{
-  "nFiles": 3,
-  "blank": 17,
-  "comment": 0,
-  "code": 65},
-"DOS Batch" :{
-  "nFiles": 1,
-  "blank": 18,
-  "comment": 0,
-  "code": 64},
-"PHP" :{
-  "nFiles": 1,
-  "blank": 2,
-  "comment": 2,
-  "code": 10},
-"SUM": {
-  "blank": 15180,
-  "comment": 4924,
-  "code": 133818,
-  "nFiles": 1645} }
+{
+    "header": {
+        "cloc_url": "github.com/AlDanial/cloc",
+        "cloc_version": "1.98",
+        "elapsed_seconds": 0.380934000015259,
+        "n_files": 1645,
+        "n_lines": 153922,
+        "files_per_second": 4318.33335941162,
+        "lines_per_second": 404064.746107815,
+        "report_file": "../output/cloc-output.json"
+    },
+    "Kotlin": {
+        "nFiles": 846,
+        "blank": 8752,
+        "comment": 779,
+        "code": 80878
+    },
+    "TypeScript": {
+        "nFiles": 479,
+        "blank": 4312,
+        "comment": 1840,
+        "code": 39811
+    },
+    "Python": {
+        "nFiles": 127,
+        "blank": 1521,
+        "comment": 1814,
+        "code": 7074
+    },
+    "SQL": {
+        "nFiles": 88,
+        "blank": 265,
+        "comment": 304,
+        "code": 2873
+    },
+    "Svelte": {
+        "nFiles": 62,
+        "blank": 127,
+        "comment": 0,
+        "code": 1991
+    },
+    "JavaScript": {
+        "nFiles": 15,
+        "blank": 58,
+        "comment": 45,
+        "code": 453
+    },
+    "GraphQL": {
+        "nFiles": 16,
+        "blank": 60,
+        "comment": 0,
+        "code": 313
+    },
+    "Gradle": {
+        "nFiles": 2,
+        "blank": 12,
+        "comment": 0,
+        "code": 105
+    },
+    "Bourne Shell": {
+        "nFiles": 1,
+        "blank": 28,
+        "comment": 118,
+        "code": 102
+    },
+    "Java": {
+        "nFiles": 4,
+        "blank": 8,
+        "comment": 22,
+        "code": 79
+    },
+    "INI": {
+        "nFiles": 3,
+        "blank": 17,
+        "comment": 0,
+        "code": 65
+    },
+    "DOS Batch": {
+        "nFiles": 1,
+        "blank": 18,
+        "comment": 0,
+        "code": 64
+    },
+    "PHP": {
+        "nFiles": 1,
+        "blank": 2,
+        "comment": 2,
+        "code": 10
+    },
+    "SUM": {
+        "blank": 15180,
+        "comment": 4924,
+        "code": 133818,
+        "nFiles": 1645
+    }
+}
