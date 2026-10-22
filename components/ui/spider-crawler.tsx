@@ -2,8 +2,9 @@
 
 import { useEffect, useRef } from "react";
 
-// Pixel art 12x12 monochrome blueprint spider matrices
-// Frame 0 & Frame 1 alternate for walking leg cadence
+// ─── Pixel Art Matrices ───────────────────────────────────────────────────────
+
+// 12x12 Spider Matrices (Leg Cadence Frames)
 const SPIDER_FRAME_0 = [
     [1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1],
     [0, 1, 0, 0, 1, 1, 1, 1, 0, 0, 1, 0],
@@ -34,30 +35,78 @@ const SPIDER_FRAME_1 = [
     [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
 ];
 
-interface Point {
-    x: number;
-    y: number;
+// 10x8 Cricket Sprite Matrix
+// Antennae, body, folded jumping hind legs
+const CRICKET_FRAME_IDLE = [
+    [1, 0, 0, 0, 0, 0, 0, 0, 0, 1],
+    [0, 1, 0, 0, 0, 0, 0, 0, 1, 0],
+    [0, 0, 1, 1, 1, 1, 1, 1, 0, 0],
+    [0, 1, 1, 1, 1, 1, 1, 1, 1, 0],
+    [1, 0, 1, 1, 1, 1, 1, 1, 0, 1],
+    [1, 0, 0, 1, 1, 1, 1, 0, 0, 1],
+    [0, 1, 0, 0, 1, 1, 0, 0, 1, 0],
+    [1, 0, 1, 0, 0, 0, 0, 1, 0, 1],
+];
+
+// In-air jump posture: legs extended backward
+const CRICKET_FRAME_JUMP = [
+    [0, 0, 0, 0, 0, 0, 0, 0, 0, 1],
+    [1, 0, 0, 0, 0, 0, 0, 1, 1, 0],
+    [0, 1, 1, 1, 1, 1, 1, 1, 0, 0],
+    [0, 0, 1, 1, 1, 1, 1, 0, 0, 0],
+    [1, 1, 0, 1, 1, 1, 0, 0, 0, 0],
+    [1, 0, 1, 0, 0, 0, 1, 0, 0, 0],
+    [0, 0, 0, 1, 0, 0, 0, 1, 0, 0],
+    [0, 0, 0, 0, 1, 0, 0, 0, 1, 0],
+];
+
+// ─── Interfaces ───────────────────────────────────────────────────────────────
+
+interface CardRect {
+    left: number;
+    top: number;
+    right: number;
+    bottom: number;
+    width: number;
+    height: number;
 }
 
-interface SpiderState {
+interface Spider {
+    cardIndex: number;
+    // Edge walking parameters: 0: top, 1: right, 2: bottom, 3: left
+    edge: number;
+    progress: number; // 0 to 1 along current edge
     x: number;
     y: number;
-    targetX: number;
-    targetY: number;
     angle: number;
     speed: number;
     frame: number;
     animTick: number;
-    isStartled: boolean;
-    threadY: number | null; // For dropping down a silk thread
-    targetThreadY: number | null;
+    isJumping: boolean;
+    jumpStart: { x: number; y: number };
+    jumpEnd: { x: number; y: number };
+    jumpArc: number;
+    jumpProgress: number;
+}
+
+interface Cricket {
+    cardIndex: number;
+    x: number;
+    y: number;
+    state: "idle" | "jumping";
+    idleTicks: number;
+    jumpStart: { x: number; y: number };
+    jumpEnd: { x: number; y: number };
+    jumpHeight: number;
+    jumpProgress: number;
+    jumpSpeed: number;
+    direction: 1 | -1;
 }
 
 export function SpiderCrawler() {
     const canvasRef = useRef<HTMLCanvasElement | null>(null);
 
     useEffect(() => {
-        // Respect prefers-reduced-motion
         const mediaQuery = window.matchMedia("(prefers-reduced-motion: reduce)");
         if (mediaQuery.matches) return;
 
@@ -78,114 +127,204 @@ export function SpiderCrawler() {
 
         window.addEventListener("resize", handleResize);
 
-        // Scan edges / borders from cards & headers
-        const getNavigablePoints = (): Point[] => {
+        // Scan all card boxes on the page
+        const getCards = (): CardRect[] => {
             const elements = document.querySelectorAll(
-                "main > div, main > section, .border, header",
+                "main > div > div, main > div, main > section, .border.bg-card\\/60",
             );
-            const points: Point[] = [];
+            const cards: CardRect[] = [];
             const scrollY = window.scrollY;
 
             elements.forEach((el) => {
                 const rect = el.getBoundingClientRect();
-                const top = rect.top + scrollY;
-                const bottom = rect.bottom + scrollY;
-                const left = rect.left;
-                const right = rect.right;
-
-                if (rect.width > 30 && rect.height > 30) {
-                    // Sample perimeter corners & midpoints
-                    points.push(
-                        { x: left, y: top },
-                        { x: right, y: top },
-                        { x: right, y: bottom },
-                        { x: left, y: bottom },
-                        { x: (left + right) / 2, y: top },
-                        { x: (left + right) / 2, y: bottom },
-                    );
+                if (rect.width > 120 && rect.height > 80) {
+                    cards.push({
+                        left: rect.left,
+                        top: rect.top + scrollY,
+                        right: rect.right,
+                        bottom: rect.bottom + scrollY,
+                        width: rect.width,
+                        height: rect.height,
+                    });
                 }
             });
 
-            return points.length > 0 ? points : [{ x: 100, y: 100 }, { x: width - 100, y: 100 }];
+            return cards.length > 0
+                ? cards
+                : [
+                      {
+                          left: 40,
+                          top: 80,
+                          right: width - 40,
+                          bottom: height - 80,
+                          width: width - 80,
+                          height: height - 160,
+                      },
+                  ];
         };
 
-        const spider: SpiderState = {
-            x: 80,
-            y: 90,
-            targetX: 200,
-            targetY: 90,
+        let cardBoxes = getCards();
+
+        // ─── Initialize Spider (Anchored strictly to card perimeter) ─────────
+        const spider: Spider = {
+            cardIndex: 0,
+            edge: 0,
+            progress: 0.1,
+            x: 0,
+            y: 0,
             angle: 0,
-            speed: 1.5,
+            speed: 0.003,
             frame: 0,
             animTick: 0,
-            isStartled: false,
-            threadY: null,
-            targetThreadY: null,
+            isJumping: false,
+            jumpStart: { x: 0, y: 0 },
+            jumpEnd: { x: 0, y: 0 },
+            jumpArc: 40,
+            jumpProgress: 0,
         };
 
-        const selectNewTarget = () => {
-            const points = getNavigablePoints();
-            // Pick a point near the current viewport
+        const updateSpiderCoordsAlongEdge = () => {
+            if (!cardBoxes[spider.cardIndex]) spider.cardIndex = 0;
+            const c = cardBoxes[spider.cardIndex];
             const scrollY = window.scrollY;
-            const visiblePoints = points.filter(
-                (p) => p.y >= scrollY - 50 && p.y <= scrollY + height + 50,
-            );
-            const pool = visiblePoints.length > 0 ? visiblePoints : points;
-            const next = pool[Math.floor(Math.random() * pool.length)];
+            const top = c.top - scrollY;
+            const bottom = c.bottom - scrollY;
+            const left = c.left;
+            const right = c.right;
 
-            spider.targetX = next.x;
-            spider.targetY = next.y - scrollY; // screen-relative coordinates
+            switch (spider.edge) {
+                case 0: // Top edge: Left to Right
+                    spider.x = left + spider.progress * c.width;
+                    spider.y = top;
+                    spider.angle = 0;
+                    break;
+                case 1: // Right edge: Top to Bottom
+                    spider.x = right;
+                    spider.y = top + spider.progress * c.height;
+                    spider.angle = Math.PI / 2;
+                    break;
+                case 2: // Bottom edge: Right to Left
+                    spider.x = right - spider.progress * c.width;
+                    spider.y = bottom;
+                    spider.angle = Math.PI;
+                    break;
+                case 3: // Left edge: Bottom to Top
+                    spider.x = left;
+                    spider.y = bottom - spider.progress * c.height;
+                    spider.angle = -Math.PI / 2;
+                    break;
+            }
         };
 
-        // Mouse hover interaction: proximity scuttle or thread drop
-        const handleMouseMove = (e: MouseEvent) => {
-            const dx = spider.x - e.clientX;
-            const dy = spider.y - e.clientY;
-            const dist = Math.hypot(dx, dy);
+        updateSpiderCoordsAlongEdge();
 
-            if (dist < 90) {
-                spider.isStartled = true;
-                spider.speed = 4.2;
-
-                // Chance to drop down a silk thread
-                if (Math.random() > 0.6 && spider.threadY === null) {
-                    spider.threadY = spider.y;
-                    spider.targetThreadY = Math.min(height - 40, spider.y + 60 + Math.random() * 80);
-                } else {
-                    // Scuttle away in opposite direction
-                    spider.targetX = Math.max(20, Math.min(width - 20, spider.x + (dx / (dist || 1)) * 160));
-                    spider.targetY = Math.max(20, Math.min(height - 20, spider.y + (dy / (dist || 1)) * 160));
+        // ─── Initialize Crickets in Tech Stack, Projects, and Certifications ───
+        const findTargetCards = () => {
+            // Pick cards matching the main content sections
+            const indices: number[] = [];
+            cardBoxes.forEach((c, idx) => {
+                if (c.width > 200 && c.height > 100) {
+                    indices.push(idx);
                 }
-            }
+            });
+            return indices.length > 0 ? indices : [0];
         };
 
-        // Click interaction: startled jump
-        const handleClick = (e: MouseEvent) => {
-            const dx = spider.x - e.clientX;
-            const dy = spider.y - e.clientY;
-            if (Math.hypot(dx, dy) < 45) {
-                spider.isStartled = true;
-                spider.speed = 6.0;
-                spider.targetX = Math.max(30, Math.min(width - 30, spider.x + (Math.random() - 0.5) * 200));
-                spider.targetY = Math.max(30, Math.min(height - 30, spider.y + (Math.random() - 0.5) * 200));
+        const targetCardIndices = findTargetCards();
+
+        const crickets: Cricket[] = [0, 1, 2, 3].map((i) => {
+            const cardIdx = targetCardIndices[i % targetCardIndices.length];
+            const c = cardBoxes[cardIdx];
+            const scrollY = window.scrollY;
+            const x = c.left + 20 + Math.random() * (c.width - 40);
+            const y = c.top - scrollY + 20 + Math.random() * (c.height - 40);
+
+            return {
+                cardIndex: cardIdx,
+                x,
+                y,
+                state: "idle",
+                idleTicks: Math.floor(Math.random() * 80) + 30,
+                jumpStart: { x, y },
+                jumpEnd: { x, y },
+                jumpHeight: 60 + Math.random() * 50,
+                jumpProgress: 0,
+                jumpSpeed: 0.024 + Math.random() * 0.015,
+                direction: Math.random() > 0.5 ? 1 : -1,
+            };
+        });
+
+        // ─── Mouse Interactions ──────────────────────────────────────────────
+        const handleMouseMove = (e: MouseEvent) => {
+            const mx = e.clientX;
+            const my = e.clientY;
+
+            // Spider startled: jump across to next edge or another box
+            const sDist = Math.hypot(spider.x - mx, spider.y - my);
+            if (sDist < 80 && !spider.isJumping) {
+                spider.isJumping = true;
+                spider.jumpStart = { x: spider.x, y: spider.y };
+                spider.jumpProgress = 0;
+                spider.jumpArc = 50 + Math.random() * 40;
+
+                // Pick adjacent edge on same or next card
+                const nextEdge = (spider.edge + (Math.random() > 0.5 ? 1 : 3)) % 4;
+                spider.edge = nextEdge;
+                spider.progress = Math.random() * 0.8 + 0.1;
+                updateSpiderCoordsAlongEdge();
+                spider.jumpEnd = { x: spider.x, y: spider.y };
             }
+
+            // Crickets catapult jump when mouse comes near
+            crickets.forEach((crk) => {
+                const dist = Math.hypot(crk.x - mx, crk.y - my);
+                if (dist < 90 && crk.state === "idle") {
+                    initiateCatapultJump(crk, mx, my);
+                }
+            });
+        };
+
+        const initiateCatapultJump = (crk: Cricket, scareX?: number, scareY?: number) => {
+            crk.state = "jumping";
+            crk.jumpProgress = 0;
+            crk.jumpStart = { x: crk.x, y: crk.y };
+
+            const c = cardBoxes[crk.cardIndex] || cardBoxes[0];
+            const scrollY = window.scrollY;
+
+            // Catapult trajectory away from scare point or to adjacent card
+            let targetX: number;
+            let targetY: number;
+
+            if (scareX !== undefined && scareY !== undefined) {
+                const awayDir = Math.sign(crk.x - scareX) || (Math.random() > 0.5 ? 1 : -1);
+                crk.direction = awayDir as 1 | -1;
+                targetX = Math.max(c.left + 15, Math.min(c.right - 15, crk.x + awayDir * (120 + Math.random() * 80)));
+                targetY = Math.max(c.top - scrollY + 15, Math.min(c.bottom - scrollY - 15, crk.y + (Math.random() - 0.5) * 60));
+            } else {
+                // Natural catapult leap across box items
+                crk.direction = Math.random() > 0.5 ? 1 : -1;
+                targetX = Math.max(c.left + 15, Math.min(c.right - 15, crk.x + crk.direction * (90 + Math.random() * 100)));
+                targetY = Math.max(c.top - scrollY + 15, Math.min(c.bottom - scrollY - 15, crk.y + (Math.random() - 0.5) * 80));
+            }
+
+            crk.jumpEnd = { x: targetX, y: targetY };
+            crk.jumpHeight = 70 + Math.random() * 60; // Big catapult arc
+            crk.jumpSpeed = 0.028 + Math.random() * 0.012;
         };
 
         window.addEventListener("mousemove", handleMouseMove, { passive: true });
-        window.addEventListener("click", handleClick, { passive: true });
 
-        // Draw pixel-art spider
-        const drawSpider = (x: number, y: number, angle: number, frame: number) => {
+        // ─── Drawing Utilities ────────────────────────────────────────────────
+        const drawSpiderSprite = (x: number, y: number, angle: number, frame: number) => {
             const matrix = frame === 0 ? SPIDER_FRAME_0 : SPIDER_FRAME_1;
             const pixelSize = 1.6;
             const size = matrix.length * pixelSize;
 
             ctx.save();
             ctx.translate(x, y);
-            ctx.rotate(angle + Math.PI / 2); // default sprite faces north
-
-            // Cyan/blueprint accent color in dark/light mode
-            ctx.fillStyle = "rgba(0, 135, 237, 0.85)";
+            ctx.rotate(angle + Math.PI / 2);
+            ctx.fillStyle = "rgba(0, 135, 237, 0.9)"; // Technical cyan/blue
 
             for (let r = 0; r < matrix.length; r++) {
                 for (let c = 0; c < matrix[r].length; c++) {
@@ -202,69 +341,127 @@ export function SpiderCrawler() {
             ctx.restore();
         };
 
-        // Render loop
-        const loop = () => {
-            ctx.clearRect(0, 0, width, height);
+        const drawCricketSprite = (crk: Cricket) => {
+            const matrix = crk.state === "jumping" ? CRICKET_FRAME_JUMP : CRICKET_FRAME_IDLE;
+            const pixelSize = 1.5;
+            const sizeW = matrix[0].length * pixelSize;
+            const sizeH = matrix.length * pixelSize;
 
-            // Silk thread dropping logic
-            if (spider.threadY !== null && spider.targetThreadY !== null) {
-                ctx.beginPath();
-                ctx.strokeStyle = "rgba(0, 135, 237, 0.4)";
-                ctx.setLineDash([2, 2]);
-                ctx.lineWidth = 1;
-                ctx.moveTo(spider.x, spider.threadY);
-                ctx.lineTo(spider.x, spider.y);
-                ctx.stroke();
-                ctx.setLineDash([]);
+            ctx.save();
+            ctx.translate(crk.x, crk.y);
+            if (crk.direction === -1) {
+                ctx.scale(-1, 1);
+            }
 
-                // Drop down or climb back up
-                if (spider.y < spider.targetThreadY) {
-                    spider.y += 3.5;
-                } else {
-                    // Reached drop bottom, scuttle resume
-                    spider.threadY = null;
-                    spider.targetThreadY = null;
-                    spider.isStartled = false;
-                    spider.speed = 1.5;
-                    selectNewTarget();
-                }
-            } else {
-                // Normal path traversal
-                const dx = spider.targetX - spider.x;
-                const dy = spider.targetY - spider.y;
-                const dist = Math.hypot(dx, dy);
+            // Green technical blueprint hue for crickets
+            ctx.fillStyle = "rgba(16, 185, 129, 0.9)";
 
-                if (dist < 6) {
-                    spider.isStartled = false;
-                    spider.speed = 1.5;
-                    selectNewTarget();
-                } else {
-                    const targetAngle = Math.atan2(dy, dx);
-                    // Smooth angular rotation
-                    spider.angle = targetAngle;
-                    spider.x += Math.cos(targetAngle) * spider.speed;
-                    spider.y += Math.sin(targetAngle) * spider.speed;
-
-                    // Leg animation tick
-                    spider.animTick++;
-                    if (spider.animTick % 6 === 0) {
-                        spider.frame = spider.frame === 0 ? 1 : 0;
+            for (let r = 0; r < matrix.length; r++) {
+                for (let c = 0; c < matrix[r].length; c++) {
+                    if (matrix[r][c] === 1) {
+                        ctx.fillRect(
+                            c * pixelSize - sizeW / 2,
+                            r * pixelSize - sizeH / 2,
+                            pixelSize,
+                            pixelSize,
+                        );
                     }
                 }
             }
+            ctx.restore();
+        };
 
-            drawSpider(spider.x, spider.y, spider.angle, spider.frame);
+        // ─── Main Animation Loop ──────────────────────────────────────────────
+        const loop = () => {
+            ctx.clearRect(0, 0, width, height);
+
+            // Re-sample card positions on scroll
+            cardBoxes = getCards();
+
+            // 1. Update & Render Spider (Strictly anchored to card perimeters)
+            if (spider.isJumping) {
+                spider.jumpProgress += 0.035;
+                if (spider.jumpProgress >= 1) {
+                    spider.isJumping = false;
+                    spider.jumpProgress = 0;
+                    spider.x = spider.jumpEnd.x;
+                    spider.y = spider.jumpEnd.y;
+                } else {
+                    const p = spider.jumpProgress;
+                    const curX = spider.jumpStart.x + (spider.jumpEnd.x - spider.jumpStart.x) * p;
+                    // Parabolic arc for startled jump
+                    const arcY = -Math.sin(p * Math.PI) * spider.jumpArc;
+                    const curY = spider.jumpStart.y + (spider.jumpEnd.y - spider.jumpStart.y) * p + arcY;
+                    spider.x = curX;
+                    spider.y = curY;
+                }
+            } else {
+                spider.progress += spider.speed;
+                if (spider.progress >= 1) {
+                    spider.progress = 0;
+                    // Transition to next edge around box
+                    spider.edge = (spider.edge + 1) % 4;
+
+                    // Small chance to jump to next card box
+                    if (Math.random() > 0.7 && cardBoxes.length > 1) {
+                        spider.isJumping = true;
+                        spider.jumpStart = { x: spider.x, y: spider.y };
+                        spider.cardIndex = (spider.cardIndex + 1) % cardBoxes.length;
+                        spider.edge = 0;
+                        spider.progress = 0.1;
+                        updateSpiderCoordsAlongEdge();
+                        spider.jumpEnd = { x: spider.x, y: spider.y };
+                        spider.jumpProgress = 0;
+                        spider.jumpArc = 60;
+                    }
+                }
+                updateSpiderCoordsAlongEdge();
+
+                spider.animTick++;
+                if (spider.animTick % 6 === 0) {
+                    spider.frame = spider.frame === 0 ? 1 : 0;
+                }
+            }
+
+            drawSpiderSprite(spider.x, spider.y, spider.angle, spider.frame);
+
+            // 2. Update & Render Crickets (Catapult jumping over stack/projects/certs)
+            crickets.forEach((crk) => {
+                if (crk.state === "idle") {
+                    crk.idleTicks--;
+                    if (crk.idleTicks <= 0) {
+                        crk.idleTicks = Math.floor(Math.random() * 120) + 40;
+                        initiateCatapultJump(crk);
+                    }
+                } else if (crk.state === "jumping") {
+                    crk.jumpProgress += crk.jumpSpeed;
+                    if (crk.jumpProgress >= 1) {
+                        crk.state = "idle";
+                        crk.jumpProgress = 0;
+                        crk.x = crk.jumpEnd.x;
+                        crk.y = crk.jumpEnd.y;
+                    } else {
+                        const p = crk.jumpProgress;
+                        const curX = crk.jumpStart.x + (crk.jumpEnd.x - crk.jumpStart.x) * p;
+                        // High catapult parabolic arc
+                        const arcY = -Math.sin(p * Math.PI) * crk.jumpHeight;
+                        const curY = crk.jumpStart.y + (crk.jumpEnd.y - crk.jumpStart.y) * p + arcY;
+                        crk.x = curX;
+                        crk.y = curY;
+                    }
+                }
+
+                drawCricketSprite(crk);
+            });
+
             animationFrameId = requestAnimationFrame(loop);
         };
 
-        // Initialize first target
-        selectNewTarget();
         loop();
 
         return () => {
             window.removeEventListener("resize", handleResize);
             window.removeEventListener("mousemove", handleMouseMove);
-            window.removeEventListener("click", handleClick);
             cancelAnimationFrame(animationFrameId);
         };
     }, []);

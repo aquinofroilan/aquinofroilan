@@ -19,11 +19,11 @@ function ProjectsCard({ className }: { className?: string }) {
 
             <BlueprintSectionHeader index="04" title="Projects" tag="selected work" icon={<FolderCode size={14} />} />
 
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-3">
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
                 {ProjectsList.map((project) => (
                     <div
                         key={project.pageLink}
-                        className="border border-border/30 px-3 py-3 flex flex-col gap-2 hover:border-primary/40 hover:bg-muted/20 transition-all"
+                        className="border border-border/30 p-4 flex flex-col gap-2.5 hover:border-primary/40 hover:bg-muted/20 transition-all"
                     >
                         <div className="flex items-start justify-between gap-2">
                             <span className="font-mono text-xs font-semibold text-foreground uppercase tracking-wide leading-snug">
