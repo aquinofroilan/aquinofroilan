@@ -1,8 +1,7 @@
 import { cn } from "@/lib/utils";
 import { BlueprintSectionHeader } from "@/components/ui/blueprint-section-header";
 import { FRONTEND, BACKEND, DEVELOPER_TOOLS, DEVOPS } from "@/data/techstack-list";
-import { ArrowRight, FlaskConical } from "lucide-react";
-import Link from "next/link";
+import { FlaskConical } from "lucide-react";
 
 function TechGroup({ label, items }: { label: string; items: string[] }) {
     return (
@@ -11,7 +10,7 @@ function TechGroup({ label, items }: { label: string; items: string[] }) {
                 {label}
             </span>
             <div className="flex flex-wrap gap-1.5">
-                {items.slice(0, 6).map((item) => (
+                {items.map((item) => (
                     <span
                         key={item}
                         className="font-mono text-[11px] border border-border/50 px-2 py-0.5 text-foreground bg-muted/20"
@@ -38,14 +37,7 @@ export const TechStackCard = ({ className }: { className?: string }) => {
                 title="Tech Stack"
                 tag="developer stack"
                 icon={<FlaskConical size={14} />}
-            >
-                <Link
-                    href="/techstack"
-                    className="font-mono text-xs text-muted-foreground hover:text-foreground transition-colors flex items-center gap-1 uppercase tracking-wider"
-                >
-                    View All <ArrowRight size={12} />
-                </Link>
-            </BlueprintSectionHeader>
+            />
 
             <div className="flex flex-col gap-4">
                 <TechGroup label="Frontend" items={FRONTEND} />
