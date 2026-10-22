@@ -98,12 +98,12 @@ export function BlueprintNavbar({ className }: BlueprintNavbarProps) {
                     </span>
                     <span className="text-muted-foreground/60 select-none">/</span>
                     <span className="text-muted-foreground font-medium group-hover:text-foreground transition-colors">
-                        portfolio
+                        AI Developer & Software Engineer
                     </span>
                 </Link>
 
                 {/* Desktop Navigation */}
-                <nav aria-label="Main Navigation" className="hidden md:flex items-center gap-1 font-mono text-xs">
+                <nav aria-label="Main Navigation" className="hidden">
                     {NAV_ITEMS.map((item) => {
                         const isActive = activeSection === item.id;
                         return (
@@ -136,7 +136,7 @@ export function BlueprintNavbar({ className }: BlueprintNavbarProps) {
                 <button
                     type="button"
                     onClick={() => setMobileMenuOpen((prev) => !prev)}
-                    className="md:hidden flex items-center justify-center h-8 w-8 rounded-none border border-border text-foreground hover:bg-muted/50 focus:outline-hidden focus:ring-1 focus:ring-ring"
+                    className="hidden"
                     aria-label="Toggle navigation menu"
                     aria-expanded={mobileMenuOpen}
                 >
@@ -145,7 +145,7 @@ export function BlueprintNavbar({ className }: BlueprintNavbarProps) {
             </div>
 
             {/* Mobile Navigation Dropdown */}
-            {mobileMenuOpen && (
+            {false && mobileMenuOpen && (
                 <div className="md:hidden border-t border-border bg-background/95 backdrop-blur-md px-4 py-3">
                     <nav className="flex flex-col gap-1 font-mono text-xs">
                         {NAV_ITEMS.map((item) => {
