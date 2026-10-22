@@ -5,15 +5,16 @@ import { FlaskConical } from "lucide-react";
 
 function TechGroup({ label, items }: { label: string; items: string[] }) {
     return (
-        <div className="flex flex-col gap-1.5">
+        <div className="flex flex-col gap-2">
             <span className="font-mono text-[10px] uppercase tracking-widest text-muted-foreground/60 select-none">
                 {label}
             </span>
-            <div className="flex flex-wrap gap-1.5">
+            <div className="flex flex-wrap gap-2.5">
                 {items.map((item) => (
                     <span
                         key={item}
-                        className="font-mono text-[11px] border border-border/50 px-2 py-0.5 text-foreground bg-muted/20"
+                        data-cricket-perch="true"
+                        className="font-mono text-[11px] border border-border/50 px-2.5 py-1 text-foreground bg-muted/20 hover:border-primary/50 transition-colors"
                     >
                         {item}
                     </span>
@@ -39,7 +40,7 @@ export const TechStackCard = ({ className }: { className?: string }) => {
                 icon={<FlaskConical size={14} />}
             />
 
-            <div className="flex flex-col gap-4">
+            <div className="flex flex-col gap-5">
                 <TechGroup label="Frontend" items={FRONTEND} />
                 <TechGroup label="Backend" items={BACKEND} />
                 <TechGroup label="DevOps & Cloud" items={DEVOPS} />

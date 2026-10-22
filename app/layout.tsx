@@ -5,7 +5,7 @@ import { ThemeProvider } from "@/provider/theme-provider";
 import { type ReactNode } from "react";
 import { SpeedInsights } from "@vercel/speed-insights/next";
 import { Footer, BlueprintNavbar } from "@/components/organisms";
-import { TooltipProvider } from "@/components/ui";
+import { TooltipProvider, SpiderCrawler } from "@/components/ui";
 import { Metadata } from "next";
 
 const inter = Inter({
@@ -79,6 +79,7 @@ export default function RootLayout({ children }: { children: ReactNode }) {
                     <ThemeProvider attribute="class" defaultTheme="system" enableSystem disableTransitionOnChange>
                         <BlueprintNavbar />
                         {children}
+                        <SpiderCrawler />
                     </ThemeProvider>
                     <Analytics />
                     <SpeedInsights />

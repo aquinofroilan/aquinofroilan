@@ -22,14 +22,15 @@ export const CertificationCard = async ({ className }: { className?: string }) =
                 icon={<BadgeCheckIcon size={14} />}
             />
 
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3">
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
                 {credlyCerts.map((cert, i) => (
                     <Link
                         key={i}
                         href={cert.link}
                         target="_blank"
                         rel="noreferrer"
-                        className="group flex flex-col justify-between gap-1 border border-border/30 px-3 py-2.5 hover:border-primary/40 hover:bg-muted/20 transition-all"
+                        data-cricket-perch="true"
+                        className="group flex flex-col justify-between gap-2 border border-border/30 p-3.5 hover:border-primary/40 hover:bg-muted/20 transition-all"
                     >
                         <span className="font-mono text-xs font-medium text-foreground group-hover:text-primary transition-colors uppercase tracking-wide leading-snug">
                             {cert.title}

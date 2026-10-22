@@ -23,6 +23,7 @@ import { cn } from "@/lib/utils";
 function HeroColumn({ className, children }: { className?: string; children: React.ReactNode }) {
     return (
         <div
+            data-hero-column="true"
             className={cn(
                 "relative flex flex-col gap-4 border border-border/60 bg-card/60 p-5 backdrop-blur-xs",
                 className,
