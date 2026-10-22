@@ -3,7 +3,7 @@ import {
     CertificationCard,
     CompetenciesCard,
     ContactMe,
-    ProfileCard,
+    HeroSection,
     TechStackCard,
     TrascendingCodeCard,
 } from "@/components/organisms/";
@@ -21,11 +21,11 @@ export const metadata: Metadata = {
 export default function Home() {
     return (
         <>
-            <main className="py-10 w-11/12 max-w-7xl">
+            <main className="py-10 w-11/12 max-w-7xl flex flex-col gap-6">
+                <FadeIn delay={0.05}>
+                    <HeroSection />
+                </FadeIn>
                 <Masonry columnCount={3} gap={16} className="w-full">
-                    <FadeIn delay={0.1} className="h-auto overflow-visible">
-                        <ProfileCard className="h-full" />
-                    </FadeIn>
                     <FadeIn delay={0.15} className="h-auto overflow-visible">
                         <AboutCard className="h-full" />
                     </FadeIn>
