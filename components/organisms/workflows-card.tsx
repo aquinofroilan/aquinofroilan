@@ -41,7 +41,7 @@ function PipelineNodeBox({
     return (
         <div
             className={cn(
-                "relative flex flex-col items-center justify-center border px-2 py-2 min-w-[80px] transition-all duration-300 font-mono",
+                "relative flex flex-col items-center justify-center border px-2 py-2 min-w-[80px] transition-all duration-300 font-mono overflow-visible",
                 NODE_STYLES[node.type],
                 isActive && "ring-1 ring-primary scale-105 shadow-sm",
                 isDone && "opacity-100",
@@ -111,8 +111,9 @@ function PipelineSimulator({ workflow }: { workflow: Workflow }) {
 
     return (
         <div className="flex flex-col gap-3">
-            {/* Pipeline row */}
-            <div className="flex items-center gap-1 overflow-x-auto pb-1 scrollbar-none">
+            {/* Pipeline row — py/my padding gives vertical room for scale transform */}
+            <div className="overflow-x-auto -mx-1 px-1">
+            <div className="flex items-center gap-1 py-2 w-max min-w-full">
                 {workflow.nodes.map((node, i) => (
                     <div key={node.id} className="flex items-center gap-1 shrink-0">
                         <PipelineNodeBox
@@ -126,6 +127,7 @@ function PipelineSimulator({ workflow }: { workflow: Workflow }) {
                         )}
                     </div>
                 ))}
+            </div>
             </div>
 
             {/* Status bar */}
