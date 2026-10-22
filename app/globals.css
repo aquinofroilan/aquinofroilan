@@ -89,6 +89,7 @@
         background-image: radial-gradient(var(--grid-dot-color) 1px, transparent 1px);
         background-size: 24px 24px;
         background-position: 0 0;
+        background-attachment: fixed;
     }
 
     .code-tag {
