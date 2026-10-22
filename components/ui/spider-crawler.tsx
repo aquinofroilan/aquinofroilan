@@ -127,17 +127,18 @@ export function SpiderCrawler() {
 
         window.addEventListener("resize", handleResize);
 
-        // Scan all card boxes on the page
-        const getCards = (): CardRect[] => {
+        // Scan all card boxes on the page for Spider
+        const getSpiderCards = (): CardRect[] => {
+            // Include hero columns and standard blueprint cards
             const elements = document.querySelectorAll(
-                "main > div > div, main > div, main > section, .border.bg-card\\/60",
+                "[data-hero-column='true'], main > div > div, main > div > section, .border.bg-card\\/60",
             );
             const cards: CardRect[] = [];
             const scrollY = window.scrollY;
 
             elements.forEach((el) => {
                 const rect = el.getBoundingClientRect();
-                if (rect.width > 120 && rect.height > 80) {
+                if (rect.width > 120 && rect.height > 60) {
                     cards.push({
                         left: rect.left,
                         top: rect.top + scrollY,
@@ -163,7 +164,31 @@ export function SpiderCrawler() {
                   ];
         };
 
-        let cardBoxes = getCards();
+        // Scan strictly the 3 Hero columns: // identity, // stack, and // metrics
+        const getHeroCards = (): CardRect[] => {
+            const elements = document.querySelectorAll("[data-hero-column='true']");
+            const heroCards: CardRect[] = [];
+            const scrollY = window.scrollY;
+
+            elements.forEach((el) => {
+                const rect = el.getBoundingClientRect();
+                if (rect.width > 60 && rect.height > 60) {
+                    heroCards.push({
+                        left: rect.left,
+                        top: rect.top + scrollY,
+                        right: rect.right,
+                        bottom: rect.bottom + scrollY,
+                        width: rect.width,
+                        height: rect.height,
+                    });
+                }
+            });
+
+            return heroCards.length > 0 ? heroCards : getSpiderCards().slice(0, 3);
+        };
+
+        let cardBoxes = getSpiderCards();
+        let heroBoxes = getHeroCards();
 
         // ─── Initialize Spider (Anchored strictly to card perimeter) ─────────
         const spider: Spider = {
@@ -218,26 +243,13 @@ export function SpiderCrawler() {
 
         updateSpiderCoordsAlongEdge();
 
-        // ─── Initialize Crickets in Tech Stack, Projects, and Certifications ───
-        const findTargetCards = () => {
-            // Pick cards matching the main content sections
-            const indices: number[] = [];
-            cardBoxes.forEach((c, idx) => {
-                if (c.width > 200 && c.height > 100) {
-                    indices.push(idx);
-                }
-            });
-            return indices.length > 0 ? indices : [0];
-        };
-
-        const targetCardIndices = findTargetCards();
-
+        // ─── Initialize Crickets strictly in Hero Columns: Identity, Stack, Metrics ───
         const crickets: Cricket[] = [0, 1, 2, 3].map((i) => {
-            const cardIdx = targetCardIndices[i % targetCardIndices.length];
-            const c = cardBoxes[cardIdx];
+            const cardIdx = i % (heroBoxes.length || 1);
+            const c = heroBoxes[cardIdx] || cardBoxes[0];
             const scrollY = window.scrollY;
-            const x = c.left + 20 + Math.random() * (c.width - 40);
-            const y = c.top - scrollY + 20 + Math.random() * (c.height - 40);
+            const x = c.left + 15 + Math.random() * Math.max(10, c.width - 30);
+            const y = c.top - scrollY + 15 + Math.random() * Math.max(10, c.height - 30);
 
             return {
                 cardIndex: cardIdx,
@@ -247,7 +259,7 @@ export function SpiderCrawler() {
                 idleTicks: Math.floor(Math.random() * 80) + 30,
                 jumpStart: { x, y },
                 jumpEnd: { x, y },
-                jumpHeight: 60 + Math.random() * 50,
+                jumpHeight: 50 + Math.random() * 40,
                 jumpProgress: 0,
                 jumpSpeed: 0.024 + Math.random() * 0.015,
                 direction: Math.random() > 0.5 ? 1 : -1,
@@ -289,7 +301,14 @@ export function SpiderCrawler() {
             crk.jumpProgress = 0;
             crk.jumpStart = { x: crk.x, y: crk.y };
 
-            const c = cardBoxes[crk.cardIndex] || cardBoxes[0];
+            // Confine crickets strictly to hero columns (or jump between adjacent hero columns!)
+            const targetColIdx =
+                Math.random() > 0.4 && heroBoxes.length > 1
+                    ? (crk.cardIndex + (Math.random() > 0.5 ? 1 : heroBoxes.length - 1)) % heroBoxes.length
+                    : crk.cardIndex;
+
+            crk.cardIndex = targetColIdx;
+            const c = heroBoxes[targetColIdx] || cardBoxes[0];
             const scrollY = window.scrollY;
 
             // Catapult trajectory away from scare point or to adjacent card
@@ -299,18 +318,18 @@ export function SpiderCrawler() {
             if (scareX !== undefined && scareY !== undefined) {
                 const awayDir = Math.sign(crk.x - scareX) || (Math.random() > 0.5 ? 1 : -1);
                 crk.direction = awayDir as 1 | -1;
-                targetX = Math.max(c.left + 15, Math.min(c.right - 15, crk.x + awayDir * (120 + Math.random() * 80)));
-                targetY = Math.max(c.top - scrollY + 15, Math.min(c.bottom - scrollY - 15, crk.y + (Math.random() - 0.5) * 60));
+                targetX = Math.max(c.left + 15, Math.min(c.right - 15, crk.x + awayDir * (90 + Math.random() * 70)));
+                targetY = Math.max(c.top - scrollY + 15, Math.min(c.bottom - scrollY - 15, crk.y + (Math.random() - 0.5) * 50));
             } else {
                 // Natural catapult leap across box items
                 crk.direction = Math.random() > 0.5 ? 1 : -1;
-                targetX = Math.max(c.left + 15, Math.min(c.right - 15, crk.x + crk.direction * (90 + Math.random() * 100)));
-                targetY = Math.max(c.top - scrollY + 15, Math.min(c.bottom - scrollY - 15, crk.y + (Math.random() - 0.5) * 80));
+                targetX = Math.max(c.left + 15, Math.min(c.right - 15, c.left + 15 + Math.random() * Math.max(10, c.width - 30)));
+                targetY = Math.max(c.top - scrollY + 15, Math.min(c.bottom - scrollY - 15, c.top - scrollY + 15 + Math.random() * Math.max(10, c.height - 30)));
             }
 
             crk.jumpEnd = { x: targetX, y: targetY };
-            crk.jumpHeight = 70 + Math.random() * 60; // Big catapult arc
-            crk.jumpSpeed = 0.028 + Math.random() * 0.012;
+            crk.jumpHeight = 60 + Math.random() * 50; // Big catapult arc
+            crk.jumpSpeed = 0.026 + Math.random() * 0.012;
         };
 
         window.addEventListener("mousemove", handleMouseMove, { passive: true });
@@ -376,7 +395,8 @@ export function SpiderCrawler() {
             ctx.clearRect(0, 0, width, height);
 
             // Re-sample card positions on scroll
-            cardBoxes = getCards();
+            cardBoxes = getSpiderCards();
+            heroBoxes = getHeroCards();
 
             // 1. Update & Render Spider (Strictly anchored to card perimeters)
             if (spider.isJumping) {
