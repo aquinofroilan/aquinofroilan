@@ -1,4 +1,4 @@
-import { BadgeCheckIcon, ArrowRight } from "lucide-react";
+import { BadgeCheckIcon } from "lucide-react";
 import Link from "next/link";
 import { getCredlyCertifications } from "@/actions";
 import { cn } from "@/lib/utils";
@@ -20,25 +20,18 @@ export const CertificationCard = async ({ className }: { className?: string }) =
                 title="Certifications"
                 tag="verified credentials"
                 icon={<BadgeCheckIcon size={14} />}
-            >
-                <Link
-                    href="/certifications"
-                    className="font-mono text-xs text-muted-foreground hover:text-foreground transition-colors flex items-center gap-1 uppercase tracking-wider"
-                >
-                    View All <ArrowRight size={12} />
-                </Link>
-            </BlueprintSectionHeader>
+            />
 
-            <div className="flex flex-col gap-3">
-                {credlyCerts.slice(0, 4).map((cert, i) => (
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3">
+                {credlyCerts.map((cert, i) => (
                     <Link
                         key={i}
                         href={cert.link}
                         target="_blank"
                         rel="noreferrer"
-                        className="group flex flex-col gap-0.5 border border-border/30 px-3 py-2 hover:border-primary/40 hover:bg-muted/20 transition-all"
+                        className="group flex flex-col justify-between gap-1 border border-border/30 px-3 py-2.5 hover:border-primary/40 hover:bg-muted/20 transition-all"
                     >
-                        <span className="font-mono text-xs font-medium text-foreground group-hover:text-primary transition-colors uppercase tracking-wide">
+                        <span className="font-mono text-xs font-medium text-foreground group-hover:text-primary transition-colors uppercase tracking-wide leading-snug">
                             {cert.title}
                         </span>
                         <span className="font-mono text-[11px] text-muted-foreground">{cert.issuer}</span>

@@ -5,8 +5,8 @@ import { ArrowRight, FolderCode } from "lucide-react";
 import { ProjectsList } from "@/data/projects-list";
 
 /**
- * Blueprint-styled Projects card — shows a summary of the top 2 projects with
- * a "View All" link. Content layout follows the technical-blueprint aesthetic.
+ * Blueprint-styled Projects card — shows all projects inline.
+ * Content layout follows the technical-blueprint aesthetic.
  */
 function ProjectsCard({ className }: { className?: string }) {
     return (
@@ -17,34 +17,27 @@ function ProjectsCard({ className }: { className?: string }) {
             <span className="pointer-events-none absolute bottom-0 left-0 h-3 w-3 border-b-2 border-l-2 border-primary/50" />
             <span className="pointer-events-none absolute bottom-0 right-0 h-3 w-3 border-b-2 border-r-2 border-primary/50" />
 
-            <BlueprintSectionHeader index="04" title="Projects" tag="selected work" icon={<FolderCode size={14} />}>
-                <Link
-                    href="/projects"
-                    className="font-mono text-xs text-muted-foreground hover:text-foreground transition-colors flex items-center gap-1 uppercase tracking-wider"
-                >
-                    View All <ArrowRight size={12} />
-                </Link>
-            </BlueprintSectionHeader>
+            <BlueprintSectionHeader index="04" title="Projects" tag="selected work" icon={<FolderCode size={14} />} />
 
-            <div className="flex flex-col gap-4">
-                {ProjectsList.slice(0, 2).map((project) => (
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-3">
+                {ProjectsList.map((project) => (
                     <div
                         key={project.pageLink}
                         className="border border-border/30 px-3 py-3 flex flex-col gap-2 hover:border-primary/40 hover:bg-muted/20 transition-all"
                     >
-                        <div className="flex items-center justify-between">
-                            <span className="font-mono text-xs font-semibold text-foreground uppercase tracking-wide">
+                        <div className="flex items-start justify-between gap-2">
+                            <span className="font-mono text-xs font-semibold text-foreground uppercase tracking-wide leading-snug">
                                 {project.title}
                             </span>
                             <Link
                                 href={project.pageLink}
                                 rel="noreferrer"
-                                className="font-mono text-[11px] text-muted-foreground hover:text-primary transition-colors flex items-center gap-1"
+                                className="font-mono text-[11px] text-muted-foreground hover:text-primary transition-colors flex items-center gap-1 shrink-0"
                             >
                                 Details <ArrowRight size={11} />
                             </Link>
                         </div>
-                        <p className="font-mono text-[11px] text-muted-foreground line-clamp-2 leading-relaxed">
+                        <p className="font-mono text-[11px] text-muted-foreground line-clamp-3 leading-relaxed flex-1">
                             {project.description}
                         </p>
                         <div className="flex flex-wrap gap-1.5 pt-1">
