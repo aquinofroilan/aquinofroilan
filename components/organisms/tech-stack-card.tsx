@@ -13,6 +13,7 @@ function TechGroup({ label, items }: { label: string; items: string[] }) {
                 {items.map((item) => (
                     <span
                         key={item}
+                        data-cricket-perch="true"
                         className="font-mono text-[11px] border border-border/50 px-2.5 py-1 text-foreground bg-muted/20 hover:border-primary/50 transition-colors"
                     >
                         {item}

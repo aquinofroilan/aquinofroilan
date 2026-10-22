@@ -29,6 +29,7 @@ export const CertificationCard = async ({ className }: { className?: string }) =
                         href={cert.link}
                         target="_blank"
                         rel="noreferrer"
+                        data-cricket-perch="true"
                         className="group flex flex-col justify-between gap-2 border border-border/30 p-3.5 hover:border-primary/40 hover:bg-muted/20 transition-all"
                     >
                         <span className="font-mono text-xs font-medium text-foreground group-hover:text-primary transition-colors uppercase tracking-wide leading-snug">

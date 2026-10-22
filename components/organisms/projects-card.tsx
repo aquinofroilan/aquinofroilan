@@ -23,6 +23,7 @@ function ProjectsCard({ className }: { className?: string }) {
                 {ProjectsList.map((project) => (
                     <div
                         key={project.pageLink}
+                        data-cricket-perch="true"
                         className="border border-border/30 p-4 flex flex-col gap-2.5 hover:border-primary/40 hover:bg-muted/20 transition-all"
                     >
                         <div className="flex items-start justify-between gap-2">
