@@ -1,11 +1,11 @@
 {"header" : {
   "cloc_url"           : "github.com/AlDanial/cloc",
-  "cloc_version"       : "1.98",
-  "elapsed_seconds"    : 0.389663934707642,
-  "n_files"            : 1650,
-  "n_lines"            : 155817,
-  "files_per_second"   : 4234.41805369534,
-  "lines_per_second"   : 399875.344165241,
+  "cloc_version"       : "2.06",
+  "elapsed_seconds"    : 0.623265027999878,
+  "n_files"            : 1648,
+  "n_lines"            : 156538,
+  "files_per_second"   : 2644.14001422253,
+  "lines_per_second"   : 251158.003365513,
   "report_file"        : "../output/cloc-output.json"},
 "Kotlin" :{
   "nFiles": 846,
@@ -27,11 +27,16 @@
   "blank": 265,
   "comment": 304,
   "code": 2873},
+"Prisma Schema" :{
+  "nFiles": 1,
+  "blank": 47,
+  "comment": 4,
+  "code": 805},
 "JavaScript" :{
-  "nFiles": 15,
-  "blank": 55,
-  "comment": 42,
-  "code": 442},
+  "nFiles": 12,
+  "blank": 38,
+  "comment": 37,
+  "code": 329},
 "GraphQL" :{
   "nFiles": 16,
   "blank": 60,
@@ -68,7 +73,7 @@
   "comment": 2,
   "code": 10},
 "SUM": {
-  "blank": 15446,
-  "comment": 5116,
-  "code": 135255,
-  "nFiles": 1650} }
+  "blank": 15476,
+  "comment": 5115,
+  "code": 135947,
+  "nFiles": 1648} }
