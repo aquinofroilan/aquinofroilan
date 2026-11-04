@@ -89,8 +89,7 @@ export function BlueprintNavbar({ className }: BlueprintNavbarProps) {
             <div className="mx-auto flex h-14 max-w-7xl items-center justify-between px-4 sm:px-6 lg:px-8">
                 {/* Brand header */}
                 <Link
-                    href="#home"
-                    onClick={(e) => handleNavClick(e, "home")}
+                    href="/"
                     className="group flex items-center gap-2 font-mono text-xs tracking-wider uppercase transition-colors"
                 >
                     <span className="font-bold text-foreground group-hover:text-primary transition-colors">
