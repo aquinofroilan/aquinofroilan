@@ -27,7 +27,7 @@ const SynectixDetails = async () => {
     const project = ProjectsList.find((p) => p.slug === "synectix");
 
     if (!project) {
-        redirect("/projects");
+        redirect("/");
     }
 
     const { title, longDescription, imgPrefix, projectLink, techStackEntries } = project;
@@ -36,11 +36,11 @@ const SynectixDetails = async () => {
     return (
         <main className="py-10 w-11/12 max-w-7xl gap-2 flex flex-col md:grid md:grid-cols-2">
             <Link
-                href={"/projects"}
+                href="/"
                 className="flex items-center gap-2 text-neutral-500 hover:text-neutral-700 dark:text-neutral-400 dark:hover:text-neutral-200 transition duration-200"
             >
                 <ArrowLeft size={15} />
-                <h1 className="text-sm">Back to Projects</h1>
+                <h1 className="text-sm">Back to Home</h1>
             </Link>
             <div className="grid place-content-center col-span-2 w-full h-full">
                 <section className="flex flex-row justify-between items-center gap-4 mb-5">
