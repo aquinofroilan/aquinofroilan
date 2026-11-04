@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useRef } from "react";
+import { usePathname } from "next/navigation";
 
 // ─── Pixel Art Matrices ───────────────────────────────────────────────────────
 
@@ -111,8 +112,11 @@ interface Cricket {
 
 export function SpiderCrawler() {
     const canvasRef = useRef<HTMLCanvasElement | null>(null);
+    const pathname = usePathname();
 
     useEffect(() => {
+        if (pathname !== "/") return;
+
         const mediaQuery = window.matchMedia("(prefers-reduced-motion: reduce)");
         if (mediaQuery.matches) return;
 
@@ -372,6 +376,32 @@ export function SpiderCrawler() {
             ctx.restore();
         };
 
+        const drawSideWeb = (x: number, y: number, edge: number) => {
+            if (edge !== 1 && edge !== 3) return;
+
+            // A small silk fan follows the spider on vertical card edges.
+            const inward = edge === 1 ? -1 : 1;
+            ctx.save();
+            ctx.translate(x, y);
+            ctx.strokeStyle = "rgba(0, 135, 237, 0.32)";
+            ctx.lineWidth = 0.7;
+            ctx.beginPath();
+            ctx.moveTo(0, 0);
+            ctx.lineTo(inward * 25, -20);
+            ctx.moveTo(0, 0);
+            ctx.lineTo(inward * 25, 20);
+            ctx.moveTo(inward * 8, -7);
+            ctx.lineTo(inward * 25, -20);
+            ctx.moveTo(inward * 8, 7);
+            ctx.lineTo(inward * 25, 20);
+            ctx.moveTo(inward * 13, -12);
+            ctx.quadraticCurveTo(inward * 17, 0, inward * 13, 12);
+            ctx.moveTo(inward * 20, -17);
+            ctx.quadraticCurveTo(inward * 25, 0, inward * 20, 17);
+            ctx.stroke();
+            ctx.restore();
+        };
+
         const drawCricketSprite = (crk: Cricket) => {
             const matrix = crk.state === "jumping" ? CRICKET_FRAME_JUMP : CRICKET_FRAME_IDLE;
             const pixelSize = 1.4;
@@ -452,6 +482,7 @@ export function SpiderCrawler() {
                 }
             }
 
+            drawSideWeb(spider.x, spider.y, spider.edge);
             drawSpiderSprite(spider.x, spider.y, spider.angle, spider.frame);
 
             // 2. Crickets update & render (Strictly perched on top of borders or in catapult arc)
@@ -495,7 +526,9 @@ export function SpiderCrawler() {
             window.removeEventListener("mousemove", handleMouseMove);
             cancelAnimationFrame(animationFrameId);
         };
-    }, []);
+    }, [pathname]);
+
+    if (pathname !== "/") return null;
 
     return (
         <canvas
