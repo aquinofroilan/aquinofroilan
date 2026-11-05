@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useRef } from "react";
+import { usePathname } from "next/navigation";
 
 // ─── Pixel Art Matrices ───────────────────────────────────────────────────────
 
@@ -109,10 +110,20 @@ interface Cricket {
     direction: 1 | -1;
 }
 
+interface SilkTrail {
+    x: number;
+    pageY: number;
+    edge: number;
+    createdAt: number;
+}
+
 export function SpiderCrawler() {
     const canvasRef = useRef<HTMLCanvasElement | null>(null);
+    const pathname = usePathname();
 
     useEffect(() => {
+        if (pathname !== "/") return;
+
         const mediaQuery = window.matchMedia("(prefers-reduced-motion: reduce)");
         if (mediaQuery.matches) return;
 
@@ -215,6 +226,9 @@ export function SpiderCrawler() {
             jumpArc: 40,
             jumpProgress: 0,
         };
+        const silkTrails: SilkTrail[] = [];
+        let lastSilkAt = 0;
+        const silkLifetime = 3200;
 
         const updateSpiderCoordsAlongEdge = () => {
             if (!cardBoxes[spider.cardIndex]) spider.cardIndex = 0;
@@ -372,6 +386,32 @@ export function SpiderCrawler() {
             ctx.restore();
         };
 
+        const drawSideWeb = (x: number, y: number, edge: number, opacity: number) => {
+            if (edge !== 1 && edge !== 3) return;
+
+            // A small silk fan stays where the spider left it on a vertical edge.
+            const inward = edge === 1 ? -1 : 1;
+            ctx.save();
+            ctx.translate(x, y);
+            ctx.strokeStyle = `rgba(0, 135, 237, ${0.32 * opacity})`;
+            ctx.lineWidth = 0.7;
+            ctx.beginPath();
+            ctx.moveTo(0, 0);
+            ctx.lineTo(inward * 25, -20);
+            ctx.moveTo(0, 0);
+            ctx.lineTo(inward * 25, 20);
+            ctx.moveTo(inward * 8, -7);
+            ctx.lineTo(inward * 25, -20);
+            ctx.moveTo(inward * 8, 7);
+            ctx.lineTo(inward * 25, 20);
+            ctx.moveTo(inward * 13, -12);
+            ctx.quadraticCurveTo(inward * 17, 0, inward * 13, 12);
+            ctx.moveTo(inward * 20, -17);
+            ctx.quadraticCurveTo(inward * 25, 0, inward * 20, 17);
+            ctx.stroke();
+            ctx.restore();
+        };
+
         const drawCricketSprite = (crk: Cricket) => {
             const matrix = crk.state === "jumping" ? CRICKET_FRAME_JUMP : CRICKET_FRAME_IDLE;
             const pixelSize = 1.4;
@@ -452,6 +492,28 @@ export function SpiderCrawler() {
                 }
             }
 
+            const now = performance.now();
+            if (!spider.isJumping && (spider.edge === 1 || spider.edge === 3) && now - lastSilkAt > 550) {
+                silkTrails.push({
+                    x: spider.x,
+                    pageY: spider.y + window.scrollY,
+                    edge: spider.edge,
+                    createdAt: now,
+                });
+                lastSilkAt = now;
+            }
+
+            for (let i = silkTrails.length - 1; i >= 0; i--) {
+                const trail = silkTrails[i];
+                const age = now - trail.createdAt;
+                if (age >= silkLifetime) {
+                    silkTrails.splice(i, 1);
+                    continue;
+                }
+
+                drawSideWeb(trail.x, trail.pageY - window.scrollY, trail.edge, 1 - age / silkLifetime);
+            }
+
             drawSpiderSprite(spider.x, spider.y, spider.angle, spider.frame);
 
             // 2. Crickets update & render (Strictly perched on top of borders or in catapult arc)
@@ -495,7 +557,9 @@ export function SpiderCrawler() {
             window.removeEventListener("mousemove", handleMouseMove);
             cancelAnimationFrame(animationFrameId);
         };
-    }, []);
+    }, [pathname]);
+
+    if (pathname !== "/") return null;
 
     return (
         <canvas

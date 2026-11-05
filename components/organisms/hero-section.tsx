@@ -143,13 +143,22 @@ export const HeroSection = async ({ className }: { className?: string }) => {
 
                 <div className="mt-auto pt-3 flex flex-row gap-2 w-full">
                     <Button className="flex-1 rounded-none font-mono text-xs" size="sm" asChild>
-                        <Link href={process.env.SCHEDULE_A_CALL_URL as string} target="_blank">
+                        <Link
+                            href={process.env.SCHEDULE_A_CALL_URL as string}
+                            target="_blank"
+                            className="flex items-center justify-center gap-2"
+                        >
                             <Phone size={12} className="hidden sm:block" />
                             Schedule a call
                         </Link>
                     </Button>
                     <Button variant="outline" className="flex-1 rounded-none font-mono text-xs" size="sm" asChild>
-                        <Link href={process.env.SEND_EMAIL_URL as string} target="_blank" rel="noopener noreferrer">
+                        <Link
+                            href={process.env.SEND_EMAIL_URL as string}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="flex items-center justify-center gap-2"
+                        >
                             <Mail size={12} className="hidden sm:block" />
                             Send email
                         </Link>
